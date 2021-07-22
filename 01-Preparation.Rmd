@@ -1,11 +1,5 @@
 # Preparation {#preparation}
 XXX
 
-::: {.defn data-latex=""}
-**Response Variable**: The variable thought to depend upon, be explained by, or be predicted by other variables.
-:::
 
-::: {.tip data-latex=""}
-All models covered in this course will have **only one** response variable
-:::
 

@@ -1,2 +1,17 @@
 preparation
 data-structures
+vectors
+data-classes
+data-frames
+tibbles
+tidy-data
+external-data-files
+entering-data
+saving-the-external-file
+excel
+google-sheets
+reading-the-external-file
+csv-files
+excel-files
+google-sheets-1
+other-formats

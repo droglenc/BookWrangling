@@ -14,9 +14,6 @@ description: "This book contains the readings for MTH250W at Northland College."
 ---
 
 ```{r setup, include=FALSE}
-library(NCStats)
-library(ggplot2)
-library(emmeans)
 knitr::opts_chunk$set(comment="#R>  ",message=FALSE,warning=FALSE,
                       fig.align='center',fig.width=3.5,fig.height=3.5,
                       class.source="RCODE",class.output="ROUTPUT",
@@ -24,24 +21,9 @@ knitr::opts_chunk$set(comment="#R>  ",message=FALSE,warning=FALSE,
                       class.error="RERROR",
                       class.message="RMESSAGE",
                       dev.args=list(bg="transparent"))
-theme_NCStats <- function() {
-  NCStats::theme_NCStats() +
-  ggplot2::theme(panel.background=element_rect(fill="transparent",colour=NA),
-                 plot.background=element_rect(fill="transparent",colour=NA),
-                 legend.background=element_rect(fill="transparent",colour=NA),
-                 legend.key=element_rect(fill="transparent",colour=NA))
-}
 
 options(show.signif.stars=FALSE,knitr.kable.NA = '')
-clrs <- c("#1dabe6","#1c366a","#c3ced0","#e43034","#fc4e51","#af060f")
-clrs2 <- clrs[c(1,4)]
-clr_full <- clrs2[1]
-clr_simple <- clrs2[2]
-clrs3 <- clrs[c(5,2,6)]
-lbl_text_size <- 4
-lbl_clr <- "gray25"
 khfont <- "Cambria"
-ARROW <- arrow(length=unit(1.5,"mm"),type="closed")
 ```
 
 # Preface {-}
@@ -66,9 +48,16 @@ mean(dat)
 
 The material presented in this book can be challenging to master. Please don't hesitate to ask me questions as you have them!
 
+
+
+## Package Needs {.unlisted .unnumbered}
+
+```{r}
+library(tidyverse)
+```
+
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'ggplot2', 'dplyr', 'tidyr', 'magrittr'
-), 'packages.bib')
+knitr::write_bib(c(.packages(), 'tidyverse'), 'packages.bib')
 ```

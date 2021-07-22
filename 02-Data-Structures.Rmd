@@ -1,11 +1,254 @@
-# Data Structures {#data-structures}
-XXX
+# Data Structures
+
+## Vectors
+The vector is the primary unit for storing data in R. You can think of a vector as a set of similar items. Vectors are created in R by combining or concatenating together the individual items into a single set with `c()`. For example, the code below creates a vector of county names stored in an object called `cn` (perhaps, short for "county names").
+
+```{r}
+cn <- c("Ashland","Bayfield","Douglas","Iron")
+```
+
+Similarly the code below creates a vector of the population size in four counties stored in an object called `pop`.
+
+```{r}
+pop <- c(15512,15056,43164,5687)
+```
 
 ::: {.defn data-latex=""}
-**Response Variable**: The variable thought to depend upon, be explained by, or be predicted by other variables.
+**Vector**: The variable thought to depend upon, be explained by, or be predicted by other variables.
 :::
+
+&nbsp;
+
+Individual items in a vector can be accessed by following the vector's object name with **square brackets** that contain the numeric position of the item. For example, the second county in `cn` and the third population size in `pop` are extracted below.
+
+```{r}
+cn[2]
+pop[3]
+```
+
+Multiple items can be accessed by combining their position indices into a vector.
+
+```{r}
+cn[c(2,3)]
+```
+
+## Data Classes
+Vectors must contain the same "type" or class of items. There are four main classes of data in R.
+
+* **num**eric: Numbers that may have decimals; e.g., 12.3.
+* **int**eger: Numbers that do not have decimals; e.g., 12.
+* **ch**a**r**acter: Words; e.g., "Bayfield".
+* **log**ical: Logical that must be either `TRUE` or `FALSE`.
+
+The primary difference between numeric and integer classes is how the data are stored in memory. For most of our purposes this will be irrelevant, so there is no practical difference between these two classes for our work. However, integer values are entered into a vector by appending the value with an "L".
+
+```{r}
+nabors <- c(4L,3L,3L,3L)
+```
+
+The values in a logical vector must be either `TRUE` or `FALSE`. Make sure to note that both of these values are in all capital letters.
+
+```{r}
+cheqbay <- c(TRUE,TRUE,FALSE,FALSE)
+```
+
+&nbsp;
+
+The class (i.e., type) of data in a vector is found with `class()`.
+
+```{r}
+class(cn)
+class(pop)
+class(nabors)
+class(cheqbay)
+```
+
+A **factor** is a special class of data where character items are specifically classified as representing groups or levels of items. A vector can be converted to a factor class with `factor()`.
+
+```{r}
+fcn <- factor(cn)
+fcn
+class(fcn)
+```
+
+Factors have useful properties that will be discussed in more detail in subsequent modules.
+
+As stated above, a vector should consist of items of the same class type. For example, this code does not make sense in most instances.
+
+```{r}
+huh <- c("Ashland",15512,TRUE,3.65)
+```
+
+However, this will not produce an error, though it likely will not be what you want it to be. For example, examine the class of this object.
+
+```{r}
+class(huh)
+```
+
+R uses hierarchical rules to assign a class for these odd situations. Rather than focusing on these rules it is more beneficial to remember that each vector should be of the same class type.
 
 ::: {.tip data-latex=""}
-All models covered in this course will have **only one** response variable
+Items in vectors should all be the same class type.
 :::
 
+## Data Frames
+Vectors are useful for small numbers of items that have a single purpose. However, a data frame is more useful if you have multiple types of items (e.g., variables) recorded on a large number of individuals. Here we explore small data frames; larger data frames will be imported from external data sources in Module \@ref(external-data-files).
+
+A data frame is a rectangular data structure where columns are vectors of the same class that represent variables recorded on individuals which are represented in rows. Simple data frames can be constructed with `data.frame()` with named arguments set equal to vectors of data. For example, the following code produces a data frame object called `counties` that has three variables called `name`, `pop`, and `party`.
+
+```{r}
+counties <- data.frame(name=c("Ashland","Bayfield","Douglas","Iron","Sawyer"),
+                       pop=c(15512,15056,43164,5687,16746),
+                       party=c("Dem","Dem","Dem","Rep","Rep"))
+```
+
+Type the name of the data frame object to see its contents.
+
+```{r}
+counties
+```
+
+::: {.tip data-latex=""}
+Columns of data frames correspond to variables whereas rows correspond to individuals.
+:::
+
+Use `str()` to examine the structure of the data frame object, which will show that the object is a `data.frame`, show the number of individuals (label as `obs` for observations) and variables, and show the name of each column/variable along with its class type abbreviation and a snapshot of the first few items in each row.
+
+```{r}
+str(counties)
+```
+
+As data frames are rectangular, individual items are accessed by using both the row and column positions within square brackets after the data frame object name.
+
+```{r}
+counties[1,2]  # first row, second column
+counties[3,1]  # third row, first column
+```
+
+Entire rows or columns are accessed by providing the numerical position of the row or column and leaving the other indice blank.
+
+```{r}
+counties[1,]  # First row
+counties[,1]  # First column
+```
+
+Note that choosing rows or more than one column will return a data frame as it will likely have data of different classes.
+
+```{r}
+class(counties[1,])      # one row is a data frame
+class(counties[,c(1,2)]) # two columns is a data frame
+
+```
+
+However, choosing one column will return a vector of items all of the same class.
+
+```{r}
+class(counties[,1])      # one column is a vector
+```
+
+As columns are named we can also use the name to access a specific column.
+
+```{r}
+counties[,"pop"]
+```
+
+This same column can be accessed by separating the data frame object name from the column name with a `$`.
+
+```{r}
+counties$pop
+```
+
+Again a column is simply a vector so you access single items in this vector in the usual way.
+
+```{r}
+counties$pop[3]
+```
+
+::: {.tip data-latex=""}
+A `$` is only used to separate a data frame name from the variable name within that data frame.
+:::
+
+
+### Tibbles
+Tibbles are a special form of data frame that was introduced as part of the "tidyverse." Tibbles are created using `tibble()` in the same way that we used `data.frame()` previously.
+
+```{r}
+counties2 <- tibble(name=c("Ashland","Bayfield","Douglas","Iron","Sawyer"),
+                    pop=c(15512,15056,43164,5687,16746),
+                    party=c("Dem","Dem","Dem","Rep","Rep"))
+```
+
+For most of our purposes a tibble will behave exactly as a data frame. For example,
+
+```{r}
+counties2
+counties2$pop
+```
+
+There are, however, differences between tibbles and data frames as described in [this introduction to tibbles](https://r4ds.had.co.nz/tibbles.html). The primary difference that you will notice in this course is that when you examine the contents of a tibble with a larger number of rows, columns, or both. For example the code below converts a data frame from the `FSA` package into a tibble.
+
+```{r}
+tibex <- as_tibble(FSA::WhitefishLC)
+```
+
+However, when you try to display the data in this tibble you can see that only first 10 rows and as many columns as will fit on the width of your display are shown. In this case, 141 rows and one variable are not shown as seen in the note at the bottom.
+
+```{r}
+tibex
+```
+
+We will encounter tibbles in subsequent modules as some tidyverse functions return tibbles by default. A tibble can be converted to a data frame with `as.data.frame()`.
+
+## Tidy Data
+Tidy Data was a term introduced [here](http://www.jstatsoft.org/v59/i10/paper) in 2011 to describe a strict data organization that leads to consistency and efficiencies in data analyses. Tidy data is described in more detail [here](https://r4ds.had.co.nz/tidy-data.html).
+
+Data can be organized in different ways. For example, below is the simple data frame from Section \@ref(data-frames).
+
+```{r echo=FALSE}
+counties
+```
+
+However, these same data could be organized as below (among other possible organizations).
+
+```{r echo=FALSE}
+tmp1 <- select(counties,name,pop) %>%
+  mutate(variable="pop") %>%
+  rename(value=pop)
+tmp2 <- select(counties,name,party) %>%
+  mutate(variable="party") %>%
+  rename(value=party)
+rbind(tmp1,tmp2) %>%
+  select(name,variable,value) %>%
+  rename(county=name) %>%
+  arrange(county)
+```
+
+This second data frame is not "tidy" and is much more difficult to use.
+
+Tidy data frames follow three simple rules:
+
+1. Each variable must have its own column.
+1. Each individual (or observation) must have its own row.
+1. Each value must have its own cell.
+
+The original data frame above is "tidy."
+
+A common "challenge" when entering data in a tidy format occurs when data is recorded on individuals in separate groups. For example, the following data are methyl mercury levels recorded in mussels from two locations labeled as "impacted" and "reference."
+
+```
+  impacted   0.011  0.054  0.056  0.095  0.051  0.077
+  reference  0.031  0.040  0.029  0.066  0.018  0.042  0.044
+```
+
+In this case, you must realize that one "observation" is a methyl mercury measurement on a mussel AND to which group the mussel belongs. Thus, each observation results in the recording of two variables. For example, the first mussel had a methyl mercury level of 0.011 AND it was at the impacted site. With this understanding these data are entered in a tidy format as follows.
+
+```{r}
+mussels <- tibble(loc=c("impacted","impacted","impacted","impacted","impacted","impacted",
+                        "reference","reference","reference","reference",
+                        "reference","reference","reference"),
+                  merc=c(0.011,0.054,0.056,0.095,0.051,0.077,
+                         0.031,0.040,0.029,0.066,0.018,0.042,0.044))
+mussels
+```
+
+Tidy data will facilitate data wrangling in subsequent modules and data analysis and graphing in other courses.
