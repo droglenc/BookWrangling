@@ -15,3 +15,16 @@ csv-files
 excel-files
 google-sheets-1
 other-formats
+relational-data
+join-concepts
+inner-join
+left-join
+right-join
+full-join
+semi-join
+anti-join
+joins-in-r
+examples-with-context
+student-data
+survey-data
+resource-data

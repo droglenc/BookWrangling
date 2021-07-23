@@ -1,0 +1,431 @@
+# Relational Data
+Some situations will have relatd data in multiple data frames. To perform a particular analysis you may need to combine these data frames into a single data frame. If the data in the separate data frames are connected by a *key* variable then the data are said to be relational -- i.e., they relate to each other through a common variable (or variables). For example a college may have the following four data frames with respect to its students.
+
+* Personal information (hometown, age, etc.)
+* Financial aid information (family income, Pell Grant aid amount, etc.)
+* Academic information (standing, major, gpa, etc.)
+* Current course information (i.e., which courses a students is registered for)
+
+Each of these data frames would also contain a student ID field so that a student's personal information could be connect with the students financial aid, academic, or course information.
+
+Data from related data frames can be *join*ed in a variety of ways. This module will explain several types of joins and how to accomplish those joins in R.
+
+## Join Concepts
+```{r echo=FALSE}
+x <- data.frame(id=c(101,102,102,103),val1=paste0("x",1:4))
+y <- data.frame(id=c(101,102,104,104),val2=paste0("y",1:4),val3=paste0("z",1:4))
+
+x2 <- rbind(x,c("",NA))
+y2 <- rbind(y,c("",NA,NA))
+
+all_combos <- full_join(mutate(x2,fake=1),mutate(y2,fake=1),by="fake") %>%
+  select(-fake) %>%
+  slice(-25)
+```
+
+Suppose that you have a simple data frame called `x` that has an `id` key variable and a `val1` measurement variable.^[The visualizations in this section are modified from https://twitter.com/hadleywickham/status/684407629259526148/photo/1.]
+
+```{r echo=FALSE}
+clrs <- c("#8088A0","#EBE7E0","#C6D4E1","#447490","white")
+clrs.x <- clrs[c(1,2,2,3)]
+knitr::kable(x,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs.x)
+```
+
+Further suppose that you have a second data frame called `y` with the same `id` key variable and different `val2` and `val3` measurement variables.^[In this treatment, the unique `id` values are also uniquely color coded to help track individual observations in the descriptions below.]
+
+```{r echo=FALSE}
+clrs.y <- clrs[c(1,2,4,4)]
+knitr::kable(y,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs.y)
+```
+
+It can be instructive when learning about joins to visualize all combinations of observations in the two data frames.^[Finding all combinations, however, is not needed to actually join two data frames.] As some key variable values may be missing in the data frames we also consider combinations with a missing key variable value (and the measurement variables set to `NA`), All combinations of the rows in `x` and `y` with the missing key valaues are shown on the left for each join type in the subsections below.
+
+```{r echo=FALSE}
+clrs.xA <- rep(c(clrs.x,"white"),each=5)[-25]
+clrs.yA <- rep(c(clrs.y,"white"),times=5)[-25]
+tbl_AC <- knitr::kable(all_combos,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs.xA) %>%
+  column_spec(3,background=clrs.yA)
+```
+
+### Inner Join
+An **inner join** is the simplest of joins. It returns values from both data frames where the key variables match in both data frames. In our simple data frames it will find all rows from all combinations of rows where the `id` variables (i.e., colors) from `x` and `y` match (see center below). The final result is these rows with the duplicated `id` key removed (see right below).
+
+```{r echo=FALSE}
+ij_rows <- with(all_combos,which(id.x==id.y))  #rows to keep
+ij_whiterows <- which(!(1:24 %in% ij_rows))    #rows to white out
+tbl_AC_IJ <- tbl_AC %>%
+  row_spec(ij_whiterows,background="white",color="white")
+
+IJ <- inner_join(x,y,by="id")
+tbl_IJ <- kable(IJ,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs[c(1,2,2)])
+  
+tbl_AC %>%
+  add_header_above(header=c("All combinations from x and y"=5)) %>%
+  kable_styling(position="float_left")
+tbl_AC_IJ %>%
+  add_header_above(header=c("Retained for 'inner join'"=5)) %>%
+  kable_styling(position="float_left")
+tbl_IJ %>%
+  add_header_above(header=c("Final 'inner join' result"=4)) %>%
+  kable_styling(position="left")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+### Left Join
+A **left join** returns the same rows as an inner join (i.e., all rows where the key variables match) AND all rows from the first data frame that don't have a key variable match in the second data frame. The values for the variables in the second data frame for key values in the first data frame without a match are replaced with `NA`s. So, a left join will include rows for all key variables from the first data frame, but only rows from the second data frame that had a key variable match with the first data frame.
+
+```{r echo=FALSE}
+lj_rows <- with(all_combos,which(id.x==103 & id.y==""))
+lj_rows <- c(ij_rows,lj_rows)                # all rows to keep (add inner joins)
+lj_whiterows <- which(!(1:24 %in% lj_rows))    #rows to white out
+clrs.xA2 <- clrs.xA
+clrs.xA2[lj_whiterows] <- "white"
+clrs.yA2 <- clrs.yA
+clrs.yA2[lj_whiterows] <- "white"
+
+tbl_AC_LJ <- knitr::kable(all_combos,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  row_spec(lj_whiterows,background="white",color="white") %>%
+  column_spec(1,background=clrs.xA2) %>%
+  column_spec(3,background=clrs.yA2)
+
+LJ <- left_join(x,y,by="id")
+tbl_LJ <- kable(LJ,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs.x)
+  
+tbl_AC %>%
+  add_header_above(header=c("All combinations from x and y"=5)) %>%
+  kable_styling(position="float_left")
+tbl_AC_LJ %>%
+  add_header_above(header=c("Retained for 'left join'"=5)) %>%
+  kable_styling(position="float_left")
+tbl_LJ %>%
+  add_header_above(header=c("Final 'left join' result"=4)) %>%
+  kable_styling(position="left")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+### Right Join
+A **right join** works just like a left join except that the result will include all rows from the *second* data frame that don't have a key variable match in the *first* data frame. A right join can also be accomplished with a left join by reversing the order of the two data frames.
+
+### Full Join
+A **full join** returns the same rows as an inner join (i.e., all rows where the key variable match) AND all rows from each data frame that don't have a key variable match in the other data frame. So a full join will include rows for all key variables from both data frames.
+
+```{r echo=FALSE}
+fj_rows1 <- with(all_combos,which(id.x==103 & id.y==""))
+fj_rows2 <- with(all_combos,which(id.x=="" & id.y==104))
+fj_rows <- c(ij_rows,fj_rows1,fj_rows2)        # all rows to keep (add inner joins)
+fj_whiterows <- which(!(1:24 %in% fj_rows))    #rows to white out
+clrs.xA2 <- clrs.xA
+clrs.xA2[fj_whiterows] <- "white"
+clrs.yA2 <- clrs.yA
+clrs.yA2[fj_whiterows] <- "white"
+
+tbl_AC_FJ <- knitr::kable(all_combos,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  row_spec(fj_whiterows,background="white",color="white") %>%
+  column_spec(1,background=clrs.xA2) %>%
+  column_spec(3,background=clrs.yA2)
+
+FJ <- full_join(x,y,by="id")
+tbl_FJ <- kable(FJ,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=c(clrs.x,clrs.y[3:4]))
+  
+tbl_AC %>%
+  add_header_above(header=c("All combinations from x and y"=5)) %>%
+  kable_styling(position="float_left")
+tbl_AC_FJ %>%
+  add_header_above(header=c("Retained for 'full join'"=5)) %>%
+  kable_styling(position="float_left")
+tbl_FJ %>%
+  add_header_above(header=c("Final 'full join' result"=4)) %>%
+  kable_styling(position="left")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+### Semi Join
+In a **semi join** only values from the first data frame that have a key variable match in the second data frame are retained. Thus, the final result will only have variables from the first data frame and rows with a key variable match in the second data frame.
+
+```{r echo=FALSE}
+SJ <- semi_join(x,y,by="id")
+tbl_SJ <- kable(SJ,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs[c(1,2,2)])
+  
+tbl_AC %>%
+  add_header_above(header=c("All combinations from x and y"=5)) %>%
+  kable_styling(position="float_left")
+tbl_AC_IJ %>%
+  add_header_above(header=c("Retained for 'semi join'"=5)) %>%
+  kable_styling(position="float_left")
+tbl_SJ %>%
+  add_header_above(header=c("Final 'semi join' result"=2)) %>%
+  kable_styling(position="left")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+
+### Anti Join
+In an **anti join** only values from the first data frame that **DO NOT** have a key variable match in the second data frame are retained. Thus, the final result will only have variables from the first data frame and rows without a key variable match in the second data frame.
+
+```{r echo=FALSE}
+aj_rows <- with(all_combos,which(id.x==103))
+aj_whiterows <- which(!(1:24 %in% aj_rows))
+
+tbl_AC_AJ <- tbl_AC %>%
+  row_spec(aj_whiterows,background="white",color="white")
+
+AJ <- anti_join(x,y,by="id")
+tbl_AJ <- kable(AJ,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,background=clrs[3])
+  
+tbl_AC %>%
+  add_header_above(header=c("All combinations from x and y"=5)) %>%
+  kable_styling(position="float_left")
+tbl_AC_AJ %>%
+  add_header_above(header=c("Retained for 'anti join'"=5)) %>%
+  kable_styling(position="float_left")
+tbl_AJ %>%
+  add_header_above(header=c("Final 'anti join' result"=2)) %>%
+  kable_styling(position="left")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+&nbsp;
+
+## Joins in R
+Performing the joins described in the previous section is straightforward with R using the `dplyr` package (part of the `tidyverse`). The functions to perform these joins are called, conveniently enough, `inner_join()`, `left_join()`, `right_join()`, `full_join()`, `semi_join()`, and `anti_join()`. The first two arguments to each function are the two data frames to join. In addition, the name of the key variable should be given, in quotes, to `by=`.
+
+The two data frames used in the previous section are created below as objects in R.
+
+```{r}
+x <- data.frame(id=c(101,102,102,103),val1=paste0("x",1:4))
+x
+y <- data.frame(id=c(101,102,104,104),val2=paste0("y",1:4),val3=paste0("z",1:4))
+y
+```
+
+The six joins discussed in the previous section are completed below.
+
+```{r}
+ij <- inner_join(x,y,by="id")
+ij
+lj <- left_join(x,y,by="id")
+lj
+rj <- right_join(x,y,by="id")
+rj
+rj2 <- left_join(y,x,by="id")
+rj2
+fj <- full_join(x,y,by="id")
+fj
+sj <- semi_join(x,y,by="id")
+sj
+aj <- anti_join(x,y,by="id")
+aj
+```
+
+
+
+## Examples With Context
+
+
+### Student Data (One-to-One) {#student-data}
+In large institutions or in complicated data environments, data about specific individuals may be housed in a variety of departments each of which maintains its own database. Preferably these data sources can be related via a primary key variable, such as a unique student ID number. As an example, suppose that the admissions office maintains a database of personal information about every student at the college. For example it might look like that below for a fictitious five students.
+
+```{r}
+personal <- data.frame(studentID=c(34535,45423,73424,89874,98222),
+                       first_nm=c("Rolando","Catherine","James","Rachel","Esteban"),
+                       last_nm=c("Blackman","Johnson","Carmichael","Brown","Perez"),
+                       hometown=c("windsor","Eden Prairie","Marion","Milwaukee","El Paso"),
+                       homestate=c("MI","MN","IA","WI","TX"))
+
+personal
+```
+
+In addition the financial aid office has a database of financial aid information that is indexed to the students' unique `studentID` number.
+
+```{r}
+finaid <- data.frame(studentID=c(34535,45423,73424,89874,98222),
+                     income_cat=c(4,5,3,2,3),
+                     pell_elig=c(TRUE,FALSE,TRUE,TRUE,TRUE),
+                     work_study=c(TRUE,FALSE,FALSE,FALSE,TRUE))
+finaid
+```
+
+Furthermore the registrar's office has a database of academic information that is also indexed to the students' unique `studentID` number.
+
+```{r}
+academics <- data.frame(studentID=c(34535,45423,73424,89874,98222),
+                        standing=c("FY","FY","SO","SR","JR"),
+                        major=c("undecided","NRS","Biology","SCD","SCD"),
+                        cum_gpa=c(0,0,3.12,3.67,2.89))
+academics
+```
+
+Ideally each of these databases would have one entry for every student. These databases form what is called a *one-to-one relationship* as each observation record in each data frame is connected to one and only one observation record in the other data frame. These data frames can generally be joined with inner, left, or right joins.
+
+For example, suppose that an institutional researcher wants to determine if student gpa differs depending on whether the student was eligible for a Pell Grant or not. In this case, the researcher wants to join the `finaid` and `academics` data frames so that the `pell_elig` and `cum_gpa` variables will be in one data frame.
+
+```{r}
+tmp <- inner_join(finaid,academics,by="studentID")
+tmp
+```
+
+Further suppose that academic advisors would like to have the students' names attached to these records so that they could reach out to students who could use some help academically.
+
+```{r}
+tmp <- inner_join(personal,tmp,by="studentID")
+tmp
+```
+
+&nbsp;
+
+Continuing the example above, suppose that registrar's office also maintains a database that contains each students' current class schedule.
+
+```{r}
+schedules <- tibble(studentID=c(34535,34535,34535,34535,
+                                45423,45423,45423,45423,45423,
+                                73424,73424,73424,73424,
+                                89874,89874,89874,
+                                98222,98222,98222,98222),
+                    course=c("MTH107","BIO115","CHM110","IDS101",
+                             "SCD110","PSY110","MTH140","OED212","IDS101",
+                             "BIO234","CHM220","BIO370","SCD110",
+                             "SCD440","PSY370","IDS490",
+                             "SCD440","SCD330","SOC480","ART220"))
+schedules
+```
+
+The registrar's office also maintains a database of information about every course taught at the college. A partial example of such a database is shown below.
+
+```{r}
+courses <- tibble(course=c("ART220","ART330","BIO115","BIO234","BIO370","BIO490",
+                           "CHM110","CHM220","CHM360","IDS101","IDS490","MTH107",
+                           "MTH140","MTH230","OED212","OED330","OED360","PSY110",
+                           "PSY370","SCD110","SCD330","SCD440","SOC111","SOC480"),
+                  credits=c(3,3,4,4,4,4,4,4,4,3,4,4,4,4,3,3,3,4,4,3,3,4,4,4),
+                  instructor=c("Duffy","Terry","Johnson","Goyke","Anich","Anich",
+                               "Carlson","Robertson","Carlson","Goyke","Hannickel","Ogle",
+                               "Jensen","Jensen","Andre","Andre","Coulson","Sneyd",
+                               "Sneyd","Tochterman","Tochterman","Foster",
+                               "Schanning","Schanning"))
+courses
+```
+
+These two data frames are related via the common `course` variable. If we think of this from the perspective of the `schedules` data frame as the primary data frame of interest then this relationship is still a one-to-one relationship because each course in `schedules` is connected to only one course record in `courses`. This type of relationship is particularly useful, though, because the information about any one course only needs to be entered once in `courses` even though the actual course may appear many times in `schedules`. This is a particularly effect way to save both time and the chance of making data entry errors. And the specific course information (credits and instructor) can be added to the `schedules` data frame with a `left_join()`.
+
+```{r}
+schedules2 <- left_join(schedules,courses,by="course")
+schedules2
+```
+
+The students personal information can also be added to these results with a `left_join()` but now using the `studentID` key variable. This representes a one-to-many relationship because the `studentID` in `persoal` is connected to many `studentID` records in `schedules2` (one for each course the student is enrolled in).
+
+```{r}
+schedules2 <- left_join(personal,schedules2,by="studentID")
+schedules2
+```
+
+&nbsp;
+
+### Survey Data (One-to-One Relationship) {#survey-data}
+Suppose that a survey research team distributed ten surveys about food insecurity at three different locations in Ashland and with different methods for distributing the survey (dropped the surveys off and people could pick them or hand the survey to people). The researchers uniquely numbered each survey so that they could later assess which methods results in better returns (if any). The data frame for these data may look like the following.
+
+```{r}
+surveys <- data.frame(surv_num=1:10,
+                      dist_site=rep(c("Walmart","Coop","HHS"),times=c(3,5,2)),
+                      method=sample(c("Drop-Off","Hand-Out"),10,replace=TRUE))
+surveys
+```
+
+Technicians for the research team entered data from the returned surveys into a separate data base as this did not require them to search though the first database to find the corresponding survey number. Example results for four returned surveys are shown below.
+
+```{r}
+results <- data.frame(surv_num=c(2,5,8,9),
+                      gender=c("M","F","F","M"),
+                      age=c("20-39","20-39","60+","40-59"),
+                      insecure=c("no","no","yes","no"))
+results
+```
+
+This is also an example of a one-to-one relationship because each survey in `surveys` is possibly connected to only one record/observation in `results`. In contrast to the current courses taken example for students above, the second data frame here has fewer rather than more records for each observed `surv_num`. These data frames can be joined using an `inner_join()` or `right_join()` to create a data frame that combines the distribution information with the results but only includes information from surveys that were returned.
+
+```{r}
+foodinsec <- inner_join(surveys,results,by="surv_num")
+foodinsec
+```
+
+&nbsp;
+
+### Resource Sampling Data (One-to-Many Relationship) {#resource-data}
+In sampling of natural resources it is common to have one database for information about the unit of sampling and another database specific to items within that sampling unit. For example, in fisheries we may have one database to record information about a particular net (e.g., where it is located, the date it was set) and a second database that records the species of fish caught and number of the species caught. You may be tempted to do this all in one database with a separate field for each fish species but this is inefficient as you may not know which species you may catch. Thus, every time you catch a new species you would need to add a new field or column to your database. In addition, this may highly inefficient if you were to record information about individual fish (e.g., length and weight) as the amount of this information may vary from net to net.
+
+In this simple example, information about five specific settings of a net is stored in a data framed called `nets`. Note that this data frame has a unique identifier for each net setting called `net_num`.
+
+```{r}
+nets <- data.frame(net_num=1:5,
+                   lake=c("Eagle","Hart","Hart","Eagle","Millicent"),
+                   date=c("3-Jul-21","3-Jul-21","5-Jul-21","6-Jul-21","6-Jul-21"))
+nets
+```
+
+In a separate data frame the researchers recorded the species and number of each species caught in each net. Here there is a separate row for each species and its number caught, but that record is indexed to the specific net with the `net_num` key variable.
+
+```{r}
+catch <- data.frame(net_num=c(1,1,2,2,2,4,4,5),
+                    species=c("Bluegill","Largemouth Bass",
+                              "Bluegill","Largemouth Bass","Bluntnose Minnow",
+                              "Bluegill","Largemouth Bass",
+                              "Largemouth Bass"),
+                    number=c(7,3,19,2,56,3,6,3))
+catch
+```
+
+The data frames illustrate a *one-to-many* relationship as each record in `nets` may be connected to multiple records in `catch`. The catch data will be joined to the net data using a `left_join()` because it is important to keep track of nets that also did not catch fish. An `inner_join()` would only return nets where some fish were caught.
+
+```{r}
+fishcatch <- left_join(nets,catch,by="net_num")
+fishcatch
+```
+

@@ -14,6 +14,7 @@ description: "This book contains the readings for MTH250W at Northland College."
 ---
 
 ```{r setup, include=FALSE}
+library(kableExtra)
 knitr::opts_chunk$set(comment="#R>  ",message=FALSE,warning=FALSE,
                       fig.align='center',fig.width=3.5,fig.height=3.5,
                       class.source="RCODE",class.output="ROUTPUT",
@@ -22,7 +23,7 @@ knitr::opts_chunk$set(comment="#R>  ",message=FALSE,warning=FALSE,
                       class.message="RMESSAGE",
                       dev.args=list(bg="transparent"))
 
-options(show.signif.stars=FALSE,knitr.kable.NA = '')
+options(show.signif.stars=FALSE)
 khfont <- "Cambria"
 ```
 

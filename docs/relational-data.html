@@ -1,0 +1,5416 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 4 Relational Data | Readings for MTH250 - Data Wrangling</title>
+  <meta name="description" content="This book contains the readings for MTH250W at Northland College." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 4 Relational Data | Readings for MTH250 - Data Wrangling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/BookWrangling/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH250W at Northland College." />
+  <meta name="github-repo" content="droglenc/BookWrangling" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 4 Relational Data | Readings for MTH250 - Data Wrangling" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH250W at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2021-07-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="external-data-files.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for Data Wrangling in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a></li>
+<li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.2" data-path="data-structures.html"><a href="data-structures.html#data-classes"><i class="fa fa-check"></i><b>2.2</b> Data Classes</a></li>
+<li class="chapter" data-level="2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>2.3</b> Data Frames</a></li>
+<li class="chapter" data-level="2.4" data-path="data-structures.html"><a href="data-structures.html#tidy-data"><i class="fa fa-check"></i><b>2.4</b> Tidy Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="external-data-files.html"><a href="external-data-files.html"><i class="fa fa-check"></i><b>3</b> External Data Files</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="external-data-files.html"><a href="external-data-files.html#entering-data"><i class="fa fa-check"></i><b>3.1</b> Entering Data</a></li>
+<li class="chapter" data-level="3.2" data-path="external-data-files.html"><a href="external-data-files.html#saving-the-external-file"><i class="fa fa-check"></i><b>3.2</b> Saving the External File</a></li>
+<li class="chapter" data-level="3.3" data-path="external-data-files.html"><a href="external-data-files.html#reading-the-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading the External File</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>4</b> Relational Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.1</b> Join Concepts</a></li>
+<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.2</b> Joins in R</a></li>
+<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.3</b> Examples With Context</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH250 - Data Wrangling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="relational-data" class="section level1" number="4">
+<h1><span class="header-section-number">Module 4</span> Relational Data</h1>
+<p>Some situations will have relatd data in multiple data frames. To perform a particular analysis you may need to combine these data frames into a single data frame. If the data in the separate data frames are connected by a <em>key</em> variable then the data are said to be relational – i.e., they relate to each other through a common variable (or variables). For example a college may have the following four data frames with respect to its students.</p>
+<ul>
+<li>Personal information (hometown, age, etc.)</li>
+<li>Financial aid information (family income, Pell Grant aid amount, etc.)</li>
+<li>Academic information (standing, major, gpa, etc.)</li>
+<li>Current course information (i.e., which courses a students is registered for)</li>
+</ul>
+<p>Each of these data frames would also contain a student ID field so that a student’s personal information could be connect with the students financial aid, academic, or course information.</p>
+<p>Data from related data frames can be <em>join</em>ed in a variety of ways. This module will explain several types of joins and how to accomplish those joins in R.</p>
+<div id="join-concepts" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Join Concepts</h2>
+<p>Suppose that you have a simple data frame called <code>x</code> that has an <code>id</code> key variable and a <code>val1</code> measurement variable.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<table class=" lightable-minimal table table-hover table-condensed" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+</tr>
+</tbody>
+</table>
+<p>Further suppose that you have a second data frame called <code>y</code> with the same <code>id</code> key variable and different <code>val2</code> and <code>val3</code> measurement variables.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+<table class=" lightable-minimal table table-hover table-condensed" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<p>It can be instructive when learning about joins to visualize all combinations of observations in the two data frames.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> As some key variable values may be missing in the data frames we also consider combinations with a missing key variable value (and the measurement variables set to <code>NA</code>), All combinations of the rows in <code>x</code> and <code>y</code> with the missing key valaues are shown on the left for each join type in the subsections below.</p>
+<div id="inner-join" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Inner Join</h3>
+<p>An <strong>inner join</strong> is the simplest of joins. It returns values from both data frames where the key variables match in both data frames. In our simple data frames it will find all rows from all combinations of rows where the <code>id</code> variables (i.e., colors) from <code>x</code> and <code>y</code> match (see center below). The final result is these rows with the duplicated <code>id</code> key removed (see right below).</p>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+All combinations from x and y
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+Retained for ‘inner join’
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; ">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 2px solid #00000050; ">
+Final ‘inner join’ result
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+</tbody>
+</table>
+<!-- for clearing the floats from above -->
+<div style="clear:both;">
+
+</div>
+</div>
+<div id="left-join" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Left Join</h3>
+<p>A <strong>left join</strong> returns the same rows as an inner join (i.e., all rows where the key variables match) AND all rows from the first data frame that don’t have a key variable match in the second data frame. The values for the variables in the second data frame for key values in the first data frame without a match are replaced with <code>NA</code>s. So, a left join will include rows for all key variables from the first data frame, but only rows from the second data frame that had a key variable match with the first data frame.</p>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+All combinations from x and y
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+Retained for ‘left join’
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; ">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 2px solid #00000050; ">
+Final ‘left join’ result
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<!-- for clearing the floats from above -->
+<div style="clear:both;">
+
+</div>
+</div>
+<div id="right-join" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Right Join</h3>
+<p>A <strong>right join</strong> works just like a left join except that the result will include all rows from the <em>second</em> data frame that don’t have a key variable match in the <em>first</em> data frame. A right join can also be accomplished with a left join by reversing the order of the two data frames.</p>
+</div>
+<div id="full-join" class="section level3" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Full Join</h3>
+<p>A <strong>full join</strong> returns the same rows as an inner join (i.e., all rows where the key variable match) AND all rows from each data frame that don’t have a key variable match in the other data frame. So a full join will include rows for all key variables from both data frames.</p>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+All combinations from x and y
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+Retained for ‘full join’
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; ">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 2px solid #00000050; ">
+Final ‘full join’ result
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<!-- for clearing the floats from above -->
+<div style="clear:both;">
+
+</div>
+</div>
+<div id="semi-join" class="section level3" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> Semi Join</h3>
+<p>In a <strong>semi join</strong> only values from the first data frame that have a key variable match in the second data frame are retained. Thus, the final result will only have variables from the first data frame and rows with a key variable match in the second data frame.</p>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+All combinations from x and y
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+Retained for ‘semi join’
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;color: white !important;background-color: white !important;">
+103
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; ">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 2px solid #00000050; ">
+Final ‘semi join’ result
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+</tr>
+</tbody>
+</table>
+<!-- for clearing the floats from above -->
+<div style="clear:both;">
+
+</div>
+</div>
+<div id="anti-join" class="section level3" number="4.1.6">
+<h3><span class="header-section-number">4.1.6</span> Anti Join</h3>
+<p>In an <strong>anti join</strong> only values from the first data frame that <strong>DO NOT</strong> have a key variable match in the second data frame are retained. Thus, the final result will only have variables from the first data frame and rows without a key variable match in the second data frame.</p>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+All combinations from x and y
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 2px solid #00000050; ">
+Retained for ‘anti join’
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id.x
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+<th style="text-align:center;font-weight: bold;">
+id.y
+</th>
+<th style="text-align:center;font-weight: bold;">
+val2
+</th>
+<th style="text-align:center;font-weight: bold;">
+val3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x1
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x2
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+x3
+</td>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;">
+101
+</td>
+<td style="text-align:center;">
+y1
+</td>
+<td style="text-align:center;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;">
+102
+</td>
+<td style="text-align:center;">
+y2
+</td>
+<td style="text-align:center;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y3
+</td>
+<td style="text-align:center;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: #447490 !important;">
+104
+</td>
+<td style="text-align:center;">
+y4
+</td>
+<td style="text-align:center;">
+z4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+<td style="text-align:center;background-color: white !important;">
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #8088A0 !important;color: white !important;background-color: white !important;">
+101
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y1
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #EBE7E0 !important;color: white !important;background-color: white !important;">
+102
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y2
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y3
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: white !important;color: white !important;background-color: white !important;">
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #447490 !important;color: white !important;background-color: white !important;">
+104
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+y4
+</td>
+<td style="text-align:center;color: white !important;background-color: white !important;">
+z4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal table table-hover table-condensed table" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; ">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 2px solid #00000050; ">
+Final ‘anti join’ result
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+id
+</th>
+<th style="text-align:center;font-weight: bold;">
+val1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #C6D4E1 !important;">
+103
+</td>
+<td style="text-align:center;">
+x4
+</td>
+</tr>
+</tbody>
+</table>
+<!-- for clearing the floats from above -->
+<div style="clear:both;">
+
+</div>
+<p> </p>
+</div>
+</div>
+<div id="joins-in-r" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Joins in R</h2>
+<p>Performing the joins described in the previous section is straightforward with R using the <code>dplyr</code> package (part of the <code>tidyverse</code>). The functions to perform these joins are called, conveniently enough, <code>inner_join()</code>, <code>left_join()</code>, <code>right_join()</code>, <code>full_join()</code>, <code>semi_join()</code>, and <code>anti_join()</code>. The first two arguments to each function are the two data frames to join. In addition, the name of the key variable should be given, in quotes, to <code>by=</code>.</p>
+<p>The two data frames used in the previous section are created below as objects in R.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="relational-data.html#cb90-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">102</span>,<span class="dv">103</span>),<span class="at">val1=</span><span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb90-2"><a href="relational-data.html#cb90-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1
+#R&gt;   1 101   x1
+#R&gt;   2 102   x2
+#R&gt;   3 102   x3
+#R&gt;   4 103   x4</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb92-1"><a href="relational-data.html#cb92-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">104</span>,<span class="dv">104</span>),<span class="at">val2=</span><span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">val3=</span><span class="fu">paste0</span>(<span class="st">&quot;z&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb92-2"><a href="relational-data.html#cb92-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val2 val3
+#R&gt;   1 101   y1   z1
+#R&gt;   2 102   y2   z2
+#R&gt;   3 104   y3   z3
+#R&gt;   4 104   y4   z4</code></pre>
+<p>The six joins discussed in the previous section are completed below.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb94-1"><a href="relational-data.html#cb94-1" aria-hidden="true" tabindex="-1"></a>ij <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb94-2"><a href="relational-data.html#cb94-2" aria-hidden="true" tabindex="-1"></a>ij</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1 val2 val3
+#R&gt;   1 101   x1   y1   z1
+#R&gt;   2 102   x2   y2   z2
+#R&gt;   3 102   x3   y2   z2</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb96-1"><a href="relational-data.html#cb96-1" aria-hidden="true" tabindex="-1"></a>lj <span class="ot">&lt;-</span> <span class="fu">left_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb96-2"><a href="relational-data.html#cb96-2" aria-hidden="true" tabindex="-1"></a>lj</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1 val2 val3
+#R&gt;   1 101   x1   y1   z1
+#R&gt;   2 102   x2   y2   z2
+#R&gt;   3 102   x3   y2   z2
+#R&gt;   4 103   x4 &lt;NA&gt; &lt;NA&gt;</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb98-1"><a href="relational-data.html#cb98-1" aria-hidden="true" tabindex="-1"></a>rj <span class="ot">&lt;-</span> <span class="fu">right_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb98-2"><a href="relational-data.html#cb98-2" aria-hidden="true" tabindex="-1"></a>rj</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1 val2 val3
+#R&gt;   1 101   x1   y1   z1
+#R&gt;   2 102   x2   y2   z2
+#R&gt;   3 102   x3   y2   z2
+#R&gt;   4 104 &lt;NA&gt;   y3   z3
+#R&gt;   5 104 &lt;NA&gt;   y4   z4</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb100-1"><a href="relational-data.html#cb100-1" aria-hidden="true" tabindex="-1"></a>rj2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(y,x,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb100-2"><a href="relational-data.html#cb100-2" aria-hidden="true" tabindex="-1"></a>rj2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val2 val3 val1
+#R&gt;   1 101   y1   z1   x1
+#R&gt;   2 102   y2   z2   x2
+#R&gt;   3 102   y2   z2   x3
+#R&gt;   4 104   y3   z3 &lt;NA&gt;
+#R&gt;   5 104   y4   z4 &lt;NA&gt;</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb102-1"><a href="relational-data.html#cb102-1" aria-hidden="true" tabindex="-1"></a>fj <span class="ot">&lt;-</span> <span class="fu">full_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb102-2"><a href="relational-data.html#cb102-2" aria-hidden="true" tabindex="-1"></a>fj</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1 val2 val3
+#R&gt;   1 101   x1   y1   z1
+#R&gt;   2 102   x2   y2   z2
+#R&gt;   3 102   x3   y2   z2
+#R&gt;   4 103   x4 &lt;NA&gt; &lt;NA&gt;
+#R&gt;   5 104 &lt;NA&gt;   y3   z3
+#R&gt;   6 104 &lt;NA&gt;   y4   z4</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb104-1"><a href="relational-data.html#cb104-1" aria-hidden="true" tabindex="-1"></a>sj <span class="ot">&lt;-</span> <span class="fu">semi_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb104-2"><a href="relational-data.html#cb104-2" aria-hidden="true" tabindex="-1"></a>sj</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1
+#R&gt;   1 101   x1
+#R&gt;   2 102   x2
+#R&gt;   3 102   x3</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb106-1"><a href="relational-data.html#cb106-1" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb106-2"><a href="relational-data.html#cb106-2" aria-hidden="true" tabindex="-1"></a>aj</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      id val1
+#R&gt;   1 103   x4</code></pre>
+</div>
+<div id="examples-with-context" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Examples With Context</h2>
+<div id="student-data" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Student Data (One-to-One)</h3>
+<p>In large institutions or in complicated data environments, data about specific individuals may be housed in a variety of departments each of which maintains its own database. Preferably these data sources can be related via a primary key variable, such as a unique student ID number. As an example, suppose that the admissions office maintains a database of personal information about every student at the college. For example it might look like that below for a fictitious five students.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb108-1"><a href="relational-data.html#cb108-1" aria-hidden="true" tabindex="-1"></a>personal <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
+<span id="cb108-2"><a href="relational-data.html#cb108-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">first_nm=</span><span class="fu">c</span>(<span class="st">&quot;Rolando&quot;</span>,<span class="st">&quot;Catherine&quot;</span>,<span class="st">&quot;James&quot;</span>,<span class="st">&quot;Rachel&quot;</span>,<span class="st">&quot;Esteban&quot;</span>),</span>
+<span id="cb108-3"><a href="relational-data.html#cb108-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">last_nm=</span><span class="fu">c</span>(<span class="st">&quot;Blackman&quot;</span>,<span class="st">&quot;Johnson&quot;</span>,<span class="st">&quot;Carmichael&quot;</span>,<span class="st">&quot;Brown&quot;</span>,<span class="st">&quot;Perez&quot;</span>),</span>
+<span id="cb108-4"><a href="relational-data.html#cb108-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">hometown=</span><span class="fu">c</span>(<span class="st">&quot;windsor&quot;</span>,<span class="st">&quot;Eden Prairie&quot;</span>,<span class="st">&quot;Marion&quot;</span>,<span class="st">&quot;Milwaukee&quot;</span>,<span class="st">&quot;El Paso&quot;</span>),</span>
+<span id="cb108-5"><a href="relational-data.html#cb108-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">homestate=</span><span class="fu">c</span>(<span class="st">&quot;MI&quot;</span>,<span class="st">&quot;MN&quot;</span>,<span class="st">&quot;IA&quot;</span>,<span class="st">&quot;WI&quot;</span>,<span class="st">&quot;TX&quot;</span>))</span>
+<span id="cb108-6"><a href="relational-data.html#cb108-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-7"><a href="relational-data.html#cb108-7" aria-hidden="true" tabindex="-1"></a>personal</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     studentID  first_nm    last_nm     hometown homestate
+#R&gt;   1     34535   Rolando   Blackman      windsor        MI
+#R&gt;   2     45423 Catherine    Johnson Eden Prairie        MN
+#R&gt;   3     73424     James Carmichael       Marion        IA
+#R&gt;   4     89874    Rachel      Brown    Milwaukee        WI
+#R&gt;   5     98222   Esteban      Perez      El Paso        TX</code></pre>
+<p>In addition the financial aid office has a database of financial aid information that is indexed to the students’ unique <code>studentID</code> number.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb110-1"><a href="relational-data.html#cb110-1" aria-hidden="true" tabindex="-1"></a>finaid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
+<span id="cb110-2"><a href="relational-data.html#cb110-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">income_cat=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb110-3"><a href="relational-data.html#cb110-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pell_elig=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>),</span>
+<span id="cb110-4"><a href="relational-data.html#cb110-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">work_study=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>))</span>
+<span id="cb110-5"><a href="relational-data.html#cb110-5" aria-hidden="true" tabindex="-1"></a>finaid</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     studentID income_cat pell_elig work_study
+#R&gt;   1     34535          4      TRUE       TRUE
+#R&gt;   2     45423          5     FALSE      FALSE
+#R&gt;   3     73424          3      TRUE      FALSE
+#R&gt;   4     89874          2      TRUE      FALSE
+#R&gt;   5     98222          3      TRUE       TRUE</code></pre>
+<p>Furthermore the registrar’s office has a database of academic information that is also indexed to the students’ unique <code>studentID</code> number.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb112-1"><a href="relational-data.html#cb112-1" aria-hidden="true" tabindex="-1"></a>academics <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
+<span id="cb112-2"><a href="relational-data.html#cb112-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">standing=</span><span class="fu">c</span>(<span class="st">&quot;FY&quot;</span>,<span class="st">&quot;FY&quot;</span>,<span class="st">&quot;SO&quot;</span>,<span class="st">&quot;SR&quot;</span>,<span class="st">&quot;JR&quot;</span>),</span>
+<span id="cb112-3"><a href="relational-data.html#cb112-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">major=</span><span class="fu">c</span>(<span class="st">&quot;undecided&quot;</span>,<span class="st">&quot;NRS&quot;</span>,<span class="st">&quot;Biology&quot;</span>,<span class="st">&quot;SCD&quot;</span>,<span class="st">&quot;SCD&quot;</span>),</span>
+<span id="cb112-4"><a href="relational-data.html#cb112-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cum_gpa=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">3.12</span>,<span class="fl">3.67</span>,<span class="fl">2.89</span>))</span>
+<span id="cb112-5"><a href="relational-data.html#cb112-5" aria-hidden="true" tabindex="-1"></a>academics</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     studentID standing     major cum_gpa
+#R&gt;   1     34535       FY undecided    0.00
+#R&gt;   2     45423       FY       NRS    0.00
+#R&gt;   3     73424       SO   Biology    3.12
+#R&gt;   4     89874       SR       SCD    3.67
+#R&gt;   5     98222       JR       SCD    2.89</code></pre>
+<p>Ideally each of these databases would have one entry for every student. These databases form what is called a <em>one-to-one relationship</em> as each observation record in each data frame is connected to one and only one observation record in the other data frame. These data frames can generally be joined with inner, left, or right joins.</p>
+<p>For example, suppose that an institutional researcher wants to determine if student gpa differs depending on whether the student was eligible for a Pell Grant or not. In this case, the researcher wants to join the <code>finaid</code> and <code>academics</code> data frames so that the <code>pell_elig</code> and <code>cum_gpa</code> variables will be in one data frame.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb114-1"><a href="relational-data.html#cb114-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(finaid,academics,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb114-2"><a href="relational-data.html#cb114-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     studentID income_cat pell_elig work_study standing     major cum_gpa
+#R&gt;   1     34535          4      TRUE       TRUE       FY undecided    0.00
+#R&gt;   2     45423          5     FALSE      FALSE       FY       NRS    0.00
+#R&gt;   3     73424          3      TRUE      FALSE       SO   Biology    3.12
+#R&gt;   4     89874          2      TRUE      FALSE       SR       SCD    3.67
+#R&gt;   5     98222          3      TRUE       TRUE       JR       SCD    2.89</code></pre>
+<p>Further suppose that academic advisors would like to have the students’ names attached to these records so that they could reach out to students who could use some help academically.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb116-1"><a href="relational-data.html#cb116-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(personal,tmp,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb116-2"><a href="relational-data.html#cb116-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     studentID  first_nm    last_nm     hometown homestate income_cat pell_elig
+#R&gt;   1     34535   Rolando   Blackman      windsor        MI          4      TRUE
+#R&gt;   2     45423 Catherine    Johnson Eden Prairie        MN          5     FALSE
+#R&gt;   3     73424     James Carmichael       Marion        IA          3      TRUE
+#R&gt;   4     89874    Rachel      Brown    Milwaukee        WI          2      TRUE
+#R&gt;   5     98222   Esteban      Perez      El Paso        TX          3      TRUE
+#R&gt;     work_study standing     major cum_gpa
+#R&gt;   1       TRUE       FY undecided    0.00
+#R&gt;   2      FALSE       FY       NRS    0.00
+#R&gt;   3      FALSE       SO   Biology    3.12
+#R&gt;   4      FALSE       SR       SCD    3.67
+#R&gt;   5       TRUE       JR       SCD    2.89</code></pre>
+<p> </p>
+<p>Continuing the example above, suppose that registrar’s office also maintains a database that contains each students’ current class schedule.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb118-1"><a href="relational-data.html#cb118-1" aria-hidden="true" tabindex="-1"></a>schedules <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">34535</span>,<span class="dv">34535</span>,<span class="dv">34535</span>,</span>
+<span id="cb118-2"><a href="relational-data.html#cb118-2" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,</span>
+<span id="cb118-3"><a href="relational-data.html#cb118-3" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">73424</span>,<span class="dv">73424</span>,<span class="dv">73424</span>,<span class="dv">73424</span>,</span>
+<span id="cb118-4"><a href="relational-data.html#cb118-4" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">89874</span>,<span class="dv">89874</span>,<span class="dv">89874</span>,</span>
+<span id="cb118-5"><a href="relational-data.html#cb118-5" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">98222</span>,<span class="dv">98222</span>,<span class="dv">98222</span>,<span class="dv">98222</span>),</span>
+<span id="cb118-6"><a href="relational-data.html#cb118-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;MTH107&quot;</span>,<span class="st">&quot;BIO115&quot;</span>,<span class="st">&quot;CHM110&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,</span>
+<span id="cb118-7"><a href="relational-data.html#cb118-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD110&quot;</span>,<span class="st">&quot;PSY110&quot;</span>,<span class="st">&quot;MTH140&quot;</span>,<span class="st">&quot;OED212&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,</span>
+<span id="cb118-8"><a href="relational-data.html#cb118-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;BIO234&quot;</span>,<span class="st">&quot;CHM220&quot;</span>,<span class="st">&quot;BIO370&quot;</span>,<span class="st">&quot;SCD110&quot;</span>,</span>
+<span id="cb118-9"><a href="relational-data.html#cb118-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;PSY370&quot;</span>,<span class="st">&quot;IDS490&quot;</span>,</span>
+<span id="cb118-10"><a href="relational-data.html#cb118-10" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;SCD330&quot;</span>,<span class="st">&quot;SOC480&quot;</span>,<span class="st">&quot;ART220&quot;</span>))</span>
+<span id="cb118-11"><a href="relational-data.html#cb118-11" aria-hidden="true" tabindex="-1"></a>schedules</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 20 x 2
+#R&gt;      studentID course
+#R&gt;          &lt;dbl&gt; &lt;chr&gt; 
+#R&gt;    1     34535 MTH107
+#R&gt;    2     34535 BIO115
+#R&gt;    3     34535 CHM110
+#R&gt;    4     34535 IDS101
+#R&gt;    5     45423 SCD110
+#R&gt;    6     45423 PSY110
+#R&gt;    7     45423 MTH140
+#R&gt;    8     45423 OED212
+#R&gt;    9     45423 IDS101
+#R&gt;   10     73424 BIO234
+#R&gt;   11     73424 CHM220
+#R&gt;   12     73424 BIO370
+#R&gt;   13     73424 SCD110
+#R&gt;   14     89874 SCD440
+#R&gt;   15     89874 PSY370
+#R&gt;   16     89874 IDS490
+#R&gt;   17     98222 SCD440
+#R&gt;   18     98222 SCD330
+#R&gt;   19     98222 SOC480
+#R&gt;   20     98222 ART220</code></pre>
+<p>The registrar’s office also maintains a database of information about every course taught at the college. A partial example of such a database is shown below.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb120-1"><a href="relational-data.html#cb120-1" aria-hidden="true" tabindex="-1"></a>courses <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;ART220&quot;</span>,<span class="st">&quot;ART330&quot;</span>,<span class="st">&quot;BIO115&quot;</span>,<span class="st">&quot;BIO234&quot;</span>,<span class="st">&quot;BIO370&quot;</span>,<span class="st">&quot;BIO490&quot;</span>,</span>
+<span id="cb120-2"><a href="relational-data.html#cb120-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;CHM110&quot;</span>,<span class="st">&quot;CHM220&quot;</span>,<span class="st">&quot;CHM360&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,<span class="st">&quot;IDS490&quot;</span>,<span class="st">&quot;MTH107&quot;</span>,</span>
+<span id="cb120-3"><a href="relational-data.html#cb120-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MTH140&quot;</span>,<span class="st">&quot;MTH230&quot;</span>,<span class="st">&quot;OED212&quot;</span>,<span class="st">&quot;OED330&quot;</span>,<span class="st">&quot;OED360&quot;</span>,<span class="st">&quot;PSY110&quot;</span>,</span>
+<span id="cb120-4"><a href="relational-data.html#cb120-4" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;PSY370&quot;</span>,<span class="st">&quot;SCD110&quot;</span>,<span class="st">&quot;SCD330&quot;</span>,<span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;SOC111&quot;</span>,<span class="st">&quot;SOC480&quot;</span>),</span>
+<span id="cb120-5"><a href="relational-data.html#cb120-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">credits=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>),</span>
+<span id="cb120-6"><a href="relational-data.html#cb120-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">instructor=</span><span class="fu">c</span>(<span class="st">&quot;Duffy&quot;</span>,<span class="st">&quot;Terry&quot;</span>,<span class="st">&quot;Johnson&quot;</span>,<span class="st">&quot;Goyke&quot;</span>,<span class="st">&quot;Anich&quot;</span>,<span class="st">&quot;Anich&quot;</span>,</span>
+<span id="cb120-7"><a href="relational-data.html#cb120-7" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Carlson&quot;</span>,<span class="st">&quot;Robertson&quot;</span>,<span class="st">&quot;Carlson&quot;</span>,<span class="st">&quot;Goyke&quot;</span>,<span class="st">&quot;Hannickel&quot;</span>,<span class="st">&quot;Ogle&quot;</span>,</span>
+<span id="cb120-8"><a href="relational-data.html#cb120-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Jensen&quot;</span>,<span class="st">&quot;Jensen&quot;</span>,<span class="st">&quot;Andre&quot;</span>,<span class="st">&quot;Andre&quot;</span>,<span class="st">&quot;Coulson&quot;</span>,<span class="st">&quot;Sneyd&quot;</span>,</span>
+<span id="cb120-9"><a href="relational-data.html#cb120-9" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Sneyd&quot;</span>,<span class="st">&quot;Tochterman&quot;</span>,<span class="st">&quot;Tochterman&quot;</span>,<span class="st">&quot;Foster&quot;</span>,</span>
+<span id="cb120-10"><a href="relational-data.html#cb120-10" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Schanning&quot;</span>,<span class="st">&quot;Schanning&quot;</span>))</span>
+<span id="cb120-11"><a href="relational-data.html#cb120-11" aria-hidden="true" tabindex="-1"></a>courses</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 24 x 3
+#R&gt;      course credits instructor
+#R&gt;      &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     
+#R&gt;    1 ART220       3 Duffy     
+#R&gt;    2 ART330       3 Terry     
+#R&gt;    3 BIO115       4 Johnson   
+#R&gt;    4 BIO234       4 Goyke     
+#R&gt;    5 BIO370       4 Anich     
+#R&gt;    6 BIO490       4 Anich     
+#R&gt;    7 CHM110       4 Carlson   
+#R&gt;    8 CHM220       4 Robertson 
+#R&gt;    9 CHM360       4 Carlson   
+#R&gt;   10 IDS101       3 Goyke     
+#R&gt;   # ... with 14 more rows</code></pre>
+<p>These two data frames are related via the common <code>course</code> variable. If we think of this from the perspective of the <code>schedules</code> data frame as the primary data frame of interest then this relationship is still a one-to-one relationship because each course in <code>schedules</code> is connected to only one course record in <code>courses</code>. This type of relationship is particularly useful, though, because the information about any one course only needs to be entered once in <code>courses</code> even though the actual course may appear many times in <code>schedules</code>. This is a particularly effect way to save both time and the chance of making data entry errors. And the specific course information (credits and instructor) can be added to the <code>schedules</code> data frame with a <code>left_join()</code>.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb122-1"><a href="relational-data.html#cb122-1" aria-hidden="true" tabindex="-1"></a>schedules2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(schedules,courses,<span class="at">by=</span><span class="st">&quot;course&quot;</span>)</span>
+<span id="cb122-2"><a href="relational-data.html#cb122-2" aria-hidden="true" tabindex="-1"></a>schedules2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 20 x 4
+#R&gt;      studentID course credits instructor
+#R&gt;          &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     
+#R&gt;    1     34535 MTH107       4 Ogle      
+#R&gt;    2     34535 BIO115       4 Johnson   
+#R&gt;    3     34535 CHM110       4 Carlson   
+#R&gt;    4     34535 IDS101       3 Goyke     
+#R&gt;    5     45423 SCD110       3 Tochterman
+#R&gt;    6     45423 PSY110       4 Sneyd     
+#R&gt;    7     45423 MTH140       4 Jensen    
+#R&gt;    8     45423 OED212       3 Andre     
+#R&gt;    9     45423 IDS101       3 Goyke     
+#R&gt;   10     73424 BIO234       4 Goyke     
+#R&gt;   11     73424 CHM220       4 Robertson 
+#R&gt;   12     73424 BIO370       4 Anich     
+#R&gt;   13     73424 SCD110       3 Tochterman
+#R&gt;   14     89874 SCD440       4 Foster    
+#R&gt;   15     89874 PSY370       4 Sneyd     
+#R&gt;   16     89874 IDS490       4 Hannickel 
+#R&gt;   17     98222 SCD440       4 Foster    
+#R&gt;   18     98222 SCD330       3 Tochterman
+#R&gt;   19     98222 SOC480       4 Schanning 
+#R&gt;   20     98222 ART220       3 Duffy</code></pre>
+<p>The students personal information can also be added to these results with a <code>left_join()</code> but now using the <code>studentID</code> key variable. This representes a one-to-many relationship because the <code>studentID</code> in <code>persoal</code> is connected to many <code>studentID</code> records in <code>schedules2</code> (one for each course the student is enrolled in).</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb124-1"><a href="relational-data.html#cb124-1" aria-hidden="true" tabindex="-1"></a>schedules2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(personal,schedules2,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb124-2"><a href="relational-data.html#cb124-2" aria-hidden="true" tabindex="-1"></a>schedules2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      studentID  first_nm    last_nm     hometown homestate course credits
+#R&gt;   1      34535   Rolando   Blackman      windsor        MI MTH107       4
+#R&gt;   2      34535   Rolando   Blackman      windsor        MI BIO115       4
+#R&gt;   3      34535   Rolando   Blackman      windsor        MI CHM110       4
+#R&gt;   4      34535   Rolando   Blackman      windsor        MI IDS101       3
+#R&gt;   5      45423 Catherine    Johnson Eden Prairie        MN SCD110       3
+#R&gt;   6      45423 Catherine    Johnson Eden Prairie        MN PSY110       4
+#R&gt;   7      45423 Catherine    Johnson Eden Prairie        MN MTH140       4
+#R&gt;   8      45423 Catherine    Johnson Eden Prairie        MN OED212       3
+#R&gt;   9      45423 Catherine    Johnson Eden Prairie        MN IDS101       3
+#R&gt;   10     73424     James Carmichael       Marion        IA BIO234       4
+#R&gt;   11     73424     James Carmichael       Marion        IA CHM220       4
+#R&gt;   12     73424     James Carmichael       Marion        IA BIO370       4
+#R&gt;   13     73424     James Carmichael       Marion        IA SCD110       3
+#R&gt;   14     89874    Rachel      Brown    Milwaukee        WI SCD440       4
+#R&gt;   15     89874    Rachel      Brown    Milwaukee        WI PSY370       4
+#R&gt;   16     89874    Rachel      Brown    Milwaukee        WI IDS490       4
+#R&gt;   17     98222   Esteban      Perez      El Paso        TX SCD440       4
+#R&gt;   18     98222   Esteban      Perez      El Paso        TX SCD330       3
+#R&gt;   19     98222   Esteban      Perez      El Paso        TX SOC480       4
+#R&gt;   20     98222   Esteban      Perez      El Paso        TX ART220       3
+#R&gt;      instructor
+#R&gt;   1        Ogle
+#R&gt;   2     Johnson
+#R&gt;   3     Carlson
+#R&gt;   4       Goyke
+#R&gt;   5  Tochterman
+#R&gt;   6       Sneyd
+#R&gt;   7      Jensen
+#R&gt;   8       Andre
+#R&gt;   9       Goyke
+#R&gt;   10      Goyke
+#R&gt;   11  Robertson
+#R&gt;   12      Anich
+#R&gt;   13 Tochterman
+#R&gt;   14     Foster
+#R&gt;   15      Sneyd
+#R&gt;   16  Hannickel
+#R&gt;   17     Foster
+#R&gt;   18 Tochterman
+#R&gt;   19  Schanning
+#R&gt;   20      Duffy</code></pre>
+<p> </p>
+</div>
+<div id="survey-data" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Survey Data (One-to-One Relationship)</h3>
+<p>Suppose that a survey research team distributed ten surveys about food insecurity at three different locations in Ashland and with different methods for distributing the survey (dropped the surveys off and people could pick them or hand the survey to people). The researchers uniquely numbered each survey so that they could later assess which methods results in better returns (if any). The data frame for these data may look like the following.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb126-1"><a href="relational-data.html#cb126-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">surv_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb126-2"><a href="relational-data.html#cb126-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">dist_site=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Walmart&quot;</span>,<span class="st">&quot;Coop&quot;</span>,<span class="st">&quot;HHS&quot;</span>),<span class="at">times=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>)),</span>
+<span id="cb126-3"><a href="relational-data.html#cb126-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method=</span><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Drop-Off&quot;</span>,<span class="st">&quot;Hand-Out&quot;</span>),<span class="dv">10</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb126-4"><a href="relational-data.html#cb126-4" aria-hidden="true" tabindex="-1"></a>surveys</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      surv_num dist_site   method
+#R&gt;   1         1   Walmart Drop-Off
+#R&gt;   2         2   Walmart Drop-Off
+#R&gt;   3         3   Walmart Drop-Off
+#R&gt;   4         4      Coop Drop-Off
+#R&gt;   5         5      Coop Hand-Out
+#R&gt;   6         6      Coop Drop-Off
+#R&gt;   7         7      Coop Drop-Off
+#R&gt;   8         8      Coop Hand-Out
+#R&gt;   9         9       HHS Hand-Out
+#R&gt;   10       10       HHS Drop-Off</code></pre>
+<p>Technicians for the research team entered data from the returned surveys into a separate data base as this did not require them to search though the first database to find the corresponding survey number. Example results for four returned surveys are shown below.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb128-1"><a href="relational-data.html#cb128-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">surv_num=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
+<span id="cb128-2"><a href="relational-data.html#cb128-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">gender=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb128-3"><a href="relational-data.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">age=</span><span class="fu">c</span>(<span class="st">&quot;20-39&quot;</span>,<span class="st">&quot;20-39&quot;</span>,<span class="st">&quot;60+&quot;</span>,<span class="st">&quot;40-59&quot;</span>),</span>
+<span id="cb128-4"><a href="relational-data.html#cb128-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">insecure=</span><span class="fu">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>))</span>
+<span id="cb128-5"><a href="relational-data.html#cb128-5" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     surv_num gender   age insecure
+#R&gt;   1        2      M 20-39       no
+#R&gt;   2        5      F 20-39       no
+#R&gt;   3        8      F   60+      yes
+#R&gt;   4        9      M 40-59       no</code></pre>
+<p>This is also an example of a one-to-one relationship because each survey in <code>surveys</code> is possibly connected to only one record/observation in <code>results</code>. In contrast to the current courses taken example for students above, the second data frame here has fewer rather than more records for each observed <code>surv_num</code>. These data frames can be joined using an <code>inner_join()</code> or <code>right_join()</code> to create a data frame that combines the distribution information with the results but only includes information from surveys that were returned.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb130-1"><a href="relational-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a>foodinsec <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(surveys,results,<span class="at">by=</span><span class="st">&quot;surv_num&quot;</span>)</span>
+<span id="cb130-2"><a href="relational-data.html#cb130-2" aria-hidden="true" tabindex="-1"></a>foodinsec</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     surv_num dist_site   method gender   age insecure
+#R&gt;   1        2   Walmart Drop-Off      M 20-39       no
+#R&gt;   2        5      Coop Hand-Out      F 20-39       no
+#R&gt;   3        8      Coop Hand-Out      F   60+      yes
+#R&gt;   4        9       HHS Hand-Out      M 40-59       no</code></pre>
+<p> </p>
+</div>
+<div id="resource-data" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Resource Sampling Data (One-to-Many Relationship)</h3>
+<p>In sampling of natural resources it is common to have one database for information about the unit of sampling and another database specific to items within that sampling unit. For example, in fisheries we may have one database to record information about a particular net (e.g., where it is located, the date it was set) and a second database that records the species of fish caught and number of the species caught. You may be tempted to do this all in one database with a separate field for each fish species but this is inefficient as you may not know which species you may catch. Thus, every time you catch a new species you would need to add a new field or column to your database. In addition, this may highly inefficient if you were to record information about individual fish (e.g., length and weight) as the amount of this information may vary from net to net.</p>
+<p>In this simple example, information about five specific settings of a net is stored in a data framed called <code>nets</code>. Note that this data frame has a unique identifier for each net setting called <code>net_num</code>.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb132-1"><a href="relational-data.html#cb132-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb132-2"><a href="relational-data.html#cb132-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">lake=</span><span class="fu">c</span>(<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Millicent&quot;</span>),</span>
+<span id="cb132-3"><a href="relational-data.html#cb132-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">date=</span><span class="fu">c</span>(<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;5-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>))</span>
+<span id="cb132-4"><a href="relational-data.html#cb132-4" aria-hidden="true" tabindex="-1"></a>nets</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     net_num      lake     date
+#R&gt;   1       1     Eagle 3-Jul-21
+#R&gt;   2       2      Hart 3-Jul-21
+#R&gt;   3       3      Hart 5-Jul-21
+#R&gt;   4       4     Eagle 6-Jul-21
+#R&gt;   5       5 Millicent 6-Jul-21</code></pre>
+<p>In a separate data frame the researchers recorded the species and number of each species caught in each net. Here there is a separate row for each species and its number caught, but that record is indexed to the specific net with the <code>net_num</code> key variable.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb134-1"><a href="relational-data.html#cb134-1" aria-hidden="true" tabindex="-1"></a>catch <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb134-2"><a href="relational-data.html#cb134-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
+<span id="cb134-3"><a href="relational-data.html#cb134-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,<span class="st">&quot;Bluntnose Minnow&quot;</span>,</span>
+<span id="cb134-4"><a href="relational-data.html#cb134-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
+<span id="cb134-5"><a href="relational-data.html#cb134-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Largemouth Bass&quot;</span>),</span>
+<span id="cb134-6"><a href="relational-data.html#cb134-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">19</span>,<span class="dv">2</span>,<span class="dv">56</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">3</span>))</span>
+<span id="cb134-7"><a href="relational-data.html#cb134-7" aria-hidden="true" tabindex="-1"></a>catch</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     net_num          species number
+#R&gt;   1       1         Bluegill      7
+#R&gt;   2       1  Largemouth Bass      3
+#R&gt;   3       2         Bluegill     19
+#R&gt;   4       2  Largemouth Bass      2
+#R&gt;   5       2 Bluntnose Minnow     56
+#R&gt;   6       4         Bluegill      3
+#R&gt;   7       4  Largemouth Bass      6
+#R&gt;   8       5  Largemouth Bass      3</code></pre>
+<p>The data frames illustrate a <em>one-to-many</em> relationship as each record in <code>nets</code> may be connected to multiple records in <code>catch</code>. The catch data will be joined to the net data using a <code>left_join()</code> because it is important to keep track of nets that also did not catch fish. An <code>inner_join()</code> would only return nets where some fish were caught.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb136-1"><a href="relational-data.html#cb136-1" aria-hidden="true" tabindex="-1"></a>fishcatch <span class="ot">&lt;-</span> <span class="fu">left_join</span>(nets,catch,<span class="at">by=</span><span class="st">&quot;net_num&quot;</span>)</span>
+<span id="cb136-2"><a href="relational-data.html#cb136-2" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     net_num      lake     date          species number
+#R&gt;   1       1     Eagle 3-Jul-21         Bluegill      7
+#R&gt;   2       1     Eagle 3-Jul-21  Largemouth Bass      3
+#R&gt;   3       2      Hart 3-Jul-21         Bluegill     19
+#R&gt;   4       2      Hart 3-Jul-21  Largemouth Bass      2
+#R&gt;   5       2      Hart 3-Jul-21 Bluntnose Minnow     56
+#R&gt;   6       3      Hart 5-Jul-21             &lt;NA&gt;     NA
+#R&gt;   7       4     Eagle 6-Jul-21         Bluegill      3
+#R&gt;   8       4     Eagle 6-Jul-21  Largemouth Bass      6
+#R&gt;   9       5 Millicent 6-Jul-21  Largemouth Bass      3</code></pre>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p>The visualizations in this section are modified from <a href="https://twitter.com/hadleywickham/status/684407629259526148/photo/1" class="uri">https://twitter.com/hadleywickham/status/684407629259526148/photo/1</a>.<a href="relational-data.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>In this treatment, the unique <code>id</code> values are also uniquely color coded to help track individual observations in the descriptions below.<a href="relational-data.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Finding all combinations, however, is not needed to actually join two data frames.<a href="relational-data.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="external-data-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>
