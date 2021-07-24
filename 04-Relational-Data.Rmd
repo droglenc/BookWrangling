@@ -424,35 +424,6 @@ These data frames represents a *one-to-many relationship* because `studentID` in
 
 &nbsp;
 
-### Survey Data (One-to-One Relationship) {#survey-data}
-Suppose that a survey research team distributed ten surveys about food insecurity at three different locations in Ashland and with different methods for distributing the survey (dropped the surveys off and people could pick them or hand the survey to people). The researchers uniquely numbered each survey so that they could later assess which methods results in better returns (if any). The data frame for these data may look like the following.
-
-```{r}
-surveys <- data.frame(surv_num=1:10,
-                      dist_site=rep(c("Walmart","Coop","HHS"),times=c(3,5,2)),
-                      method=sample(c("Drop-Off","Hand-Out"),10,replace=TRUE))
-surveys
-```
-
-Technicians for the research team entered data from the returned surveys into a separate data base as this did not require them to search though the first database to find the corresponding survey number. Example results for four returned surveys are shown below.
-
-```{r}
-results <- data.frame(surv_num=c(2,5,8,9),
-                      gender=c("M","F","F","M"),
-                      age=c("20-39","20-39","60+","40-59"),
-                      insecure=c("no","no","yes","no"))
-results
-```
-
-This is also an example of a one-to-one relationship because each survey in `surveys` is possibly connected to only one record/observation in `results`. In contrast to the current courses taken example for students above, the second data frame here has fewer rather than more records for each observed `surv_num`. These data frames can be joined using an `inner_join()` or `right_join()` to create a data frame that combines the distribution information with the results but only includes information from surveys that were returned.
-
-```{r}
-foodinsec <- inner_join(surveys,results,by="surv_num")
-foodinsec
-```
-
-&nbsp;
-
 ### Resource Sampling Data (One-to-Many Relationship) {#resource-data}
 In sampling of natural resources it is common to have one database for information about the unit of sampling and another database specific to items within that sampling unit. For example, in fisheries we may have one database to record information about a particular net (e.g., where it is located, the date it was set) and a second database that records the species of fish caught and number of the species caught. You may be tempted to do this all in one database with a separate field for each fish species but this is inefficient as you may not know which species you may catch. Thus, every time you catch a new species you would need to add a new field or column to your database. In addition, this would be highly inefficient if you were to record information about individual fish (e.g., length and weight) as the amount of this information may vary from net to net.
 

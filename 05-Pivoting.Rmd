@@ -1,0 +1,10 @@
+# Pivoting
+
+## Pivoting Concepts
+
+
+## Pivoting in R
+
+
+## Examples with Context
+

@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="external-data-files.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="pivoting.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -158,6 +158,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.1</b> Join Concepts</a></li>
 <li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.2</b> Joins in R</a></li>
 <li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.3</b> Examples With Context</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pivoting.html"><a href="pivoting.html"><i class="fa fa-check"></i><b>5</b> Pivoting</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pivoting.html"><a href="pivoting.html#pivoting-concepts"><i class="fa fa-check"></i><b>5.1</b> Pivoting Concepts</a></li>
+<li class="chapter" data-level="5.2" data-path="pivoting.html"><a href="pivoting.html#pivoting-in-r"><i class="fa fa-check"></i><b>5.2</b> Pivoting in R</a></li>
+<li class="chapter" data-level="5.3" data-path="pivoting.html"><a href="pivoting.html#examples-with-context-1"><i class="fa fa-check"></i><b>5.3</b> Examples with Context</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -5289,53 +5295,14 @@ x4
 <p>These data frames represents a <em>one-to-many relationship</em> because <code>studentID</code> in <code>personal</code> is connected to many <code>studentID</code> records in <code>schedules2</code> (one for each course the student is enrolled in).</p>
 <p> </p>
 </div>
-<div id="survey-data" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Survey Data (One-to-One Relationship)</h3>
-<p>Suppose that a survey research team distributed ten surveys about food insecurity at three different locations in Ashland and with different methods for distributing the survey (dropped the surveys off and people could pick them or hand the survey to people). The researchers uniquely numbered each survey so that they could later assess which methods results in better returns (if any). The data frame for these data may look like the following.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb126-1"><a href="relational-data.html#cb126-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">surv_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb126-2"><a href="relational-data.html#cb126-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">dist_site=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Walmart&quot;</span>,<span class="st">&quot;Coop&quot;</span>,<span class="st">&quot;HHS&quot;</span>),<span class="at">times=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>)),</span>
-<span id="cb126-3"><a href="relational-data.html#cb126-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method=</span><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Drop-Off&quot;</span>,<span class="st">&quot;Hand-Out&quot;</span>),<span class="dv">10</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
-<span id="cb126-4"><a href="relational-data.html#cb126-4" aria-hidden="true" tabindex="-1"></a>surveys</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;      surv_num dist_site   method
-#R&gt;   1         1   Walmart Hand-Out
-#R&gt;   2         2   Walmart Drop-Off
-#R&gt;   3         3   Walmart Drop-Off
-#R&gt;   4         4      Coop Hand-Out
-#R&gt;   5         5      Coop Hand-Out
-#R&gt;   6         6      Coop Drop-Off
-#R&gt;   7         7      Coop Hand-Out
-#R&gt;   8         8      Coop Hand-Out
-#R&gt;   9         9       HHS Hand-Out
-#R&gt;   10       10       HHS Hand-Out</code></pre>
-<p>Technicians for the research team entered data from the returned surveys into a separate data base as this did not require them to search though the first database to find the corresponding survey number. Example results for four returned surveys are shown below.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb128-1"><a href="relational-data.html#cb128-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">surv_num=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
-<span id="cb128-2"><a href="relational-data.html#cb128-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">gender=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
-<span id="cb128-3"><a href="relational-data.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">age=</span><span class="fu">c</span>(<span class="st">&quot;20-39&quot;</span>,<span class="st">&quot;20-39&quot;</span>,<span class="st">&quot;60+&quot;</span>,<span class="st">&quot;40-59&quot;</span>),</span>
-<span id="cb128-4"><a href="relational-data.html#cb128-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">insecure=</span><span class="fu">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>))</span>
-<span id="cb128-5"><a href="relational-data.html#cb128-5" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;     surv_num gender   age insecure
-#R&gt;   1        2      M 20-39       no
-#R&gt;   2        5      F 20-39       no
-#R&gt;   3        8      F   60+      yes
-#R&gt;   4        9      M 40-59       no</code></pre>
-<p>This is also an example of a one-to-one relationship because each survey in <code>surveys</code> is possibly connected to only one record/observation in <code>results</code>. In contrast to the current courses taken example for students above, the second data frame here has fewer rather than more records for each observed <code>surv_num</code>. These data frames can be joined using an <code>inner_join()</code> or <code>right_join()</code> to create a data frame that combines the distribution information with the results but only includes information from surveys that were returned.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb130-1"><a href="relational-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a>foodinsec <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(surveys,results,<span class="at">by=</span><span class="st">&quot;surv_num&quot;</span>)</span>
-<span id="cb130-2"><a href="relational-data.html#cb130-2" aria-hidden="true" tabindex="-1"></a>foodinsec</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;     surv_num dist_site   method gender   age insecure
-#R&gt;   1        2   Walmart Drop-Off      M 20-39       no
-#R&gt;   2        5      Coop Hand-Out      F 20-39       no
-#R&gt;   3        8      Coop Hand-Out      F   60+      yes
-#R&gt;   4        9       HHS Hand-Out      M 40-59       no</code></pre>
-<p> </p>
-</div>
-<div id="resource-data" class="section level3" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Resource Sampling Data (One-to-Many Relationship)</h3>
+<div id="resource-data" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Resource Sampling Data (One-to-Many Relationship)</h3>
 <p>In sampling of natural resources it is common to have one database for information about the unit of sampling and another database specific to items within that sampling unit. For example, in fisheries we may have one database to record information about a particular net (e.g., where it is located, the date it was set) and a second database that records the species of fish caught and number of the species caught. You may be tempted to do this all in one database with a separate field for each fish species but this is inefficient as you may not know which species you may catch. Thus, every time you catch a new species you would need to add a new field or column to your database. In addition, this would be highly inefficient if you were to record information about individual fish (e.g., length and weight) as the amount of this information may vary from net to net.</p>
 <p>In this simple example, information about five specific settings of a net is stored in <code>nets</code>, which has a unique identifier for each net setting called <code>net_num</code>.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb132-1"><a href="relational-data.html#cb132-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb132-2"><a href="relational-data.html#cb132-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">lake=</span><span class="fu">c</span>(<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Millicent&quot;</span>),</span>
-<span id="cb132-3"><a href="relational-data.html#cb132-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">date=</span><span class="fu">c</span>(<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;5-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>))</span>
-<span id="cb132-4"><a href="relational-data.html#cb132-4" aria-hidden="true" tabindex="-1"></a>nets</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb126-1"><a href="relational-data.html#cb126-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb126-2"><a href="relational-data.html#cb126-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">lake=</span><span class="fu">c</span>(<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Millicent&quot;</span>),</span>
+<span id="cb126-3"><a href="relational-data.html#cb126-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">date=</span><span class="fu">c</span>(<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;5-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>))</span>
+<span id="cb126-4"><a href="relational-data.html#cb126-4" aria-hidden="true" tabindex="-1"></a>nets</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     net_num      lake     date
 #R&gt;   1       1     Eagle 3-Jul-21
 #R&gt;   2       2      Hart 3-Jul-21
@@ -5343,13 +5310,13 @@ x4
 #R&gt;   4       4     Eagle 6-Jul-21
 #R&gt;   5       5 Millicent 6-Jul-21</code></pre>
 <p>In a separate data frame the researchers recorded the species and number of each species caught in each net. Here there is a separate row for each species and its number caught with each row indexed to the specific net with the <code>net_num</code> key variable.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb134-1"><a href="relational-data.html#cb134-1" aria-hidden="true" tabindex="-1"></a>catch <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb134-2"><a href="relational-data.html#cb134-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
-<span id="cb134-3"><a href="relational-data.html#cb134-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,<span class="st">&quot;Bluntnose Minnow&quot;</span>,</span>
-<span id="cb134-4"><a href="relational-data.html#cb134-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
-<span id="cb134-5"><a href="relational-data.html#cb134-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Largemouth Bass&quot;</span>),</span>
-<span id="cb134-6"><a href="relational-data.html#cb134-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">19</span>,<span class="dv">2</span>,<span class="dv">56</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb134-7"><a href="relational-data.html#cb134-7" aria-hidden="true" tabindex="-1"></a>catch</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb128-1"><a href="relational-data.html#cb128-1" aria-hidden="true" tabindex="-1"></a>catch <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb128-2"><a href="relational-data.html#cb128-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
+<span id="cb128-3"><a href="relational-data.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,<span class="st">&quot;Bluntnose Minnow&quot;</span>,</span>
+<span id="cb128-4"><a href="relational-data.html#cb128-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
+<span id="cb128-5"><a href="relational-data.html#cb128-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Largemouth Bass&quot;</span>),</span>
+<span id="cb128-6"><a href="relational-data.html#cb128-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">19</span>,<span class="dv">2</span>,<span class="dv">56</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">3</span>))</span>
+<span id="cb128-7"><a href="relational-data.html#cb128-7" aria-hidden="true" tabindex="-1"></a>catch</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     net_num          species number
 #R&gt;   1       1         Bluegill      7
 #R&gt;   2       1  Largemouth Bass      3
@@ -5361,8 +5328,8 @@ x4
 #R&gt;   8       5  Largemouth Bass      3</code></pre>
 <p>These data frames illustrate a <em>one-to-many</em> relationship as each record in <code>nets</code> may be connected to multiple records in <code>catch</code>.</p>
 <p>The catch data will be joined to the net data using a <code>left_join()</code> because it is important to keep track of nets that also did not catch fish. An <code>inner_join()</code> would only return nets where some fish were caught.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb136-1"><a href="relational-data.html#cb136-1" aria-hidden="true" tabindex="-1"></a>fishcatch <span class="ot">&lt;-</span> <span class="fu">left_join</span>(nets,catch,<span class="at">by=</span><span class="st">&quot;net_num&quot;</span>)</span>
-<span id="cb136-2"><a href="relational-data.html#cb136-2" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb130-1"><a href="relational-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a>fishcatch <span class="ot">&lt;-</span> <span class="fu">left_join</span>(nets,catch,<span class="at">by=</span><span class="st">&quot;net_num&quot;</span>)</span>
+<span id="cb130-2"><a href="relational-data.html#cb130-2" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     net_num      lake     date          species number
 #R&gt;   1       1     Eagle 3-Jul-21         Bluegill      7
 #R&gt;   2       1     Eagle 3-Jul-21  Largemouth Bass      3
@@ -5393,7 +5360,7 @@ x4
         </div>
       </div>
 <a href="external-data-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pivoting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

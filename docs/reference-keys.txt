@@ -26,5 +26,8 @@ anti-join
 joins-in-r
 examples-with-context
 student-data
-survey-data
 resource-data
+pivoting
+pivoting-concepts
+pivoting-in-r
+examples-with-context-1
