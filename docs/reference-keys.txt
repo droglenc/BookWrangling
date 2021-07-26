@@ -5,7 +5,7 @@ data-classes
 data-frames
 tibbles
 tidy-data
-external-data-files
+read-external-data-files
 entering-data
 saving-the-external-file
 excel
@@ -27,7 +27,7 @@ joins-in-r
 examples-with-context
 student-data
 resource-data
-pivoting
+pivot
 data-formats
 pivoting-concepts
 pivot-longer
@@ -38,3 +38,8 @@ pivot-wider-1
 pivoting-examples
 pivoting-covid
 abundance-of-mayflies
+filter-and-select
+add-new-variables
+groupings
+dates-and-times
+factors

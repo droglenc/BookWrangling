@@ -1,4 +1,4 @@
-# Pivoting
+# Pivot
 Three rules of tidy data were introduced in Section \@ref(tidy-data).
 
 1. Each variable must have its own column.

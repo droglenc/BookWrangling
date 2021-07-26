@@ -1,4 +1,4 @@
-# External Data Files
+# Read External Data Files
 Most realistic data has more than a few individuals and is, thus, not easily entered using `data.frame()` or `tibble()` as shown in Section \@ref(data-frames). Rather these data are often entered and stored in a spreadsheet or database that is external to R and, thus, needs to be read or loaded into R. This module describes how data should be entered into a spreadsheet and then how that data is read into R.
 
 ## Entering Data

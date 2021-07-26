@@ -92,7 +92,7 @@ Items in vectors should all be the same class type.
 :::
 
 ## Data Frames
-Vectors are useful for small numbers of items that have a single purpose. However, a data frame is more useful if you have multiple types of items (e.g., variables) recorded on a large number of individuals. Here we explore small data frames; larger data frames will be imported from external data sources in Module \@ref(external-data-files).
+Vectors are useful for small numbers of items that have a single purpose. However, a data frame is more useful if you have multiple types of items (e.g., variables) recorded on a large number of individuals. Here we explore small data frames; larger data frames will be imported from external data sources in Module \@ref(read-external-data-files).
 
 A data frame is a rectangular data structure where columns are vectors of the same class that represent variables recorded on individuals which are represented in rows. Simple data frames can be constructed with `data.frame()` with named arguments set equal to vectors of data. For example, the following code produces a data frame object called `counties` that has three variables called `name`, `pop`, and `party`.
 
