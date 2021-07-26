@@ -8,3 +8,6 @@ purrr
 dplyr
 stringr
 forcats
+kableExtra
+ggpp
+ggpmisc

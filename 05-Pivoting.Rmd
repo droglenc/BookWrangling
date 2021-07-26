@@ -1,10 +1,397 @@
 # Pivoting
+Three rules of tidy data were introduced in Section \@ref(tidy-data).
+
+1. Each variable must have its own column.
+1. Each observation must have its own row.
+1. Each value must have its own cell.
+
+There are a wide variety of ways to enter data. Some data will not be tidy because, for instance, it may be easier to enter data in a non-tidy format. For example, the data shown below is the number of positive confirmed COVID cases in Ashland, Bayfield, and Douglas counties in 2021 (through June).
+
+&nbsp;
+
+```{r covABD, echo=FALSE, cache=TRUE}
+covABD_L <- read_csv("data/COVID-19_Historical_Data_by_County_V2_25Jul21.csv") %>%
+  select(Date,County=GEOName,POS_NEW_CONF) %>%
+  filter(County %in% c("Ashland","Bayfield","Douglas")) %>%
+  filter(Date>="2020/03/01",Date<"2021/07/01") %>%
+  mutate(Year=lubridate::year(Date),Month=lubridate::month(Date,label=TRUE)) %>%
+  group_by(County,Year,Month) %>%
+  summarize(cases=sum(POS_NEW_CONF))
+
+covABD_L_21 <- covABD_L %>%
+  filter(Year==2021)
+
+covABD_W <- pivot_wider(covABD_L,names_from=Month:Year,values_from=cases)
+
+covABD_W_21 <- pivot_wider(covABD_L_21,names_from=Month:Year,values_from=cases)
+```
+
+```{r echo=FALSE}
+knitr::kable(covABD_W_21,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1,bold=TRUE)
+```
+
+&nbsp;
+
+Data for future months can be easily entered by simply appending a new month on the right. These data are also easy to examine in this table, but in this format they are difficult to graph and can be difficult to summarize. Thus, these data need to be converted to a different format for some simple analyses.^[Converting and graphing these data will be shown in Section \@ref(pivoting-examples).]
+
+The objective of this module is to describe and demonstrate concepts and methods for converting data betwen different formats.
+
+&nbsp;
+
+## Data Formats
+Consider a situation with one measurement variable, `x`, recorded on four individuals at two times. These eight measurements could be entered in either the `W` or `L` data frames shown below.
+
+&nbsp;
+
+```{r W, echo=FALSE}
+W <- data.frame(id=c("A","B","C","D"),x1=1:4,x2=5:8)
+```
+```{r L, echo=FALSE}
+L <- pivot_longer(W,cols=x1:x2,names_to="time",names_prefix="x",values_to="x")
+```
+```{r echo=FALSE}
+knitr::kable(W,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  add_header_above(header=c("'W' data.frame"=3)) %>%
+  kable_styling(position="float_left")
+knitr::kable(L,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  add_header_above(header=c("'L' data.frame"=3)) %>%
+  kable_styling(position="right")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+&nbsp;
+
+In this case, a measurement of `x` on an individual at a single point in time is an observation; thus, each row should correspond to one measurement (value of `x`) on one individual. The `W` data frame is not tidy because multiple observations of `x` appear in each row of the data frame (i.e., the single measurement variable, `x`, is dispersed across two columns). The `L` data frame is tidy because each row corresponds to one observation (i.e., a unique combination of `id` and `time`) and the single measurement variable, `x`, now appears in only one column.
+
+Consider a similar example where *two measurements* (the variables `x` and `y`) were made (at the same time) on four individuals. These data may be entered as in `V` and `Z` below.
+
+&nbsp;
+
+```{r V, echo=FALSE}
+V <- rename(W,x=x1,y=x2)
+```
+```{r Z, echo=FALSE}
+Z <- pivot_longer(V,cols=x:y,names_to="variable",values_to="value")
+```
+```{r echo=FALSE}
+knitr::kable(V,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  add_header_above(header=c("'V' data.frame"=3)) %>%
+  kable_styling(position="float_left")
+knitr::kable(Z,align="c") %>%
+  kable_minimal(full_width=FALSE,html_font=khfont) %>%
+  kable_styling(bootstrap_options=c("hover","condensed")) %>%
+  row_spec(0,bold=TRUE) %>%
+  add_header_above(header=c("'Z' data.frame"=3)) %>%
+  kable_styling(position="right")
+```
+
+<!-- for clearing the floats from above -->
+<div style="clear:both;"></div>
+
+&nbsp;
+
+In this case `V` is tidy because each row corresponds to one observation (defined only by `id`) and each measurement variable (`x` and `y`) is in its own column. On the other hand `Z` is not tidy because observations are split into two rows and values of the two different measurement variables are lumped into the same column.
+
+&nbsp;
+
+As you can see it can be difficult to identify the format that you want for your data. You cannot tell simply by the "shape" of the data -- there will be times when you need the data to be "longer" (as in the first example above) and other times when you need the data to be "wider" (as in the second example above).
+
+As a general rule you should strive for your data to be tidy. For this start by identifying an observation is, which variables define the observations, and what the measurement variables are. Then determine if each row corresponds to one observation and if each measurement variable is in one column by itself. If the data do not meet these requirements then you likely need to convert it to a different format as described in the next sections.
+
+&nbsp;
 
 ## Pivoting Concepts
+Each set of data described in the previous section could be entered in two formats. These formats are loosely called "wider" and "longer" based on their shapes relative to each other. converting between wider and longer format data is called A **pivot**.
+
+### Pivot Longer
+"Pivot Longer" is the conversion from a "wider" to a "longer" format. Pivotig to a longer format is usually needed if multiple observations of the same variable are recorded on individuals but are stored in separate columns of the data frame. This was the case with `W` above and also with the COVID data in the module introduction.
+
+To pivot from a wider to a longer format you must identify the variables in the wider format frame that contain the multiple measurements of the same variable. This was `x1` and `x2` in `W`. All other variables in the data frame are considered to represent a unique individual. In this case only the `id` variable is needed for this purpose.
+
+In addition, you must define names for variables in what will be the new longer format. The first name is for the variable that will identify the multiple measurements on the same individual. In this example the multiple measurements were taken at different times, so it seems logical to call the new variable `time`. The second name is for the variable that will hold the values of the measurement variable. Here the use of `x1` and `x2` in the original wider data frame suggest that this variable should be called `x`. The process of pivoting the wider `W` to a longer data frame is illustrated below.
+
+&nbsp;
+
+```{r echo=FALSE, fig.width=7, fig.asp=0.5}
+clrs <- c('#a6611a','#dfc27d','#80cdc1','#018571')
+
+bp <- ggplot(data=data.frame(x=0,y=0),mapping=aes(x=x,y=y)) +
+  geom_point(color="white") +
+  scale_x_continuous(limits=c(0,1)) +
+  scale_y_continuous(limits=c(0,1)) +
+  theme_void() +
+  theme(aspect.ratio=2/4)
+bp +
+  annotate(geom="table",x=c(0.05,0.95),y=0.85,label=list(W,L),
+           size=6,table.theme=ttheme_gtbw) +
+  annotate(geom="curve",
+           x=0.16,y=0.72-0.087*(0:3),
+           xend=0.91,yend=0.72-0.087*(0:3)*2,
+           color=clrs,curvature=-0.10,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed")) +
+  annotate(geom="curve",
+           x=0.23,y=0.72-0.087*(0:3),
+           xend=0.91,yend=0.72-0.087-0.087*(0:3)*2,
+           color=clrs,curvature=+0.25,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed")) +
+  annotate(geom="curve",
+           x=c(0.15,0.22),y=0.83,xend=0.83,yend=0.84,
+           color="red",curvature=-0.20,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed"))
+```
+
+### Pivot Wider
+"Pivot Wider" is the process of converting from a "longer" to a "wider" data frame. You will typically pivot to a wider format if multiple measurement variables are recorded in one variable. This was the case with the `Z` data frame above.
+
+To "Pivot Wider" you must identify the variable in the longer data frame that contains what will be names of variables in the wider data frame. In this case, we want the data frame created from `Z` to have `x` and `y` has names of variables; thus, the name of this variable in `Z` is `variable`. In addition, you must identify the variable that has the values of the measurement variables that will separated into columns in the new data frame. In `Z` this variale is `value`. With these two definitions the process of pivoting the longer `Z` to a wider data frame is illustrated below.
+
+&nbsp;
+
+```{r echo=FALSE, fig.width=7, fig.asp=0.5}
+bp +
+  annotate(geom="table",x=c(0.05,0.95),y=c(0.75,0.6),label=list(Z,V),
+           size=6,table.theme=ttheme_gtbw) +
+  annotate(geom="curve",
+           x=0.21,y=0.62-0.087*(0:3)*2,
+           xend=0.87,yend=0.58,
+           color="red",curvature=-0.6,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed")) +
+  annotate(geom="curve",
+           x=0.21,y=0.62-0.087-0.087*(0:3)*2,
+           xend=0.92,yend=0.58,
+           color="blue",curvature=-0.7,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed")) +
+  annotate(geom="curve",
+           x=0.35,y=0.62-0.087*(0:3)*2,
+           xend=0.865,yend=0.47-0.087*(0:3),
+           color=clrs,curvature=-0.2,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed")) +
+  annotate(geom="curve",
+           x=0.35,y=0.62-0.087-0.087*(0:3)*2,
+           xend=0.91,yend=0.47-0.087*(0:3),
+           color=clrs,curvature=0.2,size=1,
+           arrow=arrow(angle=25,length=unit(3,"mm"),type="closed"))
+```
+
+&nbsp;
 
 
 ## Pivoting in R
+Pivoting `W` to a longer format and `Z` to a wider format in R are demonstrated in this section. The two data frames are created in R below.
+
+```{r}
+<<W>>
+W
+Z <- data.frame(id=rep(c("A","B","C","D"),each=2),
+                variable=rep(c("x","y"),times=4),
+                value=c(1,5,2,6,3,7,4,8))
+Z
+```
 
 
-## Examples with Context
+### Pivot Longer
+Pivoting to a longer data frame is accomplished with `pivot_longer()`. The first argument is the name of the wider data frame. The following three arguments are also typically used.
 
+* The variables in the wider data frame that represent multiple measurements of the same variable must be given in `cols=`. Note that these variables do NOT need to be in quotes because they exist in the wider data frame. There are multiple ways to do this in most situations; here are several for this situation.^[There are still other ways (e.g., `cols=contains("x")`) but these four would be the most common given the names in this data frame.]
+    * `cols=x1:x2` will select all variables contiguous from between `x1` to `x2`.
+    * `cols=c(x1,x2)` will select only variables `x1` and `x2`.
+    * `cols=starts_with("x")` will select all variables with names that begin with `x`.
+    * `cols=-id` will select all variables not named `id`.
+* The name for the variable in the new longer data frame that will hold the index that represents the multiple measurements on the same individual is given in `names_to=`.
+* The name for the variable that will hold the values of the measurement variable in the new longer data frame is given in `values_to`.
+
+Note that the variable names in `names_to=` and `values_to=` must be in quotes because they do not appear in an (as of yet) existing data frame.
+
+Given the definitions of these items in the previous section, the following code can be used to pivot `W` to a longer format.
+
+```{r}
+L <- pivot_longer(W,cols=x1:x2,names_to="time",values_to="value")
+L
+```
+
+Note, however, that the `time` variable `L` contains `x1` and `x2` rather than `1` and `2`. By default `pivot_longer()` uses the names of the variables you supplied in `cols=` in this variable. If these variables have a common pattern -- as in they all start with "x" and end with the number that we want -- then the portion of the pattern to remove can be given in `names_prefix=`.^[There are other arguments to `pivot_longer()` for dealing with more complicated naming issues.]
+
+```{r}
+<<L>>
+L
+```
+
+```{r echo=FALSE, results="hide"}
+# This is just a check
+pivot_longer(W,cols=c(x1,x2),names_to="time",names_prefix="x",values_to="value")
+pivot_longer(W,cols=starts_with("x"),names_to="time",names_prefix="x",values_to="value")
+pivot_longer(W,cols=contains("x"),names_to="time",names_prefix="x",values_to="value")
+pivot_longer(W,cols=-id,names_to="time",names_prefix="x",values_to="value")
+```
+
+&nbsp;
+
+A reminder that all variables not given in `cols=` will be considered as identifying with the individuals in the data frame. Suppose for example that `W` had more columns that looked like this (data frame called `W2` here).
+
+```{r echo=FALSE}
+W2 <- W %>%
+  mutate(fname=c("Derek","Young","Andrew","Jodi"),
+         lname=c("Ogle","Kim","Jensen","Supanich"),
+         years=c(25,32,6,7)) %>%
+  relocate(starts_with("x"),.after=last_col())
+W2
+```
+
+The same `pivot_longer()` with `W2` will repeat the `id`, `fname`, `lname`, and `years` values.
+
+```{r}
+L2 <- pivot_longer(W2,cols=x1:x2,names_to="time",names_prefix="x",values_to="value")
+L2
+```
+
+&nbsp;
+
+### Pivot Wider
+Pivoting to a wider data frame is accomplished with `pivot_wider()`. The first argument is the name of the longer data frame. The following two arguments are all typically used.
+
+* The name of the variable in the longer data frame that contains what will be names of variables in the wider data frame is given in `names_from=`.
+* The name of the variable in the longer data frame that has the values of the measurement variable that will be separated into columns in the new data frame is given in `values_from=`.
+
+As both of these variables exist in the longer data frame they do NOT need to be in quotes.
+
+Given the definitions from the previous section `Z` is pivoted to a wider format with the following code.
+
+```{r}
+V <- pivot_wider(Z,names_from=variable,values_from=value)
+V
+```
+
+&nbsp;
+
+Again, you can imagine a slightly more complicated data frame (here called `Z2`).
+
+```{r echo=FALSE}
+Z2 <- Z %>%
+  mutate(fname=plyr::mapvalues(id,from=c("A","B","C","D"),
+                               to=c("Derek","Young","Andrew","Jodi")),
+         lname=plyr::mapvalues(id,from=c("A","B","C","D"),
+                               to=c("Ogle","Kim","Jensen","Supanich")),
+         years=plyr::mapvalues(id,from=c("A","B","C","D"),
+                               to=c(25,32,6,7))) %>%
+  relocate(fname,lname,years,.after=id)
+Z2
+```
+
+The same `pivot_wider()` on `Z2` will again repeat the `id`, `fname`, `lname`, and `years` variables.
+
+```{r}
+V2 <- pivot_wider(Z2,names_from=variable,values_from=value)
+V2
+```
+
+&nbsp;
+
+## Examples with Context {#pivoting-examples}
+### COVID Cases by County and Month {#pivoting-covid}
+In the introduction a simple data frame of COVID cases by month in three Wisconsin counties from January to June 2021 was shown. Here consider a slightly more complicated data frame that contains the same information but from March 2020 to June 2021. This data frame is called `covABD_W` and is partially shown below.
+
+```{r}
+covABD_W
+```
+
+These data are not tidy because a "measurement" is COVID cases and they do not appear in one variable/column of this data frame. In addition, an individual is a combination of county and month but month does not appear as a variable. It would be difficult to make a plot of number of cases by month for each county with the data in this format. Thus our goal here is to convert these "wider" data to "longer" data in a tidy format.
+
+All columns except for `County` are part of the data to pivot; thus, `cols=-County` is the easiest way to choose these columns. The variable names in `covABD_W` are the month and year of the data so I will call the `names_to=` variable "MonYear". Finally, the measurements are of cases of COVID so I will the `values_to=` variable "Cases". Putting this all together gives the following.
+
+```{r}
+covABD_L <- pivot_longer(covABD_W,cols=-County,names_to="MonYear",values_to="Cases")
+covABD_L
+```
+
+This is essentially what I want, but the `MonYear` variable is going to be problematic because R does not recognize that as a date (note how it is identified as a character class). I would prefer to split those items on the underscore. You can tell `pivot_longer()` how to split names with `names_sep=`. However, splitting the month and year will then produce two new columns so `names_to=` must be a vector of two names for these two new columns. These modifications produce the following result.
+
+```{r}
+covABD_L <- pivot_longer(covABD_W,cols=-County,
+                         names_to=c("Month","Year"),names_sep="_",values_to="Cases")
+covABD_L
+```
+
+We will need an actual "date" variable to make a plot of COVID cases over time. The code below does this but uses functions that won't be introduced until Modules XXX and XXX. 
+
+```{r}
+covABD_L <- covABD_L %>%
+  mutate(Date=lubridate::mdy(paste(Month,"1",Year,sep="-")))
+covABD_L
+```
+
+Finally, these data can be graphed as shown below.
+
+```{r echo=FALSE, fig.width=4.5}
+ggplot(data=covABD_L,mapping=aes(x=Date,y=Cases,color=County,group=County)) +
+  geom_line(size=1) +
+  geom_point(shape=21,size=2,fill="white") +
+  scale_y_continuous(name="Number of Confirmed Cases") +
+  scale_x_date(name="Date") +
+  theme_bw() +
+  theme(legend.position=c(0,1),legend.justification=c(-0.05,1.05))
+```
+
+&nbsp;
+
+## Abundance of Mayflies
+In 1990 technicians for the U.S. Geological Survey recorded the abundance of mayflies (Ephemeroptera) in 10 1 m^2^ quadrats in Chequamegon Bay. In 2020 they did the same at the same locations. Their data are crecorded in `ephem` as shown below.
+
+```{r echo=FALSE}
+ephem <- tibble(loc=rep(101:110,each=2),
+                hab=rep(sample(c("Cobble","Sand","Muck"),10,replace=TRUE),each=2),
+                depth=rep(round(20*runif(10)+10),each=2),
+                year=rep(c(1990,2020),times=10),
+                abundance=round(c(20*runif(10)+40,30*runif(10)+30)))
+```
+```{r}
+ephem
+```
+
+The researchers want to compute the mean change in abundance across all ten quadrats but that is not easily done with the data in this format. To facilitate this calculation these data need to be converted to a wider format that will have the 1990 and 2020 data in separate columns. In this case, potential names for the variables in the new wider format are in `year`. The values to be put in those columns are in `aboundance`. The rest of the variables should be maintained as they identify the individual (i.e., a quadrat). With these definitions these data are converted to a wider format with the following code.
+
+```{r}
+ephem2 <- pivot_wider(ephem,names_from=year,values_from=abundance)
+ephem2
+```
+
+This accomplishes the task at hand, but the two new variables are called `1990` and `2020` which are non-standard variable names in R (i.e., they start with numbers). This issue can be avoided by providing a string to be used as a prefix to the names in `names_prefix=`.
+
+```{r}
+ephem2 <- pivot_wider(ephem,names_from=year,names_prefix="year_",values_from=abundance)
+ephem2
+```
+
+The code below, which will not be introduced until Module XXX, finds the difference in abundance between the two years.
+
+```{r}
+ephem2 <- ephem2 %>%
+  mutate(diff90_20=year_1990-year_2020)
+ephem2
+```
+
+These data could then be easily plotted or summarized.
+
+```{r echo=FALSE}
+ggplot(data=ephem2,mapping=aes(x=diff90_20,y=loc,color=diff90_20<0)) +
+  geom_point() +
+  geom_vline(xintercept=0,linetype="dashed") +
+  scale_color_manual(values=c("black","red"),guide="none") +
+  scale_x_continuous(name="Change in Abundance from 1990 to 2020") +
+  scale_y_continuous(name="Quadrat",breaks=101:110) +
+  theme_bw()
+```

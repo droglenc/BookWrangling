@@ -28,6 +28,13 @@ examples-with-context
 student-data
 resource-data
 pivoting
+data-formats
 pivoting-concepts
+pivot-longer
+pivot-wider
 pivoting-in-r
-examples-with-context-1
+pivot-longer-1
+pivot-wider-1
+pivoting-examples
+pivoting-covid
+abundance-of-mayflies
