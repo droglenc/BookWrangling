@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-07-25" />
+<meta name="date" content="2021-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -165,7 +165,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="pivoting.html"><a href="pivoting.html#pivoting-concepts"><i class="fa fa-check"></i><b>5.2</b> Pivoting Concepts</a></li>
 <li class="chapter" data-level="5.3" data-path="pivoting.html"><a href="pivoting.html#pivoting-in-r"><i class="fa fa-check"></i><b>5.3</b> Pivoting in R</a></li>
 <li class="chapter" data-level="5.4" data-path="pivoting.html"><a href="pivoting.html#pivoting-examples"><i class="fa fa-check"></i><b>5.4</b> Examples with Context</a></li>
-<li class="chapter" data-level="5.5" data-path="pivoting.html"><a href="pivoting.html#abundance-of-mayflies"><i class="fa fa-check"></i><b>5.5</b> Abundance of Mayflies</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -691,14 +690,16 @@ y
 <h3><span class="header-section-number">5.2.1</span> Pivot Longer</h3>
 <p>“Pivot Longer” is the conversion from a “wider” to a “longer” format. Pivotig to a longer format is usually needed if multiple observations of the same variable are recorded on individuals but are stored in separate columns of the data frame. This was the case with <code>W</code> above and also with the COVID data in the module introduction.</p>
 <p>To pivot from a wider to a longer format you must identify the variables in the wider format frame that contain the multiple measurements of the same variable. This was <code>x1</code> and <code>x2</code> in <code>W</code>. All other variables in the data frame are considered to represent a unique individual. In this case only the <code>id</code> variable is needed for this purpose.</p>
-<p>In addition, you must define names for variables in what will be the new longer format. The first name is for the variable that will identify the multiple measurements on the same individual. In this example the multiple measurements were taken at different times, so it seems logical to call the new variable <code>time</code>. The second name is for the variable that will hold the values of the measurement variable. Here the use of <code>x1</code> and <code>x2</code> in the original wider data frame suggest that this variable should be called <code>x</code>. The process of pivoting the wider <code>W</code> to a longer data frame is illustrated below.</p>
+<p>In addition, you must define names for variables in what will be the new longer format. The first name is for the variable that will identify the multiple measurements on the same individual. In this example the multiple measurements were taken at different times, so it seems logical to call the new variable <code>time</code>. The second name is for the variable that will hold the values of the measurement variable. Here the use of <code>x1</code> and <code>x2</code> in the original wider data frame suggest that this variable should be called <code>x</code>.</p>
+<p>The process of pivoting the wider <code>W</code> to a longer data frame is illustrated below.</p>
 <p> </p>
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-77-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pivot-wider" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Pivot Wider</h3>
-<p>“Pivot Wider” is the process of converting from a “longer” to a “wider” data frame. You will typically pivot to a wider format if multiple measurement variables are recorded in one variable. This was the case with the <code>Z</code> data frame above.</p>
-<p>To “Pivot Wider” you must identify the variable in the longer data frame that contains what will be names of variables in the wider data frame. In this case, we want the data frame created from <code>Z</code> to have <code>x</code> and <code>y</code> has names of variables; thus, the name of this variable in <code>Z</code> is <code>variable</code>. In addition, you must identify the variable that has the values of the measurement variables that will separated into columns in the new data frame. In <code>Z</code> this variale is <code>value</code>. With these two definitions the process of pivoting the longer <code>Z</code> to a wider data frame is illustrated below.</p>
+<p>“Pivot Wider” is the conversion from a “longer” to a “wider” format. Pivoting to a wider format is most common when multiple measurement variables are recorded as one variable in the long format data frame. This was the case with <code>Z</code> from above.</p>
+<p>To pivot from a longer to a wider format you must identify the variable in the longer data frame that contains what will be names of variables in the wider data. The wider data frame that will be created from <code>Z</code> should have <code>x</code> and <code>y</code> has names of variables; thus, this variable in <code>Z</code> is <code>variable</code>. In addition, you must identify the variable in the long data frame that has the values of the measurement variable that will be separated into columns in the new data frame. In <code>Z</code> this variale is <code>value</code>.</p>
+<p>The process of pivoting the longer <code>Z</code> to a wider data frame is illustrated below.</p>
 <p> </p>
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-78-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p> </p>
@@ -706,7 +707,7 @@ y
 </div>
 <div id="pivoting-in-r" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Pivoting in R</h2>
-<p>Pivoting <code>W</code> to a longer format and <code>Z</code> to a wider format in R are demonstrated in this section. The two data frames are created in R below.</p>
+<p>Pivoting <code>W</code> to a longer format and <code>Z</code> to a wider format in R are demonstrated in this section. These two data frames are created in R below.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb132-1"><a href="pivoting.html#cb132-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>),<span class="at">x1=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="at">x2=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>)</span>
 <span id="cb132-2"><a href="pivoting.html#cb132-2" aria-hidden="true" tabindex="-1"></a>W</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id x1 x2
@@ -729,20 +730,20 @@ y
 #R&gt;   8  D        y     8</code></pre>
 <div id="pivot-longer-1" class="section level3" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Pivot Longer</h3>
-<p>Pivoting to a longer data frame is accomplished with <code>pivot_longer()</code>. The first argument is the name of the wider data frame. The following three arguments are also typically used.</p>
+<p>Pivoting to a longer data frame is accomplished with <code>pivot_longer()</code> from <code>tidyr</code> (which is part of <code>tidyverse</code>). The first argument is the name of the wider data frame. The following three arguments are also typically used.</p>
 <ul>
-<li>The variables in the wider data frame that represent multiple measurements of the same variable must be given in <code>cols=</code>. Note that these variables do NOT need to be in quotes because they exist in the wider data frame. There are multiple ways to do this in most situations; here are several for this situation.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>
+<li>The variables in the wider data frame that represent multiple measurements of the same variable must be given in <code>cols=</code>. Note that these variables do NOT need to be in quotes because they exist in the wider data frame. There are multiple ways to select these variables in most situations; here are several for this situation.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>
 <ul>
 <li><code>cols=x1:x2</code> will select all variables contiguous from between <code>x1</code> to <code>x2</code>.</li>
 <li><code>cols=c(x1,x2)</code> will select only variables <code>x1</code> and <code>x2</code>.</li>
 <li><code>cols=starts_with("x")</code> will select all variables with names that begin with <code>x</code>.</li>
 <li><code>cols=-id</code> will select all variables not named <code>id</code>.</li>
 </ul></li>
-<li>The name for the variable in the new longer data frame that will hold the index that represents the multiple measurements on the same individual is given in <code>names_to=</code>.</li>
+<li>The name for the variable in the new longer data frame that will hold the index for multiple measurements on the same individual in the longer data frame is given in <code>names_to=</code>.</li>
 <li>The name for the variable that will hold the values of the measurement variable in the new longer data frame is given in <code>values_to</code>.</li>
 </ul>
 <p>Note that the variable names in <code>names_to=</code> and <code>values_to=</code> must be in quotes because they do not appear in an (as of yet) existing data frame.</p>
-<p>Given the definitions of these items in the previous section, the following code can be used to pivot <code>W</code> to a longer format.</p>
+<p>Given the definitions of these items in the previous section, the following code is used to pivot <code>W</code> to a longer format data frame, <code>L</code>.</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb136-1"><a href="pivoting.html#cb136-1" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(W,<span class="at">cols=</span>x1<span class="sc">:</span>x2,<span class="at">names_to=</span><span class="st">&quot;time&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;value&quot;</span>)</span>
 <span id="cb136-2"><a href="pivoting.html#cb136-2" aria-hidden="true" tabindex="-1"></a>L</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
@@ -756,7 +757,7 @@ y
 #R&gt;   6 C     x2        7
 #R&gt;   7 D     x1        4
 #R&gt;   8 D     x2        8</code></pre>
-<p>Note, however, that the <code>time</code> variable <code>L</code> contains <code>x1</code> and <code>x2</code> rather than <code>1</code> and <code>2</code>. By default <code>pivot_longer()</code> uses the names of the variables you supplied in <code>cols=</code> in this variable. If these variables have a common pattern – as in they all start with “x” and end with the number that we want – then the portion of the pattern to remove can be given in <code>names_prefix=</code>.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>Note, however, that the <code>time</code> variable in <code>L</code> contains <code>x1</code> and <code>x2</code> rather than <code>1</code> and <code>2</code>. By default <code>pivot_longer()</code> uses the names of the variables you supplied in <code>cols=</code> in this variable. If these variables have a common pattern – as in they all start with “x” and end with the number that we want – then the portion of the pattern to remove can be given in <code>names_prefix=</code>.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb138-1"><a href="pivoting.html#cb138-1" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(W,<span class="at">cols=</span>x1<span class="sc">:</span>x2,<span class="at">names_to=</span><span class="st">&quot;time&quot;</span>,<span class="at">names_prefix=</span><span class="st">&quot;x&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;x&quot;</span>)</span>
 <span id="cb138-2"><a href="pivoting.html#cb138-2" aria-hidden="true" tabindex="-1"></a>L</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
@@ -771,13 +772,13 @@ y
 #R&gt;   7 D     1         4
 #R&gt;   8 D     2         8</code></pre>
 <p> </p>
-<p>A reminder that all variables not given in <code>cols=</code> will be considered as identifying with the individuals in the data frame. Suppose for example that <code>W</code> had more columns that looked like this (data frame called <code>W2</code> here).</p>
+<p>A reminder that all variables not given in <code>cols=</code> will be considered as identifying with the individuals in the data frame. Suppose for example that <code>W</code> had more columns that looked like this data frame called <code>W2</code>.</p>
 <pre class="ROUTPUT"><code>#R&gt;     id  fname    lname years x1 x2
 #R&gt;   1  A  Derek     Ogle    25  1  5
 #R&gt;   2  B  Young      Kim    32  2  6
 #R&gt;   3  C Andrew   Jensen     6  3  7
 #R&gt;   4  D   Jodi Supanich     7  4  8</code></pre>
-<p>The same <code>pivot_longer()</code> with <code>W2</code> will repeat the <code>id</code>, <code>fname</code>, <code>lname</code>, and <code>years</code> values.</p>
+<p>The same <code>pivot_longer()</code> with <code>W2</code> will repeat the <code>id</code>, <code>fname</code>, <code>lname</code>, and <code>years</code> values in the longer data frame <code>L2</code>.</p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb141-1"><a href="pivoting.html#cb141-1" aria-hidden="true" tabindex="-1"></a>L2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(W2,<span class="at">cols=</span>x1<span class="sc">:</span>x2,<span class="at">names_to=</span><span class="st">&quot;time&quot;</span>,<span class="at">names_prefix=</span><span class="st">&quot;x&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;value&quot;</span>)</span>
 <span id="cb141-2"><a href="pivoting.html#cb141-2" aria-hidden="true" tabindex="-1"></a>L2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 6
@@ -795,13 +796,13 @@ y
 </div>
 <div id="pivot-wider-1" class="section level3" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Pivot Wider</h3>
-<p>Pivoting to a wider data frame is accomplished with <code>pivot_wider()</code>. The first argument is the name of the longer data frame. The following two arguments are all typically used.</p>
+<p>Pivoting to a wider data frame is accomplished with <code>pivot_wider()</code> from <code>tidyr</code>. The first argument is the name of the longer data frame. The following two arguments are also typically used.</p>
 <ul>
 <li>The name of the variable in the longer data frame that contains what will be names of variables in the wider data frame is given in <code>names_from=</code>.</li>
-<li>The name of the variable in the longer data frame that has the values of the measurement variable that will be separated into columns in the new data frame is given in <code>values_from=</code>.</li>
+<li>The name of the variable in the longer data frame that has values of the measurement variable that will be separated into columns in the new data frame is given in <code>values_from=</code>.</li>
 </ul>
 <p>As both of these variables exist in the longer data frame they do NOT need to be in quotes.</p>
-<p>Given the definitions from the previous section <code>Z</code> is pivoted to a wider format with the following code.</p>
+<p>Given the definitions from the previous section, the following is used to pivot <code>Z</code> to a wider format, <code>V</code>.</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb143-1"><a href="pivoting.html#cb143-1" aria-hidden="true" tabindex="-1"></a>V <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(Z,<span class="at">names_from=</span>variable,<span class="at">values_from=</span>value)</span>
 <span id="cb143-2"><a href="pivoting.html#cb143-2" aria-hidden="true" tabindex="-1"></a>V</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 4 x 3
@@ -822,7 +823,7 @@ y
 #R&gt;   6  C Andrew   Jensen     6        y     7
 #R&gt;   7  D   Jodi Supanich     7        x     4
 #R&gt;   8  D   Jodi Supanich     7        y     8</code></pre>
-<p>The same <code>pivot_wider()</code> on <code>Z2</code> will again repeat the <code>id</code>, <code>fname</code>, <code>lname</code>, and <code>years</code> variables.</p>
+<p>The same <code>pivot_wider()</code> on <code>Z2</code> will collapse the common <code>id</code>, <code>fname</code>, <code>lname</code>, and <code>years</code> variables.</p>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="pivoting.html#cb146-1" aria-hidden="true" tabindex="-1"></a>V2 <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(Z2,<span class="at">names_from=</span>variable,<span class="at">values_from=</span>value)</span>
 <span id="cb146-2"><a href="pivoting.html#cb146-2" aria-hidden="true" tabindex="-1"></a>V2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 4 x 6
@@ -839,7 +840,7 @@ y
 <h2><span class="header-section-number">5.4</span> Examples with Context</h2>
 <div id="pivoting-covid" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> COVID Cases by County and Month</h3>
-<p>In the introduction a simple data frame of COVID cases by month in three Wisconsin counties from January to June 2021 was shown. Here consider a slightly more complicated data frame that contains the same information but from March 2020 to June 2021. This data frame is called <code>covABD_W</code> and is partially shown below.</p>
+<p>A simple data frame of COVID cases by month in three Wisconsin counties from January to June 2021 was shown in the introduction. Here consider an even wider data, <code>covABD_W</code>, of monthly cases for all three counties from March 2020 to June 2021.</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb148-1"><a href="pivoting.html#cb148-1" aria-hidden="true" tabindex="-1"></a>covABD_W</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 17
 #R&gt;   # Groups:   County [3]
@@ -851,8 +852,8 @@ y
 #R&gt;   # ... with 8 more variables: Nov_2020 &lt;dbl&gt;, Dec_2020 &lt;dbl&gt;, Jan_2021 &lt;dbl&gt;,
 #R&gt;   #   Feb_2021 &lt;dbl&gt;, Mar_2021 &lt;dbl&gt;, Apr_2021 &lt;dbl&gt;, May_2021 &lt;dbl&gt;,
 #R&gt;   #   Jun_2021 &lt;dbl&gt;</code></pre>
-<p>These data are not tidy because a “measurement” is COVID cases and they do not appear in one variable/column of this data frame. In addition, an individual is a combination of county and month but month does not appear as a variable. It would be difficult to make a plot of number of cases by month for each county with the data in this format. Thus our goal here is to convert these “wider” data to “longer” data in a tidy format.</p>
-<p>All columns except for <code>County</code> are part of the data to pivot; thus, <code>cols=-County</code> is the easiest way to choose these columns. The variable names in <code>covABD_W</code> are the month and year of the data so I will call the <code>names_to=</code> variable “MonYear.” Finally, the measurements are of cases of COVID so I will the <code>values_to=</code> variable “Cases.” Putting this all together gives the following.</p>
+<p>In this case a “measurement” is number of COVID cases and an observation is a combination of month and county. Thus, these data are not tidy because number of COVID cases is not in one column and each row is not one combination of county and month. It would be difficult to plot number of cases by month for each county with data in this format. Thus these “wider” data need to be converted to “longer” data that are tidy.</p>
+<p>All columns except <code>County</code> are part of the data to pivot; thus, <code>cols=-County</code> is the easiest way to choose these columns. The variable names in <code>covABD_W</code> are the month and year of the data so I will call the <code>names_to=</code> variable “MonYear.” Finally, the measurements are of cases of COVID so I will call the <code>values_to=</code> variable “Cases.” Putting this together gives the following.</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="pivoting.html#cb150-1" aria-hidden="true" tabindex="-1"></a>covABD_L <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(covABD_W,<span class="at">cols=</span><span class="sc">-</span>County,<span class="at">names_to=</span><span class="st">&quot;MonYear&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;Cases&quot;</span>)</span>
 <span id="cb150-2"><a href="pivoting.html#cb150-2" aria-hidden="true" tabindex="-1"></a>covABD_L</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 48 x 3
@@ -870,7 +871,7 @@ y
 #R&gt;    9 Ashland Nov_2020   378
 #R&gt;   10 Ashland Dec_2020   331
 #R&gt;   # ... with 38 more rows</code></pre>
-<p>This is essentially what I want, but the <code>MonYear</code> variable is going to be problematic because R does not recognize that as a date (note how it is identified as a character class). I would prefer to split those items on the underscore. You can tell <code>pivot_longer()</code> how to split names with <code>names_sep=</code>. However, splitting the month and year will then produce two new columns so <code>names_to=</code> must be a vector of two names for these two new columns. These modifications produce the following result.</p>
+<p>This worked but the <code>MonYear</code> variable is problematic because R does not recognize it as a date (note how it is identified as character class). It would be better to split these names on the underscore to get one variable with the months and one variale with the years. Names may be split in <code>pivot_longer()</code> by providing the character to split on in <code>names_sep=</code>. As splitting the names will produce two new variales, <code>names_to=</code> must be a vector with two names for these two new columns. These modifications produce the following result.</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb152-1"><a href="pivoting.html#cb152-1" aria-hidden="true" tabindex="-1"></a>covABD_L <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(covABD_W,<span class="at">cols=</span><span class="sc">-</span>County,</span>
 <span id="cb152-2"><a href="pivoting.html#cb152-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">names_to=</span><span class="fu">c</span>(<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Year&quot;</span>),<span class="at">names_sep=</span><span class="st">&quot;_&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;Cases&quot;</span>)</span>
 <span id="cb152-3"><a href="pivoting.html#cb152-3" aria-hidden="true" tabindex="-1"></a>covABD_L</span></code></pre></div>
@@ -912,86 +913,86 @@ y
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-92-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
-</div>
-<div id="abundance-of-mayflies" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Abundance of Mayflies</h2>
-<p>In 1990 technicians for the U.S. Geological Survey recorded the abundance of mayflies (Ephemeroptera) in 10 1 m<sup>2</sup> quadrats in Chequamegon Bay. In 2020 they did the same at the same locations. Their data are crecorded in <code>ephem</code> as shown below.</p>
+<div id="abundance-of-mayflies" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Abundance of Mayflies</h3>
+<p>In 1990 technicians for the U.S. Geological Survey recorded the abundance of mayflies (Ephemeroptera) in 10 1 m<sup>2</sup> quadrats in Chequamegon Bay. In 2020 they repeat the collections at the same locations. Their data are recorded in <code>ephem</code> as shown below.</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb156-1"><a href="pivoting.html#cb156-1" aria-hidden="true" tabindex="-1"></a>ephem</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 20 x 5
 #R&gt;        loc hab    depth  year abundance
 #R&gt;      &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-#R&gt;    1   101 Cobble    14  1990        54
-#R&gt;    2   101 Cobble    14  2020        56
-#R&gt;    3   102 Cobble    28  1990        55
-#R&gt;    4   102 Cobble    28  2020        58
-#R&gt;    5   103 Muck      17  1990        51
-#R&gt;    6   103 Muck      17  2020        54
-#R&gt;    7   104 Sand      10  1990        42
-#R&gt;    8   104 Sand      10  2020        50
-#R&gt;    9   105 Sand      13  1990        50
-#R&gt;   10   105 Sand      13  2020        56
-#R&gt;   11   106 Muck      10  1990        57
-#R&gt;   12   106 Muck      10  2020        56
-#R&gt;   13   107 Muck      15  1990        57
-#R&gt;   14   107 Muck      15  2020        44
-#R&gt;   15   108 Muck      28  1990        43
-#R&gt;   16   108 Muck      28  2020        48
-#R&gt;   17   109 Muck      11  1990        42
-#R&gt;   18   109 Muck      11  2020        47
-#R&gt;   19   110 Sand      25  1990        55
-#R&gt;   20   110 Sand      25  2020        40</code></pre>
-<p>The researchers want to compute the mean change in abundance across all ten quadrats but that is not easily done with the data in this format. To facilitate this calculation these data need to be converted to a wider format that will have the 1990 and 2020 data in separate columns. In this case, potential names for the variables in the new wider format are in <code>year</code>. The values to be put in those columns are in <code>aboundance</code>. The rest of the variables should be maintained as they identify the individual (i.e., a quadrat). With these definitions these data are converted to a wider format with the following code.</p>
+#R&gt;    1   101 Sand      16  1990        47
+#R&gt;    2   101 Sand      16  2020        46
+#R&gt;    3   102 Sand      20  1990        44
+#R&gt;    4   102 Sand      20  2020        42
+#R&gt;    5   103 Muck      23  1990        50
+#R&gt;    6   103 Muck      23  2020        53
+#R&gt;    7   104 Cobble    27  1990        54
+#R&gt;    8   104 Cobble    27  2020        56
+#R&gt;    9   105 Sand      15  1990        52
+#R&gt;   10   105 Sand      15  2020        43
+#R&gt;   11   106 Muck      21  1990        25
+#R&gt;   12   106 Muck      21  2020        30
+#R&gt;   13   107 Cobble    27  1990        36
+#R&gt;   14   107 Cobble    27  2020        20
+#R&gt;   15   108 Sand      13  1990        22
+#R&gt;   16   108 Sand      13  2020        18
+#R&gt;   17   109 Sand      10  1990        28
+#R&gt;   18   109 Sand      10  2020        28
+#R&gt;   19   110 Cobble    23  1990        40
+#R&gt;   20   110 Cobble    23  2020        36</code></pre>
+<p>The researchers want to compute the mean change in abundance across all ten quadrats. To facilitate that calculation these data need to be converted to a wider format that will have the 1990 and 2020 data in separate columns. In this case, potential names for the variables in the new wider format are in the <code>year</code> variable. The values to be put in those columns are in the <code>aboundance</code> variable. The rest of the variables should be maintained as they identify the observation (i.e., a quadrat year combination). With these definitions these data are converted to a wider format with the following code.</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb158-1"><a href="pivoting.html#cb158-1" aria-hidden="true" tabindex="-1"></a>ephem2 <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(ephem,<span class="at">names_from=</span>year,<span class="at">values_from=</span>abundance)</span>
 <span id="cb158-2"><a href="pivoting.html#cb158-2" aria-hidden="true" tabindex="-1"></a>ephem2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 10 x 5
 #R&gt;        loc hab    depth `1990` `2020`
 #R&gt;      &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-#R&gt;    1   101 Cobble    14     54     56
-#R&gt;    2   102 Cobble    28     55     58
-#R&gt;    3   103 Muck      17     51     54
-#R&gt;    4   104 Sand      10     42     50
-#R&gt;    5   105 Sand      13     50     56
-#R&gt;    6   106 Muck      10     57     56
-#R&gt;    7   107 Muck      15     57     44
-#R&gt;    8   108 Muck      28     43     48
-#R&gt;    9   109 Muck      11     42     47
-#R&gt;   10   110 Sand      25     55     40</code></pre>
-<p>This accomplishes the task at hand, but the two new variables are called <code>1990</code> and <code>2020</code> which are non-standard variable names in R (i.e., they start with numbers). This issue can be avoided by providing a string to be used as a prefix to the names in <code>names_prefix=</code>.</p>
+#R&gt;    1   101 Sand      16     47     46
+#R&gt;    2   102 Sand      20     44     42
+#R&gt;    3   103 Muck      23     50     53
+#R&gt;    4   104 Cobble    27     54     56
+#R&gt;    5   105 Sand      15     52     43
+#R&gt;    6   106 Muck      21     25     30
+#R&gt;    7   107 Cobble    27     36     20
+#R&gt;    8   108 Sand      13     22     18
+#R&gt;    9   109 Sand      10     28     28
+#R&gt;   10   110 Cobble    23     40     36</code></pre>
+<p>This accomplishes the task at hand, but the two new variables are called <code>1990</code> and <code>2020</code>, which are non-standard variable names in R (i.e., they start with numbers). This issue can be avoided by providing a string to be used as a prefix to the names in <code>names_prefix=</code>.</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb160-1"><a href="pivoting.html#cb160-1" aria-hidden="true" tabindex="-1"></a>ephem2 <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(ephem,<span class="at">names_from=</span>year,<span class="at">names_prefix=</span><span class="st">&quot;year_&quot;</span>,<span class="at">values_from=</span>abundance)</span>
 <span id="cb160-2"><a href="pivoting.html#cb160-2" aria-hidden="true" tabindex="-1"></a>ephem2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 10 x 5
 #R&gt;        loc hab    depth year_1990 year_2020
 #R&gt;      &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-#R&gt;    1   101 Cobble    14        54        56
-#R&gt;    2   102 Cobble    28        55        58
-#R&gt;    3   103 Muck      17        51        54
-#R&gt;    4   104 Sand      10        42        50
-#R&gt;    5   105 Sand      13        50        56
-#R&gt;    6   106 Muck      10        57        56
-#R&gt;    7   107 Muck      15        57        44
-#R&gt;    8   108 Muck      28        43        48
-#R&gt;    9   109 Muck      11        42        47
-#R&gt;   10   110 Sand      25        55        40</code></pre>
-<p>The code below, which will not be introduced until Module XXX, finds the difference in abundance between the two years.</p>
+#R&gt;    1   101 Sand      16        47        46
+#R&gt;    2   102 Sand      20        44        42
+#R&gt;    3   103 Muck      23        50        53
+#R&gt;    4   104 Cobble    27        54        56
+#R&gt;    5   105 Sand      15        52        43
+#R&gt;    6   106 Muck      21        25        30
+#R&gt;    7   107 Cobble    27        36        20
+#R&gt;    8   108 Sand      13        22        18
+#R&gt;    9   109 Sand      10        28        28
+#R&gt;   10   110 Cobble    23        40        36</code></pre>
+<p>The code below, which will not be introduced until Module XXX, creates a new variable that is the difference in abundance between the two years.</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb162-1"><a href="pivoting.html#cb162-1" aria-hidden="true" tabindex="-1"></a>ephem2 <span class="ot">&lt;-</span> ephem2 <span class="sc">%&gt;%</span></span>
-<span id="cb162-2"><a href="pivoting.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff90_20=</span>year_1990<span class="sc">-</span>year_2020)</span>
+<span id="cb162-2"><a href="pivoting.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff20_90=</span>year_2020<span class="sc">-</span>year_1990)</span>
 <span id="cb162-3"><a href="pivoting.html#cb162-3" aria-hidden="true" tabindex="-1"></a>ephem2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 10 x 6
-#R&gt;        loc hab    depth year_1990 year_2020 diff90_20
+#R&gt;        loc hab    depth year_1990 year_2020 diff20_90
 #R&gt;      &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-#R&gt;    1   101 Cobble    14        54        56        -2
-#R&gt;    2   102 Cobble    28        55        58        -3
-#R&gt;    3   103 Muck      17        51        54        -3
-#R&gt;    4   104 Sand      10        42        50        -8
-#R&gt;    5   105 Sand      13        50        56        -6
-#R&gt;    6   106 Muck      10        57        56         1
-#R&gt;    7   107 Muck      15        57        44        13
-#R&gt;    8   108 Muck      28        43        48        -5
-#R&gt;    9   109 Muck      11        42        47        -5
-#R&gt;   10   110 Sand      25        55        40        15</code></pre>
+#R&gt;    1   101 Sand      16        47        46        -1
+#R&gt;    2   102 Sand      20        44        42        -2
+#R&gt;    3   103 Muck      23        50        53         3
+#R&gt;    4   104 Cobble    27        54        56         2
+#R&gt;    5   105 Sand      15        52        43        -9
+#R&gt;    6   106 Muck      21        25        30         5
+#R&gt;    7   107 Cobble    27        36        20       -16
+#R&gt;    8   108 Sand      13        22        18        -4
+#R&gt;    9   109 Sand      10        28        28         0
+#R&gt;   10   110 Cobble    23        40        36        -4</code></pre>
 <p>These data could then be easily plotted or summarized.</p>
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-98-1.png" width="336" style="display: block; margin: auto;" /></p>
 
+</div>
 </div>
 </div>
 <div class="footnotes">

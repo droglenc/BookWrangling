@@ -123,7 +123,9 @@ Each set of data described in the previous section could be entered in two forma
 
 To pivot from a wider to a longer format you must identify the variables in the wider format frame that contain the multiple measurements of the same variable. This was `x1` and `x2` in `W`. All other variables in the data frame are considered to represent a unique individual. In this case only the `id` variable is needed for this purpose.
 
-In addition, you must define names for variables in what will be the new longer format. The first name is for the variable that will identify the multiple measurements on the same individual. In this example the multiple measurements were taken at different times, so it seems logical to call the new variable `time`. The second name is for the variable that will hold the values of the measurement variable. Here the use of `x1` and `x2` in the original wider data frame suggest that this variable should be called `x`. The process of pivoting the wider `W` to a longer data frame is illustrated below.
+In addition, you must define names for variables in what will be the new longer format. The first name is for the variable that will identify the multiple measurements on the same individual. In this example the multiple measurements were taken at different times, so it seems logical to call the new variable `time`. The second name is for the variable that will hold the values of the measurement variable. Here the use of `x1` and `x2` in the original wider data frame suggest that this variable should be called `x`.
+
+The process of pivoting the wider `W` to a longer data frame is illustrated below.
 
 &nbsp;
 
@@ -156,9 +158,11 @@ bp +
 ```
 
 ### Pivot Wider
-"Pivot Wider" is the process of converting from a "longer" to a "wider" data frame. You will typically pivot to a wider format if multiple measurement variables are recorded in one variable. This was the case with the `Z` data frame above.
+"Pivot Wider" is the conversion from a "longer" to a "wider" format. Pivoting to a wider format is most common when multiple measurement variables are recorded as one variable in the long format data frame. This was the case with `Z` from above.
 
-To "Pivot Wider" you must identify the variable in the longer data frame that contains what will be names of variables in the wider data frame. In this case, we want the data frame created from `Z` to have `x` and `y` has names of variables; thus, the name of this variable in `Z` is `variable`. In addition, you must identify the variable that has the values of the measurement variables that will separated into columns in the new data frame. In `Z` this variale is `value`. With these two definitions the process of pivoting the longer `Z` to a wider data frame is illustrated below.
+To pivot from a longer to a wider format you must identify the variable in the longer data frame that contains what will be names of variables in the wider data. The wider data frame that will be created from `Z` should have `x` and `y` has names of variables; thus, this variable in `Z` is `variable`. In addition, you must identify the variable in the long data frame that has the values of the measurement variable that will be separated into columns in the new data frame. In `Z` this variale is `value`.
+
+The process of pivoting the longer `Z` to a wider data frame is illustrated below.
 
 &nbsp;
 
@@ -192,7 +196,7 @@ bp +
 
 
 ## Pivoting in R
-Pivoting `W` to a longer format and `Z` to a wider format in R are demonstrated in this section. The two data frames are created in R below.
+Pivoting `W` to a longer format and `Z` to a wider format in R are demonstrated in this section. These two data frames are created in R below.
 
 ```{r}
 <<W>>
@@ -205,26 +209,26 @@ Z
 
 
 ### Pivot Longer
-Pivoting to a longer data frame is accomplished with `pivot_longer()`. The first argument is the name of the wider data frame. The following three arguments are also typically used.
+Pivoting to a longer data frame is accomplished with `pivot_longer()` from `tidyr` (which is part of `tidyverse`). The first argument is the name of the wider data frame. The following three arguments are also typically used.
 
-* The variables in the wider data frame that represent multiple measurements of the same variable must be given in `cols=`. Note that these variables do NOT need to be in quotes because they exist in the wider data frame. There are multiple ways to do this in most situations; here are several for this situation.^[There are still other ways (e.g., `cols=contains("x")`) but these four would be the most common given the names in this data frame.]
+* The variables in the wider data frame that represent multiple measurements of the same variable must be given in `cols=`. Note that these variables do NOT need to be in quotes because they exist in the wider data frame. There are multiple ways to select these variables in most situations; here are several for this situation.^[There are still other ways (e.g., `cols=contains("x")`) but these four would be the most common given the names in this data frame.]
     * `cols=x1:x2` will select all variables contiguous from between `x1` to `x2`.
     * `cols=c(x1,x2)` will select only variables `x1` and `x2`.
     * `cols=starts_with("x")` will select all variables with names that begin with `x`.
     * `cols=-id` will select all variables not named `id`.
-* The name for the variable in the new longer data frame that will hold the index that represents the multiple measurements on the same individual is given in `names_to=`.
+* The name for the variable in the new longer data frame that will hold the index for multiple measurements on the same individual in the longer data frame is given in `names_to=`.
 * The name for the variable that will hold the values of the measurement variable in the new longer data frame is given in `values_to`.
 
 Note that the variable names in `names_to=` and `values_to=` must be in quotes because they do not appear in an (as of yet) existing data frame.
 
-Given the definitions of these items in the previous section, the following code can be used to pivot `W` to a longer format.
+Given the definitions of these items in the previous section, the following code is used to pivot `W` to a longer format data frame, `L`.
 
 ```{r}
 L <- pivot_longer(W,cols=x1:x2,names_to="time",values_to="value")
 L
 ```
 
-Note, however, that the `time` variable `L` contains `x1` and `x2` rather than `1` and `2`. By default `pivot_longer()` uses the names of the variables you supplied in `cols=` in this variable. If these variables have a common pattern -- as in they all start with "x" and end with the number that we want -- then the portion of the pattern to remove can be given in `names_prefix=`.^[There are other arguments to `pivot_longer()` for dealing with more complicated naming issues.]
+Note, however, that the `time` variable in `L` contains `x1` and `x2` rather than `1` and `2`. By default `pivot_longer()` uses the names of the variables you supplied in `cols=` in this variable. If these variables have a common pattern -- as in they all start with "x" and end with the number that we want -- then the portion of the pattern to remove can be given in `names_prefix=`.^[There are other arguments to `pivot_longer()` for dealing with more complicated naming issues.]
 
 ```{r}
 <<L>>
@@ -241,7 +245,7 @@ pivot_longer(W,cols=-id,names_to="time",names_prefix="x",values_to="value")
 
 &nbsp;
 
-A reminder that all variables not given in `cols=` will be considered as identifying with the individuals in the data frame. Suppose for example that `W` had more columns that looked like this (data frame called `W2` here).
+A reminder that all variables not given in `cols=` will be considered as identifying with the individuals in the data frame. Suppose for example that `W` had more columns that looked like this data frame called `W2`.
 
 ```{r echo=FALSE}
 W2 <- W %>%
@@ -252,7 +256,7 @@ W2 <- W %>%
 W2
 ```
 
-The same `pivot_longer()` with `W2` will repeat the `id`, `fname`, `lname`, and `years` values.
+The same `pivot_longer()` with `W2` will repeat the `id`, `fname`, `lname`, and `years` values in the longer data frame `L2`.
 
 ```{r}
 L2 <- pivot_longer(W2,cols=x1:x2,names_to="time",names_prefix="x",values_to="value")
@@ -262,14 +266,14 @@ L2
 &nbsp;
 
 ### Pivot Wider
-Pivoting to a wider data frame is accomplished with `pivot_wider()`. The first argument is the name of the longer data frame. The following two arguments are all typically used.
+Pivoting to a wider data frame is accomplished with `pivot_wider()` from `tidyr`. The first argument is the name of the longer data frame. The following two arguments are also typically used.
 
 * The name of the variable in the longer data frame that contains what will be names of variables in the wider data frame is given in `names_from=`.
-* The name of the variable in the longer data frame that has the values of the measurement variable that will be separated into columns in the new data frame is given in `values_from=`.
+* The name of the variable in the longer data frame that has values of the measurement variable that will be separated into columns in the new data frame is given in `values_from=`.
 
 As both of these variables exist in the longer data frame they do NOT need to be in quotes.
 
-Given the definitions from the previous section `Z` is pivoted to a wider format with the following code.
+Given the definitions from the previous section, the following is used to pivot `Z` to a wider format, `V`.
 
 ```{r}
 V <- pivot_wider(Z,names_from=variable,values_from=value)
@@ -292,7 +296,7 @@ Z2 <- Z %>%
 Z2
 ```
 
-The same `pivot_wider()` on `Z2` will again repeat the `id`, `fname`, `lname`, and `years` variables.
+The same `pivot_wider()` on `Z2` will collapse the common `id`, `fname`, `lname`, and `years` variables.
 
 ```{r}
 V2 <- pivot_wider(Z2,names_from=variable,values_from=value)
@@ -303,22 +307,22 @@ V2
 
 ## Examples with Context {#pivoting-examples}
 ### COVID Cases by County and Month {#pivoting-covid}
-In the introduction a simple data frame of COVID cases by month in three Wisconsin counties from January to June 2021 was shown. Here consider a slightly more complicated data frame that contains the same information but from March 2020 to June 2021. This data frame is called `covABD_W` and is partially shown below.
+A simple data frame of COVID cases by month in three Wisconsin counties from January to June 2021 was shown in the introduction. Here consider an even wider data, `covABD_W`, of monthly cases for all three counties from March 2020 to June 2021.
 
 ```{r}
 covABD_W
 ```
 
-These data are not tidy because a "measurement" is COVID cases and they do not appear in one variable/column of this data frame. In addition, an individual is a combination of county and month but month does not appear as a variable. It would be difficult to make a plot of number of cases by month for each county with the data in this format. Thus our goal here is to convert these "wider" data to "longer" data in a tidy format.
+In this case a "measurement" is number of COVID cases and an observation is a combination of month and county. Thus, these data are not tidy because number of COVID cases is not in one column and each row is not one combination of county and month. It would be difficult to plot number of cases by month for each county with data in this format. Thus these "wider" data need to be converted to "longer" data that are tidy.
 
-All columns except for `County` are part of the data to pivot; thus, `cols=-County` is the easiest way to choose these columns. The variable names in `covABD_W` are the month and year of the data so I will call the `names_to=` variable "MonYear". Finally, the measurements are of cases of COVID so I will the `values_to=` variable "Cases". Putting this all together gives the following.
+All columns except `County` are part of the data to pivot; thus, `cols=-County` is the easiest way to choose these columns. The variable names in `covABD_W` are the month and year of the data so I will call the `names_to=` variable "MonYear". Finally, the measurements are of cases of COVID so I will call the `values_to=` variable "Cases". Putting this together gives the following.
 
 ```{r}
 covABD_L <- pivot_longer(covABD_W,cols=-County,names_to="MonYear",values_to="Cases")
 covABD_L
 ```
 
-This is essentially what I want, but the `MonYear` variable is going to be problematic because R does not recognize that as a date (note how it is identified as a character class). I would prefer to split those items on the underscore. You can tell `pivot_longer()` how to split names with `names_sep=`. However, splitting the month and year will then produce two new columns so `names_to=` must be a vector of two names for these two new columns. These modifications produce the following result.
+This worked but the `MonYear` variable is problematic because R does not recognize it as a date (note how it is identified as character class). It would be better to split these names on the underscore to get one variable with the months and one variale with the years. Names may be split in `pivot_longer()` by providing the character to split on in `names_sep=`. As splitting the names will produce two new variales, `names_to=` must be a vector with two names for these two new columns. These modifications produce the following result.
 
 ```{r}
 covABD_L <- pivot_longer(covABD_W,cols=-County,
@@ -348,48 +352,55 @@ ggplot(data=covABD_L,mapping=aes(x=Date,y=Cases,color=County,group=County)) +
 
 &nbsp;
 
-## Abundance of Mayflies
-In 1990 technicians for the U.S. Geological Survey recorded the abundance of mayflies (Ephemeroptera) in 10 1 m^2^ quadrats in Chequamegon Bay. In 2020 they did the same at the same locations. Their data are crecorded in `ephem` as shown below.
+### Abundance of Mayflies
+In 1990 technicians for the U.S. Geological Survey recorded the abundance of mayflies (Ephemeroptera) in 10 1 m^2^ quadrats in Chequamegon Bay. In 2020 they repeat the collections at the same locations. Their data are recorded in `ephem` as shown below.
 
 ```{r echo=FALSE}
+set.seed(533445)
 ephem <- tibble(loc=rep(101:110,each=2),
                 hab=rep(sample(c("Cobble","Sand","Muck"),10,replace=TRUE),each=2),
                 depth=rep(round(20*runif(10)+10),each=2),
                 year=rep(c(1990,2020),times=10),
-                abundance=round(c(20*runif(10)+40,30*runif(10)+30)))
+                abundance=round(c(20*runif(10)+40,30*runif(10)+15)))
 ```
 ```{r}
 ephem
 ```
 
-The researchers want to compute the mean change in abundance across all ten quadrats but that is not easily done with the data in this format. To facilitate this calculation these data need to be converted to a wider format that will have the 1990 and 2020 data in separate columns. In this case, potential names for the variables in the new wider format are in `year`. The values to be put in those columns are in `aboundance`. The rest of the variables should be maintained as they identify the individual (i.e., a quadrat). With these definitions these data are converted to a wider format with the following code.
+The researchers want to compute the mean change in abundance across all ten quadrats. To facilitate that calculation these data need to be converted to a wider format that will have the 1990 and 2020 data in separate columns. In this case, potential names for the variables in the new wider format are in the `year` variable. The values to be put in those columns are in the `aboundance` variable. The rest of the variables should be maintained as they identify the observation (i.e., a quadrat year combination). With these definitions these data are converted to a wider format with the following code.
 
 ```{r}
 ephem2 <- pivot_wider(ephem,names_from=year,values_from=abundance)
 ephem2
 ```
 
-This accomplishes the task at hand, but the two new variables are called `1990` and `2020` which are non-standard variable names in R (i.e., they start with numbers). This issue can be avoided by providing a string to be used as a prefix to the names in `names_prefix=`.
+This accomplishes the task at hand, but the two new variables are called `1990` and `2020`, which are non-standard variable names in R (i.e., they start with numbers). This issue can be avoided by providing a string to be used as a prefix to the names in `names_prefix=`.
 
 ```{r}
 ephem2 <- pivot_wider(ephem,names_from=year,names_prefix="year_",values_from=abundance)
 ephem2
 ```
 
-The code below, which will not be introduced until Module XXX, finds the difference in abundance between the two years.
+The code below, which will not be introduced until Module XXX, creates a new variable that is the difference in abundance between the two years.
 
 ```{r}
 ephem2 <- ephem2 %>%
-  mutate(diff90_20=year_1990-year_2020)
+  mutate(diff20_90=year_2020-year_1990)
 ephem2
 ```
 
 These data could then be easily plotted or summarized.
 
 ```{r echo=FALSE}
-ggplot(data=ephem2,mapping=aes(x=diff90_20,y=loc,color=diff90_20<0)) +
+mndiff <- mean(ephem2$diff20_90)
+ggplot(data=ephem2,mapping=aes(x=diff20_90,y=loc,color=diff20_90<0)) +
   geom_point() +
   geom_vline(xintercept=0,linetype="dashed") +
+  geom_vline(xintercept=mndiff,color="blue",linetype="dashed") +
+  annotate(geom="text",x=-10,y=102,
+           label=paste("mean =",formatC(mndiff,format="f",digits=1))) +
+  annotate(geom="segment",x=-8.5,y=101.7,xend=mndiff,yend=-Inf,
+           arrow=arrow(angle=15,length=unit(3,"mm"),type="closed")) +
   scale_color_manual(values=c("black","red"),guide="none") +
   scale_x_continuous(name="Change in Abundance from 1990 to 2020") +
   scale_y_continuous(name="Quadrat",breaks=101:110) +
