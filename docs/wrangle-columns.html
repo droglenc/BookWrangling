@@ -748,7 +748,7 @@ All columns
 <h2><span class="header-section-number">6.7</span> Examples in Context</h2>
 <div id="nba-players" class="section level3" number="6.7.1">
 <h3><span class="header-section-number">6.7.1</span> NBA Players</h3>
-<p>Data on every players who has ever played in the National Basketball Association was read into R in Section @ref{csv-files}. The structure of that data frame is shown below.</p>
+<p>Data on every players who has ever played in the National Basketball Association was read into R in Section <a href="read-external-data-files.html#csv-files">3.3.1</a>. The structure of that data frame is shown below.</p>
 <div class="sourceCode" id="cb212"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb212-1"><a href="wrangle-columns.html#cb212-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
 <span id="cb212-2"><a href="wrangle-columns.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(players,<span class="at">give.attr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   spec_tbl_df [4,393 x 15] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
@@ -772,29 +772,31 @@ All columns
 <ol style="list-style-type: decimal">
 <li>reduce this data frame to only the players name, the year they started, and the year they ended in the NBA,</li>
 <li>rename some of the long variable names (and remove the capitalization),</li>
-<li>calculate the amount of time they were in the NBA by subtracting their start year from their end year, and</li>
+<li>calculate the amount of time they were in the NBA by subtracting their start year from their end year,</li>
+<li>create a new variable called “modern” that is “yes” for players that ended their careers in 1980 or later and is “no” otherwise, and</li>
 <li>order the data from most to least years played,<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> and</li>
 <li>examine the top 10 rows of the data frame.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></li>
 </ol>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb214-1"><a href="wrangle-columns.html#cb214-1" aria-hidden="true" tabindex="-1"></a>players2 <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span></span>
 <span id="cb214-2"><a href="wrangle-columns.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DISPLAY_LAST_COMMA_FIRST,FROM_YEAR,TO_YEAR) <span class="sc">%&gt;%</span></span>
 <span id="cb214-3"><a href="wrangle-columns.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name=</span>DISPLAY_LAST_COMMA_FIRST,<span class="at">start=</span>FROM_YEAR,<span class="at">end=</span>TO_YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb214-4"><a href="wrangle-columns.html#cb214-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_played=</span>end<span class="sc">-</span>start) <span class="sc">%&gt;%</span></span>
-<span id="cb214-5"><a href="wrangle-columns.html#cb214-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(years_played))</span>
-<span id="cb214-6"><a href="wrangle-columns.html#cb214-6" aria-hidden="true" tabindex="-1"></a>players2 <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 10 x 4
-#R&gt;      name                 start   end years_played
-#R&gt;      &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
-#R&gt;    1 Willis, Kevin         1984  2006           22
-#R&gt;    2 Jones, Mark           1983  2004           21
-#R&gt;    3 Carter, Vince         1998  2018           20
-#R&gt;    4 Garnett, Kevin        1995  2015           20
-#R&gt;    5 Nowitzki, Dirk        1998  2018           20
-#R&gt;    6 Parish, Robert        1976  1996           20
-#R&gt;    7 Abdul-Jabbar, Kareem  1969  1988           19
-#R&gt;    8 Bryant, Kobe          1996  2015           19
-#R&gt;    9 Cousy, Bob            1950  1969           19
-#R&gt;   10 Crawford, Jamal       2000  2018           18</code></pre>
+<span id="cb214-4"><a href="wrangle-columns.html#cb214-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_played=</span>end<span class="sc">-</span>start,</span>
+<span id="cb214-5"><a href="wrangle-columns.html#cb214-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">modern=</span><span class="fu">ifelse</span>(end<span class="sc">&gt;=</span><span class="dv">1980</span>,<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb214-6"><a href="wrangle-columns.html#cb214-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(years_played))</span>
+<span id="cb214-7"><a href="wrangle-columns.html#cb214-7" aria-hidden="true" tabindex="-1"></a>players2 <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 10 x 5
+#R&gt;      name                 start   end years_played modern
+#R&gt;      &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
+#R&gt;    1 Willis, Kevin         1984  2006           22 yes   
+#R&gt;    2 Jones, Mark           1983  2004           21 yes   
+#R&gt;    3 Carter, Vince         1998  2018           20 yes   
+#R&gt;    4 Garnett, Kevin        1995  2015           20 yes   
+#R&gt;    5 Nowitzki, Dirk        1998  2018           20 yes   
+#R&gt;    6 Parish, Robert        1976  1996           20 yes   
+#R&gt;    7 Abdul-Jabbar, Kareem  1969  1988           19 yes   
+#R&gt;    8 Bryant, Kobe          1996  2015           19 yes   
+#R&gt;    9 Cousy, Bob            1950  1969           19 no    
+#R&gt;   10 Crawford, Jamal       2000  2018           18 yes</code></pre>
 <p> </p>
 <p>For fun, this is what one plot of the results might look like.</p>
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-123-1.png" width="432" style="display: block; margin: auto;" /></p>
@@ -802,7 +804,7 @@ All columns
 </div>
 <div id="wolves-and-moose-of-isle-royale" class="section level3" number="6.7.2">
 <h3><span class="header-section-number">6.7.2</span> Wolves and Moose of Isle Royale</h3>
-<p>For a module in my <a href="http://derekogle.com/NCGraphing/">“Great Graphs” course</a> I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether ice bridged formed between the mainland and Isle Royale. Fortunately, these data<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> is available at <a href="https://isleroyalewolf.org/data/data/home.html">Wolves &amp; Moose of Isle Royale</a>. I downloaded the data file provided there and read it into R below.[^You may want to review the purpose of some of these arguments to <code>read_excel()</code> in Section <a href="read-external-data-files.html#excel-files">3.3.2</a>.]</p>
+<p>For a module in my <a href="http://derekogle.com/NCGraphing/">“Great Graphs” course</a> I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether ice bridged formed between the mainland and Isle Royale. Fortunately, these data<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> is available at <a href="https://isleroyalewolf.org/data/data/home.html">Wolves &amp; Moose of Isle Royale</a>. I downloaded the data file provided there and read it into R below.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb216-1"><a href="wrangle-columns.html#cb216-1" aria-hidden="true" tabindex="-1"></a>irmw <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Data_wolves_moose_Isle_Royale_June2019.xlsx&quot;</span>),</span>
 <span id="cb216-2"><a href="wrangle-columns.html#cb216-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sheet=</span><span class="st">&quot;1. population level data&quot;</span>,<span class="at">skip=</span><span class="dv">1</span>,<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;N/A&quot;</span>))</span>
 <span id="cb216-3"><a href="wrangle-columns.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(irmw,<span class="at">give.attr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
@@ -844,29 +846,37 @@ All columns
 <ol style="list-style-type: decimal">
 <li>reduce the data frame to only the variables that I was interested in,</li>
 <li>rename the variables to be shorter and in standard format,</li>
-<li>change the “coding” of the variable about ice bridges from using 0 and 1 to using the more descriptive and easier to remember “no” and “yes,” and</li>
+<li>change the “coding” of the variable about ice bridges from using 0 and 1 to using the more descriptive and easier to remember “no” and “yes,”</li>
+<li>create an “era” variable says “early” for years before 1975, “middle” for years between 1975 and 2000, and “recent” for years after 2000,</li>
+<li>move the “era” variable to be next to the year variable (for aesthetic reasons), and</li>
 <li>make sure the data are ordered from earliest to latest year.</li>
 </ol>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb218-1"><a href="wrangle-columns.html#cb218-1" aria-hidden="true" tabindex="-1"></a>irmw2 <span class="ot">&lt;-</span> irmw <span class="sc">%&gt;%</span></span>
 <span id="cb218-2"><a href="wrangle-columns.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,wolves,moose,<span class="st">`</span><span class="at">Jan-Feb (temp, F)</span><span class="st">`</span>,<span class="st">`</span><span class="at">ice bridges (0=none, 1 = present)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb218-3"><a href="wrangle-columns.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">winter_temp=</span><span class="st">`</span><span class="at">Jan-Feb (temp, F)</span><span class="st">`</span>,</span>
 <span id="cb218-4"><a href="wrangle-columns.html#cb218-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ice_bridges=</span><span class="st">`</span><span class="at">ice bridges (0=none, 1 = present)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb218-5"><a href="wrangle-columns.html#cb218-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ice_bridges=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(ice_bridges,<span class="at">from=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb218-6"><a href="wrangle-columns.html#cb218-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
-<span id="cb218-7"><a href="wrangle-columns.html#cb218-7" aria-hidden="true" tabindex="-1"></a>irmw2</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 61 x 5
-#R&gt;       year wolves moose winter_temp ice_bridges
-#R&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
-#R&gt;    1  1959     20  538.        1.4  no         
-#R&gt;    2  1960     22  564.        8.45 no         
-#R&gt;    3  1961     22  572.        9.75 yes        
-#R&gt;    4  1962     23  579.        2.15 yes        
-#R&gt;    5  1963     20  596.       -0.35 yes        
-#R&gt;    6  1964     26  620.       12.4  no         
-#R&gt;    7  1965     28  634.        1.25 yes        
-#R&gt;    8  1966     26  661.        1.7  yes        
-#R&gt;    9  1967     22  766.        2.75 yes        
-#R&gt;   10  1968     22  848.        5.85 yes        
+<span id="cb218-5"><a href="wrangle-columns.html#cb218-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ice_bridges=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(ice_bridges,<span class="at">from=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)),</span>
+<span id="cb218-6"><a href="wrangle-columns.html#cb218-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">era=</span><span class="fu">case_when</span>(</span>
+<span id="cb218-7"><a href="wrangle-columns.html#cb218-7" aria-hidden="true" tabindex="-1"></a>           year<span class="sc">&lt;</span><span class="dv">1975</span> <span class="sc">~</span> <span class="st">&quot;early&quot;</span>,</span>
+<span id="cb218-8"><a href="wrangle-columns.html#cb218-8" aria-hidden="true" tabindex="-1"></a>           year<span class="sc">&lt;=</span><span class="dv">2000</span> <span class="sc">~</span> <span class="st">&quot;middle&quot;</span>,</span>
+<span id="cb218-9"><a href="wrangle-columns.html#cb218-9" aria-hidden="true" tabindex="-1"></a>           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;recent&quot;</span></span>
+<span id="cb218-10"><a href="wrangle-columns.html#cb218-10" aria-hidden="true" tabindex="-1"></a>         )) <span class="sc">%&gt;%</span></span>
+<span id="cb218-11"><a href="wrangle-columns.html#cb218-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(era,<span class="at">.after=</span>year) <span class="sc">%&gt;%</span></span>
+<span id="cb218-12"><a href="wrangle-columns.html#cb218-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
+<span id="cb218-13"><a href="wrangle-columns.html#cb218-13" aria-hidden="true" tabindex="-1"></a>irmw2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 61 x 6
+#R&gt;       year era   wolves moose winter_temp ice_bridges
+#R&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
+#R&gt;    1  1959 early     20  538.        1.4  no         
+#R&gt;    2  1960 early     22  564.        8.45 no         
+#R&gt;    3  1961 early     22  572.        9.75 yes        
+#R&gt;    4  1962 early     23  579.        2.15 yes        
+#R&gt;    5  1963 early     20  596.       -0.35 yes        
+#R&gt;    6  1964 early     26  620.       12.4  no         
+#R&gt;    7  1965 early     28  634.        1.25 yes        
+#R&gt;    8  1966 early     26  661.        1.7  yes        
+#R&gt;    9  1967 early     22  766.        2.75 yes        
+#R&gt;   10  1968 early     22  848.        5.85 yes        
 #R&gt;   # ... with 51 more rows</code></pre>
 
 </div>
@@ -880,6 +890,7 @@ All columns
 <li id="fn16"><p>You will learn this in the next module<a href="wrangle-columns.html#fnref16" class="footnote-back">↩︎</a></p></li>
 <li id="fn17"><p>You will learn this in the next module<a href="wrangle-columns.html#fnref17" class="footnote-back">↩︎</a></p></li>
 <li id="fn18"><p>Along with a wide variety of other data about Wolves and Moose on Isle Royale.<a href="wrangle-columns.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>You may want to review the purpose of some of these arguments to <code>read_excel()</code> in Section <a href="read-external-data-files.html#excel-files">3.3.2</a>.<a href="wrangle-columns.html#fnref19" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
