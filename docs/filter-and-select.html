@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,7 +166,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="pivot.html"><a href="pivot.html#pivoting-in-r"><i class="fa fa-check"></i><b>5.3</b> Pivoting in R</a></li>
 <li class="chapter" data-level="5.4" data-path="pivot.html"><a href="pivot.html#pivoting-examples"><i class="fa fa-check"></i><b>5.4</b> Examples with Context</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="filter-and-select.html"><a href="filter-and-select.html"><i class="fa fa-check"></i><b>6</b> Filter and Select</a></li>
+<li class="chapter" data-level="6" data-path="filter-and-select.html"><a href="filter-and-select.html"><i class="fa fa-check"></i><b>6</b> Filter and Select</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="filter-and-select.html"><a href="filter-and-select.html#dplyr-verbs"><i class="fa fa-check"></i><b>6.1</b> <code>dplyr</code> verbs</a></li>
+<li class="chapter" data-level="6.2" data-path="filter-and-select.html"><a href="filter-and-select.html#pipe"><i class="fa fa-check"></i><b>6.2</b> Pipe</a></li>
+<li class="chapter" data-level="6.3" data-path="filter-and-select.html"><a href="filter-and-select.html#filtering-rows"><i class="fa fa-check"></i><b>6.3</b> Filtering Rows</a></li>
+<li class="chapter" data-level="6.4" data-path="filter-and-select.html"><a href="filter-and-select.html#arranging-rows"><i class="fa fa-check"></i><b>6.4</b> Arranging Rows</a></li>
+<li class="chapter" data-level="6.5" data-path="filter-and-select.html"><a href="filter-and-select.html#appending-rows"><i class="fa fa-check"></i><b>6.5</b> Appending Rows</a></li>
+<li class="chapter" data-level="6.6" data-path="filter-and-select.html"><a href="filter-and-select.html#selecting-columns"><i class="fa fa-check"></i><b>6.6</b> Selecting Columns</a></li>
+<li class="chapter" data-level="6.7" data-path="filter-and-select.html"><a href="filter-and-select.html#moving-columns"><i class="fa fa-check"></i><b>6.7</b> Moving Columns</a></li>
+<li class="chapter" data-level="6.8" data-path="filter-and-select.html"><a href="filter-and-select.html#renaming-columns"><i class="fa fa-check"></i><b>6.8</b> Renaming Columns</a></li>
+<li class="chapter" data-level="6.9" data-path="filter-and-select.html"><a href="filter-and-select.html#examples-in-context"><i class="fa fa-check"></i><b>6.9</b> Examples in Context</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="add-new-variables.html"><a href="add-new-variables.html"><i class="fa fa-check"></i><b>7</b> Add New Variables</a></li>
 <li class="chapter" data-level="8" data-path="groupings.html"><a href="groupings.html"><i class="fa fa-check"></i><b>8</b> Groupings</a></li>
 <li class="chapter" data-level="9" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>9</b> Dates and Times</a></li>
@@ -195,7 +206,644 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="filter-and-select" class="section level1" number="6">
 <h1><span class="header-section-number">Module 6</span> Filter and Select</h1>
+<p>Previous modules were primarily focused on reading data into R and making sure it is tidy. In this module the basics of manipulating a data frame are introduced by disucssing how to obtain a subset of the rows (i.e., observations) or columns (i.e., variables) of a data frame. Subsequent modules will discuss further manipulations of data frames.</p>
+<p>The descriptive examples below will use the <code>bears</code> and <code>players</code> data frames from Section <a href="read-external-data-files.html#csv-files">3.3.1</a>.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb164-1"><a href="filter-and-select.html#cb164-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
+<span id="cb164-2"><a href="filter-and-select.html#cb164-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      139        110 Bayfield
+#R&gt;   2      120.        60 Bayfield
+#R&gt;   3      149         85 Bayfield
+#R&gt;   4      141        100 Ashland 
+#R&gt;   5      141         95 Ashland 
+#R&gt;   6      150         85 Douglas 
+#R&gt;   7      130.       105 Douglas 
+#R&gt;   8      150        110 Douglas</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb166-1"><a href="filter-and-select.html#cb166-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
+<span id="cb166-2"><a href="filter-and-select.html#cb166-2" aria-hidden="true" tabindex="-1"></a>players</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 4,393 x 15
+#R&gt;         X1 DISPLAY_FIRST_LAST  DISPLAY_LAST_COMMA_FIRST FROM_YEAR GAMES_PLAYED_FL~
+#R&gt;      &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;           
+#R&gt;    1     0 Alaa Abdelnaby      Abdelnaby, Alaa               1990 Y               
+#R&gt;    2     1 Zaid Abdul-Aziz     Abdul-Aziz, Zaid              1968 Y               
+#R&gt;    3     2 Kareem Abdul-Jabbar Abdul-Jabbar, Kareem          1969 Y               
+#R&gt;    4     3 Mahmoud Abdul-Rauf  Abdul-Rauf, Mahmoud           1990 Y               
+#R&gt;    5     4 Tariq Abdul-Wahad   Abdul-Wahad, Tariq            1997 Y               
+#R&gt;    6     5 Shareef Abdur-Rahim Abdur-Rahim, Shareef          1996 Y               
+#R&gt;    7     6 Tom Abernethy       Abernethy, Tom                1976 Y               
+#R&gt;    8     7 Forest Able         Able, Forest                  1956 Y               
+#R&gt;    9     8 John Abramovic      Abramovic, John               1946 Y               
+#R&gt;   10     9 Alex Abrines        Abrines, Alex                 2016 Y               
+#R&gt;   # ... with 4,383 more rows, and 10 more variables:
+#R&gt;   #   OTHERLEAGUE_EXPERIENCE_CH &lt;chr&gt;, PERSON_ID &lt;dbl&gt;, PLAYERCODE &lt;chr&gt;,
+#R&gt;   #   ROSTERSTATUS &lt;dbl&gt;, TEAM_ABBREVIATION &lt;chr&gt;, TEAM_CITY &lt;chr&gt;,
+#R&gt;   #   TEAM_CODE &lt;chr&gt;, TEAM_ID &lt;dbl&gt;, TEAM_NAME &lt;chr&gt;, TO_YEAR &lt;dbl&gt;</code></pre>
+<p> </p>
+<div id="dplyr-verbs" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> <code>dplyr</code> verbs</h2>
+<p>The primary tools for manipulating data frames used in this course are “verbs” from the <code>dplyr</code> package. These verbs are a suite of functions for selecting rows, selecting columns, arranging columns, renaming columns, etc. These functions will be described in more detail in subsequent sections and modules but each function has these same characteristics:</p>
+<ul>
+<li>The first argument is a data frame or tibble.</li>
+<li>Further arguments are directives explaining how to manipulate the data frame.</li>
+<li>Variables do not need to be given in quotes.</li>
+<li>A data frame or tibble is returned from the function.</li>
+</ul>
+<p>Thus, these verbs have this general format.</p>
+<pre><code>new_df &lt;- verb(old_df,...)</code></pre>
+<p>where <code>new_df</code> is a new resultant data frame, <code>verb</code> is the name of the <code>dplyr</code> verb, <code>old_df</code> is the old original data frame, and <code>...</code> will be replaced with directive arguments.</p>
+</div>
+<div id="pipe" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Pipe</h2>
+<p>As you will see in future modules, several <code>dplyr</code> verbs may be used consecutively. For example, you may use verbs to select just the females in the data frame, add on a new variable that calculates body mass index, and then order the observations from lowest to highest BMI.</p>
+<p>The “pipe” operator, <code>%&gt;%</code>, allows consecutive verbs to be connected in a more efficient and readable manner. The pipe takes the data frame from in front of <code>%&gt;%</code> and places it into the first argument (by default) of the function after the <code>%&gt;%</code>. For example, the general format of a <code>dplyr</code> verb from above could be rewritten like this</p>
+<pre><code>new_df &lt;- old_df %&gt;% verb(...)</code></pre>
+<p>because <code>%&gt;%</code> will “pipe” <code>old_df</code> into the first argument of <code>verb()</code>.</p>
+<p>This may not look simpler in this case, but it allows for code like this</p>
+<pre><code>new_df &lt;- verb1(old_df,...)
+new_df &lt;- verb2(new_df,...)
+new_df &lt;- verb3(new_df,...)</code></pre>
+<p>to be written more efficiently and expressively like this</p>
+<pre><code>new_df &lt;- old_df %&gt;%
+  verb1(...) %&gt;%
+  verb2(...) %&gt;%
+  verb3(...)</code></pre>
+<p>When reading this code think of replacing the pipe with “then.” For example, the last code above could be read as “a new data frame is created by starting with an old data frame and THEN applying verb1 and THEN verb2 and THEN verb3.”</p>
+<p>The pipe will be used hereafter, even for single lines of code so that you become more familiar with its use for more involved future examples.</p>
+</div>
+<div id="filtering-rows" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Filtering Rows</h2>
+<p>Observations or rows can be selected from a data frame with <code>filter()</code>. The directive arguments to <code>filter()</code> are conditional expressions describing which observations from the data frame to maintain. Common operators used in these conditional expressions are in Table <a href="filter-and-select.html#tab:filterComps">6.1</a>.</p>
+<p> </p>
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:filterComps">Table 6.1: </span>Comparison operators used in <code>filterD()</code> and their results. Note that <code>var</code> generically represents a variable in the original data frame and <code>value</code> is a generic value or level. Both <code>var</code> and <code>val</code> would be replaced with specific items (see examples in main text).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Comparison Operator
+</th>
+<th style="text-align:left;font-weight: bold;">
+Rows Returned from Original Data Frame
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var==value</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> <strong>IS equal</strong> to <code>value</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var!=value</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> <strong>is NOT equal</strong> to <code>value</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var %in% c(value1,value2)</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> <strong>IS IN</strong> (or one of the) vector of <code>value</code>s<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var</code>&gt;<code>value</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> is <strong>greater than</strong> <code>value</code><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var</code>&gt;=<code>value</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> is <strong>greater than or equal to</strong> <code>value</code><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var</code>&lt;<code>value</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> is <strong>less than</strong> <code>value</code><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>var</code>&lt;=<code>value</code>
+</td>
+<td style="text-align:left;">
+All rows where <code>var</code> is <strong>less than or equal to</strong> <code>value</code><a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+condition1,condition2
+</td>
+<td style="text-align:left;">
+All rows where <strong>BOTH</strong> conditions are true
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+condition1 | condition2
+</td>
+<td style="text-align:left;">
+All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>The following are examples of new data frames created from <code>bears</code>. The name of the new data frame (i.e., object left of the assignment operator) can be any valid object name. As demonstrated below, the new data frame should be examined after each filtering to ensure that the data frame actually contains the items that you desire.</p>
+<ul>
+<li>Only individuals from <em>Bayfield</em> county.</li>
+</ul>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="filter-and-select.html#cb172-1" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc<span class="sc">==</span><span class="st">&quot;Bayfield&quot;</span>)</span>
+<span id="cb172-2"><a href="filter-and-select.html#cb172-2" aria-hidden="true" tabindex="-1"></a>bf</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      139        110 Bayfield
+#R&gt;   2      120.        60 Bayfield
+#R&gt;   3      149         85 Bayfield</code></pre>
+<ul>
+<li>Individuals from both <em>Bayfield</em> and <em>Ashland</em> counties.</li>
+</ul>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb174-1"><a href="filter-and-select.html#cb174-1" aria-hidden="true" tabindex="-1"></a>bfash <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>))</span>
+<span id="cb174-2"><a href="filter-and-select.html#cb174-2" aria-hidden="true" tabindex="-1"></a>bfash</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      139        110 Bayfield
+#R&gt;   2      120.        60 Bayfield
+#R&gt;   3      149         85 Bayfield
+#R&gt;   4      141        100 Ashland 
+#R&gt;   5      141         95 Ashland</code></pre>
+<ul>
+<li>Individuals <em>NOT</em> from <em>Bayfield</em> county.</li>
+</ul>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb176-1"><a href="filter-and-select.html#cb176-1" aria-hidden="true" tabindex="-1"></a>bfnotbay <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">!=</span> <span class="st">&quot;Bayfield&quot;</span>)</span>
+<span id="cb176-2"><a href="filter-and-select.html#cb176-2" aria-hidden="true" tabindex="-1"></a>bfnotbay</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 3
+#R&gt;     length.cm weight.kg loc    
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
+#R&gt;   1      141        100 Ashland
+#R&gt;   2      141         95 Ashland
+#R&gt;   3      150         85 Douglas
+#R&gt;   4      130.       105 Douglas
+#R&gt;   5      150        110 Douglas</code></pre>
+<ul>
+<li>Individuals with a weight greater than 100 kg.</li>
+</ul>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb178-1"><a href="filter-and-select.html#cb178-1" aria-hidden="true" tabindex="-1"></a>gt100 <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(weight.kg<span class="sc">&gt;</span><span class="dv">100</span>)</span>
+<span id="cb178-2"><a href="filter-and-select.html#cb178-2" aria-hidden="true" tabindex="-1"></a>gt100</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      139        110 Bayfield
+#R&gt;   2      130.       105 Douglas 
+#R&gt;   3      150        110 Douglas</code></pre>
+<ul>
+<li>Individuals from <em>Douglas</em> County that weighed at least 150 kg.</li>
+</ul>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="filter-and-select.html#cb180-1" aria-hidden="true" tabindex="-1"></a>do150 <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc<span class="sc">==</span><span class="st">&quot;Douglas&quot;</span>,weight.kg<span class="sc">&gt;=</span><span class="dv">150</span>)</span>
+<span id="cb180-2"><a href="filter-and-select.html#cb180-2" aria-hidden="true" tabindex="-1"></a>do150</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 0 x 3
+#R&gt;   # ... with 3 variables: length.cm &lt;dbl&gt;, weight.kg &lt;dbl&gt;, loc &lt;chr&gt;</code></pre>
+<p>The last example above illustrates that multiple conditional expressions in <code>filter()</code> are combined as an “and” operator such that both conditions must be true.</p>
+<div class="tip">
+<p>Examine the new data frame after filtering to ensure that it contains the data you intended.</p>
+</div>
+<p> </p>
+</div>
+<div id="arranging-rows" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Arranging Rows</h2>
+<p>The <code>arrange()</code> function is used to sort rows based on values in one or more variables. By default sorting is in ascending order. To sort in descending order then wrap the variable name in <code>desc()</code>. If more than one variable is given then the rows are first sorted based on the first variable and then ties in the first variable are sorted based on the second variable. Examples of sorting are shown below.</p>
+<ul>
+<li>Alphabetically sort bears by location name.</li>
+</ul>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="filter-and-select.html#cb182-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(loc)</span>
+<span id="cb182-2"><a href="filter-and-select.html#cb182-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      141        100 Ashland 
+#R&gt;   2      141         95 Ashland 
+#R&gt;   3      139        110 Bayfield
+#R&gt;   4      120.        60 Bayfield
+#R&gt;   5      149         85 Bayfield
+#R&gt;   6      150         85 Douglas 
+#R&gt;   7      130.       105 Douglas 
+#R&gt;   8      150        110 Douglas</code></pre>
+<ul>
+<li>Sort bears from heaviest to lightest.</li>
+</ul>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb184-1"><a href="filter-and-select.html#cb184-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight.kg))</span>
+<span id="cb184-2"><a href="filter-and-select.html#cb184-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      139        110 Bayfield
+#R&gt;   2      150        110 Douglas 
+#R&gt;   3      130.       105 Douglas 
+#R&gt;   4      141        100 Ashland 
+#R&gt;   5      141         95 Ashland 
+#R&gt;   6      149         85 Bayfield
+#R&gt;   7      150         85 Douglas 
+#R&gt;   8      120.        60 Bayfield</code></pre>
+<ul>
+<li>Sort bears from heaviest to lightest <em>within</em> each location.</li>
+</ul>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb186-1"><a href="filter-and-select.html#cb186-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(loc,<span class="fu">desc</span>(weight.kg))</span>
+<span id="cb186-2"><a href="filter-and-select.html#cb186-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      141        100 Ashland 
+#R&gt;   2      141         95 Ashland 
+#R&gt;   3      139        110 Bayfield
+#R&gt;   4      149         85 Bayfield
+#R&gt;   5      120.        60 Bayfield
+#R&gt;   6      150        110 Douglas 
+#R&gt;   7      130.       105 Douglas 
+#R&gt;   8      150         85 Douglas</code></pre>
+<ul>
+<li>sort bears by size, first by length and then by weight.</li>
+</ul>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb188-1"><a href="filter-and-select.html#cb188-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(length.cm,weight.kg)</span>
+<span id="cb188-2"><a href="filter-and-select.html#cb188-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
+#R&gt;     length.cm weight.kg loc     
+#R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;   1      120.        60 Bayfield
+#R&gt;   2      130.       105 Douglas 
+#R&gt;   3      139        110 Bayfield
+#R&gt;   4      141         95 Ashland 
+#R&gt;   5      141        100 Ashland 
+#R&gt;   6      149         85 Bayfield
+#R&gt;   7      150         85 Douglas 
+#R&gt;   8      150        110 Douglas</code></pre>
+<p> </p>
+</div>
+<div id="appending-rows" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Appending Rows</h2>
+<p>Two data frames can be combined with <code>bind_rows()</code> <strong>IF</strong> they have the same column names and classes. For example suppose that two other data frames exist – <code>bears2</code> has more bear information and <code>bobcats</code> has similar information about bobcats.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb190-1"><a href="filter-and-select.html#cb190-1" aria-hidden="true" tabindex="-1"></a>bears2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg  loc
+#R&gt;   1       135       100 Iron
+#R&gt;   2       142       115 Iron
+#R&gt;   3       143       110 Iron</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb192-1"><a href="filter-and-select.html#cb192-1" aria-hidden="true" tabindex="-1"></a>bobcats</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg      loc
+#R&gt;   1        75       6.2  Douglas
+#R&gt;   2        82       8.1  Douglas
+#R&gt;   3        71       7.4 Bayfield
+#R&gt;   4        79       7.6  Douglas</code></pre>
+<p>The code below appends the <code>bears2</code> data frame to the bottom of the <code>bears</code> data frame and then, for demonstration purposes, orders the bears by size.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb194-1"><a href="filter-and-select.html#cb194-1" aria-hidden="true" tabindex="-1"></a>newbears <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(bears,bears2) <span class="sc">%&gt;%</span></span>
+<span id="cb194-2"><a href="filter-and-select.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(length.cm,weight.kg)</span>
+<span id="cb194-3"><a href="filter-and-select.html#cb194-3" aria-hidden="true" tabindex="-1"></a>newbears</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 11 x 3
+#R&gt;      length.cm weight.kg loc     
+#R&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;    1      120.        60 Bayfield
+#R&gt;    2      130.       105 Douglas 
+#R&gt;    3      135        100 Iron    
+#R&gt;    4      139        110 Bayfield
+#R&gt;    5      141         95 Ashland 
+#R&gt;    6      141        100 Ashland 
+#R&gt;    7      142        115 Iron    
+#R&gt;    8      143        110 Iron    
+#R&gt;    9      149         85 Bayfield
+#R&gt;   10      150         85 Douglas 
+#R&gt;   11      150        110 Douglas</code></pre>
+<p>The same could be done with the <code>bears</code> and <code>bobcats</code> data frames but there will be no way to then tell which observations are for bears and which are for bobcats. This deficiency can be overcome by giving names to the data frames within <code>bind_rows()</code> and giving a variable name to <code>.id=</code> for the new variable that will identify the groups. For example,</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb196-1"><a href="filter-and-select.html#cb196-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="st">&quot;bear&quot;</span><span class="ot">=</span>bears,<span class="st">&quot;bobcat&quot;</span><span class="ot">=</span>bobcats,<span class="at">.id=</span><span class="st">&quot;animal&quot;</span>)</span>
+<span id="cb196-2"><a href="filter-and-select.html#cb196-2" aria-hidden="true" tabindex="-1"></a>animals</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 12 x 4
+#R&gt;      animal length.cm weight.kg loc     
+#R&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+#R&gt;    1 bear        120.      60   Bayfield
+#R&gt;    2 bear        130.     105   Douglas 
+#R&gt;    3 bear        139      110   Bayfield
+#R&gt;    4 bear        141       95   Ashland 
+#R&gt;    5 bear        141      100   Ashland 
+#R&gt;    6 bear        149       85   Bayfield
+#R&gt;    7 bear        150       85   Douglas 
+#R&gt;    8 bear        150      110   Douglas 
+#R&gt;    9 bobcat       75        6.2 Douglas 
+#R&gt;   10 bobcat       82        8.1 Douglas 
+#R&gt;   11 bobcat       71        7.4 Bayfield
+#R&gt;   12 bobcat       79        7.6 Douglas</code></pre>
+<p>Note that more than two data frames can be combined with <code>bind_rows()</code>.</p>
+</div>
+<div id="selecting-columns" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Selecting Columns</h2>
+<p>Some data frames will have a very large number of <strong>variables/columns</strong> and it may be useful to narrow the data frame to only those variables you plan to use in an analysis. The <code>select()</code> function is used to select variables to keep in a data frame. Those variables can be selected in a wide variety of ways, some of which may make your coding more succinct, as shown in <a href="filter-and-select.html#tab:selectors">6.2</a>.</p>
+<p> </p>
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:selectors">Table 6.2: </span>Methods to select columns from a data frame using <code>select()</code>. Note that numbers and variable names will be replaced with numbers and names specific to the selection process (see examples in main text).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Selector
+</th>
+<th style="text-align:left;font-weight: bold;">
+Column/Variables Returned
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>2</code>
+</td>
+<td style="text-align:left;">
+2nd column
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>c(2,3)</code>
+</td>
+<td style="text-align:left;">
+2nd &amp; 3rd columns
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>2:5</code>
+</td>
+<td style="text-align:left;">
+All columns between 2nd and 5th columns
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>-2</code>
+</td>
+<td style="text-align:left;">
+All but the 2nd column
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>x</code>
+</td>
+<td style="text-align:left;">
+Column named <code>x</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>c(x,y)</code>
+</td>
+<td style="text-align:left;">
+Columns named <code>x</code> and <code>y</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>x:z</code>
+</td>
+<td style="text-align:left;">
+All columns between columns named <code>x</code> and <code>z</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>-x</code>
+</td>
+<td style="text-align:left;">
+All but the column named <code>x</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>starts_with("x")</code>
+</td>
+<td style="text-align:left;">
+All columns with names that start with x
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>starts_with(c("x","y"))</code>
+</td>
+<td style="text-align:left;">
+All columns with names that start with x or y
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>ends_with("x")</code>
+</td>
+<td style="text-align:left;">
+All columns with names that end with x
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>contains("x")</code>
+</td>
+<td style="text-align:left;">
+All columns with names that contain an x
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>any_of(c("x","y"))</code>
+</td>
+<td style="text-align:left;">
+Any (or all) of the columns named x or y (exactly)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>all_of(c("x","y"))</code>
+</td>
+<td style="text-align:left;">
+All columns named x or y (exactly)<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>last_col()</code>
+</td>
+<td style="text-align:left;">
+Last column
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2.5in; ">
+<code>everything()</code>
+</td>
+<td style="text-align:left;">
+All columns
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Some examples of selecting columns<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
+<ul>
+<li>Select the first two variables of <code>bears2</code>.</li>
+</ul>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb198-1"><a href="filter-and-select.html#cb198-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb198-2"><a href="filter-and-select.html#cb198-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg
+#R&gt;   1       135       100
+#R&gt;   2       142       115
+#R&gt;   3       143       110</code></pre>
+<ul>
+<li>Select all variables in <code>bears2</code> that contain a “.”</li>
+</ul>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb200-1"><a href="filter-and-select.html#cb200-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;.&quot;</span>))</span>
+<span id="cb200-2"><a href="filter-and-select.html#cb200-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg
+#R&gt;   1       135       100
+#R&gt;   2       142       115
+#R&gt;   3       143       110</code></pre>
+<ul>
+<li>Select all variables in <code>bears2</code> that starts with an “l.”</li>
+</ul>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb202-1"><a href="filter-and-select.html#cb202-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;l&quot;</span>))</span>
+<span id="cb202-2"><a href="filter-and-select.html#cb202-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm  loc
+#R&gt;   1       135 Iron
+#R&gt;   2       142 Iron
+#R&gt;   3       143 Iron</code></pre>
+<ul>
+<li>Select all variables in <code>bears2</code> except <code>loc</code>.</li>
+</ul>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb204-1"><a href="filter-and-select.html#cb204-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>loc)</span>
+<span id="cb204-2"><a href="filter-and-select.html#cb204-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg
+#R&gt;   1       135       100
+#R&gt;   2       142       115
+#R&gt;   3       143       110</code></pre>
+</div>
+<div id="moving-columns" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Moving Columns</h2>
+<p>While it is not strictly necessary that variables of a data frame be in a particular order, you may find it easier to work with variables in a particular order. Variables can be moved within a data frame using <code>relocate</code>. By default the selected columns are moved to the beginning of the data frame. However, they can be placed before or after a particular column by using <code>.before=</code> and <code>.after=</code>. Note that columns to be moved can be selected with methods shown in <a href="filter-and-select.html#tab:selectors">6.2</a>. Some examples are below.</p>
+<ul>
+<li>Move <code>loc</code> variable to beginning of <code>bears2</code> data frame.</li>
+</ul>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb206-1"><a href="filter-and-select.html#cb206-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc)</span>
+<span id="cb206-2"><a href="filter-and-select.html#cb206-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;      loc length.cm weight.kg
+#R&gt;   1 Iron       135       100
+#R&gt;   2 Iron       142       115
+#R&gt;   3 Iron       143       110</code></pre>
+<ul>
+<li>Move <code>loc</code> variable to after <code>length.cm</code> of <code>bears2</code> data frame.</li>
+</ul>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb208-1"><a href="filter-and-select.html#cb208-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc,<span class="at">.after=</span>length.cm)</span>
+<span id="cb208-2"><a href="filter-and-select.html#cb208-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm  loc weight.kg
+#R&gt;   1       135 Iron       100
+#R&gt;   2       142 Iron       115
+#R&gt;   3       143 Iron       110</code></pre>
+<ul>
+<li>Move <code>loc</code> variable to before <code>weight.kg.cm</code> of <code>bears2</code> data frame.</li>
+</ul>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb210-1"><a href="filter-and-select.html#cb210-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc,<span class="at">.before=</span>weight.kg)</span>
+<span id="cb210-2"><a href="filter-and-select.html#cb210-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm  loc weight.kg
+#R&gt;   1       135 Iron       100
+#R&gt;   2       142 Iron       115
+#R&gt;   3       143 Iron       110</code></pre>
+<ul>
+<li>Move <code>length.cm</code> variable to end of the <code>bears2</code> data frame.</li>
+</ul>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb212-1"><a href="filter-and-select.html#cb212-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(length.cm,<span class="at">.after=</span><span class="fu">last_col</span>())</span>
+<span id="cb212-2"><a href="filter-and-select.html#cb212-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     weight.kg  loc length.cm
+#R&gt;   1       100 Iron       135
+#R&gt;   2       115 Iron       142
+#R&gt;   3       110 Iron       143</code></pre>
+<ul>
+<li>Move both <code>length.cm</code> and <code>weight.kg</code> variables to the beginning of the <code>bears2</code> data frame.</li>
+</ul>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb214-1"><a href="filter-and-select.html#cb214-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(<span class="fu">contains</span>(<span class="st">&quot;.&quot;</span>))</span>
+<span id="cb214-2"><a href="filter-and-select.html#cb214-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg  loc
+#R&gt;   1       135       100 Iron
+#R&gt;   2       142       115 Iron
+#R&gt;   3       143       110 Iron</code></pre>
+</div>
+<div id="renaming-columns" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Renaming Columns</h2>
+<p>Variables may be given new names with <code>rename()</code>. Each directive argument in <code>rename</code> has the form <code>newname=oldname</code> where <code>newname</code> will be the new name for the <code>oldname</code> variable in the data frame. Examples are below.</p>
+<ul>
+<li>Rename <code>loc</code> in <code>bears2</code> to <code>Location</code>.</li>
+</ul>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb216-1"><a href="filter-and-select.html#cb216-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Location=</span>loc)</span>
+<span id="cb216-2"><a href="filter-and-select.html#cb216-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg Location
+#R&gt;   1       135       100     Iron
+#R&gt;   2       142       115     Iron
+#R&gt;   3       143       110     Iron</code></pre>
+<ul>
+<li>Rename both <code>length.cm</code> and <code>weight.kg</code> in <code>bears2</code>.</li>
+</ul>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb218-1"><a href="filter-and-select.html#cb218-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Length=</span>length.cm,<span class="at">Weight=</span>weight.kg)</span>
+<span id="cb218-2"><a href="filter-and-select.html#cb218-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     Length Weight  loc
+#R&gt;   1    135    100 Iron
+#R&gt;   2    142    115 Iron
+#R&gt;   3    143    110 Iron</code></pre>
+<p>If the name of a variable is non-standard then you will need to include it between “backticks” when renaming it. For example, suppose that the names of variables in <code>bears3</code> look like this (note the spaces in the names of the first two variables).</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb220-1"><a href="filter-and-select.html#cb220-1" aria-hidden="true" tabindex="-1"></a>bears3</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     length (cm) weight (kg)  loc
+#R&gt;   1         135         100 Iron
+#R&gt;   2         142         115 Iron
+#R&gt;   3         143         110 Iron</code></pre>
+<p>Use the following code to rename these variables.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb222-1"><a href="filter-and-select.html#cb222-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears3 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Length=</span><span class="st">`</span><span class="at">length (cm)</span><span class="st">`</span>,<span class="at">Weight=</span><span class="st">`</span><span class="at">weight (kg)</span><span class="st">`</span>)</span>
+<span id="cb222-2"><a href="filter-and-select.html#cb222-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     Length Weight  loc
+#R&gt;   1    135    100 Iron
+#R&gt;   2    142    115 Iron
+#R&gt;   3    143    110 Iron</code></pre>
+</div>
+<div id="examples-in-context" class="section level2" number="6.9">
+<h2><span class="header-section-number">6.9</span> Examples in Context</h2>
+<div id="nba-players" class="section level3" number="6.9.1">
+<h3><span class="header-section-number">6.9.1</span> NBA Players</h3>
+</div>
+<div id="xxx" class="section level3" number="6.9.2">
+<h3><span class="header-section-number">6.9.2</span> XXX</h3>
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="14">
+<li id="fn14"><p><code>value</code> should be a character, factor, or integer.<a href="filter-and-select.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p><code>value</code> must be numeric.<a href="filter-and-select.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p><code>value</code> must be numeric.<a href="filter-and-select.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p><code>value</code> must be numeric.<a href="filter-and-select.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p><code>value</code> must be numeric.<a href="filter-and-select.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Note that this “or” operator is a “vertical line”” which is typed with the shift-backslash key.<a href="filter-and-select.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>If all columns do not exist in the data frame then an error will occur.<a href="filter-and-select.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>Note that some of these selections would not make sense to do but they do demonstrate the technique.<a href="filter-and-select.html#fnref21" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

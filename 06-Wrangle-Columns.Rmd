@@ -1,0 +1,360 @@
+# Wrangle Columns
+Previous modules were primarily focused on reading data into R and making sure it was tidy. In this module we will start wrangling data by manipulating columns or variables. Module \@ref(wrangle-rows) will further describe how to wrangle data through manipulating rows. More complex wrangling topics will be discussed in modules after that.
+
+The descriptive examples below will use the `bears` data frame from Section \@ref(csv-files).
+
+```{r}
+bears <- read_csv(file.path("data","Bears.csv"))
+bears
+```
+
+&nbsp;
+
+## `dplyr` verbs
+The primary tools for manipulating data frames used in this course are "verbs" from the `dplyr` package. These verbs are a suite of functions for selecting columns, arranging columns, renaming columns, selecting rows, etc. These functions will be described in more detail in subsequent sections and modules but each function has these same characteristics:
+
+* The first argument is a data frame or tibble.
+* Further arguments are directives explaining how to manipulate the data frame.
+* Variables do not need to be given in quotes.
+* A data frame or tibble is returned from the function.
+
+Thus, these verbs have this general format.
+
+```
+new_df <- verb(old_df,...)
+```
+
+where `new_df` is a new resultant data frame, `verb` is the name of the `dplyr` verb, `old_df` is the old original data frame, and `...` will be replaced with directive arguments.
+
+## Pipe
+As you will see in future modules, several `dplyr` verbs may be used consecutively. For example, you may use verbs to select just the females in the data frame, add on a new variable that calculates body mass index, and then order the observations from lowest to highest BMI. 
+
+The "pipe" operator, `%>%`, allows consecutive verbs to be connected in a more efficient and readable manner. The pipe takes the data frame from in front of `%>%` and places it into the first argument (by default) of the function after the `%>%`. For example, the general format of a `dplyr` verb from above could be rewritten like this 
+
+```
+new_df <- old_df %>% verb(...)
+```
+
+because `%>%` will "pipe" `old_df` into the first argument of `verb()`.
+
+This may not look simpler in this case, but it allows for code like this
+
+```
+new_df <- verb1(old_df,...)
+new_df <- verb2(new_df,...)
+new_df <- verb3(new_df,...)
+```
+
+to be written more efficiently and expressively like this
+
+```
+new_df <- old_df %>%
+  verb1(...) %>%
+  verb2(...) %>%
+  verb3(...)
+```
+
+When reading this code think of replacing the pipe with "then." For example, the last code above could be read as "a new data frame is created by starting with an old data frame and THEN applying verb1 and THEN verb2 and THEN verb3."
+
+&nbsp;
+
+The "pipe and assign" operator, `%<>%`, will also be used in this and subsequent modules. This operator takes the data frame to the left and puts it in the first object of the function on the right **AND** then takes the results of the function and assigns it to the name of the data frame to the left of the operator. In other words, code like this
+
+```
+old_df <- old_df %>% verb()
+```
+
+can be replaced with this
+
+```
+old_df %<>% verb()
+```
+
+Be careful with this operator as the "old" data frame will be replaced with the result of the verb.
+
+These pipe operatures will be used hereafter, even for single lines of code so that you become more familiar with its use for more involved future examples.
+
+&nbsp;
+
+## Selecting Columns
+Recall from Section \@ref(data-frames) that individual variables (or columns) can be selected from a data frame with `dataframename$variablename`. For example, the following code selects the `loc` variable from the `bears` data frame.
+
+```{r}
+bears$loc
+```
+
+&nbsp;
+
+However, in this section, we are more interested in selecting multiple variables from a data frame, rather than a single variable, to form a new data frame. This may be useful when working with a data frame that has a very large number of variables/columns.
+
+Variables are selected from a data frame with `select()`. Variables to retain can be selected in a wide variety of ways as shown in Table \@ref(tab:selectors). As you will see in the examples, multiple methods may be used to select the same variables, but you may find that some ways can make your code more succinct and readable.
+
+&nbsp;
+
+```{r selectors, echo=FALSE}
+tribble(
+  ~Selector,~`Column/Variables Returned`,
+  '`2`','2nd column',
+  '`c(2,3)`','2nd & 3rd columns',
+  '`2:5`','All columns between 2nd and 5th columns',
+  '`-2`','All but the 2nd column',
+  '`x`','Column named `x`',
+  '`c(x,y)`','Columns named `x` and `y`',
+  '`x:z`','All columns between columns named `x` and `z`',
+  '`-x`','All but the column named `x`',
+  '`starts_with("x")`','All columns with names that start with x',
+  '`starts_with(c("x","y"))`','All columns with names that start with x or y',
+  '`ends_with("x")`','All columns with names that end with x',
+  '`contains("x")`','All columns with names that contain an x',
+  '`any_of(c("x","y"))`','Any (or all) of the columns named x or y (exactly)',
+  '`all_of(c("x","y"))`','All columns named x or y (exactly)^[If all columns do not exist in the data frame then an error will occur.]',
+  '`last_col()`','Last column',
+  '`everything()`','All columns'
+) %>%
+  knitr::kable(booktabs=TRUE,caption="Methods to select columns from a data frame using `select()`. Note that numbers and variable names will be replaced with numbers and names specific to the selection process (see examples in main text).") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::row_spec(0,bold=TRUE)%>%
+  kableExtra::column_spec(1,width="2.5in")
+```
+
+&nbsp;
+
+Below are examples of selecting variables from `bears`.^[These selections are likely not needed because `bears` is so small; however, they are used here to demonstrate the selection techniques.] Note that each resulting data frame is called `tmp` (for temporary) because it will not be used further here.
+
+* Select first two variables.
+
+```{r}
+tmp <- bears %>% select(1:2)
+tmp
+```
+
+* Select all variables that contain a ".".
+
+```{r}
+tmp <- bears %>% select(contains("."))
+tmp
+```
+
+* Select all variables that start with an "l".
+
+```{r}
+tmp <- bears %>% select(starts_with("l"))
+tmp
+```
+
+* Select all variables except `loc`.
+
+```{r}
+tmp <- bears %>% select(-loc)
+tmp
+```
+
+## Moving Columns
+It is not necessary that variables be in a particular order in a data frame; however, you may find it easier to work with variables in a particular order. Variables can be moved within a data frame with `relocate()`. By default the selected columns are moved to the beginning of the data frame. However, they can be placed before or after a particular column by using `.before=` and `.after=`. Note that columns to be moved can be selected with methods shown in \@ref(tab:selectors). Below are examples of moving variables within `bears`.
+
+* Move `loc` variable to beginning.
+
+```{r}
+tmp <- bears %>% relocate(loc)
+tmp
+```
+
+* Move `loc` variable to after `length.cm`.
+
+```{r}
+tmp <- bears %>% relocate(loc,.after=length.cm)
+tmp
+```
+
+* Move `loc` variable to before `weight.kg`.
+
+```{r}
+tmp <- bears %>% relocate(loc,.before=weight.kg)
+tmp
+```
+
+* Move `length.cm` variable to end.
+
+```{r}
+tmp <- bears %>% relocate(length.cm,.after=last_col())
+tmp
+```
+
+* Move both `length.cm` and `weight.kg` variables to the beginning.
+
+```{r}
+tmp <- bears %>% relocate(contains("."))
+tmp
+```
+
+## Renaming Columns
+Variables may be given new names with `rename()`. Each directive argument in `rename()` has the form `newname=oldname` where `newname` will be the new name for the `oldname` variable in the data frame. Below are examples of renaming variables in `bears`.
+
+* Rename `loc` to `Location`.
+
+```{r}
+tmp <- bears %>% rename(Location=loc)
+tmp
+```
+
+* Rename both `length.cm` and `weight.kg`.
+
+```{r}
+tmp <- bears %>% rename(Length=length.cm,Weight=weight.kg)
+tmp
+```
+
+Non-standard names of variables must be included in "backticks" when renaming it. For example, suppose that the names of variables in `bears2` look like this (note the spaces in the names of the first two variables).
+
+```{r echo=FALSE}
+bears2 <- bears %>% rename(`length (cm)`=length.cm,`weight (kg)`=weight.kg)
+```
+```{r}
+bears2
+```
+
+The following code is used to sensibly rename these variables.
+
+```{r}
+tmp <- bears2 %>% rename(Length=`length (cm)`,Weight=`weight (kg)`)
+tmp
+```
+
+## Adding Columns
+New variables may be added to a data frame with `mutate()`. The directive arguments to this function have the form `newvar=XXX` where `newvar` will be the name of the new variable and `XXX` will create a new variable. There are a wide variety of expressions and functions that can be used to construct a new variable. A few of these will be illustrated below with `bears` but it is impossible to demonstrate all possibilities. Thus, other examples will be shown in the full context examples below as well as in subsequent modules.
+
+* Add a `year` variable that is a constant value.
+
+```{r}
+tmp <- bears %>% mutate(year=2021)
+tmp
+```
+
+* Add a length in inches variable derived from `length.cm`.
+
+```{r}
+tmp <- bears %>% mutate(length.in=length.cm/2.54)
+tmp
+```
+
+Multiple variables can be created at one time by including more arguments to `mutate()`. Subsequent arguments in `mutate()` may use variables created previously in the same `mutate()`. For example, the code below adds new variables that represent the weight of the bear if it were "healthy" (based on its length), the difference between the observed weight and this "healthy" weight, and a note if the bear is more or less than the healthy weight.
+
+```{r}
+tmp <- bears %>% mutate(health.wt=0.1129*length.cm^1.366,
+                        rel_weight=weight.kg-health.wt,
+                        rel_health=ifelse(rel_weight>0,"MORE","less"))
+tmp
+```
+
+In the above example `ifelse()` contains three arguments -- a conditioning expression that can evaluate to either true or false, an item to return if the expression evaluates to true, and an item to return if the expression evaluates to false. This `ifelse()` can be read as "if the relative weight is greater than 0 then return 'MORE' otherwise return 'less'."
+
+The `ifelse()` function is quite powerful for converting values to **binary** groups. However, `case_when()` is more flexible when more groups will be created. The `case_when()` function consists of several arguments of the form `condition ~ return` where `condition` is a condition expression and `return` is the item that will be returned if that condition expression evaluates to true. The conditions in the arguments are sequential such that the result for the first condition that evaluates to true is returned. The last condition expression in `case_when` is usually `TRUE` which will always evaluate to true and will thus return the last result if all previous conditions were not met. For example, the code below provides a bit more detailed description of the relative health of the bears.
+
+```{r}
+tmp <- bears %>% mutate(health.wt=0.1129*length.cm^1.366,
+                        rel_weight=weight.kg-health.wt,
+                        rel_health=case_when(
+                          rel_weight>10 ~ "MUCH MORE",
+                          rel_weight>0 ~ "SOME MORE",
+                          rel_weight>-10 ~ "some less",
+                          TRUE ~ "much less"
+                        ))
+tmp
+```
+
+Finally, `mapvalues()` from the `plyr` package can be used to efficiently convert the groups in one categorical variable to groups in a second categorical variables. The arguments to this function are the name of the first categorical variable followed by the names of the groups of this variable in `from=` and the new names for the groups in the new variable in `to=`. Note that all group names not listed in `from=` will simply carry-over as-is in the new variable.
+
+For example, suppose that the locations in `loc` need to be converted to abbreviations to save space when graphing the data.
+
+```{r}
+tmp <- bears %>% 
+  mutate(loc_abb=plyr::mapvalues(loc,
+                                 from=c("Ashland","Bayfield","Douglas"),
+                                 to=c("ASH","BAY","DOU")))
+tmp
+```
+
+Alternatively suppose that Ashland and Bayfield need to be combined into one group for some reason. This can be accomplished by given the combined name for counties in the positions of `to=` that match the two countines in `from=`. For example,
+
+```{r}
+tmp <- bears %>% 
+  mutate(loc_abb=plyr::mapvalues(loc,
+                                 from=c("Ashland","Bayfield"),
+                                 to=c("Ashland/Bayfield","Ashland/Bayfield")))
+tmp
+```
+
+Note in the code above that I did not include "Douglas" in either `from=` or `to=` because it was not to be modified for this situation.
+
+&nbsp;
+
+## Examples in Context
+### NBA Players
+Data on every players who has ever played in the National Basketball Association was read into R in Section \@ref{csv-files}. The structure of that data frame is shown below.
+```{r cache=TRUE}
+players <- read_csv("https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv")
+str(players,give.attr=FALSE)
+```
+
+&nbsp;
+
+Suppose that we ultimately want to make a graph related to the length of time that players were in the NBA. To facilitate this, I am going to 
+
+1. reduce this data frame to only the players name, the year they started, and the year they ended in the NBA,
+1. rename some of the long variable names (and remove the capitalization),
+1. calculate the amount of time they were in the NBA by subtracting their start year from their end year, and
+1. order the data from most to least years played,^[You will learn this in the next module] and
+1. examine the top 10 rows of the data frame.^[You will learn this in the next module]
+
+```{r}
+players2 <- players %>%
+  select(DISPLAY_LAST_COMMA_FIRST,FROM_YEAR,TO_YEAR) %>%
+  rename(name=DISPLAY_LAST_COMMA_FIRST,start=FROM_YEAR,end=TO_YEAR) %>%
+  mutate(years_played=end-start) %>%
+  arrange(desc(years_played))
+players2 %>% slice(1:10)
+```
+
+&nbsp;
+
+For fun, this is what one plot of the results might look like.
+
+```{r echo=FALSE,fig.width=4.5}
+ggplot(filter(players2,years_played>18)) +
+  geom_segment(mapping=aes(x=start,xend=end,y=name,yend=name),
+               size=1.5,color="steelblue4") +
+  geom_label(mapping=aes(x=(end+start)/2,y=name,label=years_played),
+             size=3.5,color="steelblue4") +
+  labs(title="Players with more than 18 years in the NBA") +
+  theme_minimal() +
+  theme(axis.title=element_blank(),
+        plot.title.position="plot")
+```
+
+&nbsp;
+
+### Wolves and Moose of Isle Royale
+For a module in my ["Great Graphs" course](http://derekogle.com/NCGraphing/) I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether ice bridged formed between the mainland and Isle Royale. Fortunately, these data^[Along with a wide variety of other data about Wolves and Moose on Isle Royale.] is available at [Wolves & Moose of Isle Royale](https://isleroyalewolf.org/data/data/home.html). I downloaded the data file provided there and read it into R below.[^You may want to review the purpose of some of these arguments to `read_excel()` in Section \@ref(excel-files).]
+
+```{r}
+irmw <- readxl::read_excel(file.path("data","Data_wolves_moose_Isle_Royale_June2019.xlsx"),
+                           sheet="1. population level data",skip=1,na=c("NA","N/A"))
+str(irmw,give.attr=FALSE)
+```
+
+The structure of this file shows that there are many variables, most of which I was not interested in for this demonstration, and the variable names are non-standard (i.e., they contains spaces). Thus, to prepare the data for the graphing course, I wanted to ..
+
+1. reduce the data frame to only the variables that I was interested in,
+1. rename the variables to be shorter and in standard format, 
+1. change the "coding" of the variable about ice bridges from using 0 and 1 to using the more descriptive and easier to remember "no" and "yes", and
+1. make sure the data are ordered from earliest to latest year.
+
+```{r}
+irmw2 <- irmw %>%
+  select(year,wolves,moose,`Jan-Feb (temp, F)`,`ice bridges (0=none, 1 = present)`) %>%
+  rename(winter_temp=`Jan-Feb (temp, F)`,
+         ice_bridges=`ice bridges (0=none, 1 = present)`) %>%
+  mutate(ice_bridges=plyr::mapvalues(ice_bridges,from=c(0,1),to=c("no","yes"))) %>%
+  arrange(year)
+irmw2
+```
