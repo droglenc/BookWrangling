@@ -235,7 +235,7 @@ The original data frame above is "tidy."
 
 &nbsp;
 
-```{r tidyGraph, echo=FALSE, out.width='80%',fig.cap="Schematic illustration the structure of tidy data (from [Ocean Health Index Team](http://ohi-science.org/data-science-training/))"}
+```{r tidyGraph, echo=FALSE, out.width='80%',fig.cap="Schematic illustration the structure of tidy data (from [RStudio Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf))"}
 knitr::include_graphics("zimgs/tidy_data.png")
 ```
 
