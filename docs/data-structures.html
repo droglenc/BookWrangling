@@ -387,13 +387,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   9    Sawyer      pop 16746
 #R&gt;   10   Sawyer    party   Rep</code></pre>
 <p>This second data frame is not “tidy” and is much more difficult to use.</p>
-<p>Tidy data frames follow three simple rules:</p>
+<p>Tidy data frames follow three simple rules (Figure <a href="data-structures.html#fig:tidyGraph">2.1</a>):</p>
 <ol style="list-style-type: decimal">
 <li>Each variable must have its own column.</li>
 <li>Each observation must have its own row.</li>
 <li>Each value must have its own cell.</li>
 </ol>
 <p>The original data frame above is “tidy.”</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:tidyGraph"></span>
+<img src="zimgs/tidy_data.png" alt="Schematic illustration the structure of tidy data (from [Ocean Health Index Team](http://ohi-science.org/data-science-training/))" width="80%" />
+<p class="caption">
+Figure 2.1: Schematic illustration the structure of tidy data (from <a href="http://ohi-science.org/data-science-training/">Ocean Health Index Team</a>)
+</p>
+</div>
+<p> </p>
 <p>A common “challenge” when entering data in a tidy format occurs when data is recorded on individuals in separate groups. For example, the following data are methyl mercury levels recorded in mussels from two locations labeled as “impacted” and “reference.”</p>
 <pre><code>  impacted   0.011  0.054  0.056  0.095  0.051  0.077
   reference  0.031  0.040  0.029  0.066  0.018  0.042  0.044</code></pre>
