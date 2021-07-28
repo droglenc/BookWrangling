@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-07-27" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,10 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="wrangle-columns.html"><a href="wrangle-columns.html#dplyr-verbs"><i class="fa fa-check"></i><b>6.1</b> <code>dplyr</code> verbs</a></li>
 <li class="chapter" data-level="6.2" data-path="wrangle-columns.html"><a href="wrangle-columns.html#pipe"><i class="fa fa-check"></i><b>6.2</b> Pipe</a></li>
-<li class="chapter" data-level="6.3" data-path="wrangle-columns.html"><a href="wrangle-columns.html#selecting-columns"><i class="fa fa-check"></i><b>6.3</b> Selecting Columns</a></li>
-<li class="chapter" data-level="6.4" data-path="wrangle-columns.html"><a href="wrangle-columns.html#moving-columns"><i class="fa fa-check"></i><b>6.4</b> Moving Columns</a></li>
-<li class="chapter" data-level="6.5" data-path="wrangle-columns.html"><a href="wrangle-columns.html#renaming-columns"><i class="fa fa-check"></i><b>6.5</b> Renaming Columns</a></li>
-<li class="chapter" data-level="6.6" data-path="wrangle-columns.html"><a href="wrangle-columns.html#adding-columns"><i class="fa fa-check"></i><b>6.6</b> Adding Columns</a></li>
+<li class="chapter" data-level="6.3" data-path="wrangle-columns.html"><a href="wrangle-columns.html#selecting-variables"><i class="fa fa-check"></i><b>6.3</b> Selecting Variables</a></li>
+<li class="chapter" data-level="6.4" data-path="wrangle-columns.html"><a href="wrangle-columns.html#moving-variables"><i class="fa fa-check"></i><b>6.4</b> Moving Variables</a></li>
+<li class="chapter" data-level="6.5" data-path="wrangle-columns.html"><a href="wrangle-columns.html#renaming-variables"><i class="fa fa-check"></i><b>6.5</b> Renaming Variables</a></li>
+<li class="chapter" data-level="6.6" data-path="wrangle-columns.html"><a href="wrangle-columns.html#adding-variables"><i class="fa fa-check"></i><b>6.6</b> Adding Variables</a></li>
 <li class="chapter" data-level="6.7" data-path="wrangle-columns.html"><a href="wrangle-columns.html#examples-in-context"><i class="fa fa-check"></i><b>6.7</b> Examples in Context</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="wrangle-rows.html"><a href="wrangle-rows.html"><i class="fa fa-check"></i><b>7</b> Wrangle Rows</a>
@@ -212,8 +212,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Module 7</span> Wrangle Rows</h1>
 <p>The previous module demonstrated methods for wrangling columns or variables in a data frame. In this module, methods to wrangle rows in a data frame are introduced. The primary method of interest here is selecting a smaller subset of rows (i.e., filtering) for further analysis.</p>
 <p>Again the descriptive examples below will use the <code>bears</code> data frame from Section <a href="read-external-data-files.html#csv-files">3.3.1</a>.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb220-1"><a href="wrangle-rows.html#cb220-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
-<span id="cb220-2"><a href="wrangle-rows.html#cb220-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb222-1"><a href="wrangle-rows.html#cb222-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
+<span id="cb222-2"><a href="wrangle-rows.html#cb222-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -267,7 +267,7 @@ All rows where <code>var</code> <strong>is NOT equal</strong> to <code>value</co
 <code>var %in% c(value1,value2)</code>
 </td>
 <td style="text-align:left;">
-All rows where <code>var</code> <strong>IS IN</strong> (or one of the) vector of <code>value</code>s<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>
+All rows where <code>var</code> <strong>IS IN</strong> (or one of the) vector of <code>value</code>s<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>
 </td>
 </tr>
 <tr>
@@ -275,7 +275,7 @@ All rows where <code>var</code> <strong>IS IN</strong> (or one of the) vector of
 <code>var</code>&gt;<code>value</code>
 </td>
 <td style="text-align:left;">
-All rows where <code>var</code> is <strong>greater than</strong> <code>value</code><a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>
+All rows where <code>var</code> is <strong>greater than</strong> <code>value</code><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>
 </td>
 </tr>
 <tr>
@@ -283,7 +283,7 @@ All rows where <code>var</code> is <strong>greater than</strong> <code>value</co
 <code>var</code>&gt;=<code>value</code>
 </td>
 <td style="text-align:left;">
-All rows where <code>var</code> is <strong>greater than or equal to</strong> <code>value</code><a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>
+All rows where <code>var</code> is <strong>greater than or equal to</strong> <code>value</code><a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>
 </td>
 </tr>
 <tr>
@@ -291,7 +291,7 @@ All rows where <code>var</code> is <strong>greater than or equal to</strong> <co
 <code>var</code>&lt;<code>value</code>
 </td>
 <td style="text-align:left;">
-All rows where <code>var</code> is <strong>less than</strong> <code>value</code><a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>
+All rows where <code>var</code> is <strong>less than</strong> <code>value</code><a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>
 </td>
 </tr>
 <tr>
@@ -299,7 +299,7 @@ All rows where <code>var</code> is <strong>less than</strong> <code>value</code>
 <code>var</code>&lt;=<code>value</code>
 </td>
 <td style="text-align:left;">
-All rows where <code>var</code> is <strong>less than or equal to</strong> <code>value</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>
+All rows where <code>var</code> is <strong>less than or equal to</strong> <code>value</code><a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>
 </td>
 </tr>
 <tr>
@@ -315,7 +315,7 @@ All rows where <strong>BOTH</strong> conditions are true
 condition1 | condition2
 </td>
 <td style="text-align:left;">
-All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>
+All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>
 </td>
 </tr>
 </tbody>
@@ -325,8 +325,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Only individuals from <em>Bayfield</em> county.</li>
 </ul>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb222-1"><a href="wrangle-rows.html#cb222-1" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc<span class="sc">==</span><span class="st">&quot;Bayfield&quot;</span>)</span>
-<span id="cb222-2"><a href="wrangle-rows.html#cb222-2" aria-hidden="true" tabindex="-1"></a>bf</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb224-1"><a href="wrangle-rows.html#cb224-1" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc<span class="sc">==</span><span class="st">&quot;Bayfield&quot;</span>)</span>
+<span id="cb224-2"><a href="wrangle-rows.html#cb224-2" aria-hidden="true" tabindex="-1"></a>bf</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -336,8 +336,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Individuals from both <em>Bayfield</em> and <em>Ashland</em> counties.</li>
 </ul>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb224-1"><a href="wrangle-rows.html#cb224-1" aria-hidden="true" tabindex="-1"></a>bfash <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>))</span>
-<span id="cb224-2"><a href="wrangle-rows.html#cb224-2" aria-hidden="true" tabindex="-1"></a>bfash</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb226-1"><a href="wrangle-rows.html#cb226-1" aria-hidden="true" tabindex="-1"></a>bfash <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>))</span>
+<span id="cb226-2"><a href="wrangle-rows.html#cb226-2" aria-hidden="true" tabindex="-1"></a>bfash</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -349,8 +349,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Individuals <em>NOT</em> from <em>Bayfield</em> county.</li>
 </ul>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb226-1"><a href="wrangle-rows.html#cb226-1" aria-hidden="true" tabindex="-1"></a>bfnotbay <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">!=</span> <span class="st">&quot;Bayfield&quot;</span>)</span>
-<span id="cb226-2"><a href="wrangle-rows.html#cb226-2" aria-hidden="true" tabindex="-1"></a>bfnotbay</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb228-1"><a href="wrangle-rows.html#cb228-1" aria-hidden="true" tabindex="-1"></a>bfnotbay <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">!=</span> <span class="st">&quot;Bayfield&quot;</span>)</span>
+<span id="cb228-2"><a href="wrangle-rows.html#cb228-2" aria-hidden="true" tabindex="-1"></a>bfnotbay</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 3
 #R&gt;     length.cm weight.kg loc    
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
@@ -362,8 +362,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Individuals with a weight greater than 100 kg.</li>
 </ul>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb228-1"><a href="wrangle-rows.html#cb228-1" aria-hidden="true" tabindex="-1"></a>gt100 <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(weight.kg<span class="sc">&gt;</span><span class="dv">100</span>)</span>
-<span id="cb228-2"><a href="wrangle-rows.html#cb228-2" aria-hidden="true" tabindex="-1"></a>gt100</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb230-1"><a href="wrangle-rows.html#cb230-1" aria-hidden="true" tabindex="-1"></a>gt100 <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(weight.kg<span class="sc">&gt;</span><span class="dv">100</span>)</span>
+<span id="cb230-2"><a href="wrangle-rows.html#cb230-2" aria-hidden="true" tabindex="-1"></a>gt100</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -373,8 +373,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Individuals from <em>Douglas</em> County that weighed at least 150 kg.</li>
 </ul>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb230-1"><a href="wrangle-rows.html#cb230-1" aria-hidden="true" tabindex="-1"></a>do150 <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc<span class="sc">==</span><span class="st">&quot;Douglas&quot;</span>,weight.kg<span class="sc">&gt;=</span><span class="dv">150</span>)</span>
-<span id="cb230-2"><a href="wrangle-rows.html#cb230-2" aria-hidden="true" tabindex="-1"></a>do150</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb232-1"><a href="wrangle-rows.html#cb232-1" aria-hidden="true" tabindex="-1"></a>do150 <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc<span class="sc">==</span><span class="st">&quot;Douglas&quot;</span>,weight.kg<span class="sc">&gt;=</span><span class="dv">150</span>)</span>
+<span id="cb232-2"><a href="wrangle-rows.html#cb232-2" aria-hidden="true" tabindex="-1"></a>do150</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 0 x 3
 #R&gt;   # ... with 3 variables: length.cm &lt;dbl&gt;, weight.kg &lt;dbl&gt;, loc &lt;chr&gt;</code></pre>
 <p>The last example above illustrates that multiple conditional expressions in <code>filter()</code> are combined as an “and” operator such that both conditions must be true.</p>
@@ -389,8 +389,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Alphabetically sort bears by location name.</li>
 </ul>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb232-1"><a href="wrangle-rows.html#cb232-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(loc)</span>
-<span id="cb232-2"><a href="wrangle-rows.html#cb232-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb234-1"><a href="wrangle-rows.html#cb234-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(loc)</span>
+<span id="cb234-2"><a href="wrangle-rows.html#cb234-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -405,8 +405,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Sort bears from heaviest to lightest.</li>
 </ul>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb234-1"><a href="wrangle-rows.html#cb234-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight.kg))</span>
-<span id="cb234-2"><a href="wrangle-rows.html#cb234-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb236-1"><a href="wrangle-rows.html#cb236-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight.kg))</span>
+<span id="cb236-2"><a href="wrangle-rows.html#cb236-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -421,8 +421,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>Sort bears from heaviest to lightest <em>within</em> each location.</li>
 </ul>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb236-1"><a href="wrangle-rows.html#cb236-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(loc,<span class="fu">desc</span>(weight.kg))</span>
-<span id="cb236-2"><a href="wrangle-rows.html#cb236-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb238-1"><a href="wrangle-rows.html#cb238-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(loc,<span class="fu">desc</span>(weight.kg))</span>
+<span id="cb238-2"><a href="wrangle-rows.html#cb238-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -437,8 +437,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <ul>
 <li>sort bears by size, first by length and then by weight.</li>
 </ul>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb238-1"><a href="wrangle-rows.html#cb238-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(length.cm,weight.kg)</span>
-<span id="cb238-2"><a href="wrangle-rows.html#cb238-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb240-1"><a href="wrangle-rows.html#cb240-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(length.cm,weight.kg)</span>
+<span id="cb240-2"><a href="wrangle-rows.html#cb240-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -455,21 +455,21 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 <div id="appending-rows" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Appending Rows</h2>
 <p>Two data frames can be combined with <code>bind_rows()</code> <strong>IF</strong> they have the same column names and classes. For example suppose that two other data frames exist – <code>bears2</code> has more bear information and <code>bobcats</code> has similar information about bobcats.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb240-1"><a href="wrangle-rows.html#cb240-1" aria-hidden="true" tabindex="-1"></a>bears2</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb242-1"><a href="wrangle-rows.html#cb242-1" aria-hidden="true" tabindex="-1"></a>bears2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg  loc
 #R&gt;   1       135       100 Iron
 #R&gt;   2       142       115 Iron
 #R&gt;   3       143       110 Iron</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb242-1"><a href="wrangle-rows.html#cb242-1" aria-hidden="true" tabindex="-1"></a>bobcats</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb244-1"><a href="wrangle-rows.html#cb244-1" aria-hidden="true" tabindex="-1"></a>bobcats</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     length.cm weight.kg      loc
 #R&gt;   1        75       6.2  Douglas
 #R&gt;   2        82       8.1  Douglas
 #R&gt;   3        71       7.4 Bayfield
 #R&gt;   4        79       7.6  Douglas</code></pre>
 <p>The code below appends the <code>bears2</code> data frame to the bottom of the <code>bears</code> data frame and then, for demonstration purposes, orders the bears by size.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb244-1"><a href="wrangle-rows.html#cb244-1" aria-hidden="true" tabindex="-1"></a>newbears <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(bears,bears2) <span class="sc">%&gt;%</span></span>
-<span id="cb244-2"><a href="wrangle-rows.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(length.cm,weight.kg)</span>
-<span id="cb244-3"><a href="wrangle-rows.html#cb244-3" aria-hidden="true" tabindex="-1"></a>newbears</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb246-1"><a href="wrangle-rows.html#cb246-1" aria-hidden="true" tabindex="-1"></a>newbears <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(bears,bears2) <span class="sc">%&gt;%</span></span>
+<span id="cb246-2"><a href="wrangle-rows.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(length.cm,weight.kg)</span>
+<span id="cb246-3"><a href="wrangle-rows.html#cb246-3" aria-hidden="true" tabindex="-1"></a>newbears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 11 x 3
 #R&gt;      length.cm weight.kg loc     
 #R&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -485,8 +485,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 #R&gt;   10      150         85 Douglas 
 #R&gt;   11      150        110 Douglas</code></pre>
 <p>The same could be done with the <code>bears</code> and <code>bobcats</code> data frames but there will be no way to then tell which observations are for bears and which are for bobcats. This deficiency can be overcome by giving names to the data frames within <code>bind_rows()</code> and giving a variable name to <code>.id=</code> for the new variable that will identify the groups. For example,</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb246-1"><a href="wrangle-rows.html#cb246-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="st">&quot;bear&quot;</span><span class="ot">=</span>bears,<span class="st">&quot;bobcat&quot;</span><span class="ot">=</span>bobcats,<span class="at">.id=</span><span class="st">&quot;animal&quot;</span>)</span>
-<span id="cb246-2"><a href="wrangle-rows.html#cb246-2" aria-hidden="true" tabindex="-1"></a>animals</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb248-1"><a href="wrangle-rows.html#cb248-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="st">&quot;bear&quot;</span><span class="ot">=</span>bears,<span class="st">&quot;bobcat&quot;</span><span class="ot">=</span>bobcats,<span class="at">.id=</span><span class="st">&quot;animal&quot;</span>)</span>
+<span id="cb248-2"><a href="wrangle-rows.html#cb248-2" aria-hidden="true" tabindex="-1"></a>animals</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 12 x 4
 #R&gt;      animal length.cm weight.kg loc     
 #R&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -512,13 +512,13 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn25" c
 </div>
 <div class="footnotes">
 <hr />
-<ol start="20">
-<li id="fn20"><p><code>value</code> should be a character, factor, or integer.<a href="wrangle-rows.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<ol start="19">
+<li id="fn19"><p><code>value</code> should be a character, factor, or integer.<a href="wrangle-rows.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p><code>value</code> must be numeric.<a href="wrangle-rows.html#fnref20" class="footnote-back">↩︎</a></p></li>
 <li id="fn21"><p><code>value</code> must be numeric.<a href="wrangle-rows.html#fnref21" class="footnote-back">↩︎</a></p></li>
 <li id="fn22"><p><code>value</code> must be numeric.<a href="wrangle-rows.html#fnref22" class="footnote-back">↩︎</a></p></li>
 <li id="fn23"><p><code>value</code> must be numeric.<a href="wrangle-rows.html#fnref23" class="footnote-back">↩︎</a></p></li>
-<li id="fn24"><p><code>value</code> must be numeric.<a href="wrangle-rows.html#fnref24" class="footnote-back">↩︎</a></p></li>
-<li id="fn25"><p>Note that this “or” operator is a “vertical line”” which is typed with the shift-backslash key.<a href="wrangle-rows.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>Note that this “or” operator is a “vertical line”” which is typed with the shift-backslash key.<a href="wrangle-rows.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

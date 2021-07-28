@@ -44,10 +44,10 @@ abundance-of-mayflies
 wrangle-columns
 dplyr-verbs
 pipe
-selecting-columns
-moving-columns
-renaming-columns
-adding-columns
+selecting-variables
+moving-variables
+renaming-variables
+adding-variables
 examples-in-context
 nba-players
 wolves-and-moose-of-isle-royale
