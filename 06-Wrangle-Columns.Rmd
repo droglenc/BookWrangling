@@ -307,8 +307,8 @@ Note in the code above that I did not include "Douglas" in either `from=` or `to
 
 &nbsp;
 
-## Examples in Context
-### NBA Players
+## Examples in Context {#columns-examples}
+### NBA Players {#columns-nba}
 Data on every player who has ever played in the National Basketball Association was read into R in Section \@ref(csv-files). The structure of that data frame is shown below.
 ```{r cache=TRUE}
 players <- read_csv("https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv")
@@ -356,7 +356,7 @@ ggplot(filter(players2,years_played>18)) +
 
 &nbsp;
 
-### Wolves and Moose of Isle Royale
+### Wolves and Moose of Isle Royale {#columns-isle-royale}
 For a module in my ["Great Graphs" course](http://derekogle.com/NCGraphing/) I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether an ice bridge formed between the mainland and Isle Royale. Fortunately, these data^[Along with a wide variety of other data about Wolves and Moose on Isle Royale.] are available at [Wolves & Moose of Isle Royale](https://isleroyalewolf.org/data/data/home.html). I downloaded the data file provided there and read it into R below.^[You may want to review the purpose of some of these arguments to `read_excel()` in Section \@ref(excel-files).]
 
 ```{r}

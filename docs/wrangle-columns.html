@@ -174,14 +174,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="wrangle-columns.html"><a href="wrangle-columns.html#moving-variables"><i class="fa fa-check"></i><b>6.4</b> Moving Variables</a></li>
 <li class="chapter" data-level="6.5" data-path="wrangle-columns.html"><a href="wrangle-columns.html#renaming-variables"><i class="fa fa-check"></i><b>6.5</b> Renaming Variables</a></li>
 <li class="chapter" data-level="6.6" data-path="wrangle-columns.html"><a href="wrangle-columns.html#adding-variables"><i class="fa fa-check"></i><b>6.6</b> Adding Variables</a></li>
-<li class="chapter" data-level="6.7" data-path="wrangle-columns.html"><a href="wrangle-columns.html#examples-in-context"><i class="fa fa-check"></i><b>6.7</b> Examples in Context</a></li>
+<li class="chapter" data-level="6.7" data-path="wrangle-columns.html"><a href="wrangle-columns.html#columns-examples"><i class="fa fa-check"></i><b>6.7</b> Examples in Context</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="wrangle-rows.html"><a href="wrangle-rows.html"><i class="fa fa-check"></i><b>7</b> Wrangle Rows</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="wrangle-rows.html"><a href="wrangle-rows.html#filtering-rows"><i class="fa fa-check"></i><b>7.1</b> Filtering Rows</a></li>
 <li class="chapter" data-level="7.2" data-path="wrangle-rows.html"><a href="wrangle-rows.html#arranging-rows"><i class="fa fa-check"></i><b>7.2</b> Arranging Rows</a></li>
 <li class="chapter" data-level="7.3" data-path="wrangle-rows.html"><a href="wrangle-rows.html#appending-rows"><i class="fa fa-check"></i><b>7.3</b> Appending Rows</a></li>
-<li class="chapter" data-level="7.4" data-path="wrangle-rows.html"><a href="wrangle-rows.html#examples-in-context-1"><i class="fa fa-check"></i><b>7.4</b> Examples in Context</a></li>
+<li class="chapter" data-level="7.4" data-path="wrangle-rows.html"><a href="wrangle-rows.html#examples-in-context"><i class="fa fa-check"></i><b>7.4</b> Examples in Context</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="groupings.html"><a href="groupings.html"><i class="fa fa-check"></i><b>8</b> Groupings</a></li>
 <li class="chapter" data-level="9" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>9</b> Dates and Times</a></li>
@@ -768,9 +768,9 @@ All columns
 <p>Note in the code above that I did not include “Douglas” in either <code>from=</code> or <code>to=</code> because it was not to be modified for this situation.</p>
 <p> </p>
 </div>
-<div id="examples-in-context" class="section level2" number="6.7">
+<div id="columns-examples" class="section level2" number="6.7">
 <h2><span class="header-section-number">6.7</span> Examples in Context</h2>
-<div id="nba-players" class="section level3" number="6.7.1">
+<div id="columns-nba" class="section level3" number="6.7.1">
 <h3><span class="header-section-number">6.7.1</span> NBA Players</h3>
 <p>Data on every player who has ever played in the National Basketball Association was read into R in Section <a href="read-external-data-files.html#csv-files">3.3.1</a>. The structure of that data frame is shown below.</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb214-1"><a href="wrangle-columns.html#cb214-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
@@ -826,7 +826,7 @@ All columns
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-124-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
-<div id="wolves-and-moose-of-isle-royale" class="section level3" number="6.7.2">
+<div id="columns-isle-royale" class="section level3" number="6.7.2">
 <h3><span class="header-section-number">6.7.2</span> Wolves and Moose of Isle Royale</h3>
 <p>For a module in my <a href="http://derekogle.com/NCGraphing/">“Great Graphs” course</a> I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether an ice bridge formed between the mainland and Isle Royale. Fortunately, these data<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> are available at <a href="https://isleroyalewolf.org/data/data/home.html">Wolves &amp; Moose of Isle Royale</a>. I downloaded the data file provided there and read it into R below.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb218-1"><a href="wrangle-columns.html#cb218-1" aria-hidden="true" tabindex="-1"></a>irmw <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Data_wolves_moose_Isle_Royale_June2019.xlsx&quot;</span>),</span>
