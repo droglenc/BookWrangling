@@ -57,6 +57,8 @@ arranging-rows
 appending-rows
 examples-in-context
 rows-nba
+rows-isle-royale
 groupings
 dates-and-times
 factors
+strings

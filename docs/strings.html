@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 11 Strings | Readings for MTH250 - Data Wrangling</title>
+  <meta name="description" content="This book contains the readings for MTH250W at Northland College." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 11 Strings | Readings for MTH250 - Data Wrangling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/BookWrangling/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH250W at Northland College." />
+  <meta name="github-repo" content="droglenc/BookWrangling" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 11 Strings | Readings for MTH250 - Data Wrangling" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH250W at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2021-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="factors.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.4.0/str_view.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for Data Wrangling in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a></li>
+<li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.2" data-path="data-structures.html"><a href="data-structures.html#data-classes"><i class="fa fa-check"></i><b>2.2</b> Data Classes</a></li>
+<li class="chapter" data-level="2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>2.3</b> Data Frames</a></li>
+<li class="chapter" data-level="2.4" data-path="data-structures.html"><a href="data-structures.html#tidy-data"><i class="fa fa-check"></i><b>2.4</b> Tidy Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="read-external-data-files.html"><a href="read-external-data-files.html"><i class="fa fa-check"></i><b>3</b> Read External Data Files</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="read-external-data-files.html"><a href="read-external-data-files.html#entering-data"><i class="fa fa-check"></i><b>3.1</b> Entering Data</a></li>
+<li class="chapter" data-level="3.2" data-path="read-external-data-files.html"><a href="read-external-data-files.html#saving-the-external-file"><i class="fa fa-check"></i><b>3.2</b> Saving the External File</a></li>
+<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-the-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading the External File</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>4</b> Relational Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.1</b> Join Concepts</a></li>
+<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.2</b> Joins in R</a></li>
+<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.3</b> Examples With Context</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pivot.html"><a href="pivot.html"><i class="fa fa-check"></i><b>5</b> Pivot</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pivot.html"><a href="pivot.html#data-formats"><i class="fa fa-check"></i><b>5.1</b> Data Formats</a></li>
+<li class="chapter" data-level="5.2" data-path="pivot.html"><a href="pivot.html#pivoting-concepts"><i class="fa fa-check"></i><b>5.2</b> Pivoting Concepts</a></li>
+<li class="chapter" data-level="5.3" data-path="pivot.html"><a href="pivot.html#pivoting-in-r"><i class="fa fa-check"></i><b>5.3</b> Pivoting in R</a></li>
+<li class="chapter" data-level="5.4" data-path="pivot.html"><a href="pivot.html#pivoting-examples"><i class="fa fa-check"></i><b>5.4</b> Examples with Context</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="wrangle-columns.html"><a href="wrangle-columns.html"><i class="fa fa-check"></i><b>6</b> Wrangle Columns</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="wrangle-columns.html"><a href="wrangle-columns.html#dplyr-verbs"><i class="fa fa-check"></i><b>6.1</b> <code>dplyr</code> verbs</a></li>
+<li class="chapter" data-level="6.2" data-path="wrangle-columns.html"><a href="wrangle-columns.html#pipe"><i class="fa fa-check"></i><b>6.2</b> Pipe</a></li>
+<li class="chapter" data-level="6.3" data-path="wrangle-columns.html"><a href="wrangle-columns.html#selecting-variables"><i class="fa fa-check"></i><b>6.3</b> Selecting Variables</a></li>
+<li class="chapter" data-level="6.4" data-path="wrangle-columns.html"><a href="wrangle-columns.html#moving-variables"><i class="fa fa-check"></i><b>6.4</b> Moving Variables</a></li>
+<li class="chapter" data-level="6.5" data-path="wrangle-columns.html"><a href="wrangle-columns.html#renaming-variables"><i class="fa fa-check"></i><b>6.5</b> Renaming Variables</a></li>
+<li class="chapter" data-level="6.6" data-path="wrangle-columns.html"><a href="wrangle-columns.html#adding-variables"><i class="fa fa-check"></i><b>6.6</b> Adding Variables</a></li>
+<li class="chapter" data-level="6.7" data-path="wrangle-columns.html"><a href="wrangle-columns.html#columns-examples"><i class="fa fa-check"></i><b>6.7</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="wrangle-rows.html"><a href="wrangle-rows.html"><i class="fa fa-check"></i><b>7</b> Wrangle Rows</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="wrangle-rows.html"><a href="wrangle-rows.html#filtering-rows"><i class="fa fa-check"></i><b>7.1</b> Filtering Rows</a></li>
+<li class="chapter" data-level="7.2" data-path="wrangle-rows.html"><a href="wrangle-rows.html#arranging-rows"><i class="fa fa-check"></i><b>7.2</b> Arranging Rows</a></li>
+<li class="chapter" data-level="7.3" data-path="wrangle-rows.html"><a href="wrangle-rows.html#appending-rows"><i class="fa fa-check"></i><b>7.3</b> Appending Rows</a></li>
+<li class="chapter" data-level="7.4" data-path="wrangle-rows.html"><a href="wrangle-rows.html#examples-in-context"><i class="fa fa-check"></i><b>7.4</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="groupings.html"><a href="groupings.html"><i class="fa fa-check"></i><b>8</b> Groupings</a></li>
+<li class="chapter" data-level="9" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>9</b> Dates and Times</a></li>
+<li class="chapter" data-level="10" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>10</b> Factors</a></li>
+<li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH250 - Data Wrangling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="strings" class="section level1" number="11">
+<h1><span class="header-section-number">Module 11</span> Strings</h1>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb287-1"><a href="strings.html#cb287-1" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Adams&quot;</span>,<span class="st">&quot;Buffalo&quot;</span>,<span class="st">&quot;Jefferson&quot;</span>)</span>
+<span id="cb287-2"><a href="strings.html#cb287-2" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chinook Salmon&quot;</span>,<span class="st">&quot;Coho Salmon&quot;</span>,<span class="st">&quot;Chum Salmon&quot;</span>,</span>
+<span id="cb287-3"><a href="strings.html#cb287-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;Pink Salmon&quot;</span>,<span class="st">&quot;Sockeye Salmon&quot;</span>,<span class="st">&quot;Salmon&quot;</span>)</span>
+<span id="cb287-4"><a href="strings.html#cb287-4" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;WD40&quot;</span>,<span class="st">&quot;JB80&quot;</span>,<span class="st">&quot;R2D2&quot;</span>,<span class="st">&quot;C3PO&quot;</span>,<span class="st">&quot;Run DMC&quot;</span>,<span class="st">&quot;AC/DC&quot;</span>)</span>
+<span id="cb287-5"><a href="strings.html#cb287-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-6"><a href="strings.html#cb287-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-4b4c743f48a991d3e3ef" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4b4c743f48a991d3e3ef">{"x":{"html":"<ul>\n  <li>Ash<span class='match'>l<\/span>and<\/li>\n  <li>Bayfie<span class='match'>l<\/span>d<\/li>\n  <li>Doug<span class='match'>l<\/span>as<\/li>\n  <li>Adams<\/li>\n  <li>Buffa<span class='match'>l<\/span>o<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb288-1"><a href="strings.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;la&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-74c48b5796cb8977cdb8" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74c48b5796cb8977cdb8">{"x":{"html":"<ul>\n  <li>Ash<span class='match'>la<\/span>nd<\/li>\n  <li>Bayfield<\/li>\n  <li>Doug<span class='match'>la<\/span>s<\/li>\n  <li>Adams<\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb289-1"><a href="strings.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;.l.&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-cdcd68a211785e9642c7" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cdcd68a211785e9642c7">{"x":{"html":"<ul>\n  <li>As<span class='match'>hla<\/span>nd<\/li>\n  <li>Bayfi<span class='match'>eld<\/span><\/li>\n  <li>Dou<span class='match'>gla<\/span>s<\/li>\n  <li>Adams<\/li>\n  <li>Buff<span class='match'>alo<\/span><\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb290-1"><a href="strings.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;.la.&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-b95b7814675c8af549be" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b95b7814675c8af549be">{"x":{"html":"<ul>\n  <li>As<span class='match'>hlan<\/span>d<\/li>\n  <li>Bayfield<\/li>\n  <li>Dou<span class='match'>glas<\/span><\/li>\n  <li>Adams<\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb291-1"><a href="strings.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;^A&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-b60b33bdbe79053934d6" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b60b33bdbe79053934d6">{"x":{"html":"<ul>\n  <li><span class='match'>A<\/span>shland<\/li>\n  <li>Bayfield<\/li>\n  <li>Douglas<\/li>\n  <li><span class='match'>A<\/span>dams<\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb292-1"><a href="strings.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;^A.&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-a65ad5d189390f09ab9a" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a65ad5d189390f09ab9a">{"x":{"html":"<ul>\n  <li><span class='match'>As<\/span>hland<\/li>\n  <li>Bayfield<\/li>\n  <li>Douglas<\/li>\n  <li><span class='match'>Ad<\/span>ams<\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb293-1"><a href="strings.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;s$&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-7a73cad227b2db15ff6d" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a73cad227b2db15ff6d">{"x":{"html":"<ul>\n  <li>Ashland<\/li>\n  <li>Bayfield<\/li>\n  <li>Dougla<span class='match'>s<\/span><\/li>\n  <li>Adam<span class='match'>s<\/span><\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb294-1"><a href="strings.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;.s$&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-672ea60aedf5693df79d" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-672ea60aedf5693df79d">{"x":{"html":"<ul>\n  <li>Ashland<\/li>\n  <li>Bayfield<\/li>\n  <li>Dougl<span class='match'>as<\/span><\/li>\n  <li>Ada<span class='match'>ms<\/span><\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb295-1"><a href="strings.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex2,<span class="st">&quot;Salmon&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-e0ffdff30216d094fc60" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e0ffdff30216d094fc60">{"x":{"html":"<ul>\n  <li>Chinook <span class='match'>Salmon<\/span><\/li>\n  <li>Coho <span class='match'>Salmon<\/span><\/li>\n  <li>Chum <span class='match'>Salmon<\/span><\/li>\n  <li>Pink <span class='match'>Salmon<\/span><\/li>\n  <li>Sockeye <span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Salmon<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb296-1"><a href="strings.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex2,<span class="st">&quot;^Salmon$&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-3744b48ff50621b38466" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3744b48ff50621b38466">{"x":{"html":"<ul>\n  <li>Chinook Salmon<\/li>\n  <li>Coho Salmon<\/li>\n  <li>Chum Salmon<\/li>\n  <li>Pink Salmon<\/li>\n  <li>Sockeye Salmon<\/li>\n  <li><span class='match'>Salmon<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb297-1"><a href="strings.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex3,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">d&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-939770466eea6f245087" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-939770466eea6f245087">{"x":{"html":"<ul>\n  <li>WD<span class='match'>4<\/span>0<\/li>\n  <li>JB<span class='match'>8<\/span>0<\/li>\n  <li>R<span class='match'>2<\/span>D2<\/li>\n  <li>C<span class='match'>3<\/span>PO<\/li>\n  <li>Run DMC<\/li>\n  <li>AC/DC<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb298-1"><a href="strings.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex3,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-3263d65c3b8530a4585f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3263d65c3b8530a4585f">{"x":{"html":"<ul>\n  <li>WD40<\/li>\n  <li>JB80<\/li>\n  <li>R2D2<\/li>\n  <li>C3PO<\/li>\n  <li>Run<span class='match'> <\/span>DMC<\/li>\n  <li>AC/DC<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb299-1"><a href="strings.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;[sl]&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-4785e94ce50a49f5b427" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4785e94ce50a49f5b427">{"x":{"html":"<ul>\n  <li>A<span class='match'>s<\/span>hland<\/li>\n  <li>Bayfie<span class='match'>l<\/span>d<\/li>\n  <li>Doug<span class='match'>l<\/span>as<\/li>\n  <li>Adam<span class='match'>s<\/span><\/li>\n  <li>Buffa<span class='match'>l<\/span>o<\/li>\n  <li>Jeffer<span class='match'>s<\/span>on<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb300-1"><a href="strings.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;[^sl]&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-e55c27b76681e917777c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e55c27b76681e917777c">{"x":{"html":"<ul>\n  <li><span class='match'>A<\/span>shland<\/li>\n  <li><span class='match'>B<\/span>ayfield<\/li>\n  <li><span class='match'>D<\/span>ouglas<\/li>\n  <li><span class='match'>A<\/span>dams<\/li>\n  <li><span class='match'>B<\/span>uffalo<\/li>\n  <li><span class='match'>J<\/span>efferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb301-1"><a href="strings.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;a|l&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-94db3756eac281acec9d" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-94db3756eac281acec9d">{"x":{"html":"<ul>\n  <li>Ash<span class='match'>l<\/span>and<\/li>\n  <li>B<span class='match'>a<\/span>yfield<\/li>\n  <li>Doug<span class='match'>l<\/span>as<\/li>\n  <li>Ad<span class='match'>a<\/span>ms<\/li>\n  <li>Buff<span class='match'>a<\/span>lo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb302-1"><a href="strings.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view_all</span>(ex1,<span class="st">&quot;a|l&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-e67e9b1686bd6fbbf51c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e67e9b1686bd6fbbf51c">{"x":{"html":"<ul>\n  <li>Ash<span class='match'>l<\/span><span class='match'>a<\/span>nd<\/li>\n  <li>B<span class='match'>a<\/span>yfie<span class='match'>l<\/span>d<\/li>\n  <li>Doug<span class='match'>l<\/span><span class='match'>a<\/span>s<\/li>\n  <li>Ad<span class='match'>a<\/span>ms<\/li>\n  <li>Buff<span class='match'>a<\/span><span class='match'>l<\/span>o<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb303-1"><a href="strings.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;[AEIOU]&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-ed4066129969f2304b07" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ed4066129969f2304b07">{"x":{"html":"<ul>\n  <li><span class='match'>A<\/span>shland<\/li>\n  <li>Bayfield<\/li>\n  <li>Douglas<\/li>\n  <li><span class='match'>A<\/span>dams<\/li>\n  <li>Buffalo<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb304-1"><a href="strings.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;[^AEIOU]&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-83807fe246e33981b2b7" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83807fe246e33981b2b7">{"x":{"html":"<ul>\n  <li>A<span class='match'>s<\/span>hland<\/li>\n  <li><span class='match'>B<\/span>ayfield<\/li>\n  <li><span class='match'>D<\/span>ouglas<\/li>\n  <li>A<span class='match'>d<\/span>ams<\/li>\n  <li><span class='match'>B<\/span>uffalo<\/li>\n  <li><span class='match'>J<\/span>efferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb305-1"><a href="strings.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;[aeiou]&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-798c093ddf1e5108d049" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-798c093ddf1e5108d049">{"x":{"html":"<ul>\n  <li>Ashl<span class='match'>a<\/span>nd<\/li>\n  <li>B<span class='match'>a<\/span>yfield<\/li>\n  <li>D<span class='match'>o<\/span>uglas<\/li>\n  <li>Ad<span class='match'>a<\/span>ms<\/li>\n  <li>B<span class='match'>u<\/span>ffalo<\/li>\n  <li>J<span class='match'>e<\/span>fferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb306-1"><a href="strings.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;ff?&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-c30a1f2c70f63e74ddfc" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c30a1f2c70f63e74ddfc">{"x":{"html":"<ul>\n  <li>Ashland<\/li>\n  <li>Bay<span class='match'>f<\/span>ield<\/li>\n  <li>Douglas<\/li>\n  <li>Adams<\/li>\n  <li>Bu<span class='match'>ff<\/span>alo<\/li>\n  <li>Je<span class='match'>ff<\/span>erson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb307-1"><a href="strings.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;ff+&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-5a37f01b14aa1514c52f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5a37f01b14aa1514c52f">{"x":{"html":"<ul>\n  <li>Ashland<\/li>\n  <li>Bayfield<\/li>\n  <li>Douglas<\/li>\n  <li>Adams<\/li>\n  <li>Bu<span class='match'>ff<\/span>alo<\/li>\n  <li>Je<span class='match'>ff<\/span>erson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb308-1"><a href="strings.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;ff*&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-4ca0eb38d990b2b35db8" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4ca0eb38d990b2b35db8">{"x":{"html":"<ul>\n  <li>Ashland<\/li>\n  <li>Bay<span class='match'>f<\/span>ield<\/li>\n  <li>Douglas<\/li>\n  <li>Adams<\/li>\n  <li>Bu<span class='match'>ff<\/span>alo<\/li>\n  <li>Je<span class='match'>ff<\/span>erson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb309-1"><a href="strings.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;ff{1}&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-d14ee5edc27c695758f0" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d14ee5edc27c695758f0">{"x":{"html":"<ul>\n  <li>Ashland<\/li>\n  <li>Bayfield<\/li>\n  <li>Douglas<\/li>\n  <li>Adams<\/li>\n  <li>Bu<span class='match'>ff<\/span>alo<\/li>\n  <li>Je<span class='match'>ff<\/span>erson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb310-1"><a href="strings.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(ex1,<span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-a11953e8f6445ca2fdfd" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a11953e8f6445ca2fdfd">{"x":{"html":"<ul>\n  <li>Ash<span class='match'>l<\/span>and<\/li>\n  <li>Bayfie<span class='match'>l<\/span>d<\/li>\n  <li>Doug<span class='match'>l<\/span>as<\/li>\n  <li>Adams<\/li>\n  <li>Buffa<span class='match'>l<\/span>o<\/li>\n  <li>Jefferson<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb311-1"><a href="strings.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(ex1,<span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb313-1"><a href="strings.html#cb313-1" aria-hidden="true" tabindex="-1"></a>ex1[<span class="fu">str_detect</span>(ex1,<span class="st">&quot;l&quot;</span>)]</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashland&quot;  &quot;Bayfield&quot; &quot;Douglas&quot;  &quot;Buffalo&quot;</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb315-1"><a href="strings.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(ex1,<span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] 1 1 1 0 1 0</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb317-1"><a href="strings.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(ex1,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;-&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashland&quot;   &quot;Bay-ield&quot;  &quot;Douglas&quot;   &quot;Adams&quot;     &quot;Bu-falo&quot;   &quot;Je-ferson&quot;</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb319-1"><a href="strings.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(ex1,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;-&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashland&quot;   &quot;Bay-ield&quot;  &quot;Douglas&quot;   &quot;Adams&quot;     &quot;Bu--alo&quot;   &quot;Je--erson&quot;</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb321-1"><a href="strings.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(ex1,<span class="st">&quot;[a|f]&quot;</span>,<span class="st">&quot;-&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashl-nd&quot;   &quot;B-yfield&quot;  &quot;Dougl-s&quot;   &quot;Ad-ms&quot;     &quot;Bu-falo&quot;   &quot;Je-ferson&quot;</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb323-1"><a href="strings.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(ex1,<span class="st">&quot;[a|f]&quot;</span>,<span class="st">&quot;-&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashl-nd&quot;   &quot;B-y-ield&quot;  &quot;Dougl-s&quot;   &quot;Ad-ms&quot;     &quot;Bu---lo&quot;   &quot;Je--erson&quot;</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb325-1"><a href="strings.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(ex1,<span class="fu">c</span>(<span class="st">&quot;a&quot;</span><span class="ot">=</span><span class="st">&quot;-&quot;</span>,<span class="st">&quot;f&quot;</span><span class="ot">=</span><span class="st">&quot;*&quot;</span>))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashl-nd&quot;   &quot;B-y*ield&quot;  &quot;Dougl-s&quot;   &quot;Ad-ms&quot;     &quot;Bu**-lo&quot;   &quot;Je**erson&quot;</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb327-1"><a href="strings.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(ex2,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [[1]]
+#R&gt;   [1] &quot;Chinook&quot; &quot;Salmon&quot; 
+#R&gt;   
+#R&gt;   [[2]]
+#R&gt;   [1] &quot;Coho&quot;   &quot;Salmon&quot;
+#R&gt;   
+#R&gt;   [[3]]
+#R&gt;   [1] &quot;Chum&quot;   &quot;Salmon&quot;
+#R&gt;   
+#R&gt;   [[4]]
+#R&gt;   [1] &quot;Pink&quot;   &quot;Salmon&quot;
+#R&gt;   
+#R&gt;   [[5]]
+#R&gt;   [1] &quot;Sockeye&quot; &quot;Salmon&quot; 
+#R&gt;   
+#R&gt;   [[6]]
+#R&gt;   [1] &quot;Salmon&quot;</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb329-1"><a href="strings.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(ex2,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>,<span class="at">simplify=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;        [,1]      [,2]    
+#R&gt;   [1,] &quot;Chinook&quot; &quot;Salmon&quot;
+#R&gt;   [2,] &quot;Coho&quot;    &quot;Salmon&quot;
+#R&gt;   [3,] &quot;Chum&quot;    &quot;Salmon&quot;
+#R&gt;   [4,] &quot;Pink&quot;    &quot;Salmon&quot;
+#R&gt;   [5,] &quot;Sockeye&quot; &quot;Salmon&quot;
+#R&gt;   [6,] &quot;Salmon&quot;  &quot;&quot;</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb331-1"><a href="strings.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(ex2,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>,<span class="at">simplify=</span><span class="cn">TRUE</span>,<span class="at">n=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;        [,1]            
+#R&gt;   [1,] &quot;Chinook Salmon&quot;
+#R&gt;   [2,] &quot;Coho Salmon&quot;   
+#R&gt;   [3,] &quot;Chum Salmon&quot;   
+#R&gt;   [4,] &quot;Pink Salmon&quot;   
+#R&gt;   [5,] &quot;Sockeye Salmon&quot;
+#R&gt;   [6,] &quot;Salmon&quot;</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb333-1"><a href="strings.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view_all</span>(ex2,<span class="fu">boundary</span>(<span class="st">&quot;word&quot;</span>))</span></code></pre></div>
+<div id="htmlwidget-d71db3742724cd50bbb9" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d71db3742724cd50bbb9">{"x":{"html":"<ul>\n  <li><span class='match'>Chinook<\/span> <span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Coho<\/span> <span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Chum<\/span> <span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Pink<\/span> <span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Sockeye<\/span> <span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Salmon<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb334-1"><a href="strings.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view_all</span>(ex2,<span class="fu">boundary</span>(<span class="st">&quot;character&quot;</span>))</span></code></pre></div>
+<div id="htmlwidget-c0b10095385c4d9c1f5e" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c0b10095385c4d9c1f5e">{"x":{"html":"<ul>\n  <li><span class='match'>C<\/span><span class='match'>h<\/span><span class='match'>i<\/span><span class='match'>n<\/span><span class='match'>o<\/span><span class='match'>o<\/span><span class='match'>k<\/span><span class='match'> <\/span><span class='match'>S<\/span><span class='match'>a<\/span><span class='match'>l<\/span><span class='match'>m<\/span><span class='match'>o<\/span><span class='match'>n<\/span><\/li>\n  <li><span class='match'>C<\/span><span class='match'>o<\/span><span class='match'>h<\/span><span class='match'>o<\/span><span class='match'> <\/span><span class='match'>S<\/span><span class='match'>a<\/span><span class='match'>l<\/span><span class='match'>m<\/span><span class='match'>o<\/span><span class='match'>n<\/span><\/li>\n  <li><span class='match'>C<\/span><span class='match'>h<\/span><span class='match'>u<\/span><span class='match'>m<\/span><span class='match'> <\/span><span class='match'>S<\/span><span class='match'>a<\/span><span class='match'>l<\/span><span class='match'>m<\/span><span class='match'>o<\/span><span class='match'>n<\/span><\/li>\n  <li><span class='match'>P<\/span><span class='match'>i<\/span><span class='match'>n<\/span><span class='match'>k<\/span><span class='match'> <\/span><span class='match'>S<\/span><span class='match'>a<\/span><span class='match'>l<\/span><span class='match'>m<\/span><span class='match'>o<\/span><span class='match'>n<\/span><\/li>\n  <li><span class='match'>S<\/span><span class='match'>o<\/span><span class='match'>c<\/span><span class='match'>k<\/span><span class='match'>e<\/span><span class='match'>y<\/span><span class='match'>e<\/span><span class='match'> <\/span><span class='match'>S<\/span><span class='match'>a<\/span><span class='match'>l<\/span><span class='match'>m<\/span><span class='match'>o<\/span><span class='match'>n<\/span><\/li>\n  <li><span class='match'>S<\/span><span class='match'>a<\/span><span class='match'>l<\/span><span class='match'>m<\/span><span class='match'>o<\/span><span class='match'>n<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb335-1"><a href="strings.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view_all</span>(ex2,<span class="fu">boundary</span>(<span class="st">&quot;line&quot;</span>))</span></code></pre></div>
+<div id="htmlwidget-95aff8482471bfd51e68" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-95aff8482471bfd51e68">{"x":{"html":"<ul>\n  <li><span class='match'>Chinook <\/span><span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Coho <\/span><span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Chum <\/span><span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Pink <\/span><span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Sockeye <\/span><span class='match'>Salmon<\/span><\/li>\n  <li><span class='match'>Salmon<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="factors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

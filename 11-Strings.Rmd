@@ -1,0 +1,65 @@
+# Strings
+
+
+
+```{r}
+ex1 <- c("Ashland","Bayfield","Douglas","Adams","Buffalo","Jefferson")
+ex2 <- c("Chinook Salmon","Coho Salmon","Chum Salmon",
+         "Pink Salmon","Sockeye Salmon","Salmon")
+ex3 <- c("WD40","JB80","R2D2","C3PO","Run DMC","AC/DC")
+
+str_view(ex1,"l")
+str_view(ex1,"la")
+
+str_view(ex1,".l.")
+str_view(ex1,".la.")
+
+str_view(ex1,"^A")
+str_view(ex1,"^A.")
+
+str_view(ex1,"s$")
+str_view(ex1,".s$")
+
+str_view(ex2,"Salmon")
+str_view(ex2,"^Salmon$")
+
+str_view(ex3,"\\d")
+str_view(ex3,"\\s")
+str_view(ex1,"[sl]")
+str_view(ex1,"[^sl]")
+
+str_view(ex1,"a|l")
+str_view_all(ex1,"a|l")
+
+str_view(ex1,"[AEIOU]")
+str_view(ex1,"[^AEIOU]")
+str_view(ex1,"[aeiou]")
+
+str_view(ex1,"ff?")
+str_view(ex1,"ff+")
+str_view(ex1,"ff*")
+str_view(ex1,"ff{1}")
+
+str_view(ex1,"l")
+str_detect(ex1,"l")
+ex1[str_detect(ex1,"l")]
+str_count(ex1,"l")
+
+str_replace(ex1,"f","-")
+str_replace_all(ex1,"f","-")
+str_replace(ex1,"[a|f]","-")
+str_replace_all(ex1,"[a|f]","-")
+
+str_replace_all(ex1,c("a"="-","f"="*"))
+
+str_split(ex2,"\\s")
+str_split(ex2,"\\s",simplify=TRUE)
+str_split(ex2,"\\s",simplify=TRUE,n=1)
+
+str_view_all(ex2,boundary("word"))
+str_view_all(ex2,boundary("character"))
+str_view_all(ex2,boundary("line"))
+
+
+```
+

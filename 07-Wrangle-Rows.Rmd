@@ -246,7 +246,7 @@ It is intersting that there were no players in the NBA with the first name "Jord
 
 &nbsp;
 
-### Wolves and Moose of Isle Royale {#columns-isle-royale}
+### Wolves and Moose of Isle Royale {#rows-isle-royale}
 In Section \@ref(columns-isle-royale) the `irmw2` data frame was created for use in the graphing course.
 
 ```{r}
