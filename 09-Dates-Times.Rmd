@@ -1,2 +1,351 @@
 # Dates and Times
+One of the most common and most difficult types of data to wrangle is date, time, or date and time data. Dates, for example, can be entered in a variety of formats (with different "standards" for different parts of the world) and there are different numbers of days in months, leap years, and starts of the week. Times have complications related to, for example, different formats (e.g., 12- versue 24-hour clock) and time zones. The most common (rather than all) difficulties with dates and times will be addressed in this module.
 
+The methods in this module depend on functions from `lubridate`, which must be explicitly loaded as it is not part of `tidyverse`.^[Everything done in this module can also be accomplished with functions in base R. However, the functions of `lubridate` and their arguments are generally more consistent.]
+
+```{r}
+library(lubridate)
+```
+
+&nbsp;
+
+## Obtaining Dates Data
+There are two common ways to get date data in R -- as strings or component parts.
+
+### Making Dates from Strings
+Dates are often entered as string or character class data, which can make them fairly easily to deal with. However, dates can be entered in many different formats, some of which can be ambiguous as to what date they represent. For example, July 15th in 2021 could be formatted as "July 15, 2021", "15-Jul-2021", "15-Jul-21", "15-July-2021", or "2021-Jul-15", among other possibilities. Fortunately, `lubridate` has a suite of functions that can easily convert strings to dates as long as all dates are entered in the same format and you know what that format is.
+
+The `lubridate` function names are combinations of `y`, `m`, and `d` in order of the year, month, and day components of the date format. For example, if dates are given as year, month, and day then use `ymd()`. Alternatively, if the dates are given as month, day, and year then use `mdy()`.
+
+Each `lubridate` function is good at deciphering the proper dates regardless of how the components are separated (dashes, slashes, commas, spaces) or whether words or numbers are used for months (as long they consistent!). For example, a data frame is created below that has dates in year-month-day format in the `DSTR` variable which is then converted with `ymd()` to the `DATE` variable. Note how the `DATE` variable is of the "date" data class, which is what is needed for proper graphing and calculation as shown in later sections.
+
+```{r}
+ex1 <- tibble(DSTR=c("2021-7-15","2020-9-21","2019-3-3"),
+              DATE=ymd(DSTR))
+ex1
+```
+
+The following examples are similar except that the date strings are in different formats so different `lubridate` functions are used. Note how the `DATE` variable in each example has the same year-month-day format. Thus, regardless of the original format of the date, the actual "date" class variable will be of the same format.
+
+```{r}
+ex2 <- tibble(DSTR=c("July 15, 2021","September 11, 2020","March 3, 2019"),
+              DATE=mdy(DSTR))
+ex2
+
+ex3 <- tibble(DSTR=c("Jul-15, 2021","Sep-11, 2020","Mar-3, 2019"),
+              DATE=mdy(DSTR))
+ex3
+
+ex4 <- tibble(DSTR=c("7/15/2021","9/11/2020","3/3/2019"),
+              DATE=mdy(DSTR))
+ex4
+
+ex5 <- tibble(DSTR=c("15-Jul 2021","11-Sep 2020","3-Mar 2019"),
+              DATE=dmy(DSTR))
+ex5
+```
+
+&nbsp;
+
+### Making Dates from Components
+It is also common to receive dates as three variables that contain the year, month, and day components of the date, respectively.
+
+```{r}
+ex6 <- tibble(yr=c(2021,2020,2019),
+              mon=c("Jul","Sep","Mar"),
+              d=c(15,11,3))
+ex6
+```
+
+An easy way to deal with the components is to first combine the components into a string with `paste()`.
+
+```{r}
+ex6a <- ex6 %>%
+  mutate(DSTR=paste(mon,d,yr))
+ex6a
+```
+
+A "date" class variable is then created with `mdy()` (in this case because of the order in which the components were pasted).
+
+```{r}
+ex6a %<>% mutate(DATE=mdy(DSTR))
+ex6a
+```
+
+The `paste()` is often used inside of `mdy()` to eliminate the need to create the intermediate `DSTR` variable. This is shown below, along with eliminating the original component variables to make a cleaner data frame to use as an example in the next sections.
+
+```{r}
+ex6a <- ex6 %>%
+  mutate(DATE=mdy(paste(mon,d,yr))) %>%
+  select(DATE)
+ex6a
+```
+
+&nbsp;
+
+## Extracting Date Components
+The `year()`, `month()`, and `day()` functions from `lubridate` extract the year, month, and day (within the month), respectively, from a "date" data class variable. The `month()` function extracts the numeric month by default. The abbreviated name can be extracted by including `label=TRUE` and the full month name can be extracted by also including `abbr=FALSE`.
+
+```{r}
+ex6b <- ex6a %>%
+  mutate(yr=year(DATE),
+         mon=month(DATE),
+         mon1=month(DATE,label=TRUE),
+         mon2=month(DATE,label=TRUE,abbr=FALSE),
+         d=day(DATE))
+ex6b
+```
+
+Note here that the two variables of month names are shown to be of the "ord" class. This means that the natural order of the months is maintained. This is useful for graphing and for making comparisons. For example,
+
+```{r}
+ex6b$mon1 > "Apr"
+```
+
+There are more useful extractor functions in `lubridate`. Day number within the year is returned with `yday()`.^[For example, `yday()` returns a 1 for January 1st.]
+
+```{r}
+yday(ex6a$DATE)
+```
+
+Numeric day of the week is given with `wday()`.^[By default the week day starts on "Sunday."] The abbreviated name of the week is given when `label=TRUE` is included and the full names is given when `abbr=FALSE` is also given.
+
+```{r}
+wday(ex6a$DATE)
+wday(ex6a$DATE,label=TRUE)
+wday(ex6a$DATE,label=TRUE,abbr=FALSE)
+```
+
+Week number within the year is returned with `week()`.^[A week is defined here as a full seven day period and is inclusive of the current seven day period. Thus, the week for 1-Jan will always be 1 and 8-Jan will always be 2.]
+
+```{r}
+week(ex6a$DATE)
+```
+
+Numeric day within a "quarter" is given by `qday()`, whereas the actual "quarter" in which the day falls is given by `quarter()`.
+
+```{r}
+quarter(ex6a$DATE)
+qday(ex6a$DATE)
+```
+
+Whether or not a year is a leap year can be determined with `leap_year()`.
+
+```{r}
+leap_year(2010:2020)
+```
+
+Finally, the current dat eis found with `today()`.
+
+```{r}
+today()
+```
+
+&nbsp;
+
+## Calculations with Dates
+Performing calculations on dates introduces new data classes. The main one that we will use in this course is **interval**. An interval is a special date class that records the start and end date of an interval of time. Intervals are created from two dates with `%--%`. For example, the code below creates one interval from `DATE` to today and another interval from January 1, 2019 to January 1, 2021. Note in the second example that the date strings must be converted to a date format first (using `ymd()` in this case).
+
+```{r}
+ex6c <- ex6a %>%
+  mutate(int2now=DATE %--% today(),
+         int2Jan20=ymd("2019-Jan-1") %--% ymd("2021-Jan-1"))
+ex6c
+```
+
+Here you can see that the two new variables contain start and end dates for the interval on either side of the `--`.
+
+Use `%within%` to determine if a date is within an interval and `int_overlaps()` to determine if two intervals overlap.
+
+```{r}
+ymd("2020-Jan-1") %within% ex6c$int2now
+int_overlaps(ex6c$int2now,ex6c$int2Jan20)
+```
+
+The amount of time within an interval is found with `time_length()` with units of measurement supplied to `unit=`. When `units=` `"months"` or `"years"` then `time_length()` will take into account that not all months and years have the same number of days.^[As long as `time_length()` is given an interval class type.]
+
+```{r}
+ex6d <- ex6a %>%
+  mutate(int2now=ex1$DATE %--% today(),
+         dur2now_days=time_length(int2now,unit="days"),
+         dur2now_yrs=time_length(int2now,unit="years"),
+         dur2now_mons=time_length(int2now,unit="months"))
+select(ex6d,-DATE)  # only so that the new variables can be seen
+```
+
+&nbsp;
+
+## Obtaining Times Data
+
+### Just Times
+```{r}
+exT1 <- tibble(TSTR=c("12:15:01","9:14:56","19:34:01"),
+               TIME=hms(TSTR),
+               TIMES2=hms::as_hms(TSTR))
+exT1
+```
+
+```{r}
+exT1 %>%
+  mutate(hrs=dhours(TIME),
+         mins=dminutes(TIME),
+         secs=dseconds(TIME))
+```
+
+
+
+### Dates and Times
+```{r}
+exT1 <- tibble(DTSTR=c("2021-7-15 12:15:01","2020-9-21 9:14:56","2019-3-3 19:34:01"),
+               DATETIME=ymd_hms(DTSTR,tz="America/Chicago")) %>%
+  select(-DTSTR) %>%
+  mutate(int2now=DATETIME %--% now(),
+         dur2now=time_length(int2now,unit="days"))
+exT1
+
+```
+
+
+&nbsp;
+
+## Examples in Context
+### Sales Transactions
+
+[transact.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/transact.csv)^[Original data from [rsquaredacadamy](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv).]
+
+```{r}
+trans <- read_csv(file.path("data","transact.csv"))
+trans
+```
+
+```{r}
+trans1 <- trans %>%
+  mutate(yr=year(Due),
+         mon=month(Due,label=TRUE),
+         qrtr=quarter(Due),
+         settle_days=as.duration(Invoice %--% Payment)/ddays(1),
+         overdue_days=as.duration(Due %--% Payment)/ddays(1),
+         overdue=overdue_days>0)
+```
+
+```{r}
+trans1 %>%
+  group_by(yr,qrtr) %>%
+  summarize(n=n())
+```
+```{r}
+trans1 %>%
+  group_by(yr,mon) %>%
+  summarize(n=n())
+```
+
+
+## Stream Discharge
+The U.S. Geological Survey (USGS) monitors stream/river discharge at a large number of stations around the United States. These data can be accessed via the [National Water Information System: Web Interface](https://waterdata.usgs.gov/nwis). Here I will examine provisional data available for 2021 (up to 3-Aug, the day I accessed the data). The following steps were taken to produce a **tab**-delimited file from the NWIS site for use below.
+
+* Select "Current Conditions" button.
+* Select Wisconsin on the US map.
+* Carefully select the "Whittlesey Creek" dot on the Wisconsin map.
+* Select only "00060 Discharge" from "Available Parameters", "Tab-separated" from "Output format", and enter "2021-01-01" into "Begin Date". Press "GO" button.
+* Copy URL from the ensuing page into `read_tsv()` below. [*Note that the top of the file has many lines of comments each preceded by a '#', which precipates the use of `comment=` below.*]
+
+```{r wcd_data, cache=TRUE}
+wcd <- read_tsv("https://nwis.waterdata.usgs.gov/usa/nwis/uv/?cb_00045=on&cb_00060=on&format=rdb&site_no=040263205&period=&begin_date=2021-01-01&end_date=2021-08-03",comment="#")
+wcd
+```
+
+There are several issues with the way these data load into R.
+
+1. The first line of the data frame is not data at all; this row is removed with `slice()` below.
+1. The two columns with "cd" in the name can be removed (they just note that the data is provisional)
+1. The `agency_cd`, `site_no`, and `tz_cd` columns are all constants and can thus be removed. Do note that the time zone is "CST".
+1. The discharge data is in the column that ends with "00060" and the precipitation data is in the column that ends with "00045". These names should be changed to be more useful.
+1. The `datetime` variable needs to be converted from a character to datetime class (as described in this module).
+1. The `discharge` and `precip` variables need to be converted from a character to a numeric class (with `as.numeric()` below).
+
+```{r}
+wcd %<>%
+  slice(-1) %>%
+  select(-ends_with("cd"),-site_no) %>%
+  rename(discharge=ends_with("00060"),
+         precip=ends_with("00045")) %>%
+  mutate(datetime=ymd_hm(datetime),
+         discharge=as.numeric(discharge),
+         precip=as.numeric(precip))
+wcd
+```
+
+The discharge data can then be plotted as follows (note the log scale).
+
+```{r echo=FALSE}
+ggplot(data=wcd,mapping=aes(x=datetime,y=discharge)) +
+  geom_line() +
+  scale_y_continuous(name="Discharge (cf/s)",limits=c(15,NA),
+                     breaks=c(15,30,50,100,250),trans="log10",
+                     expand=expansion(mult=c(0,0.05))) +
+  scale_x_datetime(breaks="months",date_labels="%e-%b") +
+  theme_bw() +
+  theme(axis.title.x=element_blank()) +
+  labs(title="Whittlesey Creek, Bayfield County, WI",
+       subtitle="2021 Stream Discharge (through 2-Aug)",
+       caption="source: USGS provisional data")
+```
+
+&nbsp;
+
+The discharge data is recorded every five minutes, thus each observation is highly correlated with nearby observations. One possible way to handle this statistical issue is to summarize the data on a daily basis. Doing this first requires adding a variable that indicates the day of the year for the observation. A month variable will be added as well for an example further below.
+
+Suppose that the researchers want to examine discharge for various periods of time (say weekly and monthly). The data frame then needs to include variables that identify weeks and months.
+
+```{r}
+wcd %<>%
+  mutate(wk=week(datetime),
+         mon=month(datetime,label=TRUE))
+wcd
+```
+
+For example, statistical summaries can then be computed by, for example, month.
+
+```{r}
+wcd_sum_mon <- wcd %>%
+  group_by(mon) %>%
+  summarize(n=n(),
+            mean=mean(discharge),
+            sd=sd(discharge),
+            min=min(discharge),
+            max=max(discharge))
+wcd_sum_mon
+```
+
+From this it is clear that discharge was relatively constant (low SD values) with an average between 17 and 18 cfs in January, February, June, July, and August, but more variable and with greater mean discharge in March, April, and, to a lesser degree, in May.
+
+For fun, it is often interesting to look at the discharge plot around a "flashy" event. The code below finds the "datetime" for the maximum discharge.
+
+```{r}
+wcd$datetime[which.max(wcd$discharge)]
+```
+
+A new data frame that is around this point of maximum discharge can then be created with `filter()`.
+
+```{r}
+wcd1 <- wcd %>%
+  filter(datetime>=ymd_hms("2021-03-09 12:00:00"),
+         datetime<=ymd_hms("2021-03-12 6:00:00"))
+wcd1
+```
+
+Which can then be plotted.
+
+```{r echo=FALSE}
+ggplot(data=wcd1,mapping=aes(x=datetime,y=discharge)) +
+  geom_line() +
+  scale_y_continuous(name="Discharge (cf/s)",
+                     expand=expansion(mult=c(0,0.05)),limits=c(15,NA)) +
+  scale_x_datetime(date_breaks="days",date_labels="%e-%b %H:%M",
+                   date_minor_breaks="hours") +
+  theme_bw() +
+  theme(axis.title.x=element_blank()) +
+  labs(title="Whittlesey Creek, Bayfield County, WI",
+       subtitle="Discharge Around the 10&11-Mar event",
+       caption="source: USGS provisional data")
+```

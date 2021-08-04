@@ -60,5 +60,16 @@ rows-nba
 rows-isle-royale
 groupings
 dates-and-times
+obtaining-dates-data
+making-dates-from-strings
+making-dates-from-components
+extracting-date-components
+calculations-with-dates
+obtaining-times-data
+just-times
+dates-and-times-1
+examples-in-context-1
+sales-transactions
+stream-discharge
 factors
 strings

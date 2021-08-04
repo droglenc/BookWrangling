@@ -63,3 +63,29 @@ str_view_all(ex2,boundary("line"))
 
 ```
 
+```{r}
+el <- readxl::read_excel(file.path("data","EcoLeague.xlsx"))
+el
+
+str_view(el$Institution,"a")
+str_view_all(el$Institution,"a")
+
+str_view(el$Institution,".College.")
+str_view(el$Institution,"College.")
+str_view(el$Institution,".College")
+str_view(el$Institution,".College.|.College|College.")
+
+sum(str_detect(el$Institution,".College.|.College|College."))
+
+str_view(el$Institution,"[col]")
+str_view_all(el$Institution,"[col]")
+
+str_view_all(el$Institution,boundary("word"))
+
+str_extract_all(el$Institution,boundary("word"),simplify=TRUE)
+
+el %>% separate(City_State_ZIP,into=c("City","State_ZIP"),sep=", ") %>%
+  separate(State_ZIP,into=c("State","ZIP"))
+```
+
+
