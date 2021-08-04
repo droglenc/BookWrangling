@@ -11,3 +11,5 @@ forcats
 kableExtra
 ggpp
 ggpmisc
+magrittr
+lubridate
