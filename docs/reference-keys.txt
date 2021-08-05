@@ -65,9 +65,11 @@ making-dates-from-strings
 making-dates-from-components
 extracting-date-components
 calculations-with-dates
-obtaining-times-data
+obtaining-time-data
 just-times
 dates-and-times-1
+extracting-time-components
+calculations-with-date-times
 examples-in-context-1
 sales-transactions
 stream-discharge
