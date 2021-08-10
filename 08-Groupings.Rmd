@@ -1,2 +1,435 @@
 # Groupings
+In some instances data from individual observations need to be summarized by groupings of those observations. For example, you may want to compute the total number of COVID  cases by county (across all months) for the data frame shown below.^[This data frame was introduced in Module \@ref(pivot).]
 
+```{r echo=FALSE}
+covABD <- covABD_L %>%
+  select(-Date) %>%
+  ungroup()
+covABD
+```
+
+How to summarize and wrangle data by groups is introduced in this module.
+
+## Declaring Groupings
+Groups may be declared by including the grouping variable or variables in `group_by()`. For example the code below declares groupings based on levels in `County`.
+
+
+```{r}
+covid_byCO <- covABD %>%
+  group_by(County)
+covid_byCO
+```
+
+Simply using `group_by()` will not produce any immediately noticeable difference in the data frame. For example, the only perceptible difference above is the addition of the "Groups: County[3]" line. Using `group_by()` only adds a grouping declaration to a data frame. How this is useful is demonstrated in the next sections.
+
+There can be multiple levels of groupings. For example, the code below will group `Year` within `County`. Note that the subsequent variables are always nested within groups of previous variables.
+
+```{r}
+covid_byCOYR <- covABD %>%
+  group_by(County,Year)
+covid_byCOYR
+```
+
+&nbsp;
+
+## Summarizing by Groups
+Adding groupings to a data frame becomes most useful when that data frame is submitted to `summarize()` to summarize results by groups. The `summarize()` function takes arguments that are a name for the summary set equal to a function that creates a summary. The summary function can be any function that returns a single numeric result (Table \@ref(tab:SumFunctions)).
+
+&nbsp;
+
+```{r SumFunctions, echo=FALSE}
+tribble(
+  ~Function,~`Summary value returned`,
+  '`n()`','Number of observations^[There are no arguments to `n()`.]',
+  '`sum(!is.na(x))`','Count of non-missing values in `x`',
+  '`sum(x)`','Sum values in `x`',
+  '`mean(x)`','Mean (average) of values in `x`',
+  '`median(x)`','Median of values in `x`',
+  '`sd(x)`','Standard deviation of values in `x`',
+  '`IQR(x)`','Inter-quartile range of values in `x`',
+  '`max(x)`','Maximum value of `x`',
+  '`min(x)`','Minimum value of `x`',
+  '`quantile(x,p)`','100$\\times$`p`% quantile of values in `x`',
+  '`first(x)`','Value of first observation of `x`',
+  '`last(x)`','Value of last observation of `x`',
+  '`n_distinct(x)`','Number of distance (i.e., unique) values of `x`.',
+) %>%
+  knitr::kable(booktabs=TRUE,caption="Common summary functions used in `summarize()`, especially with `group_by()`. Note that `x` generically represents a variable in the data frame and would be replaced with a specific variable name (see examples in main text).") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::row_spec(0,bold=TRUE)%>%
+  kableExtra::column_spec(1,width="2.0in")
+```
+
+&nbsp;
+
+For example, the code below finds the sample size (i.e., number of months) and total number of cases of COVID by county (across all months) using the first "grouped" data frame created in Section \@ref(declaring-groupings).
+
+```{r}
+sum_covid_byCO <- covid_byCO %>%
+  summarize(num_mons=n(),
+            num_cases=sum(Cases))
+sum_covid_byCO
+```
+
+The results from applying `summarize()` to a "grouped" data frame is itself a data frame with the last level of grouping removed. In the example above, there was only one level of grouping (i.e., `County`) so the returned result was simply a data frame with the grouping removed. However, applying the same summaries to the data frame that had groupings by both `County` and `Year` returns a data frame with summaries by year within each county, with the returned data frame retaining the first grouping (i.e., by `County`) but not the last (i.e., by `Year`).
+
+```{r}
+sum_covid_byCOYR <- covid_byCOYR %>%
+  summarize(num_mons=n(),
+            num_cases=sum(Cases))
+sum_covid_byCOYR
+```
+
+Summarizing this summarized but still grouped data frame will then summarize the summarized data across the remaining groupings (i.e., by `County`).^[Note here the use of the summarized but still grouped data frame and that the computation of numbers of months and cases had to be adjusted for the new variables in the summarized data frame.] Note that these results are the same as when the summarization was just by `County` (i.e., compare `sum_covid_byCO` from above to `sum_covid_byCO1` below).
+
+```{r}
+sum_covid_byCO1 <- sum_covid_byCOYR %>%
+  summarize(num_mons=sum(num_mons),
+            num_cases=sum(num_cases))
+sum_covid_byCO1
+```
+
+&nbsp;
+
+Nested levels of groupings can be very powerful, but they should be used carefully. As a general rule, multi-level summarizations on multiple grouping variables only work properly for counts and sums. Multi-level summarizations are unlikely to give the desired results when using other summaries, such as the mean or standard deviation. 
+
+For example, consider this simple data frame called `trouble` with two grouping variables and a single measurement variable.
+
+```{r echo=FALSE}
+trouble <- tribble(
+  ~group1, ~group2, ~value,
+  "A", "z", 10,
+  "A", "z",  9,
+  "A", "y", 10,
+  "A", "y", 12,
+  "A", "y", 13,
+  "A", "y", 14,
+  "A", "y", 55,
+  "B", "z", 10,
+  "B", "z",  9,
+  "B", "y", 11,
+  "B", "y", 55,
+)
+
+trouble
+```
+
+The code below computes the sample size, sum, and mean of `value` for the two groups defined by `group1`.
+
+```{r}
+sum_trouble_1 <- trouble %>%
+  group_by(group1) %>%
+  summarize(n=n(),
+            sum=sum(value),
+            mn=mean(value))
+sum_trouble_1
+```
+
+The code below computes the same summaries for the four groups defined by `group2` nested within `group1`.
+
+```{r}
+sum_trouble_2 <- trouble %>%
+  group_by(group1,group2) %>%
+  summarize(n=n(),
+            sum=sum(value),
+            mn=mean(value))
+sum_trouble_2
+```
+
+This last data frame is still grouped by `group1` so it is possible to use it to get summaries for the two groups defined by `group1`.
+
+```{r}
+sum_trouble_1A <- sum_trouble_2 %>%
+  summarize(n=sum(n),
+            sum=sum(sum),
+            mn=mean(mn))
+sum_trouble_1A
+```
+
+A comparison of `sum_trouble_1` from further above to `sum_trouble_1A` here reveals that both means return identical results for both groups for the count of and sum of the values and the same mean for the "B" group. However the mean is different for the "A" group. The means for the "A" group differ between the two methods of summarization because there were different sample sizes among the groups of `group2` nested within the "A" group of `group1`. In other words, the mean for the "A" group was calculated as the mean of 20.8 and 19.5 without realizing that 20.8 came from five observations in the `y` group and 9.5 came from only two observations in the `z` group.^[In the two-level summarize the mean of the "A" group is calculated as $\frac{20.8+19.5}{1+1}$ rather than $\frac{104+19}{5+2}$.]
+
+&nbsp;
+
+### Handling Missing Values
+Missing values are coded in R with `NA`. For example, this simple data frame called `trouble2` has three missing values in the `value` variable.
+
+```{r echo=FALSE}
+trouble2 <- tribble(
+  ~group1, ~group2, ~value,
+  "A", "z", 10,
+  "A", "z", NA,
+  "A", "y", 10,
+  "A", "y", 12,
+  "A", "y", 13,
+  "A", "y", 14,
+  "A", "y", 55,
+  "B", "z", NA,
+  "B", "z",  9,
+  "B", "y", NA,
+  "B", "y", 55,
+)
+
+trouble2
+```
+
+Most of the summary functions shown in Table \@ref(tab:SumFunctions) will return `NA` if the variable being summarized contains any `NA`s. For example, the code below attempts to count the number of values in `value` and compute the mean and standard deviation of `value` for each group in `group1`.
+
+```{r}
+tmp <- trouble2 %>%
+  group_by(group1) %>%
+  summarize(n=n(),
+            mn=mean(value),
+            sd=sd(value))
+tmp
+```
+
+There are at least two issues here. First, the count variable (`n`) suggests that there were 7 and 4 *valid* observations in the two groups, when in reality there is only 6 and 2. Second, the means and standard deviations could not be properly calculated because of the `NA`s in `value`.
+
+The first issue of counting valid observations is addressed by using the `sum(!is.na(x))` code shown in Table \@ref(tab:SumFunctions). This code is a combination of two functions. The `is.na()` function returns `TRUE` if an element is an `NA` (and `FALSE` otherwise). The exclamation point in front of `is.na()` takes the complement of these values (i.e., `TRUE` becomes `FALSE` and vice versa) such that `!is.na()` returns `TRUE` if the element is **not** an `NA`. When logical values are given to `sum()` the `TRUE`s are converted to `1`s and the `FALSE`s to `0`s. Thus, the `sum()` of these logicals will return the number of `TRUE`s or, in this case, the number of elements that are **not** `NA`; i.e., the number of valid observations.
+
+The second issue of the summary function returning `NA` if an `NA` exists in the variable is addressed by including `na.rm=TRUE` within the summary function. This argument serves to remove the `NA`s from the calculations and will, thus, return the summary of all non-missing elements.
+
+Thus, the following code provides a better summary of the count, mean, and standard deviation of the `value` variable.
+
+```{r}
+tmp <- trouble2 %>%
+  group_by(group1) %>%
+  summarize(n=n(),
+            n_valid=sum(!is.na(value)),
+            mn=mean(value,na.rm=TRUE),
+            sd=sd(value,na.rm=TRUE))
+tmp
+```
+
+&nbsp;
+
+## Wrangling by Group
+Groupings can also be used with other `dplyr` verbs. For example, consider this simple data frame called `grades` that has hypothetical exam scores for students in two sections of a course.
+
+```{r echo=FALSE}
+grades <- tribble(
+  ~last,~section,~grade,
+  "Boshwitz",1,87.2,
+  "Lepal",1,56.9,
+  "Smith",1,74.4,
+  "Felix",1,92.5,
+  "Seidel",1,88.2,
+  "Phelps",2,71.2,
+  "McLaughlin",2,88.4,
+  "Robertson",2,56.5,
+  "Jak",2,78.3,
+  "Abel",2,67.6,
+  "Bonham",2,80.3
+)
+grades
+```
+
+The code below uses `rank()` and `desc()` to create a new variable that is the rank of the student in the course based on their grade. The `desc()` function must be used here to assure that the student with the highest grade is given a rank of 1 (because `rank()` ranks in ascending order by default).
+
+```{r}
+tmp <- grades %>%
+  mutate(rnk=rank(desc(grade))) %>%
+  arrange(rnk)
+tmp
+```
+
+However, suppose that interest is in the rank WITHIN each section. Here `group_by()` can be used prior to `mutate()` so that the methods in `mutate()` are applied separately to each group.
+
+```{r}
+grades %<>%
+  group_by(section) %>%
+  mutate(rnk=rank(desc(grade))) %>%
+  arrange(section,rnk)
+grades
+```
+
+Note that in contrast to `summarize()` that the grouping is not removed from the data frame when `mutate()` is used.
+
+Further suppose that the data frame should be reduced to the three students with the highest grades in EACH section. Here `filter()` can be used to filter the data within each grouping.
+
+```{r}
+top3 <- grades %>%
+  filter(rnk<=3)
+top3
+```
+
+Once again, note that the grouping is not removed from the data frame when using `filter()`. Thus, one could immediately calculate the mean grade for the highest three grades in each section.
+
+```{r}
+top3 %>% summarize(n=n(),
+                   mn=mean(grade))
+```
+
+&nbsp;
+
+The use of `mutate()` with `group_by()` is less common but can be very powerful. As a simple example, suppose that one wanted to find the difference between each observation and the mean of its group. In the example below, the use of `mean()` within `mutate()` will find the mean for each group because of the use of `group_by()`. Because this is within a `mutate()` rather than a `summarize()` it is repeated for each observation in each group.
+
+```{r}
+tmp <- trouble2 %>%
+  group_by(group1) %>%
+  mutate(mn=mean(value,na.rm=TRUE),
+         diff=value-mn)
+tmp
+```
+
+&nbsp;
+
+## Ungrouping
+As a general rule-of-thumb it is best to remove the groupings from your data frame once you know you are done summarizing, filtering, etc. based on groups. There are two main reasons for this. First, as noted above, many `dplyr` verbs work on groupings. Thus, if your data frame maintins groupings after you are done (in your mind) with groupings then you may get unintended results.
+
+As a very simple example, suppose that you want to use `slice()` to retain **ONLY** the first row of a data frame. However, if that data frame has groupings (e.g., after a first level of summarizing) then `slice()` will return rows from each group. For example, suppose that you want only the first row of `sum_trouble_2` created above (note below that it retained a grouping variable).
+
+```{r}
+sum_trouble_2
+
+tmp <- sum_trouble_2 %>%
+  slice(1)
+tmp
+```
+
+As you can see, `slice()` was applied to both groups of `group1` such that the first row of each group was returned, which was not the intended outcome.
+
+As another example, suppose that you wanted to change the names of the groups in `group1` in `sum_trouble_2`.
+
+```{r message=TRUE}
+tmp <- sum_trouble_2 %>%
+  mutate(group1=plyr::mapvalues(group1,from=c("A","B"),to=c("Alex","Bart")))
+tmp
+```
+
+While this ultimately worked the messages shown in the output suggest an issue. Again the `mutate()` is applied by groups and when working with group "A" there is no group "B" which leads to the first message (and the second message comes from the opposite problem when working with group "B").
+
+Both of these issues can be corrected by using `ungroup()` to remove the groupings from the data frame.
+
+```{r}
+tmp <- sum_trouble_2 %>%
+  ungroup() %>%
+  mutate(group1=plyr::mapvalues(group1,from=c("A","B"),to=c("Alex","Bart"))) %>%
+  slice(1)
+tmp
+```
+
+As a general rule-of-thumb, I suggest using `ungroup()` at the end of a piping chain where you know you are done with the groupings. For example, instead of using `ungroup()` as in the previous code, I would have created `sum_trouble_2` as such.
+
+```{r}
+sum_trouble_2 <- trouble %>%
+  group_by(group1,group2) %>%
+  summarize(n=n(),
+            sum=sum(value),
+            mn=mean(value)) %>%
+  ungroup()
+sum_trouble_2
+```
+
+Notice how the tibble does not showing any grouping structure.
+
+&nbsp;
+
+## Examples in Context
+
+
+### Student Data
+In Section \@ref(student-data) a data frame called `schedules2` was constructued that contained a student's ID number with each course they were enrolled along with the course's credits and instructor.
+
+```{r}
+schedules2
+```
+
+Additionally, recall that there was a data frame called `personal` that contained personal information about each student (along with the ID).
+
+```{r}
+personal
+```
+
+In this example, suppose that the registrar wants to creat a database that has the number of courses and the total number of credits taken appended to the personal information for each student. Construction of this database begins by summarizing `schedules2` for each student.
+
+```{r}
+sum_crs <- schedules2 %>%
+  group_by(studentID) %>%
+  summarize(num_courses=n(),
+            num_credits=sum(credits))
+sum_crs
+```
+
+These results can then be `left_join()`ed with `personal` to create the desired database.
+
+```{r}
+personal2 <- personal %>%
+  left_join(sum_crs,by="studentID")
+personal2
+```
+
+&nbsp;
+
+### Resource Sampling Data
+In Section \@ref(resource-data) a data frame called `fishcatch` was created that had the species and number of that species caught in each of five nets. The date and lake where the net was set was also recorded.
+
+```{r}
+fishcatch
+```
+
+Suppose a technician wants to summarize the number of species caught and the total catch (regardless of species) in each net. An examination of the data frame above reveals `NA`s for `species` and `number` for one of the nets that did not catch any fish. Because of this we cannot simply count the number of rows for each `net_num` to get the number of species. Instead this calculation will have to be treated as described for finding the valid number of observations. The total catch in each `net_num` can be found with `sum()` but it must include `na.rm=TRUE` to account for the missing data.
+
+```{r}
+tmp <- fishcatch %>%
+  group_by(net_num) %>%
+  summarize(num_spec=sum(!is.na(species)),
+            ttl_catch=sum(number,na.rm=TRUE))
+tmp
+```
+
+The resulting data frame is missing the specific information (date and lake) for each `net_num`. A trick for including information that is specific (and thus repeated) to the grouping variable is to include those variables as grouping variables prior to the main grouping variable. For example, there is only one `net_num` per `lake` and `date` combination so including `lake` and `date` prior to `net_num` will not alter the results but will retain the `lake` and `date` values. If you use this trick, make sure to `ungroup()` after the summarization so there are no unintended consequences of adding the extra grouping variables.
+
+```{r}
+tmp <- fishcatch %>%
+  group_by(lake,date,net_num) %>%
+  summarize(num_spec=sum(!is.na(species)),
+            ttl_catch=sum(number,na.rm=TRUE)) %>%
+  ungroup() %>%
+  arrange(net_num) %>%
+  relocate(net_num)
+tmp
+```
+
+&nbsp;
+
+### Wolves and Moose of Isle Royale
+In Section \@ref(columns-isle-royale) a data frame called `irmw2` was created that contained the number of wolves and moose, the winter air temperature, and whether or not an ice bridge to the mainland formed for each year from 1959-2012. In that module, an `era` variable was also created that categorized the years into "early", "middle", and "late" time periods.
+
+Suppose that the researchers want to compute summary statistics for the number of moose separated by era, and by era and whether an ice bridge formed. The latter is accomplished below.
+
+```{r}
+tmp <- irmw2 %>%
+  group_by(era,ice_bridges) %>%
+  summarize(n=n(),
+            n_valid=sum(!is.na(moose)),
+            mean=mean(moose,na.rm=TRUE),
+            sd=sd(moose,na.rm=TRUE),
+            min=min(moose,na.rm=TRUE),
+            Q1=quantile(moose,0.25,na.rm=TRUE),
+            median=median(moose,na.rm=TRUE),
+            Q3=quantile(moose,0.75,na.rm=TRUE),
+            max=max(moose,na.rm=TRUE)) %>%
+  ungroup()
+tmp
+```
+
+Here I `ungroup()`ed the data frame because I want to make sure that I am not tempted to summarize the returned data frame that would have still had groupings by `era`. As mentioned in the main text it is inappropriate to compute most summaries on a second level of groupings after summarizing by the first level of groupings.
+
+Thus, the first goal of the researchers is then accomplished below.
+
+```{r}
+tmp <- irmw2 %>%
+  group_by(era) %>%
+  summarize(n=n(),
+            n_valid=sum(!is.na(moose)),
+            mean=mean(moose,na.rm=TRUE),
+            sd=sd(moose,na.rm=TRUE),
+            min=min(moose,na.rm=TRUE),
+            Q1=quantile(moose,0.25,na.rm=TRUE),
+            median=median(moose,na.rm=TRUE),
+            Q3=quantile(moose,0.75,na.rm=TRUE),
+            max=max(moose,na.rm=TRUE)) %>%
+  ungroup()
+tmp
+```

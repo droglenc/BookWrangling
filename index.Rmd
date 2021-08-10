@@ -14,6 +14,7 @@ description: "This book contains the readings for MTH250W at Northland College."
 ---
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 library(kableExtra)
 library(ggpmisc)
 library(magrittr)

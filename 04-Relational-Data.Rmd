@@ -416,8 +416,8 @@ Note here that if we consider `schedules` as the primary data frame of interest 
 The student's personal information can also be added to these results with a `left_join()` but now using the `studentID` key variable.
 
 ```{r}
-schedules2 <- left_join(personal,schedules2,by="studentID")
-schedules2
+schedules2A <- left_join(personal,schedules2,by="studentID")
+schedules2A
 ```
 
 These data frames represents a *one-to-many relationship* because `studentID` in `personal` is connected to many `studentID` records in `schedules2` (one for each course the student is enrolled in).

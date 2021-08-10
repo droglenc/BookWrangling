@@ -330,7 +330,7 @@ covABD_L <- pivot_longer(covABD_W,cols=-County,
 covABD_L
 ```
 
-We will need an actual "date" variable to make a plot of COVID cases over time. The code below does this but uses functions that won't be introduced until Modules XXX and XXX. 
+We will need an actual "date" variable to make a plot of COVID cases over time. The code below does this but uses functions that won't be introduced until Module \@ref(dates-and-times). 
 
 ```{r}
 covABD_L <- covABD_L %>%

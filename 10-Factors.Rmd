@@ -1,0 +1,257 @@
+# Factors
+Factors are a special case of character variables in R. Factors are primarily used for categorical data, especially if summaries of that data are to be displayed in other than alphabetical order. For example, a simple count of the number of observations in each `loc` of the `bears` data frame introduced in Section \@ref(csv-files) shows that the categories of the character variable are displayed alphabetically by default.
+
+```{r}
+bears <- read_csv(file.path("data","Bears.csv"))
+tmp <- bears %>%
+  group_by(loc) %>%
+  summarize(n=n())
+tmp
+```
+
+To display these results in other than alphabetical order will require the use of factors, which will be illustrated in this module.
+
+Factors have a long and, for some, dubious history in R. The `forcats` package was developed to aid working with factors in R. While it is not critical to understanding the methods of this module, the [stringsAsFactors: An unauthorized biography](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/) and [stringsAsFactors = \<sigh\>](http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh) are interesting reads about how unforseen issues can arise when using factors. Many of these issues are addressed when using `forcats`, which is loaded with `tidyverse`.
+
+&nbsp;
+
+## Creating Factors
+A variable is converted to a factor class by including that variable in `factor()`. The code below creates a new data frame where `loc` is now a factor, as indicated by `<fct>` below `loc` when the tibble is printed.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=factor(loc))
+tmp
+```
+
+Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order his is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes "1" is mapped to "Ashland", "2" to "Bayfield", and "3" to "Douglas". This mapping is shown below.
+
+```{r}
+tmp %>% mutate(loc_nums=as.numeric(loc))
+```
+
+Suppose, however, that we prefer that the levels of the `loc` variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to `levels=` within `factor()`.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=factor(loc,levels=c("Douglas","Bayfield","Ashland")))
+tmp
+```
+
+Again, the data are not fundamentally altered, but the codes underlying the factor variables are.^[See that "1" is now mapped to "Douglas", "2" to "Bayfield", and "3" to "Ashland".]
+
+```{r}
+tmp %>% mutate(loc_nums=as.numeric(loc))
+```
+
+When setting the levels of a factor variable make sure that all levels are spelled exactly as they are in the original variable. For example, see the major problem created below when a level is erroneously set (i.e., "bayfield" is not capitalized).
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=factor(loc,levels=c("Douglas","bayfield","Ashland")))
+tmp
+```
+
+Additionally, make sure that you include all possible levels when creating the levels.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=factor(loc,levels=c("Douglas","Ashland")))
+tmp
+```
+
+Given these last two issues it is important to understand what levels exist within a variable. If the variable is a character class (and not yet a factor) then use `unique()` to see the list of levels.
+
+```{r}
+unique(bears$loc)
+```
+
+However, if the variable is a factor class already then use `levels()` to see the list of levels along with their order.
+
+```{r}
+levels(tmp$loc)
+```
+
+&nbsp;
+
+## Changing Factor Order
+Factor levels can be manually reordered using `levels=` as shown in the previous section. However, `forcats` provides functions that provide other methods for reordering levels.
+
+The `fct_reorder()` function can reorder levels based on the value of another variable. This function takes the factor variable name as the first argument and the name of a numeric variable that contains the values for which to reorder the factor levels. Optionally a third argument called `f` can be included that calculates a summary value of the numeric variable when multiple values of the variable exist.^[It defaults to using the median.]
+
+For example, the code below orders the `loc` levels based on the median length of the bears.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_reorder(loc,length.cm))
+levels(tmp$loc)
+
+tmp %>%
+  group_by(loc) %>%
+  summarize(n=n(),
+            mdn=median(length.cm))
+```
+
+Alternatively, the code below orders the `loc` levels by the minimum length of the bears.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_reorder(loc,length.cm,.fun=min))
+levels(tmp$loc)
+
+tmp %>%
+  group_by(loc) %>%
+  summarize(n=n(),
+            min=min(length.cm))
+```
+
+&nbsp;
+
+The `fct_relevel()` function can be used to move levels to the beginning of the order of levels. The first argument must be the name of the factor variable and subsequent arguments are the levels to move to the "beginning of the line." For example, the following code moves "Bayfield" to the beginning of the order.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_relevel(loc,"Bayfield"))
+levels(tmp$loc)
+```
+
+Alternatively, both "Bayfield" and "Douglas" were moved to the beginning below
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_relevel(loc,"Bayfield","Douglas"))
+levels(tmp$loc)
+```
+
+&nbsp;
+
+The `fct_rev()` function simply reverses the order of the levels for the given factor variable.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_rev(loc))
+levels(tmp$loc)
+```
+
+The `fct_rev()` function can be used with `fct_reorder()` to change the order from ascending to descending order. For example, the code below show the factor levels in ascending order of the mininum length.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_reorder(loc,length.cm,.fun=min),
+         loc=fct_rev(loc))
+
+tmp %>%
+  group_by(loc) %>%
+  summarize(n=n(),
+            min=min(length.cm))
+```
+
+&nbsp;
+
+The `fct_infreq()` function is used to order the levels by **de**creasing frequency of their occurrence.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_infreq(loc))
+
+tmp %>%
+  group_by(loc) %>%
+  summarize(n=n())
+```
+
+Of course, using `fct_rev()` with `fct_infreq()` would order the levels ascending frequency of occurrence.
+
+```{r}
+tmp <- bears %>%
+  mutate(loc=fct_rev(fct_infreq(loc)))
+
+tmp %>%
+  group_by(loc) %>%
+  summarize(n=n())
+```
+
+
+
+## Changing Factor Levels
+In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as "Balsam Fir" plots. These data were extracted from [Sanders and Grochowski (2012)](https://irma.nps.gov/DataStore/DownloadFile/454366) and are stored in [APIS_FirPlots.xlsx](https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx). These data are read in and briefly summarized below.
+
+```{r}
+aip <- readxl::read_excel(file.path("data","APIS_FirPlots.xlsx"))
+aip
+```
+```{r}
+aip_sum1 <- aip %>%
+  group_by(species) %>%
+  summarize(n=n(),
+            ttl_density=sum(density),
+            ttl_barea=sum(basal_area))
+aip_sum1
+```
+
+
+
+
+```{r}
+aip %<>%
+  mutate(species2=fct_collapse(species,
+                               "Acer sp."=c("Acer rubrum","Acer saccharum",
+                                            "Acer sp.","Acer spicatum"),
+                               "Betula sp."=c("Betula alleghaniensis",
+                                              "Betula papyrifera",
+                                              "Betula sp."),
+                               "Unknown"=c("unknown tree - hardwood",
+                                           "unknown tree - softwood")),
+         species2=fct_rev(fct_reorder(species2,density,.fun=sum)))
+aip
+```
+
+
+```{r}
+aip_sum2 <- aip %>%
+  group_by(species2) %>%
+  summarize(n=n(),
+            ttl_density=sum(density),
+            ttl_barea=sum(basal_area))
+aip_sum2
+```
+
+```{r}
+aip <- aip %>%
+  mutate(species3=fct_lump(species2,n=4))
+aip
+```
+
+
+```{r}
+aip_sum3 <- aip %>%
+  group_by(species3) %>%
+  summarize(n=n(),
+            ttl_density=sum(density),
+            ttl_barea=sum(basal_area))
+aip_sum3
+```
+
+```{r}
+aip %<>%
+  mutate(species4=fct_recode(species3,
+                             "Maple" = "Acer sp.",
+                             "Birch" = "Betula sp.",
+                             "Balsam Fir" = "Abies balsamea"))
+aip
+```
+
+
+```{r}
+aip_sum4 <- aip %>%
+  group_by(species4) %>%
+  summarize(n=n(),
+            ttl_density=sum(density),
+            ttl_barea=sum(basal_area))
+aip_sum4
+```
+
+
+
+
+## Examples in Context
+
