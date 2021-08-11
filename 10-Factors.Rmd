@@ -24,7 +24,7 @@ tmp <- bears %>%
 tmp
 ```
 
-Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order his is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes "1" is mapped to "Ashland", "2" to "Bayfield", and "3" to "Douglas". This mapping is shown below.
+Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order here is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes "1" is mapped to "Ashland", "2" to "Bayfield", and "3" to "Douglas". This mapping is shown below.
 
 ```{r}
 tmp %>% mutate(loc_nums=as.numeric(loc))
@@ -75,11 +75,11 @@ levels(tmp$loc)
 &nbsp;
 
 ## Changing Factor Order
-Factor levels can be manually reordered using `levels=` as shown in the previous section. However, `forcats` provides functions that provide other methods for reordering levels.
+Factor levels can be manually reordered using `levels=` as shown in the previous section. However functions in `forcats` provide other methods to simplify reordering levels for common situations.
 
-The `fct_reorder()` function can reorder levels based on the value of another variable. This function takes the factor variable name as the first argument and the name of a numeric variable that contains the values for which to reorder the factor levels. Optionally a third argument called `f` can be included that calculates a summary value of the numeric variable when multiple values of the variable exist.^[It defaults to using the median.]
+Levels can be reordered based on the value of another variable with `fct_reorder()`. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called `.fun` can be used to calculate a summary of the numeric variable to use for reordering.^[Note that `.fun` is only useful if multiple observations of the factor variable are present and it defaults to using the median.]
 
-For example, the code below orders the `loc` levels based on the median length of the bears.
+For example, the code below orders the levels in `loc` by the median length of the bears.
 
 ```{r}
 tmp <- bears %>%
@@ -92,7 +92,7 @@ tmp %>%
             mdn=median(length.cm))
 ```
 
-Alternatively, the code below orders the `loc` levels by the minimum length of the bears.
+Alternatively, the code below orders the levels of `loc` by the minimum length of the bears.
 
 ```{r}
 tmp <- bears %>%
@@ -107,7 +107,7 @@ tmp %>%
 
 &nbsp;
 
-The `fct_relevel()` function can be used to move levels to the beginning of the order of levels. The first argument must be the name of the factor variable and subsequent arguments are the levels to move to the "beginning of the line." For example, the following code moves "Bayfield" to the beginning of the order.
+Specific levels are moved to the beginning of the order of levels with `fct_relevel()`. The first argument to this function is the factor variable and subsequent arguments are levels to move to the "beginning of the line." For example, the following code moves "Bayfield" to the beginning of the order.
 
 ```{r}
 tmp <- bears %>%
@@ -115,7 +115,7 @@ tmp <- bears %>%
 levels(tmp$loc)
 ```
 
-Alternatively, both "Bayfield" and "Douglas" were moved to the beginning below
+Alternatively, both "Bayfield" and "Douglas" are moved to the beginning below
 
 ```{r}
 tmp <- bears %>%
@@ -125,7 +125,7 @@ levels(tmp$loc)
 
 &nbsp;
 
-The `fct_rev()` function simply reverses the order of the levels for the given factor variable.
+The order of levels for a factor variable are reversed with `fct_rev()`.
 
 ```{r}
 tmp <- bears %>%
@@ -133,7 +133,7 @@ tmp <- bears %>%
 levels(tmp$loc)
 ```
 
-The `fct_rev()` function can be used with `fct_reorder()` to change the order from ascending to descending order. For example, the code below show the factor levels in ascending order of the mininum length.
+The `fct_rev()` function can be used with `fct_reorder()` to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.
 
 ```{r}
 tmp <- bears %>%
@@ -159,7 +159,7 @@ tmp %>%
   summarize(n=n())
 ```
 
-Of course, using `fct_rev()` with `fct_infreq()` would order the levels ascending frequency of occurrence.
+Of course, using `fct_rev()` with `fct_infreq()` would order the levels in ascending frequency of occurrence.
 
 ```{r}
 tmp <- bears %>%
@@ -173,12 +173,15 @@ tmp %>%
 
 
 ## Changing Factor Levels
-In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as "Balsam Fir" plots. These data were extracted from [Sanders and Grochowski (2012)](https://irma.nps.gov/DataStore/DownloadFile/454366) and are stored in [APIS_FirPlots.xlsx](https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx). These data are read in and briefly summarized below.
+In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as "Balsam Fir" plots. These data were extracted from [Sanders and Grochowski (2012)](https://irma.nps.gov/DataStore/DownloadFile/454366)^[Note that Jessica Grochowski, now Jessica Kirschbaum, is a Northland alum.] and are stored in [APIS_FirPlots.xlsx](https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx).
 
 ```{r}
 aip <- readxl::read_excel(file.path("data","APIS_FirPlots.xlsx"))
 aip
 ```
+
+These data are read in and briefly summarized below.
+
 ```{r}
 aip_sum1 <- aip %>%
   group_by(species) %>%
@@ -188,8 +191,11 @@ aip_sum1 <- aip %>%
 aip_sum1
 ```
 
+The summary above shows several species within a few genera. A research may wish to collapse these species into a one level that represents the genera. For example, one may want to collapse "Acer rubrum", "Acer saccharum", "Acer spicatum", and "Acer sp." into a single level of "Acer sp."
 
+The "collapsing" of multiple levels into one level is accomplished with `fct_collapse()`. The first argument to this function is the factor variable containing the "old" levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.
 
+For example the code below uses `fct_collapse()` to create a new `species2` variable that collapses the multiple "Acer" and "Betula" levels into two levels specific to each genera. The levels of `species2` are then ordered in descending order of the sum of `density` (using `fct_reorder()` and `fct_rev()`).^[Compare the `species` to `species2` columns below to confirm how the "refactoring" worked.]
 
 ```{r}
 aip %<>%
@@ -205,6 +211,7 @@ aip %<>%
 aip
 ```
 
+Total density and total basal area by level of `species2`, where the levels of `species2` are ordered in descending order of the total density is shown below.
 
 ```{r}
 aip_sum2 <- aip %>%
@@ -215,14 +222,12 @@ aip_sum2 <- aip %>%
 aip_sum2
 ```
 
+The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four infrequent species into an "other" category. This type of "lumping" can be accomplished with `fct_lump()` which requires the factor variable as its first argument. While it is option, `n=` is usually used with `fct_lump()` to indicate the top `n` levels to **not** lump into an "other" category. For example, the code below will lump all levels in `species2` after the top four into an "other" category of the new `species3` variable. The summary results illustrate the lumping.
+
 ```{r}
 aip <- aip %>%
   mutate(species3=fct_lump(species2,n=4))
-aip
-```
 
-
-```{r}
 aip_sum3 <- aip %>%
   group_by(species3) %>%
   summarize(n=n(),
@@ -231,17 +236,15 @@ aip_sum3 <- aip %>%
 aip_sum3
 ```
 
+Finally, the names of specific levels can be changed with `fct_recode()`. The first argument to this function is the orginal factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in `fct_recode()` will be retained with their original names. For example, the code below creates a new `species4` variable with new common names for the three "species" levels remaining in `species3`. The results are seen in the summary below.
+
 ```{r}
 aip %<>%
   mutate(species4=fct_recode(species3,
                              "Maple" = "Acer sp.",
                              "Birch" = "Betula sp.",
                              "Balsam Fir" = "Abies balsamea"))
-aip
-```
 
-
-```{r}
 aip_sum4 <- aip %>%
   group_by(species4) %>%
   summarize(n=n(),

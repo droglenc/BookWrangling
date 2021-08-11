@@ -268,7 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   6      150         85 Douglas 
 #R&gt;   7      130.       105 Douglas 
 #R&gt;   8      150        110 Douglas</code></pre>
-<p>Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order his is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes “1” is mapped to “Ashland,” “2” to “Bayfield,” and “3” to “Douglas.” This mapping is shown below.</p>
+<p>Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order here is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes “1” is mapped to “Ashland,” “2” to “Bayfield,” and “3” to “Douglas.” This mapping is shown below.</p>
 <div class="sourceCode" id="cb443"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb443-1"><a href="factors.html#cb443-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">loc_nums=</span><span class="fu">as.numeric</span>(loc))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 4
 #R&gt;     length.cm weight.kg loc      loc_nums
@@ -349,9 +349,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="changing-factor-order" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Changing Factor Order</h2>
-<p>Factor levels can be manually reordered using <code>levels=</code> as shown in the previous section. However, <code>forcats</code> provides functions that provide other methods for reordering levels.</p>
-<p>The <code>fct_reorder()</code> function can reorder levels based on the value of another variable. This function takes the factor variable name as the first argument and the name of a numeric variable that contains the values for which to reorder the factor levels. Optionally a third argument called <code>f</code> can be included that calculates a summary value of the numeric variable when multiple values of the variable exist.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
-<p>For example, the code below orders the <code>loc</code> levels based on the median length of the bears.</p>
+<p>Factor levels can be manually reordered using <code>levels=</code> as shown in the previous section. However functions in <code>forcats</code> provide other methods to simplify reordering levels for common situations.</p>
+<p>Levels can be reordered based on the value of another variable with <code>fct_reorder()</code>. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called <code>.fun</code> can be used to calculate a summary of the numeric variable to use for reordering.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
+<p>For example, the code below orders the levels in <code>loc</code> by the median length of the bears.</p>
 <div class="sourceCode" id="cb457"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb457-1"><a href="factors.html#cb457-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb457-2"><a href="factors.html#cb457-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm))</span>
 <span id="cb457-3"><a href="factors.html#cb457-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
@@ -366,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   1 Bayfield     3   139
 #R&gt;   2 Ashland      2   141
 #R&gt;   3 Douglas      3   150</code></pre>
-<p>Alternatively, the code below orders the <code>loc</code> levels by the minimum length of the bears.</p>
+<p>Alternatively, the code below orders the levels of <code>loc</code> by the minimum length of the bears.</p>
 <div class="sourceCode" id="cb461"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb461-1"><a href="factors.html#cb461-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb461-2"><a href="factors.html#cb461-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm,<span class="at">.fun=</span>min))</span>
 <span id="cb461-3"><a href="factors.html#cb461-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
@@ -382,23 +382,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   2 Douglas      3  130.
 #R&gt;   3 Ashland      2  141</code></pre>
 <p> </p>
-<p>The <code>fct_relevel()</code> function can be used to move levels to the beginning of the order of levels. The first argument must be the name of the factor variable and subsequent arguments are the levels to move to the “beginning of the line.” For example, the following code moves “Bayfield” to the beginning of the order.</p>
+<p>Specific levels are moved to the beginning of the order of levels with <code>fct_relevel()</code>. The first argument to this function is the factor variable and subsequent arguments are levels to move to the “beginning of the line.” For example, the following code moves “Bayfield” to the beginning of the order.</p>
 <div class="sourceCode" id="cb465"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb465-1"><a href="factors.html#cb465-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb465-2"><a href="factors.html#cb465-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_relevel</span>(loc,<span class="st">&quot;Bayfield&quot;</span>))</span>
 <span id="cb465-3"><a href="factors.html#cb465-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Bayfield&quot; &quot;Ashland&quot;  &quot;Douglas&quot;</code></pre>
-<p>Alternatively, both “Bayfield” and “Douglas” were moved to the beginning below</p>
+<p>Alternatively, both “Bayfield” and “Douglas” are moved to the beginning below</p>
 <div class="sourceCode" id="cb467"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb467-1"><a href="factors.html#cb467-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb467-2"><a href="factors.html#cb467-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_relevel</span>(loc,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>))</span>
 <span id="cb467-3"><a href="factors.html#cb467-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Bayfield&quot; &quot;Douglas&quot;  &quot;Ashland&quot;</code></pre>
 <p> </p>
-<p>The <code>fct_rev()</code> function simply reverses the order of the levels for the given factor variable.</p>
+<p>The order of levels for a factor variable are reversed with <code>fct_rev()</code>.</p>
 <div class="sourceCode" id="cb469"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb469-1"><a href="factors.html#cb469-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb469-2"><a href="factors.html#cb469-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_rev</span>(loc))</span>
 <span id="cb469-3"><a href="factors.html#cb469-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Douglas&quot;  &quot;Bayfield&quot; &quot;Ashland&quot;</code></pre>
-<p>The <code>fct_rev()</code> function can be used with <code>fct_reorder()</code> to change the order from ascending to descending order. For example, the code below show the factor levels in ascending order of the mininum length.</p>
+<p>The <code>fct_rev()</code> function can be used with <code>fct_reorder()</code> to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.</p>
 <div class="sourceCode" id="cb471"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb471-1"><a href="factors.html#cb471-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb471-2"><a href="factors.html#cb471-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm,<span class="at">.fun=</span>min),</span>
 <span id="cb471-3"><a href="factors.html#cb471-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">loc=</span><span class="fu">fct_rev</span>(loc))</span>
@@ -427,7 +427,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   1 Bayfield     3
 #R&gt;   2 Douglas      3
 #R&gt;   3 Ashland      2</code></pre>
-<p>Of course, using <code>fct_rev()</code> with <code>fct_infreq()</code> would order the levels ascending frequency of occurrence.</p>
+<p>Of course, using <code>fct_rev()</code> with <code>fct_infreq()</code> would order the levels in ascending frequency of occurrence.</p>
 <div class="sourceCode" id="cb475"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb475-1"><a href="factors.html#cb475-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
 <span id="cb475-2"><a href="factors.html#cb475-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_rev</span>(<span class="fu">fct_infreq</span>(loc)))</span>
 <span id="cb475-3"><a href="factors.html#cb475-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -443,7 +443,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="changing-factor-levels" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Changing Factor Levels</h2>
-<p>In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as “Balsam Fir” plots. These data were extracted from <a href="https://irma.nps.gov/DataStore/DownloadFile/454366">Sanders and Grochowski (2012)</a> and are stored in <a href="https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx">APIS_FirPlots.xlsx</a>. These data are read in and briefly summarized below.</p>
+<p>In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as “Balsam Fir” plots. These data were extracted from <a href="https://irma.nps.gov/DataStore/DownloadFile/454366">Sanders and Grochowski (2012)</a><a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> and are stored in <a href="https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx">APIS_FirPlots.xlsx</a>.</p>
 <div class="sourceCode" id="cb477"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb477-1"><a href="factors.html#cb477-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;APIS_FirPlots.xlsx&quot;</span>))</span>
 <span id="cb477-2"><a href="factors.html#cb477-2" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 26 x 4
@@ -460,6 +460,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;    9  1031 Acer sp.                   44.4        0.3
 #R&gt;   10  1031 Betula papyrifera          33.3        1.5
 #R&gt;   # ... with 16 more rows</code></pre>
+<p>These data are read in and briefly summarized below.</p>
 <div class="sourceCode" id="cb479"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb479-1"><a href="factors.html#cb479-1" aria-hidden="true" tabindex="-1"></a>aip_sum1 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
 <span id="cb479-2"><a href="factors.html#cb479-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
 <span id="cb479-3"><a href="factors.html#cb479-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
@@ -483,6 +484,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   12 Thuja occidentalis          1        11.1       0.7
 #R&gt;   13 unknown tree - hardwood     4       111         4.3
 #R&gt;   14 unknown tree - softwood     2       144.        1.2</code></pre>
+<p>The summary above shows several species within a few genera. A research may wish to collapse these species into a one level that represents the genera. For example, one may want to collapse “Acer rubrum,” “Acer saccharum,” “Acer spicatum,” and “Acer sp.” into a single level of “Acer sp.”</p>
+<p>The “collapsing” of multiple levels into one level is accomplished with <code>fct_collapse()</code>. The first argument to this function is the factor variable containing the “old” levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.</p>
+<p>For example the code below uses <code>fct_collapse()</code> to create a new <code>species2</code> variable that collapses the multiple “Acer” and “Betula” levels into two levels specific to each genera. The levels of <code>species2</code> are then ordered in descending order of the sum of <code>density</code> (using <code>fct_reorder()</code> and <code>fct_rev()</code>).<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></p>
 <div class="sourceCode" id="cb481"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb481-1"><a href="factors.html#cb481-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
 <span id="cb481-2"><a href="factors.html#cb481-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species2=</span><span class="fu">fct_collapse</span>(species,</span>
 <span id="cb481-3"><a href="factors.html#cb481-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Acer sp.&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Acer rubrum&quot;</span>,<span class="st">&quot;Acer saccharum&quot;</span>,</span>
@@ -508,6 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;    9  1031 Acer sp.                   44.4        0.3 Acer sp.      
 #R&gt;   10  1031 Betula papyrifera          33.3        1.5 Betula sp.    
 #R&gt;   # ... with 16 more rows</code></pre>
+<p>Total density and total basal area by level of <code>species2</code>, where the levels of <code>species2</code> are ordered in descending order of the total density is shown below.</p>
 <div class="sourceCode" id="cb483"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb483-1"><a href="factors.html#cb483-1" aria-hidden="true" tabindex="-1"></a>aip_sum2 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
 <span id="cb483-2"><a href="factors.html#cb483-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species2) <span class="sc">%&gt;%</span></span>
 <span id="cb483-3"><a href="factors.html#cb483-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
@@ -525,29 +530,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   6 Populus tremuloides     1        22.2       1.5
 #R&gt;   7 Thuja occidentalis      1        11.1       0.7
 #R&gt;   8 Quercus rubra           1        11.1       0</code></pre>
+<p>The result above indicate that four of the “species” dominated the results. It may be useful (especially if graphing these results) to “lump” the four infrequent species into an “other” category. This type of “lumping” can be accomplished with <code>fct_lump()</code> which requires the factor variable as its first argument. While it is option, <code>n=</code> is usually used with <code>fct_lump()</code> to indicate the top <code>n</code> levels to <strong>not</strong> lump into an “other” category. For example, the code below will lump all levels in <code>species2</code> after the top four into an “other” category of the new <code>species3</code> variable. The summary results illustrate the lumping.</p>
 <div class="sourceCode" id="cb485"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb485-1"><a href="factors.html#cb485-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
 <span id="cb485-2"><a href="factors.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species3=</span><span class="fu">fct_lump</span>(species2,<span class="at">n=</span><span class="dv">4</span>))</span>
-<span id="cb485-3"><a href="factors.html#cb485-3" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 26 x 6
-#R&gt;       plot species                 density basal_area species2       species3     
-#R&gt;      &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;          &lt;fct&gt;        
-#R&gt;    1  1011 Acer rubrum                11.1        0.4 Acer sp.       Acer sp.     
-#R&gt;    2  1011 Betula alleghaniensis     156.         1.7 Betula sp.     Betula sp.   
-#R&gt;    3  1011 Betula papyrifera          44.4        0.7 Betula sp.     Betula sp.   
-#R&gt;    4  1011 Sorbus decora              22.2        0.2 Sorbus decora  Other        
-#R&gt;    5  1011 unknown tree - hardwood    11.1        0.6 Unknown        Unknown      
-#R&gt;    6  1011 Abies balsamea            878.         2.5 Abies balsamea Abies balsam~
-#R&gt;    7  1011 unknown tree - softwood   122.         1.2 Unknown        Unknown      
-#R&gt;    8  1031 Acer saccharum             55.6        0.1 Acer sp.       Acer sp.     
-#R&gt;    9  1031 Acer sp.                   44.4        0.3 Acer sp.       Acer sp.     
-#R&gt;   10  1031 Betula papyrifera          33.3        1.5 Betula sp.     Betula sp.   
-#R&gt;   # ... with 16 more rows</code></pre>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb487-1"><a href="factors.html#cb487-1" aria-hidden="true" tabindex="-1"></a>aip_sum3 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb487-2"><a href="factors.html#cb487-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species3) <span class="sc">%&gt;%</span></span>
-<span id="cb487-3"><a href="factors.html#cb487-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb487-4"><a href="factors.html#cb487-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
-<span id="cb487-5"><a href="factors.html#cb487-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
-<span id="cb487-6"><a href="factors.html#cb487-6" aria-hidden="true" tabindex="-1"></a>aip_sum3</span></code></pre></div>
+<span id="cb485-3"><a href="factors.html#cb485-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-4"><a href="factors.html#cb485-4" aria-hidden="true" tabindex="-1"></a>aip_sum3 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb485-5"><a href="factors.html#cb485-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species3) <span class="sc">%&gt;%</span></span>
+<span id="cb485-6"><a href="factors.html#cb485-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb485-7"><a href="factors.html#cb485-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
+<span id="cb485-8"><a href="factors.html#cb485-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
+<span id="cb485-9"><a href="factors.html#cb485-9" aria-hidden="true" tabindex="-1"></a>aip_sum3</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 4
 #R&gt;     species3           n ttl_density ttl_barea
 #R&gt;     &lt;fct&gt;          &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -556,32 +548,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   3 Unknown            6       255.        5.5
 #R&gt;   4 Acer sp.           6       144.        0.9
 #R&gt;   5 Other              4        66.6       2.4</code></pre>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb489-1"><a href="factors.html#cb489-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb489-2"><a href="factors.html#cb489-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species4=</span><span class="fu">fct_recode</span>(species3,</span>
-<span id="cb489-3"><a href="factors.html#cb489-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Maple&quot;</span> <span class="ot">=</span> <span class="st">&quot;Acer sp.&quot;</span>,</span>
-<span id="cb489-4"><a href="factors.html#cb489-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Birch&quot;</span> <span class="ot">=</span> <span class="st">&quot;Betula sp.&quot;</span>,</span>
-<span id="cb489-5"><a href="factors.html#cb489-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Balsam Fir&quot;</span> <span class="ot">=</span> <span class="st">&quot;Abies balsamea&quot;</span>))</span>
-<span id="cb489-6"><a href="factors.html#cb489-6" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 26 x 7
-#R&gt;       plot species           density basal_area species2     species3    species4 
-#R&gt;      &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;        &lt;fct&gt;       &lt;fct&gt;    
-#R&gt;    1  1011 Acer rubrum          11.1        0.4 Acer sp.     Acer sp.    Maple    
-#R&gt;    2  1011 Betula alleghani~   156.         1.7 Betula sp.   Betula sp.  Birch    
-#R&gt;    3  1011 Betula papyrifera    44.4        0.7 Betula sp.   Betula sp.  Birch    
-#R&gt;    4  1011 Sorbus decora        22.2        0.2 Sorbus deco~ Other       Other    
-#R&gt;    5  1011 unknown tree - h~    11.1        0.6 Unknown      Unknown     Unknown  
-#R&gt;    6  1011 Abies balsamea      878.         2.5 Abies balsa~ Abies bals~ Balsam F~
-#R&gt;    7  1011 unknown tree - s~   122.         1.2 Unknown      Unknown     Unknown  
-#R&gt;    8  1031 Acer saccharum       55.6        0.1 Acer sp.     Acer sp.    Maple    
-#R&gt;    9  1031 Acer sp.             44.4        0.3 Acer sp.     Acer sp.    Maple    
-#R&gt;   10  1031 Betula papyrifera    33.3        1.5 Betula sp.   Betula sp.  Birch    
-#R&gt;   # ... with 16 more rows</code></pre>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb491-1"><a href="factors.html#cb491-1" aria-hidden="true" tabindex="-1"></a>aip_sum4 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb491-2"><a href="factors.html#cb491-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species4) <span class="sc">%&gt;%</span></span>
-<span id="cb491-3"><a href="factors.html#cb491-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb491-4"><a href="factors.html#cb491-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
-<span id="cb491-5"><a href="factors.html#cb491-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
-<span id="cb491-6"><a href="factors.html#cb491-6" aria-hidden="true" tabindex="-1"></a>aip_sum4</span></code></pre></div>
+<p>Finally, the names of specific levels can be changed with <code>fct_recode()</code>. The first argument to this function is the orginal factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in <code>fct_recode()</code> will be retained with their original names. For example, the code below creates a new <code>species4</code> variable with new common names for the three “species” levels remaining in <code>species3</code>. The results are seen in the summary below.</p>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb487-1"><a href="factors.html#cb487-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb487-2"><a href="factors.html#cb487-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species4=</span><span class="fu">fct_recode</span>(species3,</span>
+<span id="cb487-3"><a href="factors.html#cb487-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Maple&quot;</span> <span class="ot">=</span> <span class="st">&quot;Acer sp.&quot;</span>,</span>
+<span id="cb487-4"><a href="factors.html#cb487-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Birch&quot;</span> <span class="ot">=</span> <span class="st">&quot;Betula sp.&quot;</span>,</span>
+<span id="cb487-5"><a href="factors.html#cb487-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Balsam Fir&quot;</span> <span class="ot">=</span> <span class="st">&quot;Abies balsamea&quot;</span>))</span>
+<span id="cb487-6"><a href="factors.html#cb487-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb487-7"><a href="factors.html#cb487-7" aria-hidden="true" tabindex="-1"></a>aip_sum4 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb487-8"><a href="factors.html#cb487-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species4) <span class="sc">%&gt;%</span></span>
+<span id="cb487-9"><a href="factors.html#cb487-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb487-10"><a href="factors.html#cb487-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
+<span id="cb487-11"><a href="factors.html#cb487-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
+<span id="cb487-12"><a href="factors.html#cb487-12" aria-hidden="true" tabindex="-1"></a>aip_sum4</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 4
 #R&gt;     species4       n ttl_density ttl_barea
 #R&gt;     &lt;fct&gt;      &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -600,7 +579,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <ol start="37">
 <li id="fn37"><p>See that “1” is now mapped to “Douglas,” “2” to “Bayfield,” and “3” to “Ashland.”<a href="factors.html#fnref37" class="footnote-back">↩︎</a></p></li>
-<li id="fn38"><p>It defaults to using the median.<a href="factors.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>Note that <code>.fun</code> is only useful if multiple observations of the factor variable are present and it defaults to using the median.<a href="factors.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn39"><p>Note that Jessica Grochowski, now Jessica Kirschbaum, is a Northland alum.<a href="factors.html#fnref39" class="footnote-back">↩︎</a></p></li>
+<li id="fn40"><p>Compare the <code>species</code> to <code>species2</code> columns below to confirm how the “refactoring” worked.<a href="factors.html#fnref40" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
