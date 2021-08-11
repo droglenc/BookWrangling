@@ -88,4 +88,6 @@ creating-factors
 changing-factor-order
 changing-factor-levels
 examples-in-context-3
+pulse-of-the-nation-survey
+enterococci-on-sydney-beaches
 strings

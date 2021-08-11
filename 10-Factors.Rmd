@@ -257,4 +257,230 @@ aip_sum4
 
 
 ## Examples in Context
+### Pulse of the Nation Survey
+[Cards Against Humanity Saves America](https://www.cardsagainsthumanitysavesamerica.com/) created monthly polls to assess what they called the "Pulse of the Nation." "Cards" partnered with Survey Sampling International — a professional research firm — to contact a nationally representative sample of the American public. For the first three polls, they interrupted people’s dinners on both their cell phones and landlines, and a total of about 3000 adults did not hang up immediately. Results from the first poll are in [201709-CAH_PulseOfTheNation.csv]()^[These data are from [Kaggle](https://www.kaggle.com/cardsagainsthumanity/pulse-of-the-nation)], which are read in below.
 
+```{r}
+PON <- read_csv(file.path("data","201709-CAH_PulseOfTheNation.csv"))
+PON
+```
+
+The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used `names()`, which when given a data frame returns all the variable names of that data frame.
+
+```{r}
+names(PON)
+```
+
+For this analysis I want to focus on the `Political Affiliation`, `Age Range`, and the three variable related to education, opinion about climate change, and opinion about the honesty of scientists. These last three variables have very long names so it will be easier to refer to them by their column **number**. From above, it is noted that the "education" variable is column 7, the climate change variable is in column 15, and the "scientists honesty" question is in column 18. In the code below, I rename each of the columns (and `Age Range`) and then reduce the data frame to just those variables.
+
+```{r}
+PON %<>%
+  rename(polit_aff=`Political Affiliation`,age_range=`Age Range`,
+         education=7,climate=15,scihon=18) %>%
+  select(polit_aff,age_range,education,climate,scihon)
+PON
+```
+
+All remaining variables are categorical and for my analysis purposes I want each to be a factor. Before converting these variables to factors I will examine the levels that appear in each.
+
+```{r}
+unique(PON$polit_aff)
+unique(PON$age_range)
+unique(PON$education)
+unique(PON$climate)
+unique(PON$scihon)
+```
+
+From this examination of levels, I made the following notes:
+
+* Respondents were allowed to answer "Don't Know" or refuse to answer which were coded as "DK/REF". My general preference is to have "DK/REF" answers be the last level.
+* The levels for `age_range` will **not** need to be controlled because the numbers will naturally alphabetically order (as the numbers are all two digits; the order might not be natural if there were some one digit (say "1-17") or three digit (say "100+") numbers).
+* Levels in `education` and `scihon` need to be ordered according to their natural order (i.e., increasing education and increasing level of agreement).
+* I will order the levels for `climate` based on my understanding of what the correct answer is (i.e., I will order the answers from correct to less correct).
+* I will order the levels of `polit_aff` so that "Independent" is in the middle (which will happen alphabetically) and "DK/REF" is last.
+
+Creation of these factors is below. Note that to move "DK/REF" to the end of `polit_aff` I used `fct_relevel()` with `after=Inf` to move the level to the last position.
+
+```{r}
+PON %<>%
+  mutate(polit_aff=factor(polit_aff),
+         polit_aff=fct_relevel(polit_aff,"DK/REF",after=Inf),
+         age_range=factor(age_range),
+         education=factor(education,levels=c("High school","Some college",
+                                             "College degree","Graduate degree",
+                                             "Other","DK/REF")),
+         climate=factor(climate,levels=c("Real and Caused by People",
+                                         "Real but not Caused by People",
+                                         "Not Real At All",
+                                         "DK/REF")),
+         scihon=factor(scihon,levels=c("Strongly Disagree","Somewhat Disagree",
+                                       "Neither Agree nor Disagree",
+                                       "Somewhat Agree","Strongly Agree",
+                                       "DK/REF")))
+```
+
+I then used `levels()` to double-check that each factor has the levels and the order of levels that I expected.
+
+```{r}
+levels(PON$polit_aff)
+levels(PON$age_range)
+levels(PON$education)
+levels(PON$climate)
+levels(PON$scihon)
+```
+
+Suppose the first analysis of interest is examining responses to the "scientists are generally honest and are serving the public good" question.
+
+```{r}
+sci_sum1 <- PON %>%
+  group_by(scihon) %>%
+  summarize(freq=n())
+sci_sum1
+```
+
+Suppose that the analysts want to simplify this result for their audience by ignoring the "Don't know or refused to answer" responses and collapsing all disagree answers to one level and all agree answers to one level.
+
+```{r}
+tmp <- PON %>%
+  filter(scihon!="DK/REF") %>%
+  mutate(scihon=fct_collapse(scihon,
+                             "Disagree"=c("Strongly Disagree","Somewhat Disagree"),
+                             "Agree"=c("Strongly Agree","Somewhat Agree")))
+sci_sum2 <- tmp %>%
+  group_by(scihon) %>%
+  summarize(freq=n())
+sci_sum2
+```
+
+For fun, a graph of this summary is below.
+
+```{r echo=FALSE, fig.width=4.5}
+ggplot(sci_sum2,mapping=aes(x=scihon,y=freq)) +
+  geom_bar(stat="identity",color="black",fill="gray70") +
+  scale_y_continuous(name="Frequency of Responsdents",
+                     expand=expansion(mult=c(0,0.05))) +
+  labs(title='Agreement with "scientists are generally honest\nand are serving the public good"',
+       caption="Data from Cards Against Humanity Saves America") +
+  theme_bw() +
+  theme(axis.title.x=element_blank())
+```
+
+Further suppose that the analysts want to summarize the question about climate change separately by political affiliation (for which an answer was provided).
+
+```{r}
+polclim_sum1 <- PON %>%
+  filter(polit_aff != "DK/REF") %>%
+  group_by(polit_aff,climate) %>%
+  summarize(freq=n()) %>%
+  mutate(perc=freq/sum(freq)*100)
+polclim_sum1
+```
+
+Suppose that the researchers want to compute a percentage of respondents that thought climate change was real, whether they had the cause correct or not. Further suppose that they wish to include the "DK/REF" answers with the "Not Real At All" answers under the assumption that if they though climate change was real they would have responded as such.
+
+```{r}
+tmp <- PON %>%
+  filter(polit_aff != "DK/REF") %>%
+  mutate(climate=fct_collapse(climate,
+                              "Real"=c("Real and Caused by People",
+                                       "Real but not Caused by People"),
+                              "Not Real"=c("Not Real At All",
+                                           "DK/REF")))
+polclim_sum2 <- tmp %>%
+  group_by(polit_aff,climate) %>%
+  summarize(freq=n()) %>%
+  mutate(perc=freq/sum(freq)*100) %>%
+  ungroup()
+polclim_sum2
+```
+
+And a graphic of the results for fun.
+
+```{r echo=FALSE, fig.width=4.5}
+ggplot(polclim_sum2,mapping=aes(x=polit_aff,y=perc,fill=fct_rev(climate))) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(name="Frequency of Responsdents",
+                     expand=expansion(mult=0)) +
+  scale_fill_manual(values=c("Real"="gray30","Not Real"="gray70"),guide="none") +
+  annotate(geom="text",x=1,y=50,label="Real",color="white") +
+  annotate(geom="text",x=3,y=85,label="Not Real") +
+  labs(title='Response about Climate Change being Real',
+       subtitle='by Political Affiliation',
+       caption="Data from Cards Against Humanity Saves America") +
+  theme_bw() +
+  theme(axis.title.x=element_blank())
+```
+
+&nbsp;
+
+### Enterococci on Sydney Beaches
+The Beachwatch Water Quality Program of Sydney, Australia measured the density (in colony forming units per 100 ml of water) of [*Enterococci*](https://en.wikipedia.org/wiki/Enterococcus) on Sydney beaches. The data from 2013 to 2018 was made available by the R-Ladies Sydney group and is in [sydneybeaches.csv](https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv).^[Data from [this online book](https://rladiessydney.org/courses/ryouwithme/01-basicbasics-3/).] The data are loaded below.
+
+```{r}
+sb <- read_csv("https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv")
+sb
+```
+
+For the demonstration here the `BeachId`, `Council`, and `Region` variables are not needed. The density of Enterococci is the last variable but its name is difficult to work with and will be renamed.
+
+```{r}
+sb %<>%
+  select(-BeachId,-Council,-Region) %>%
+  rename(density=last_col())
+sb
+```
+
+In one part of their analysis the researchers wanted to produce a plot of the mean and range of densities of *Enterococci* by beach. To aid understand, however, they wanted the beaches ordered from south to north. The summary statistics below are calculated by `Site` converted to a factor class based on `Latitude`. The latitudes are list with negative numbers (because Australia is in the southern hemisphere) so that more negative numbers are further south.
+
+```{r}
+sb_sum1 <- sb %>%
+  mutate(Site=fct_reorder(Site,Latitude)) %>%
+  group_by(Longitude,Latitude,Site) %>%
+  summarize(n=n(),
+            valid_n=sum(!is.na(density)),
+            mn_density=mean(density,na.rm=TRUE),
+            sd_density=sd(density,na.rm=TRUE),
+            min_density=min(density,na.rm=TRUE),
+            max_density=max(density,na.rm=TRUE)) %>%
+  ungroup()
+sb_sum1
+```
+
+The desired plot is shown below (with the southern-most beach at the bottom of the y-axis).
+
+```{r echo=FALSE, fig.width=5}
+sb_sum1 %<>%
+  mutate(Site=fct_rev(Site))
+sb_plot1 <- ggplot(sb_sum1) +
+  geom_point(mapping=aes(x=mn_density,y=Site)) +
+  geom_segment(mapping=aes(x=min_density,xend=max_density,
+                           y=Site,yend=Site),color="gray60") +
+  scale_x_continuous(name="Density of Enterococci (cfu/100 ml)",
+                     expand=expansion(mult=0.01)) +
+  labs(title="Enterococci Density on Sydney Beaches",
+       subtitle="Mean and range for 2013-2018 shown",
+       caption="Data from R-Ladies Sydney") +
+  theme_bw() +
+  theme(axis.title.y=element_blank())
+sb_plot1
+```
+
+Other researchers would prefer that the beaches are ordered from lowest to highest density of *Enterococci*. The code below creates a summary by `Site`s ordered by the mean `density`. Note the use of `na.rm=TRUE` in `fct_reorder()` because of the missing values at some sites.
+
+```{r}
+sb_sum2 <- sb %>%
+  mutate(Site=fct_reorder(Site,density,.fun=mean,na.rm=TRUE)) %>%
+  group_by(Site,Longitude,Latitude) %>%
+  summarize(n=n(),
+            valid_n=sum(!is.na(density)),
+            mn_density=mean(density,na.rm=TRUE),
+            sd_density=sd(density,na.rm=TRUE),
+            min_density=min(density,na.rm=TRUE),
+            max_density=max(density,na.rm=TRUE)) %>%
+  ungroup()
+sb_sum2
+```
+
+```{r echo=FALSE, fig.width=5}
+sb_plot1 %+% mutate(sb_sum2,Site=fct_rev(Site))
+```

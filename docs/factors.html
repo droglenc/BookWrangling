@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-10" />
+<meta name="date" content="2021-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -572,7 +572,324 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="examples-in-context-3" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> Examples in Context</h2>
+<div id="pulse-of-the-nation-survey" class="section level3" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Pulse of the Nation Survey</h3>
+<p><a href="https://www.cardsagainsthumanitysavesamerica.com/">Cards Against Humanity Saves America</a> created monthly polls to assess what they called the “Pulse of the Nation.” “Cards” partnered with Survey Sampling International — a professional research firm — to contact a nationally representative sample of the American public. For the first three polls, they interrupted people’s dinners on both their cell phones and landlines, and a total of about 3000 adults did not hang up immediately. Results from the first poll are in <a href="">201709-CAH_PulseOfTheNation.csv</a><a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a>, which are read in below.</p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb489-1"><a href="factors.html#cb489-1" aria-hidden="true" tabindex="-1"></a>PON <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;201709-CAH_PulseOfTheNation.csv&quot;</span>))</span>
+<span id="cb489-2"><a href="factors.html#cb489-2" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 1,000 x 28
+#R&gt;      Income Gender   Age `Age Range` `Political Affili~ `Do you approve or disapp~
+#R&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;chr&gt;                     
+#R&gt;    1   8000 Female    64 55-64       Democrat           Strongly disapprove       
+#R&gt;    2  68000 Female    56 55-64       Democrat           Strongly disapprove       
+#R&gt;    3  46000 Male      63 55-64       Independent        Somewhat Approve          
+#R&gt;    4  51000 Male      48 45-54       Republican         Strongly Approve          
+#R&gt;    5 100000 Female    32 25-34       Democrat           Somewhat Approve          
+#R&gt;    6  54000 Female    64 55-64       Democrat           Strongly disapprove       
+#R&gt;    7  83000 Male      61 55-64       Independent        Somewhat Approve          
+#R&gt;    8 114000 Female    64 55-64       Republican         Somewhat disapprove       
+#R&gt;    9  90000 Female    64 55-64       Republican         Somewhat Approve          
+#R&gt;   10   5000 Female    68 65+         Democrat           Somewhat disapprove       
+#R&gt;   # ... with 990 more rows, and 22 more variables:
+#R&gt;   #   What is your highest level of education? &lt;chr&gt;, Q5OTH1 &lt;chr&gt;,
+#R&gt;   #   What is your race? &lt;chr&gt;, Q6OTH1 &lt;chr&gt;, What is your marital status? &lt;chr&gt;,
+#R&gt;   #   Q7OTH1 &lt;chr&gt;, q8x &lt;chr&gt;,
+#R&gt;   #   What would you say is the likelihood that your current job will be entirely performed by robots or computers within the next decade? &lt;chr&gt;,
+#R&gt;   #   Do you believe that climate change is real and caused by people, real but not caused by people, or not real at all? &lt;chr&gt;,
+#R&gt;   #   How many Transformers movies have you seen? &lt;dbl&gt;, q11x &lt;chr&gt;,
+#R&gt;   #   Do you agree or disagree with the following statement: scientists are generally honest and are serving the public good. &lt;chr&gt;,
+#R&gt;   #   Do you agree or disagree with the following statement: vaccines are safe and protect children from disease. &lt;chr&gt;,
+#R&gt;   #   How many books, if any, have you read in the past year? &lt;dbl&gt;, q14x &lt;chr&gt;,
+#R&gt;   #   Do you believe in ghosts? &lt;chr&gt;,
+#R&gt;   #   What percentage of the federal budget would you estimate is spent on scientific research? &lt;dbl&gt;,
+#R&gt;   #   q16x &lt;chr&gt;,
+#R&gt;   #   Is federal funding of scientific research too high, too low, or about right? &lt;chr&gt;,
+#R&gt;   #   True or false: the earth is always farther away from the sun in the winter than in the summer. &lt;chr&gt;,
+#R&gt;   #   If you had to choose: would you rather be smart and sad, or dumb and happy? &lt;chr&gt;,
+#R&gt;   #   Do you think it is acceptable or unacceptable to urinate in the shower? &lt;chr&gt;</code></pre>
+<p>The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used <code>names()</code>, which when given a data frame returns all the variable names of that data frame.</p>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb491-1"><a href="factors.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(PON)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;    [1] &quot;Income&quot;                                                                                                                              
+#R&gt;    [2] &quot;Gender&quot;                                                                                                                              
+#R&gt;    [3] &quot;Age&quot;                                                                                                                                 
+#R&gt;    [4] &quot;Age Range&quot;                                                                                                                           
+#R&gt;    [5] &quot;Political Affiliation&quot;                                                                                                               
+#R&gt;    [6] &quot;Do you approve or disapprove of how Donald Trump is handling his job as president?&quot;                                                  
+#R&gt;    [7] &quot;What is your highest level of education?&quot;                                                                                            
+#R&gt;    [8] &quot;Q5OTH1&quot;                                                                                                                              
+#R&gt;    [9] &quot;What is your race?&quot;                                                                                                                  
+#R&gt;   [10] &quot;Q6OTH1&quot;                                                                                                                              
+#R&gt;   [11] &quot;What is your marital status?&quot;                                                                                                        
+#R&gt;   [12] &quot;Q7OTH1&quot;                                                                                                                              
+#R&gt;   [13] &quot;q8x&quot;                                                                                                                                 
+#R&gt;   [14] &quot;What would you say is the likelihood that your current job will be entirely performed by robots or computers within the next decade?&quot;
+#R&gt;   [15] &quot;Do you believe that climate change is real and caused by people, real but not caused by people, or not real at all?&quot;                 
+#R&gt;   [16] &quot;How many Transformers movies have you seen?&quot;                                                                                         
+#R&gt;   [17] &quot;q11x&quot;                                                                                                                                
+#R&gt;   [18] &quot;Do you agree or disagree with the following statement: scientists are generally honest and are serving the public good.&quot;             
+#R&gt;   [19] &quot;Do you agree or disagree with the following statement: vaccines are safe and protect children from disease.&quot;                         
+#R&gt;   [20] &quot;How many books, if any, have you read in the past year?&quot;                                                                             
+#R&gt;   [21] &quot;q14x&quot;                                                                                                                                
+#R&gt;   [22] &quot;Do you believe in ghosts?&quot;                                                                                                           
+#R&gt;   [23] &quot;What percentage of the federal budget would you estimate is spent on scientific research?&quot;                                           
+#R&gt;   [24] &quot;q16x&quot;                                                                                                                                
+#R&gt;   [25] &quot;Is federal funding of scientific research too high, too low, or about right?&quot;                                                        
+#R&gt;   [26] &quot;True or false: the earth is always farther away from the sun in the winter than in the summer.&quot;                                      
+#R&gt;   [27] &quot;If you had to choose: would you rather be smart and sad, or dumb and happy?&quot;                                                         
+#R&gt;   [28] &quot;Do you think it is acceptable or unacceptable to urinate in the shower?&quot;</code></pre>
+<p>For this analysis I want to focus on the <code>Political Affiliation</code>, <code>Age Range</code>, and the three variable related to education, opinion about climate change, and opinion about the honesty of scientists. These last three variables have very long names so it will be easier to refer to them by their column <strong>number</strong>. From above, it is noted that the “education” variable is column 7, the climate change variable is in column 15, and the “scientists honesty” question is in column 18. In the code below, I rename each of the columns (and <code>Age Range</code>) and then reduce the data frame to just those variables.</p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb493-1"><a href="factors.html#cb493-1" aria-hidden="true" tabindex="-1"></a>PON <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb493-2"><a href="factors.html#cb493-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">polit_aff=</span><span class="st">`</span><span class="at">Political Affiliation</span><span class="st">`</span>,<span class="at">age_range=</span><span class="st">`</span><span class="at">Age Range</span><span class="st">`</span>,</span>
+<span id="cb493-3"><a href="factors.html#cb493-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">education=</span><span class="dv">7</span>,<span class="at">climate=</span><span class="dv">15</span>,<span class="at">scihon=</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb493-4"><a href="factors.html#cb493-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(polit_aff,age_range,education,climate,scihon)</span>
+<span id="cb493-5"><a href="factors.html#cb493-5" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 1,000 x 5
+#R&gt;      polit_aff   age_range education     climate                   scihon         
+#R&gt;      &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;                     &lt;chr&gt;          
+#R&gt;    1 Democrat    55-64     College degr~ Real and Caused by People Strongly Agree 
+#R&gt;    2 Democrat    55-64     High school   DK/REF                    Somewhat Agree 
+#R&gt;    3 Independent 55-64     Some college  Real but not Caused by P~ Somewhat Agree 
+#R&gt;    4 Republican  45-54     High school   Not Real At All           Somewhat Disag~
+#R&gt;    5 Democrat    25-34     Some college  Real and Caused by People Strongly Agree 
+#R&gt;    6 Democrat    55-64     Some college  Real and Caused by People Strongly Agree 
+#R&gt;    7 Independent 55-64     College degr~ Real but not Caused by P~ Strongly Agree 
+#R&gt;    8 Republican  55-64     College degr~ Real and Caused by People Somewhat Agree 
+#R&gt;    9 Republican  55-64     High school   Real and Caused by People Somewhat Agree 
+#R&gt;   10 Democrat    65+       Some college  Real and Caused by People Somewhat Agree 
+#R&gt;   # ... with 990 more rows</code></pre>
+<p>All remaining variables are categorical and for my analysis purposes I want each to be a factor. Before converting these variables to factors I will examine the levels that appear in each.</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb495-1"><a href="factors.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Democrat&quot;    &quot;Independent&quot; &quot;Republican&quot;  &quot;DK/REF&quot;</code></pre>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb497-1"><a href="factors.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>age_range)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;55-64&quot; &quot;45-54&quot; &quot;25-34&quot; &quot;65+&quot;   &quot;35-44&quot; &quot;18-24&quot;</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb499-1"><a href="factors.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>education)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;College degree&quot;  &quot;High school&quot;     &quot;Some college&quot;    &quot;Graduate degree&quot;
+#R&gt;   [5] &quot;DK/REF&quot;          &quot;Other&quot;</code></pre>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb501-1"><a href="factors.html#cb501-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>climate)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Real and Caused by People&quot;     &quot;DK/REF&quot;                       
+#R&gt;   [3] &quot;Real but not Caused by People&quot; &quot;Not Real At All&quot;</code></pre>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb503-1"><a href="factors.html#cb503-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>scihon)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Strongly Agree&quot;             &quot;Somewhat Agree&quot;            
+#R&gt;   [3] &quot;Somewhat Disagree&quot;          &quot;Strongly Disagree&quot;         
+#R&gt;   [5] &quot;DK/REF&quot;                     &quot;Neither Agree nor Disagree&quot;</code></pre>
+<p>From this examination of levels, I made the following notes:</p>
+<ul>
+<li>Respondents were allowed to answer “Don’t Know” or refuse to answer which were coded as “DK/REF.” My general preference is to have “DK/REF” answers be the last level.</li>
+<li>The levels for <code>age_range</code> will <strong>not</strong> need to be controlled because the numbers will naturally alphabetically order (as the numbers are all two digits; the order might not be natural if there were some one digit (say “1-17”) or three digit (say “100+”) numbers).</li>
+<li>Levels in <code>education</code> and <code>scihon</code> need to be ordered according to their natural order (i.e., increasing education and increasing level of agreement).</li>
+<li>I will order the levels for <code>climate</code> based on my understanding of what the correct answer is (i.e., I will order the answers from correct to less correct).</li>
+<li>I will order the levels of <code>polit_aff</code> so that “Independent” is in the middle (which will happen alphabetically) and “DK/REF” is last.</li>
+</ul>
+<p>Creation of these factors is below. Note that to move “DK/REF” to the end of <code>polit_aff</code> I used <code>fct_relevel()</code> with <code>after=Inf</code> to move the level to the last position.</p>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb505-1"><a href="factors.html#cb505-1" aria-hidden="true" tabindex="-1"></a>PON <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb505-2"><a href="factors.html#cb505-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">polit_aff=</span><span class="fu">factor</span>(polit_aff),</span>
+<span id="cb505-3"><a href="factors.html#cb505-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">polit_aff=</span><span class="fu">fct_relevel</span>(polit_aff,<span class="st">&quot;DK/REF&quot;</span>,<span class="at">after=</span><span class="cn">Inf</span>),</span>
+<span id="cb505-4"><a href="factors.html#cb505-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_range=</span><span class="fu">factor</span>(age_range),</span>
+<span id="cb505-5"><a href="factors.html#cb505-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">education=</span><span class="fu">factor</span>(education,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;High school&quot;</span>,<span class="st">&quot;Some college&quot;</span>,</span>
+<span id="cb505-6"><a href="factors.html#cb505-6" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;College degree&quot;</span>,<span class="st">&quot;Graduate degree&quot;</span>,</span>
+<span id="cb505-7"><a href="factors.html#cb505-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Other&quot;</span>,<span class="st">&quot;DK/REF&quot;</span>)),</span>
+<span id="cb505-8"><a href="factors.html#cb505-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">climate=</span><span class="fu">factor</span>(climate,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Real and Caused by People&quot;</span>,</span>
+<span id="cb505-9"><a href="factors.html#cb505-9" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Real but not Caused by People&quot;</span>,</span>
+<span id="cb505-10"><a href="factors.html#cb505-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Not Real At All&quot;</span>,</span>
+<span id="cb505-11"><a href="factors.html#cb505-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;DK/REF&quot;</span>)),</span>
+<span id="cb505-12"><a href="factors.html#cb505-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">scihon=</span><span class="fu">factor</span>(scihon,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,<span class="st">&quot;Somewhat Disagree&quot;</span>,</span>
+<span id="cb505-13"><a href="factors.html#cb505-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
+<span id="cb505-14"><a href="factors.html#cb505-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Somewhat Agree&quot;</span>,<span class="st">&quot;Strongly Agree&quot;</span>,</span>
+<span id="cb505-15"><a href="factors.html#cb505-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;DK/REF&quot;</span>)))</span></code></pre></div>
+<p>I then used <code>levels()</code> to double-check that each factor has the levels and the order of levels that I expected.</p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb506-1"><a href="factors.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Democrat&quot;    &quot;Independent&quot; &quot;Republican&quot;  &quot;DK/REF&quot;</code></pre>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb508-1"><a href="factors.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>age_range)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;18-24&quot; &quot;25-34&quot; &quot;35-44&quot; &quot;45-54&quot; &quot;55-64&quot; &quot;65+&quot;</code></pre>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb510-1"><a href="factors.html#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>education)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;High school&quot;     &quot;Some college&quot;    &quot;College degree&quot;  &quot;Graduate degree&quot;
+#R&gt;   [5] &quot;Other&quot;           &quot;DK/REF&quot;</code></pre>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb512-1"><a href="factors.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>climate)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Real and Caused by People&quot;     &quot;Real but not Caused by People&quot;
+#R&gt;   [3] &quot;Not Real At All&quot;               &quot;DK/REF&quot;</code></pre>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb514-1"><a href="factors.html#cb514-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>scihon)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Strongly Disagree&quot;          &quot;Somewhat Disagree&quot;         
+#R&gt;   [3] &quot;Neither Agree nor Disagree&quot; &quot;Somewhat Agree&quot;            
+#R&gt;   [5] &quot;Strongly Agree&quot;             &quot;DK/REF&quot;</code></pre>
+<p>Suppose the first analysis of interest is examining responses to the “scientists are generally honest and are serving the public good” question.</p>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb516-1"><a href="factors.html#cb516-1" aria-hidden="true" tabindex="-1"></a>sci_sum1 <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb516-2"><a href="factors.html#cb516-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scihon) <span class="sc">%&gt;%</span></span>
+<span id="cb516-3"><a href="factors.html#cb516-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>())</span>
+<span id="cb516-4"><a href="factors.html#cb516-4" aria-hidden="true" tabindex="-1"></a>sci_sum1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 6 x 2
+#R&gt;     scihon                      freq
+#R&gt;     &lt;fct&gt;                      &lt;int&gt;
+#R&gt;   1 Strongly Disagree            104
+#R&gt;   2 Somewhat Disagree            133
+#R&gt;   3 Neither Agree nor Disagree    19
+#R&gt;   4 Somewhat Agree               335
+#R&gt;   5 Strongly Agree               349
+#R&gt;   6 DK/REF                        60</code></pre>
+<p>Suppose that the analysts want to simplify this result for their audience by ignoring the “Don’t know or refused to answer” responses and collapsing all disagree answers to one level and all agree answers to one level.</p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb518-1"><a href="factors.html#cb518-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb518-2"><a href="factors.html#cb518-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scihon<span class="sc">!=</span><span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb518-3"><a href="factors.html#cb518-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scihon=</span><span class="fu">fct_collapse</span>(scihon,</span>
+<span id="cb518-4"><a href="factors.html#cb518-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Disagree&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,<span class="st">&quot;Somewhat Disagree&quot;</span>),</span>
+<span id="cb518-5"><a href="factors.html#cb518-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Agree&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Agree&quot;</span>,<span class="st">&quot;Somewhat Agree&quot;</span>)))</span>
+<span id="cb518-6"><a href="factors.html#cb518-6" aria-hidden="true" tabindex="-1"></a>sci_sum2 <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
+<span id="cb518-7"><a href="factors.html#cb518-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scihon) <span class="sc">%&gt;%</span></span>
+<span id="cb518-8"><a href="factors.html#cb518-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>())</span>
+<span id="cb518-9"><a href="factors.html#cb518-9" aria-hidden="true" tabindex="-1"></a>sci_sum2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
+#R&gt;     scihon                      freq
+#R&gt;     &lt;fct&gt;                      &lt;int&gt;
+#R&gt;   1 Disagree                     237
+#R&gt;   2 Neither Agree nor Disagree    19
+#R&gt;   3 Agree                        684</code></pre>
+<p>For fun, a graph of this summary is below.</p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-260-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p>Further suppose that the analysts want to summarize the question about climate change separately by political affiliation (for which an answer was provided).</p>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb520-1"><a href="factors.html#cb520-1" aria-hidden="true" tabindex="-1"></a>polclim_sum1 <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb520-2"><a href="factors.html#cb520-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polit_aff <span class="sc">!=</span> <span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-3"><a href="factors.html#cb520-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(polit_aff,climate) <span class="sc">%&gt;%</span></span>
+<span id="cb520-4"><a href="factors.html#cb520-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb520-5"><a href="factors.html#cb520-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc=</span>freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb520-6"><a href="factors.html#cb520-6" aria-hidden="true" tabindex="-1"></a>polclim_sum1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 12 x 4
+#R&gt;   # Groups:   polit_aff [3]
+#R&gt;      polit_aff   climate                        freq  perc
+#R&gt;      &lt;fct&gt;       &lt;fct&gt;                         &lt;int&gt; &lt;dbl&gt;
+#R&gt;    1 Democrat    Real and Caused by People       221 80.7 
+#R&gt;    2 Democrat    Real but not Caused by People    28 10.2 
+#R&gt;    3 Democrat    Not Real At All                  15  5.47
+#R&gt;    4 Democrat    DK/REF                           10  3.65
+#R&gt;    5 Independent Real and Caused by People       234 63.6 
+#R&gt;    6 Independent Real but not Caused by People    69 18.8 
+#R&gt;    7 Independent Not Real At All                  49 13.3 
+#R&gt;    8 Independent DK/REF                           16  4.35
+#R&gt;    9 Republican  Real and Caused by People        71 34.1 
+#R&gt;   10 Republican  Real but not Caused by People    61 29.3 
+#R&gt;   11 Republican  Not Real At All                  61 29.3 
+#R&gt;   12 Republican  DK/REF                           15  7.21</code></pre>
+<p>Suppose that the researchers want to compute a percentage of respondents that thought climate change was real, whether they had the cause correct or not. Further suppose that they wish to include the “DK/REF” answers with the “Not Real At All” answers under the assumption that if they though climate change was real they would have responded as such.</p>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb522-1"><a href="factors.html#cb522-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb522-2"><a href="factors.html#cb522-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polit_aff <span class="sc">!=</span> <span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb522-3"><a href="factors.html#cb522-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">climate=</span><span class="fu">fct_collapse</span>(climate,</span>
+<span id="cb522-4"><a href="factors.html#cb522-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Real&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Real and Caused by People&quot;</span>,</span>
+<span id="cb522-5"><a href="factors.html#cb522-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Real but not Caused by People&quot;</span>),</span>
+<span id="cb522-6"><a href="factors.html#cb522-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Not Real&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Not Real At All&quot;</span>,</span>
+<span id="cb522-7"><a href="factors.html#cb522-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;DK/REF&quot;</span>)))</span>
+<span id="cb522-8"><a href="factors.html#cb522-8" aria-hidden="true" tabindex="-1"></a>polclim_sum2 <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
+<span id="cb522-9"><a href="factors.html#cb522-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(polit_aff,climate) <span class="sc">%&gt;%</span></span>
+<span id="cb522-10"><a href="factors.html#cb522-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb522-11"><a href="factors.html#cb522-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc=</span>freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb522-12"><a href="factors.html#cb522-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb522-13"><a href="factors.html#cb522-13" aria-hidden="true" tabindex="-1"></a>polclim_sum2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 6 x 4
+#R&gt;     polit_aff   climate   freq  perc
+#R&gt;     &lt;fct&gt;       &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
+#R&gt;   1 Democrat    Real       249 90.9 
+#R&gt;   2 Democrat    Not Real    25  9.12
+#R&gt;   3 Independent Real       303 82.3 
+#R&gt;   4 Independent Not Real    65 17.7 
+#R&gt;   5 Republican  Real       132 63.5 
+#R&gt;   6 Republican  Not Real    76 36.5</code></pre>
+<p>And a graphic of the results for fun.</p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-263-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p> </p>
+</div>
+<div id="enterococci-on-sydney-beaches" class="section level3" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> Enterococci on Sydney Beaches</h3>
+<p>The Beachwatch Water Quality Program of Sydney, Australia measured the density (in colony forming units per 100 ml of water) of <a href="https://en.wikipedia.org/wiki/Enterococcus"><em>Enterococci</em></a> on Sydney beaches. The data from 2013 to 2018 was made available by the R-Ladies Sydney group and is in <a href="https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv">sydneybeaches.csv</a>.<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a> The data are loaded below.</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb524-1"><a href="factors.html#cb524-1" aria-hidden="true" tabindex="-1"></a>sb <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv&quot;</span>)</span>
+<span id="cb524-2"><a href="factors.html#cb524-2" aria-hidden="true" tabindex="-1"></a>sb</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3,690 x 8
+#R&gt;      BeachId Region    Council   Site   Longitude Latitude Date  `Enterococci (cf~
+#R&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
+#R&gt;    1      25 Sydney C~ Randwick~ Clove~      151.    -33.9 02/0~                19
+#R&gt;    2      25 Sydney C~ Randwick~ Clove~      151.    -33.9 06/0~                 3
+#R&gt;    3      25 Sydney C~ Randwick~ Clove~      151.    -33.9 12/0~                 2
+#R&gt;    4      25 Sydney C~ Randwick~ Clove~      151.    -33.9 18/0~                13
+#R&gt;    5      25 Sydney C~ Randwick~ Clove~      151.    -33.9 30/0~                 8
+#R&gt;    6      25 Sydney C~ Randwick~ Clove~      151.    -33.9 05/0~                 7
+#R&gt;    7      25 Sydney C~ Randwick~ Clove~      151.    -33.9 11/0~                11
+#R&gt;    8      25 Sydney C~ Randwick~ Clove~      151.    -33.9 23/0~                97
+#R&gt;    9      25 Sydney C~ Randwick~ Clove~      151.    -33.9 07/0~                 3
+#R&gt;   10      25 Sydney C~ Randwick~ Clove~      151.    -33.9 25/0~                 0
+#R&gt;   # ... with 3,680 more rows</code></pre>
+<p>For the demonstration here the <code>BeachId</code>, <code>Council</code>, and <code>Region</code> variables are not needed. The density of Enterococci is the last variable but its name is difficult to work with and will be renamed.</p>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb526-1"><a href="factors.html#cb526-1" aria-hidden="true" tabindex="-1"></a>sb <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb526-2"><a href="factors.html#cb526-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>BeachId,<span class="sc">-</span>Council,<span class="sc">-</span>Region) <span class="sc">%&gt;%</span></span>
+<span id="cb526-3"><a href="factors.html#cb526-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">density=</span><span class="fu">last_col</span>())</span>
+<span id="cb526-4"><a href="factors.html#cb526-4" aria-hidden="true" tabindex="-1"></a>sb</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3,690 x 5
+#R&gt;      Site           Longitude Latitude Date       density
+#R&gt;      &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+#R&gt;    1 Clovelly Beach      151.    -33.9 02/01/2013      19
+#R&gt;    2 Clovelly Beach      151.    -33.9 06/01/2013       3
+#R&gt;    3 Clovelly Beach      151.    -33.9 12/01/2013       2
+#R&gt;    4 Clovelly Beach      151.    -33.9 18/01/2013      13
+#R&gt;    5 Clovelly Beach      151.    -33.9 30/01/2013       8
+#R&gt;    6 Clovelly Beach      151.    -33.9 05/02/2013       7
+#R&gt;    7 Clovelly Beach      151.    -33.9 11/02/2013      11
+#R&gt;    8 Clovelly Beach      151.    -33.9 23/02/2013      97
+#R&gt;    9 Clovelly Beach      151.    -33.9 07/03/2013       3
+#R&gt;   10 Clovelly Beach      151.    -33.9 25/03/2013       0
+#R&gt;   # ... with 3,680 more rows</code></pre>
+<p>In one part of their analysis the researchers wanted to produce a plot of the mean and range of densities of <em>Enterococci</em> by beach. To aid understand, however, they wanted the beaches ordered from south to north. The summary statistics below are calculated by <code>Site</code> converted to a factor class based on <code>Latitude</code>. The latitudes are list with negative numbers (because Australia is in the southern hemisphere) so that more negative numbers are further south.</p>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb528-1"><a href="factors.html#cb528-1" aria-hidden="true" tabindex="-1"></a>sb_sum1 <span class="ot">&lt;-</span> sb <span class="sc">%&gt;%</span></span>
+<span id="cb528-2"><a href="factors.html#cb528-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Site=</span><span class="fu">fct_reorder</span>(Site,Latitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb528-3"><a href="factors.html#cb528-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Longitude,Latitude,Site) <span class="sc">%&gt;%</span></span>
+<span id="cb528-4"><a href="factors.html#cb528-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb528-5"><a href="factors.html#cb528-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">valid_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(density)),</span>
+<span id="cb528-6"><a href="factors.html#cb528-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn_density=</span><span class="fu">mean</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb528-7"><a href="factors.html#cb528-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_density=</span><span class="fu">sd</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb528-8"><a href="factors.html#cb528-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_density=</span><span class="fu">min</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb528-9"><a href="factors.html#cb528-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_density=</span><span class="fu">max</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb528-10"><a href="factors.html#cb528-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb528-11"><a href="factors.html#cb528-11" aria-hidden="true" tabindex="-1"></a>sb_sum1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 11 x 9
+#R&gt;      Longitude Latitude Site           n valid_n mn_density sd_density min_density
+#R&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+#R&gt;    1      151.    -34.0 Little Ba~   338     336       45.6      297.            0
+#R&gt;    2      151.    -34.0 Malabar B~   343     341       68.1      214.            0
+#R&gt;    3      151.    -34.0 South Mar~   338     336       15.7       77.0           0
+#R&gt;    4      151.    -33.9 Maroubra ~   338     335       20.2      123.            0
+#R&gt;    5      151.    -33.9 Coogee Be~   342     339       39.4      109.            0
+#R&gt;    6      151.    -34.0 South Mar~   316     314       63.9      210.            0
+#R&gt;    7      151.    -33.9 Gordons B~   324     322       24.9      120.            0
+#R&gt;    8      151.    -33.9 Clovelly ~   338     334       10.2       26.4           0
+#R&gt;    9      151.    -33.9 Bronte Be~   338     335       31.4      126.            0
+#R&gt;   10      151.    -33.9 Tamarama ~   337     335       35.7      129.            0
+#R&gt;   11      151.    -33.9 Bondi Bea~   338     334       18.8       51.9           0
+#R&gt;   # ... with 1 more variable: max_density &lt;dbl&gt;</code></pre>
+<p>The desired plot is shown below (with the southern-most beach at the bottom of the y-axis).</p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-267-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Other researchers would prefer that the beaches are ordered from lowest to highest density of <em>Enterococci</em>. The code below creates a summary by <code>Site</code>s ordered by the mean <code>density</code>. Note the use of <code>na.rm=TRUE</code> in <code>fct_reorder()</code> because of the missing values at some sites.</p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb530-1"><a href="factors.html#cb530-1" aria-hidden="true" tabindex="-1"></a>sb_sum2 <span class="ot">&lt;-</span> sb <span class="sc">%&gt;%</span></span>
+<span id="cb530-2"><a href="factors.html#cb530-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Site=</span><span class="fu">fct_reorder</span>(Site,density,<span class="at">.fun=</span>mean,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb530-3"><a href="factors.html#cb530-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site,Longitude,Latitude) <span class="sc">%&gt;%</span></span>
+<span id="cb530-4"><a href="factors.html#cb530-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb530-5"><a href="factors.html#cb530-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">valid_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(density)),</span>
+<span id="cb530-6"><a href="factors.html#cb530-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn_density=</span><span class="fu">mean</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb530-7"><a href="factors.html#cb530-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_density=</span><span class="fu">sd</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb530-8"><a href="factors.html#cb530-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_density=</span><span class="fu">min</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb530-9"><a href="factors.html#cb530-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_density=</span><span class="fu">max</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb530-10"><a href="factors.html#cb530-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb530-11"><a href="factors.html#cb530-11" aria-hidden="true" tabindex="-1"></a>sb_sum2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 11 x 9
+#R&gt;      Site       Longitude Latitude     n valid_n mn_density sd_density min_density
+#R&gt;      &lt;fct&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+#R&gt;    1 Clovelly ~      151.    -33.9   338     334       10.2       26.4           0
+#R&gt;    2 South Mar~      151.    -34.0   338     336       15.7       77.0           0
+#R&gt;    3 Bondi Bea~      151.    -33.9   338     334       18.8       51.9           0
+#R&gt;    4 Maroubra ~      151.    -33.9   338     335       20.2      123.            0
+#R&gt;    5 Gordons B~      151.    -33.9   324     322       24.9      120.            0
+#R&gt;    6 Bronte Be~      151.    -33.9   338     335       31.4      126.            0
+#R&gt;    7 Tamarama ~      151.    -33.9   337     335       35.7      129.            0
+#R&gt;    8 Coogee Be~      151.    -33.9   342     339       39.4      109.            0
+#R&gt;    9 Little Ba~      151.    -34.0   338     336       45.6      297.            0
+#R&gt;   10 South Mar~      151.    -34.0   316     314       63.9      210.            0
+#R&gt;   11 Malabar B~      151.    -34.0   343     341       68.1      214.            0
+#R&gt;   # ... with 1 more variable: max_density &lt;dbl&gt;</code></pre>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-269-1.png" width="480" style="display: block; margin: auto;" /></p>
 
+</div>
 </div>
 </div>
 <div class="footnotes">
@@ -582,6 +899,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li id="fn38"><p>Note that <code>.fun</code> is only useful if multiple observations of the factor variable are present and it defaults to using the median.<a href="factors.html#fnref38" class="footnote-back">↩︎</a></p></li>
 <li id="fn39"><p>Note that Jessica Grochowski, now Jessica Kirschbaum, is a Northland alum.<a href="factors.html#fnref39" class="footnote-back">↩︎</a></p></li>
 <li id="fn40"><p>Compare the <code>species</code> to <code>species2</code> columns below to confirm how the “refactoring” worked.<a href="factors.html#fnref40" class="footnote-back">↩︎</a></p></li>
+<li id="fn41"><p>These data are from <a href="https://www.kaggle.com/cardsagainsthumanity/pulse-of-the-nation">Kaggle</a><a href="factors.html#fnref41" class="footnote-back">↩︎</a></p></li>
+<li id="fn42"><p>Data from <a href="https://rladiessydney.org/courses/ryouwithme/01-basicbasics-3/">this online book</a>.<a href="factors.html#fnref42" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

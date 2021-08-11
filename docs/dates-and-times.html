@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-10" />
+<meta name="date" content="2021-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -385,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;    [1] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE</code></pre>
 <p>Finally, the current date is found with <code>today()</code>.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb391-1"><a href="dates-and-times.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;2021-08-10&quot;</code></pre>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;2021-08-11&quot;</code></pre>
 <p> </p>
 </div>
 <div id="calculations-with-dates" class="section level2" number="9.3">
@@ -398,9 +398,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
 #R&gt;     DATE       int2now                        int2Jan20                     
 #R&gt;     &lt;date&gt;     &lt;Interval&gt;                     &lt;Interval&gt;                    
-#R&gt;   1 2021-07-15 2021-07-15 UTC--2021-08-10 UTC 2019-01-01 UTC--2021-01-01 UTC
-#R&gt;   2 2020-09-11 2020-09-11 UTC--2021-08-10 UTC 2019-01-01 UTC--2021-01-01 UTC
-#R&gt;   3 2019-03-03 2019-03-03 UTC--2021-08-10 UTC 2019-01-01 UTC--2021-01-01 UTC</code></pre>
+#R&gt;   1 2021-07-15 2021-07-15 UTC--2021-08-11 UTC 2019-01-01 UTC--2021-01-01 UTC
+#R&gt;   2 2020-09-11 2020-09-11 UTC--2021-08-11 UTC 2019-01-01 UTC--2021-01-01 UTC
+#R&gt;   3 2019-03-03 2019-03-03 UTC--2021-08-11 UTC 2019-01-01 UTC--2021-01-01 UTC</code></pre>
 <p>Here you can see that the two new variables contain start and end dates for the interval on either side of the <code>--</code>.</p>
 <p>Use <code>%within%</code> to determine if a date is within an interval and <code>int_overlaps()</code> to determine if two intervals overlap.</p>
 <div class="sourceCode" id="cb395"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb395-1"><a href="dates-and-times.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">&quot;2020-Jan-1&quot;</span>) <span class="sc">%within%</span> ex6c<span class="sc">$</span>int2now</span></code></pre></div>
@@ -417,9 +417,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 4
 #R&gt;     int2now                        dur2now_days dur2now_yrs dur2now_mons
 #R&gt;     &lt;Interval&gt;                            &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-#R&gt;   1 2021-07-15 UTC--2021-08-10 UTC           26      0.0712        0.839
-#R&gt;   2 2020-09-21 UTC--2021-08-10 UTC          323      0.885        10.6  
-#R&gt;   3 2019-03-03 UTC--2021-08-10 UTC          891      2.44         29.2</code></pre>
+#R&gt;   1 2021-07-15 UTC--2021-08-11 UTC           27      0.0740        0.871
+#R&gt;   2 2020-09-21 UTC--2021-08-11 UTC          324      0.888        10.7  
+#R&gt;   3 2019-03-03 UTC--2021-08-11 UTC          892      2.44         29.3</code></pre>
 <p> </p>
 </div>
 <div id="obtaining-time-data" class="section level2" number="9.4">
@@ -498,9 +498,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 4
 #R&gt;     DATETIME            hrs2now days2now
 #R&gt;     &lt;dttm&gt;                &lt;dbl&gt;    &lt;dbl&gt;
-#R&gt;   1 2021-07-15 12:15:01    633.     26.4
-#R&gt;   2 2020-09-21 09:14:56   7764.    323. 
-#R&gt;   3 2019-03-03 19:34:01  21385.    891. 
+#R&gt;   1 2021-07-15 12:15:01    648.     27.0
+#R&gt;   2 2020-09-21 09:14:56   7779.    324. 
+#R&gt;   3 2019-03-03 19:34:01  21400.    892. 
 #R&gt;   # ... with 1 more variable: int2now &lt;Interval&gt;</code></pre>
 <p> </p>
 <p>A quick return to the data frame from Section <a href="dates-and-times.html#just-times">9.4.1</a>. Suppose that the researcher wants to find the number of minutes between the given time (which was converted to a date-time) and dinner at 6 pm. Note that if you use the trick of adding a dummy date then you must use the same dummy date here.</p>
