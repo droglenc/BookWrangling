@@ -19,7 +19,7 @@ When entering data make sure to follow the three rules of tidy data (see Section
   reference  0.031  0.040  0.029  0.066  0.018  0.042  0.044
 ```
 
-As described in Section \@ref(tidy-data), one "observation" (i.e., row) is a methyl mercury measurement on a mussel AND which group the mussel belongs. The rules for tidy data dictate two columns (one for each of the two variables recorded) and 13 rows (one for each obseration of a mussel). format as follows. Thus, these data would be entered into the spreadsheet as shown below.
+As described in Section \@ref(tidy-data), one "observation" (i.e., row) is a methyl mercury measurement on a mussel AND which group the mussel belongs. The rules for tidy data dictate two columns (one for each of the two variables recorded) and 13 rows (one for each observation of a mussel). format as follows. Thus, these data would be entered into the spreadsheet as shown below.
 
 ```{r echo=FALSE, out.width='25%'}
 knitr::include_graphics("zimgs/StackedData.jpg")
@@ -151,7 +151,7 @@ tmp
 
 &nbsp;
 
-In general, `read_excel()` works best if the data are arranged rectangularly starting in cell "A1." However, `read_excel()` can handle different organizations of data in the worksheet as described [here](https://readxl.tidyverse.org/articles/sheet-geometry.html). Researchers may also use multiple header rows in their Excel worksheet; e.g., variables names in the first row, variable units in the second row. [This](https://readxl.tidyverse.org/articles/articles/multiple-header-rows.html) provides a strategy for reading data arranged in such a way.
+In general, `read_excel()` works best if the data are arranged in a rectangle starting in cell "A1." However, `read_excel()` can handle different organizations of data in the worksheet as described [here](https://readxl.tidyverse.org/articles/sheet-geometry.html). Researchers may also use multiple header rows in their Excel worksheet; e.g., variables names in the first row, variable units in the second row. [This](https://readxl.tidyverse.org/articles/articles/multiple-header-rows.html) provides a strategy for reading data arranged in such a way.
 
 The examples above will serve you well for most files read in this class, with the possible exception of files that contain variables with dates. Handling dates is discussed XXXXXX.
 

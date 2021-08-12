@@ -11,7 +11,7 @@ tmp
 
 To display these results in other than alphabetical order will require the use of factors, which will be illustrated in this module.
 
-Factors have a long and, for some, dubious history in R. The `forcats` package was developed to aid working with factors in R. While it is not critical to understanding the methods of this module, the [stringsAsFactors: An unauthorized biography](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/) and [stringsAsFactors = \<sigh\>](http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh) are interesting reads about how unforseen issues can arise when using factors. Many of these issues are addressed when using `forcats`, which is loaded with `tidyverse`.
+Factors have a long and, for some, dubious history in R. The `forcats` package was developed to aid working with factors in R. While it is not critical to understanding the methods of this module, the [stringsAsFactors: An unauthorized biography](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/) and [stringsAsFactors = \<sigh\>](http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh) are interesting reads about how unforeseen issues can arise when using factors. Many of these issues are addressed when using `forcats`, which is loaded with `tidyverse`.
 
 &nbsp;
 
@@ -222,11 +222,11 @@ aip_sum2 <- aip %>%
 aip_sum2
 ```
 
-The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four infrequent species into an "other" category. This type of "lumping" can be accomplished with `fct_lump()` which requires the factor variable as its first argument. While it is option, `n=` is usually used with `fct_lump()` to indicate the top `n` levels to **not** lump into an "other" category. For example, the code below will lump all levels in `species2` after the top four into an "other" category of the new `species3` variable. The summary results illustrate the lumping.
+The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four infrequent species into an "Other" category. This type of "lumping" can be accomplished with `fct_lump_n()` which requires the factor variable as its first argument and`n=` to indicate the top `n` levels to **not** lump into an "Other" category. For example, the code below will lump all levels in `species2` after the top four into an "Other" category of the new `species3` variable. The summary results illustrate the lumping.
 
 ```{r}
 aip <- aip %>%
-  mutate(species3=fct_lump(species2,n=4))
+  mutate(species3=fct_lump_n(species2,n=4))
 
 aip_sum3 <- aip %>%
   group_by(species3) %>%
@@ -236,7 +236,9 @@ aip_sum3 <- aip %>%
 aip_sum3
 ```
 
-Finally, the names of specific levels can be changed with `fct_recode()`. The first argument to this function is the orginal factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in `fct_recode()` will be retained with their original names. For example, the code below creates a new `species4` variable with new common names for the three "species" levels remaining in `species3`. The results are seen in the summary below.
+Other versions of `fct_lump_XXX()`, such as `fct_lump_prop()` and `fct_lump_min()`, can be used when ordering by frequency rather than be another variable as shown here.
+
+Finally, the names of specific levels can be changed with `fct_recode()`. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in `fct_recode()` will be retained with their original names. For example, the code below creates a new `species4` variable with new common names for the three "species" levels remaining in `species3`. The results are seen in the summary below.
 
 ```{r}
 aip %<>%

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-08-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="dates-and-times.html"/>
 <link rel="next" href="strings.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   2 Bayfield     3
 #R&gt;   3 Douglas      3</code></pre>
 <p>To display these results in other than alphabetical order will require the use of factors, which will be illustrated in this module.</p>
-<p>Factors have a long and, for some, dubious history in R. The <code>forcats</code> package was developed to aid working with factors in R. While it is not critical to understanding the methods of this module, the <a href="http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/">stringsAsFactors: An unauthorized biography</a> and <a href="http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh">stringsAsFactors = &lt;sigh&gt;</a> are interesting reads about how unforseen issues can arise when using factors. Many of these issues are addressed when using <code>forcats</code>, which is loaded with <code>tidyverse</code>.</p>
+<p>Factors have a long and, for some, dubious history in R. The <code>forcats</code> package was developed to aid working with factors in R. While it is not critical to understanding the methods of this module, the <a href="http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/">stringsAsFactors: An unauthorized biography</a> and <a href="http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh">stringsAsFactors = &lt;sigh&gt;</a> are interesting reads about how unforeseen issues can arise when using factors. Many of these issues are addressed when using <code>forcats</code>, which is loaded with <code>tidyverse</code>.</p>
 <p> </p>
 <div id="creating-factors" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> Creating Factors</h2>
@@ -530,9 +530,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   6 Populus tremuloides     1        22.2       1.5
 #R&gt;   7 Thuja occidentalis      1        11.1       0.7
 #R&gt;   8 Quercus rubra           1        11.1       0</code></pre>
-<p>The result above indicate that four of the “species” dominated the results. It may be useful (especially if graphing these results) to “lump” the four infrequent species into an “other” category. This type of “lumping” can be accomplished with <code>fct_lump()</code> which requires the factor variable as its first argument. While it is option, <code>n=</code> is usually used with <code>fct_lump()</code> to indicate the top <code>n</code> levels to <strong>not</strong> lump into an “other” category. For example, the code below will lump all levels in <code>species2</code> after the top four into an “other” category of the new <code>species3</code> variable. The summary results illustrate the lumping.</p>
+<p>The result above indicate that four of the “species” dominated the results. It may be useful (especially if graphing these results) to “lump” the four infrequent species into an “Other” category. This type of “lumping” can be accomplished with <code>fct_lump_n()</code> which requires the factor variable as its first argument and<code>n=</code> to indicate the top <code>n</code> levels to <strong>not</strong> lump into an “Other” category. For example, the code below will lump all levels in <code>species2</code> after the top four into an “Other” category of the new <code>species3</code> variable. The summary results illustrate the lumping.</p>
 <div class="sourceCode" id="cb485"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb485-1"><a href="factors.html#cb485-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb485-2"><a href="factors.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species3=</span><span class="fu">fct_lump</span>(species2,<span class="at">n=</span><span class="dv">4</span>))</span>
+<span id="cb485-2"><a href="factors.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species3=</span><span class="fu">fct_lump_n</span>(species2,<span class="at">n=</span><span class="dv">4</span>))</span>
 <span id="cb485-3"><a href="factors.html#cb485-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb485-4"><a href="factors.html#cb485-4" aria-hidden="true" tabindex="-1"></a>aip_sum3 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
 <span id="cb485-5"><a href="factors.html#cb485-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species3) <span class="sc">%&gt;%</span></span>
@@ -548,7 +548,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   3 Unknown            6       255.        5.5
 #R&gt;   4 Acer sp.           6       144.        0.9
 #R&gt;   5 Other              4        66.6       2.4</code></pre>
-<p>Finally, the names of specific levels can be changed with <code>fct_recode()</code>. The first argument to this function is the orginal factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in <code>fct_recode()</code> will be retained with their original names. For example, the code below creates a new <code>species4</code> variable with new common names for the three “species” levels remaining in <code>species3</code>. The results are seen in the summary below.</p>
+<p>Other versions of <code>fct_lump_XXX()</code>, such as <code>fct_lump_prop()</code> and <code>fct_lump_min()</code>, can be used when ordering by frequency rather than be another variable as shown here.</p>
+<p>Finally, the names of specific levels can be changed with <code>fct_recode()</code>. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in <code>fct_recode()</code> will be retained with their original names. For example, the code below creates a new <code>species4</code> variable with new common names for the three “species” levels remaining in <code>species3</code>. The results are seen in the summary below.</p>
 <div class="sourceCode" id="cb487"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb487-1"><a href="factors.html#cb487-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
 <span id="cb487-2"><a href="factors.html#cb487-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species4=</span><span class="fu">fct_recode</span>(species3,</span>
 <span id="cb487-3"><a href="factors.html#cb487-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Maple&quot;</span> <span class="ot">=</span> <span class="st">&quot;Acer sp.&quot;</span>,</span>
@@ -578,35 +579,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb489"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb489-1"><a href="factors.html#cb489-1" aria-hidden="true" tabindex="-1"></a>PON <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;201709-CAH_PulseOfTheNation.csv&quot;</span>))</span>
 <span id="cb489-2"><a href="factors.html#cb489-2" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 1,000 x 28
-#R&gt;      Income Gender   Age `Age Range` `Political Affili~ `Do you approve or disapp~
-#R&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;chr&gt;                     
-#R&gt;    1   8000 Female    64 55-64       Democrat           Strongly disapprove       
-#R&gt;    2  68000 Female    56 55-64       Democrat           Strongly disapprove       
-#R&gt;    3  46000 Male      63 55-64       Independent        Somewhat Approve          
-#R&gt;    4  51000 Male      48 45-54       Republican         Strongly Approve          
-#R&gt;    5 100000 Female    32 25-34       Democrat           Somewhat Approve          
-#R&gt;    6  54000 Female    64 55-64       Democrat           Strongly disapprove       
-#R&gt;    7  83000 Male      61 55-64       Independent        Somewhat Approve          
-#R&gt;    8 114000 Female    64 55-64       Republican         Somewhat disapprove       
-#R&gt;    9  90000 Female    64 55-64       Republican         Somewhat Approve          
-#R&gt;   10   5000 Female    68 65+         Democrat           Somewhat disapprove       
+#R&gt;      Income Gender   Age `Age Range` `Political Affiliation` `Do you approve or d~
+#R&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;                
+#R&gt;    1   8000 Female    64 55-64       Democrat                Strongly disapprove  
+#R&gt;    2  68000 Female    56 55-64       Democrat                Strongly disapprove  
+#R&gt;    3  46000 Male      63 55-64       Independent             Somewhat Approve     
+#R&gt;    4  51000 Male      48 45-54       Republican              Strongly Approve     
+#R&gt;    5 100000 Female    32 25-34       Democrat                Somewhat Approve     
+#R&gt;    6  54000 Female    64 55-64       Democrat                Strongly disapprove  
+#R&gt;    7  83000 Male      61 55-64       Independent             Somewhat Approve     
+#R&gt;    8 114000 Female    64 55-64       Republican              Somewhat disapprove  
+#R&gt;    9  90000 Female    64 55-64       Republican              Somewhat Approve     
+#R&gt;   10   5000 Female    68 65+         Democrat                Somewhat disapprove  
 #R&gt;   # ... with 990 more rows, and 22 more variables:
 #R&gt;   #   What is your highest level of education? &lt;chr&gt;, Q5OTH1 &lt;chr&gt;,
 #R&gt;   #   What is your race? &lt;chr&gt;, Q6OTH1 &lt;chr&gt;, What is your marital status? &lt;chr&gt;,
 #R&gt;   #   Q7OTH1 &lt;chr&gt;, q8x &lt;chr&gt;,
 #R&gt;   #   What would you say is the likelihood that your current job will be entirely performed by robots or computers within the next decade? &lt;chr&gt;,
 #R&gt;   #   Do you believe that climate change is real and caused by people, real but not caused by people, or not real at all? &lt;chr&gt;,
-#R&gt;   #   How many Transformers movies have you seen? &lt;dbl&gt;, q11x &lt;chr&gt;,
-#R&gt;   #   Do you agree or disagree with the following statement: scientists are generally honest and are serving the public good. &lt;chr&gt;,
-#R&gt;   #   Do you agree or disagree with the following statement: vaccines are safe and protect children from disease. &lt;chr&gt;,
-#R&gt;   #   How many books, if any, have you read in the past year? &lt;dbl&gt;, q14x &lt;chr&gt;,
-#R&gt;   #   Do you believe in ghosts? &lt;chr&gt;,
-#R&gt;   #   What percentage of the federal budget would you estimate is spent on scientific research? &lt;dbl&gt;,
-#R&gt;   #   q16x &lt;chr&gt;,
-#R&gt;   #   Is federal funding of scientific research too high, too low, or about right? &lt;chr&gt;,
-#R&gt;   #   True or false: the earth is always farther away from the sun in the winter than in the summer. &lt;chr&gt;,
-#R&gt;   #   If you had to choose: would you rather be smart and sad, or dumb and happy? &lt;chr&gt;,
-#R&gt;   #   Do you think it is acceptable or unacceptable to urinate in the shower? &lt;chr&gt;</code></pre>
+#R&gt;   #   How many Transformers movies have you seen? &lt;dbl&gt;, q11x &lt;chr&gt;, ...</code></pre>
 <p>The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used <code>names()</code>, which when given a data frame returns all the variable names of that data frame.</p>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb491-1"><a href="factors.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(PON)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;    [1] &quot;Income&quot;                                                                                                                              
@@ -644,18 +635,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb493-4"><a href="factors.html#cb493-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(polit_aff,age_range,education,climate,scihon)</span>
 <span id="cb493-5"><a href="factors.html#cb493-5" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 1,000 x 5
-#R&gt;      polit_aff   age_range education     climate                   scihon         
-#R&gt;      &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;                     &lt;chr&gt;          
-#R&gt;    1 Democrat    55-64     College degr~ Real and Caused by People Strongly Agree 
-#R&gt;    2 Democrat    55-64     High school   DK/REF                    Somewhat Agree 
-#R&gt;    3 Independent 55-64     Some college  Real but not Caused by P~ Somewhat Agree 
-#R&gt;    4 Republican  45-54     High school   Not Real At All           Somewhat Disag~
-#R&gt;    5 Democrat    25-34     Some college  Real and Caused by People Strongly Agree 
-#R&gt;    6 Democrat    55-64     Some college  Real and Caused by People Strongly Agree 
-#R&gt;    7 Independent 55-64     College degr~ Real but not Caused by P~ Strongly Agree 
-#R&gt;    8 Republican  55-64     College degr~ Real and Caused by People Somewhat Agree 
-#R&gt;    9 Republican  55-64     High school   Real and Caused by People Somewhat Agree 
-#R&gt;   10 Democrat    65+       Some college  Real and Caused by People Somewhat Agree 
+#R&gt;      polit_aff   age_range education      climate                       scihon    
+#R&gt;      &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;                         &lt;chr&gt;     
+#R&gt;    1 Democrat    55-64     College degree Real and Caused by People     Strongly ~
+#R&gt;    2 Democrat    55-64     High school    DK/REF                        Somewhat ~
+#R&gt;    3 Independent 55-64     Some college   Real but not Caused by People Somewhat ~
+#R&gt;    4 Republican  45-54     High school    Not Real At All               Somewhat ~
+#R&gt;    5 Democrat    25-34     Some college   Real and Caused by People     Strongly ~
+#R&gt;    6 Democrat    55-64     Some college   Real and Caused by People     Strongly ~
+#R&gt;    7 Independent 55-64     College degree Real but not Caused by People Strongly ~
+#R&gt;    8 Republican  55-64     College degree Real and Caused by People     Somewhat ~
+#R&gt;    9 Republican  55-64     High school    Real and Caused by People     Somewhat ~
+#R&gt;   10 Democrat    65+       Some college   Real and Caused by People     Somewhat ~
 #R&gt;   # ... with 990 more rows</code></pre>
 <p>All remaining variables are categorical and for my analysis purposes I want each to be a factor. Before converting these variables to factors I will examine the levels that appear in each.</p>
 <div class="sourceCode" id="cb495"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb495-1"><a href="factors.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
