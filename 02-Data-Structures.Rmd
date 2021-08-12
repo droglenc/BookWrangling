@@ -71,7 +71,7 @@ fcn
 class(fcn)
 ```
 
-Factors have useful properties that will be discussed in more detail in subsequent modules.
+Factors have useful properties that will be discussed in more detail in Module \@ref(factors).
 
 As stated above, a vector should consist of items of the same class type. For example, this code does not make sense in most instances.
 

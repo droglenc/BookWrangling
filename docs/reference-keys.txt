@@ -53,6 +53,7 @@ columns-examples
 columns-nba
 columns-isle-royale
 wrangle-rows
+selecting-specific-rows
 filtering-rows
 arranging-rows
 appending-rows

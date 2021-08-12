@@ -260,7 +260,7 @@ aip_sum4
 
 ## Examples in Context
 ### Pulse of the Nation Survey
-[Cards Against Humanity Saves America](https://www.cardsagainsthumanitysavesamerica.com/) created monthly polls to assess what they called the "Pulse of the Nation." "Cards" partnered with Survey Sampling International — a professional research firm — to contact a nationally representative sample of the American public. For the first three polls, they interrupted people’s dinners on both their cell phones and landlines, and a total of about 3000 adults did not hang up immediately. Results from the first poll are in [201709-CAH_PulseOfTheNation.csv]()^[These data are from [Kaggle](https://www.kaggle.com/cardsagainsthumanity/pulse-of-the-nation)], which are read in below.
+[Cards Against Humanity Saves America](https://www.cardsagainsthumanitysavesamerica.com/) created monthly polls to assess what they called the "Pulse of the Nation." "Cards" partnered with Survey Sampling International — a professional research firm — to contact a nationally representative sample of the American public. For the first three polls, they interrupted people’s dinners on both their cell phones and landlines, and a total of about 3000 adults did not hang up immediately. Results from the first poll are in [201709-CAH_PulseOfTheNation.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/201709-CAH_PulseOfTheNation.csv)^[These data are from [Kaggle](https://www.kaggle.com/cardsagainsthumanity/pulse-of-the-nation)], which are read in below.
 
 ```{r}
 PON <- read_csv(file.path("data","201709-CAH_PulseOfTheNation.csv"))

@@ -121,7 +121,7 @@ tmp
 
 &nbsp;
 
-The examples above will serve you well for most files read in this class, with the possible exception of files that contain variables with dates. Handling dates is discussed XXXXXX.
+The examples above will serve you well for most files read in this class, with the possible exception of files that contain variables with dates. Handling dates is discussed in Module \@ref(dates-and-times).
 
 ### Excel Files
 Some researchers prefer to save data entered in Excel as an Excel workbook rather than a CSV file. The main argument here is that saving to a CSV often results in two files -- an Excel workbook file and a CSV file. It is generally bad practice to have your data in two files as you may update the Excel file and forget to save it to the CSV file or you may update the CSV file and forget to also update the Excel file. Regardless of the reason, data can generally be read from an Excel file into R.
