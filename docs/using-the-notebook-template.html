@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 4 Using the Notebook Template | Readings for MTH250 - Data Wrangling</title>
+  <meta name="description" content="This book contains the readings for MTH250W at Northland College." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 4 Using the Notebook Template | Readings for MTH250 - Data Wrangling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/BookWrangling/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH250W at Northland College." />
+  <meta name="github-repo" content="droglenc/BookWrangling" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 4 Using the Notebook Template | Readings for MTH250 - Data Wrangling" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH250W at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2021-08-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rstudio-projects.html"/>
+<link rel="next" href="data-structures.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.4.0/str_view.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for Data Wrangling in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="preparation.html"><a href="preparation.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#mac"><i class="fa fa-check"></i><b>1.2</b> Mac</a></li>
+<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.3</b> Optimally Configuring RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="install-tidyverse-and-other-packages.html"><a href="install-tidyverse-and-other-packages.html"><i class="fa fa-check"></i><b>2</b> Install Tidyverse and Other Packages</a></li>
+<li class="chapter" data-level="3" data-path="rstudio-projects.html"><a href="rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> RStudio Projects</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-projects.html"><a href="rstudio-projects.html#creating-a-project"><i class="fa fa-check"></i><b>3.1</b> Creating a Project</a></li>
+<li class="chapter" data-level="3.2" data-path="rstudio-projects.html"><a href="rstudio-projects.html#opening-an-existing-project"><i class="fa fa-check"></i><b>3.2</b> Opening an Existing Project</a></li>
+<li class="chapter" data-level="3.3" data-path="rstudio-projects.html"><a href="rstudio-projects.html#project-benefits"><i class="fa fa-check"></i><b>3.3</b> Project Benefits</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="using-the-notebook-template.html"><a href="using-the-notebook-template.html"><i class="fa fa-check"></i><b>4</b> Using the Notebook Template</a></li>
+<li class="chapter" data-level="5" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>5</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>5.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.2" data-path="data-structures.html"><a href="data-structures.html#data-classes"><i class="fa fa-check"></i><b>5.2</b> Data Classes</a></li>
+<li class="chapter" data-level="5.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>5.3</b> Data Frames</a></li>
+<li class="chapter" data-level="5.4" data-path="data-structures.html"><a href="data-structures.html#tidy-data"><i class="fa fa-check"></i><b>5.4</b> Tidy Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="read-external-data-files.html"><a href="read-external-data-files.html"><i class="fa fa-check"></i><b>6</b> Read External Data Files</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="read-external-data-files.html"><a href="read-external-data-files.html#entering-data"><i class="fa fa-check"></i><b>6.1</b> Entering Data</a></li>
+<li class="chapter" data-level="6.2" data-path="read-external-data-files.html"><a href="read-external-data-files.html#saving-the-external-file"><i class="fa fa-check"></i><b>6.2</b> Saving the External File</a></li>
+<li class="chapter" data-level="6.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-the-external-file"><i class="fa fa-check"></i><b>6.3</b> Reading the External File</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>7</b> Relational Data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>7.1</b> Join Concepts</a></li>
+<li class="chapter" data-level="7.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>7.2</b> Joins in R</a></li>
+<li class="chapter" data-level="7.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>7.3</b> Examples With Context</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="pivot.html"><a href="pivot.html"><i class="fa fa-check"></i><b>8</b> Pivot</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="pivot.html"><a href="pivot.html#data-formats"><i class="fa fa-check"></i><b>8.1</b> Data Formats</a></li>
+<li class="chapter" data-level="8.2" data-path="pivot.html"><a href="pivot.html#pivoting-concepts"><i class="fa fa-check"></i><b>8.2</b> Pivoting Concepts</a></li>
+<li class="chapter" data-level="8.3" data-path="pivot.html"><a href="pivot.html#pivoting-in-r"><i class="fa fa-check"></i><b>8.3</b> Pivoting in R</a></li>
+<li class="chapter" data-level="8.4" data-path="pivot.html"><a href="pivot.html#pivoting-examples"><i class="fa fa-check"></i><b>8.4</b> Examples with Context</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="wrangle-columns.html"><a href="wrangle-columns.html"><i class="fa fa-check"></i><b>9</b> Wrangle Columns</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="wrangle-columns.html"><a href="wrangle-columns.html#dplyr-verbs"><i class="fa fa-check"></i><b>9.1</b> <code>dplyr</code> verbs</a></li>
+<li class="chapter" data-level="9.2" data-path="wrangle-columns.html"><a href="wrangle-columns.html#pipe"><i class="fa fa-check"></i><b>9.2</b> Pipe</a></li>
+<li class="chapter" data-level="9.3" data-path="wrangle-columns.html"><a href="wrangle-columns.html#selecting-variables"><i class="fa fa-check"></i><b>9.3</b> Selecting Variables</a></li>
+<li class="chapter" data-level="9.4" data-path="wrangle-columns.html"><a href="wrangle-columns.html#moving-variables"><i class="fa fa-check"></i><b>9.4</b> Moving Variables</a></li>
+<li class="chapter" data-level="9.5" data-path="wrangle-columns.html"><a href="wrangle-columns.html#renaming-variables"><i class="fa fa-check"></i><b>9.5</b> Renaming Variables</a></li>
+<li class="chapter" data-level="9.6" data-path="wrangle-columns.html"><a href="wrangle-columns.html#adding-variables"><i class="fa fa-check"></i><b>9.6</b> Adding Variables</a></li>
+<li class="chapter" data-level="9.7" data-path="wrangle-columns.html"><a href="wrangle-columns.html#columns-examples"><i class="fa fa-check"></i><b>9.7</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="wrangle-rows.html"><a href="wrangle-rows.html"><i class="fa fa-check"></i><b>10</b> Wrangle Rows</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="wrangle-rows.html"><a href="wrangle-rows.html#selecting-specific-rows"><i class="fa fa-check"></i><b>10.1</b> Selecting Specific Rows</a></li>
+<li class="chapter" data-level="10.2" data-path="wrangle-rows.html"><a href="wrangle-rows.html#filtering-rows"><i class="fa fa-check"></i><b>10.2</b> Filtering Rows</a></li>
+<li class="chapter" data-level="10.3" data-path="wrangle-rows.html"><a href="wrangle-rows.html#arranging-rows"><i class="fa fa-check"></i><b>10.3</b> Arranging Rows</a></li>
+<li class="chapter" data-level="10.4" data-path="wrangle-rows.html"><a href="wrangle-rows.html#appending-rows"><i class="fa fa-check"></i><b>10.4</b> Appending Rows</a></li>
+<li class="chapter" data-level="10.5" data-path="wrangle-rows.html"><a href="wrangle-rows.html#examples-in-context"><i class="fa fa-check"></i><b>10.5</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="groupings.html"><a href="groupings.html"><i class="fa fa-check"></i><b>11</b> Groupings</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="groupings.html"><a href="groupings.html#declaring-groupings"><i class="fa fa-check"></i><b>11.1</b> Declaring Groupings</a></li>
+<li class="chapter" data-level="11.2" data-path="groupings.html"><a href="groupings.html#summarizing-by-groups"><i class="fa fa-check"></i><b>11.2</b> Summarizing by Groups</a></li>
+<li class="chapter" data-level="11.3" data-path="groupings.html"><a href="groupings.html#wrangling-by-group"><i class="fa fa-check"></i><b>11.3</b> Wrangling by Group</a></li>
+<li class="chapter" data-level="11.4" data-path="groupings.html"><a href="groupings.html#ungrouping"><i class="fa fa-check"></i><b>11.4</b> Ungrouping</a></li>
+<li class="chapter" data-level="11.5" data-path="groupings.html"><a href="groupings.html#examples-in-context-1"><i class="fa fa-check"></i><b>11.5</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>12</b> Dates and Times</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="dates-and-times.html"><a href="dates-and-times.html#obtaining-dates-data"><i class="fa fa-check"></i><b>12.1</b> Obtaining Dates Data</a></li>
+<li class="chapter" data-level="12.2" data-path="dates-and-times.html"><a href="dates-and-times.html#extracting-date-components"><i class="fa fa-check"></i><b>12.2</b> Extracting Date Components</a></li>
+<li class="chapter" data-level="12.3" data-path="dates-and-times.html"><a href="dates-and-times.html#calculations-with-dates"><i class="fa fa-check"></i><b>12.3</b> Calculations with Dates</a></li>
+<li class="chapter" data-level="12.4" data-path="dates-and-times.html"><a href="dates-and-times.html#obtaining-time-data"><i class="fa fa-check"></i><b>12.4</b> Obtaining Time Data</a></li>
+<li class="chapter" data-level="12.5" data-path="dates-and-times.html"><a href="dates-and-times.html#extracting-time-components"><i class="fa fa-check"></i><b>12.5</b> Extracting Time Components</a></li>
+<li class="chapter" data-level="12.6" data-path="dates-and-times.html"><a href="dates-and-times.html#calculations-with-date-times"><i class="fa fa-check"></i><b>12.6</b> Calculations with Date-Times</a></li>
+<li class="chapter" data-level="12.7" data-path="dates-and-times.html"><a href="dates-and-times.html#examples-in-context-2"><i class="fa fa-check"></i><b>12.7</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>13</b> Factors</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="factors.html"><a href="factors.html#creating-factors"><i class="fa fa-check"></i><b>13.1</b> Creating Factors</a></li>
+<li class="chapter" data-level="13.2" data-path="factors.html"><a href="factors.html#changing-factor-order"><i class="fa fa-check"></i><b>13.2</b> Changing Factor Order</a></li>
+<li class="chapter" data-level="13.3" data-path="factors.html"><a href="factors.html#changing-factor-levels"><i class="fa fa-check"></i><b>13.3</b> Changing Factor Levels</a></li>
+<li class="chapter" data-level="13.4" data-path="factors.html"><a href="factors.html#examples-in-context-3"><i class="fa fa-check"></i><b>13.4</b> Examples in Context</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>14</b> Strings</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH250 - Data Wrangling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="using-the-notebook-template" class="section level1" number="4">
+<h1><span class="header-section-number">Module 4</span> Using the Notebook Template</h1>
+<p>Notebooks in RStudio are an efficient way to enter R code, show results of R code, write answers to assignment questions, and compile all of that to a document that can be handed in.</p>
+<p>For class assignments, start by downloading <a href="https://raw.githubusercontent.com/droglenc/NCWrangling/main/modules/Setup/TEMPLATE.Rmd">this template</a> (right-click, don’t change the name) to a folder where you plan to store all of your class-related work. Then open the template in RStudio and change the Author in line 3 to your name. Save the template with this change.</p>
+<p>Every time you start an assignment you should open the template file in RStudio and immediately save it (File .. Save As) with a different name (e.g., “Assignment1” … make sure that the name does not have a “dot” in it). Then edit the Title in line 2 to something that represents the assignment (e.g., “Wrangling Columns”). Do not change anything else in the first 23 lines.</p>
+<p><img src="zimgs/Notebook_TopLines.JPG" width="90%" style="display: block; margin: auto;" /></p>
+<p> </p>
+<div id="including-text-in-the-notebook" class="section level3" number="4.0.1">
+<h3><span class="header-section-number">4.0.1</span> Including Text in the Notebook</h3>
+<div id="creating-sections" class="section level4 unnumbered">
+<h4>Creating Sections</h4>
+<p>Most assignments will have several questions, each of which is identified with a section heading. Your answers to the assignments should be shown under section headings with the same name as on the assignment. Section headings are created by preceding the section heading name with a hashtag. The template has one section heading started that looks like this …</p>
+<aside>
+Subsequent section headings can be inserted by preceding text with a hashtag, making sure that there is a blank line prior to section heading line.
+</aside>
+<pre><code># EDIT THIS WITH FIRST SECTION HEADING TEXT</code></pre>
+<p>You should change this text to create the section heading that you want; e.g.,</p>
+<pre><code># Arctic Penguins</code></pre>
+</div>
+<div id="writing-text-for-your-answers" class="section level4 unnumbered">
+<h4>Writing Text for Your Answers</h4>
+<p>Sentences can be included by typing the text at the beginning of any line. A new paragraph is created by pressing return twice so that there is a blank line between paragraphs.</p>
+</div>
+<div id="numbered-lists-for-your-answers" class="section level4 unnumbered">
+<h4>Numbered Lists for Your Answers</h4>
+<p>A numbered list is created by starting a line with “1.” followed by what you want after the number (e.g., your answer). If there are no blank lines between consecutive “1.” items then RStudio will automatically iterate the number when the document is compiled. For example, typing this …</p>
+<aside>
+Note the space after the dot and before the text that will form the list item.
+</aside>
+<p><img src="zimgs/Notebook_OrderedList_1.JPG" width="40%" style="display: block; margin: auto;" /></p>
+<p>… produces this text …</p>
+<p><img src="zimgs/Notebook_OrderedList_Out1.JPG" width="40%" style="display: block; margin: auto;" /></p>
+<p>However, typing this …</p>
+<p><img src="zimgs/Notebook_OrderedList_2.JPG" width="60%" style="display: block; margin: auto;" /></p>
+<p>… produces this text …</p>
+<p><img src="zimgs/Notebook_OrderedList_Out2.JPG" width="60%" style="display: block; margin: auto;" /></p>
+<p> </p>
+</div>
+</div>
+<div id="compile-notebook-to-html-document" class="section level3" number="4.0.2">
+<h3><span class="header-section-number">4.0.2</span> Compile Notebook to HTML Document</h3>
+<p>Once you are comfortable that your R code runs without error and that you have answered all questions for the assignment, then compile your Notebook to an HTML document by pressing the “Knit” button on the console window toolbar.</p>
+<aside>
+Check your document for completeness and neatness before turning in.
+<aside>
+<p>If the document does not produce an HTML document (this make take several seconds) then there may be an error in your R code.</p>
+<p><img src="zimgs/Notebook_Knit.JPG" width="20%" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rstudio-projects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-structures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

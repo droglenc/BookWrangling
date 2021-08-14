@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,7 +142,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="preparation.html"><a href="preparation.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#mac"><i class="fa fa-check"></i><b>1.2</b> Mac</a></li>
+<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.3</b> Optimally Configuring RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.4</b> Install Tidyverse and Other Packages</a></li>
+<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.5</b> RStudio Projects</a></li>
+<li class="chapter" data-level="1.6" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.6</b> Using the Notebook Template</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a></li>
@@ -242,8 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Manipulating <strong>columns</strong> means you are manipulating <strong>variables</strong>.</p>
 </div>
 <p>The descriptive examples below will use the <code>bears</code> data frame from Section <a href="read-external-data-files.html#csv-files">3.3.1</a>.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb164-1"><a href="wrangle-columns.html#cb164-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
-<span id="cb164-2"><a href="wrangle-columns.html#cb164-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb167-1"><a href="wrangle-columns.html#cb167-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
+<span id="cb167-2"><a href="wrangle-columns.html#cb167-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -300,7 +308,7 @@ new_df &lt;- verb3(new_df,...)</code></pre>
 <div id="selecting-variables" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Selecting Variables</h2>
 <p>Recall from Section <a href="data-structures.html#data-frames">2.3</a> that an individual variable (i.e., column) can be selected from a data frame by separating the data frame name and the variable name with a <code>$</code>. For example, the following selects <code>loc</code> from the <code>bears</code> data frame.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="wrangle-columns.html#cb172-1" aria-hidden="true" tabindex="-1"></a>bears<span class="sc">$</span>loc</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb175-1"><a href="wrangle-columns.html#cb175-1" aria-hidden="true" tabindex="-1"></a>bears<span class="sc">$</span>loc</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Bayfield&quot; &quot;Bayfield&quot; &quot;Bayfield&quot; &quot;Ashland&quot;  &quot;Ashland&quot;  &quot;Douglas&quot;  &quot;Douglas&quot; 
 #R&gt;   [8] &quot;Douglas&quot;</code></pre>
 <p>However, in this section, we are more interested in selecting multiple variables, rather than a single variable, from a data frame to form a new data frame.</p>
@@ -430,7 +438,7 @@ Any (or all) of the columns named x or y (exactly)
 <code>all_of(c("x","y"))</code>
 </td>
 <td style="text-align:left;">
-All columns named x or y (exactly)<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+All columns named x or y (exactly)<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>
 </td>
 </tr>
 <tr>
@@ -452,12 +460,12 @@ All columns
 </tbody>
 </table>
 <p> </p>
-<p>Below are examples of selecting variables from <code>bears</code>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Note that each resulting data frame is called <code>tmp</code> (for temporary) because it will not be used further here.</p>
+<p>Below are examples of selecting variables from <code>bears</code>.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> Note that each resulting data frame is called <code>tmp</code> (for temporary) because it will not be used further here.</p>
 <ul>
 <li>Select first two variables.</li>
 </ul>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb174-1"><a href="wrangle-columns.html#cb174-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb174-2"><a href="wrangle-columns.html#cb174-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb177-1"><a href="wrangle-columns.html#cb177-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb177-2"><a href="wrangle-columns.html#cb177-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 2
 #R&gt;     length.cm weight.kg
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt;
@@ -472,8 +480,8 @@ All columns
 <ul>
 <li>Select the <code>loc</code> and <code>length.cm</code> variables.</li>
 </ul>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb176-1"><a href="wrangle-columns.html#cb176-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(loc,length.cm))</span>
-<span id="cb176-2"><a href="wrangle-columns.html#cb176-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb179-1"><a href="wrangle-columns.html#cb179-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(loc,length.cm))</span>
+<span id="cb179-2"><a href="wrangle-columns.html#cb179-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 2
 #R&gt;     loc      length.cm
 #R&gt;     &lt;chr&gt;        &lt;dbl&gt;
@@ -488,8 +496,8 @@ All columns
 <ul>
 <li>Select all variables that contain a “.”</li>
 </ul>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb178-1"><a href="wrangle-columns.html#cb178-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;.&quot;</span>))</span>
-<span id="cb178-2"><a href="wrangle-columns.html#cb178-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="wrangle-columns.html#cb181-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;.&quot;</span>))</span>
+<span id="cb181-2"><a href="wrangle-columns.html#cb181-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 2
 #R&gt;     length.cm weight.kg
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt;
@@ -504,8 +512,8 @@ All columns
 <ul>
 <li>Select all variables that start with an “l.”</li>
 </ul>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="wrangle-columns.html#cb180-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;l&quot;</span>))</span>
-<span id="cb180-2"><a href="wrangle-columns.html#cb180-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="wrangle-columns.html#cb183-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;l&quot;</span>))</span>
+<span id="cb183-2"><a href="wrangle-columns.html#cb183-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 2
 #R&gt;     length.cm loc     
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;   
@@ -520,8 +528,8 @@ All columns
 <ul>
 <li>Select all variables except <code>loc</code>.</li>
 </ul>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="wrangle-columns.html#cb182-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>loc)</span>
-<span id="cb182-2"><a href="wrangle-columns.html#cb182-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb185-1"><a href="wrangle-columns.html#cb185-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>loc)</span>
+<span id="cb185-2"><a href="wrangle-columns.html#cb185-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 2
 #R&gt;     length.cm weight.kg
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt;
@@ -541,8 +549,8 @@ All columns
 <ul>
 <li>Move <code>loc</code> to the beginning.</li>
 </ul>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb184-1"><a href="wrangle-columns.html#cb184-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc)</span>
-<span id="cb184-2"><a href="wrangle-columns.html#cb184-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb187-1"><a href="wrangle-columns.html#cb187-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc)</span>
+<span id="cb187-2"><a href="wrangle-columns.html#cb187-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     loc      length.cm weight.kg
 #R&gt;     &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;
@@ -557,8 +565,8 @@ All columns
 <ul>
 <li>Move <code>loc</code> to after <code>length.cm</code>.</li>
 </ul>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb186-1"><a href="wrangle-columns.html#cb186-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc,<span class="at">.after=</span>length.cm)</span>
-<span id="cb186-2"><a href="wrangle-columns.html#cb186-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb189-1"><a href="wrangle-columns.html#cb189-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc,<span class="at">.after=</span>length.cm)</span>
+<span id="cb189-2"><a href="wrangle-columns.html#cb189-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm loc      weight.kg
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -573,8 +581,8 @@ All columns
 <ul>
 <li>Move <code>loc</code> to before <code>weight.kg</code>.</li>
 </ul>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb188-1"><a href="wrangle-columns.html#cb188-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc,<span class="at">.before=</span>weight.kg)</span>
-<span id="cb188-2"><a href="wrangle-columns.html#cb188-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb191-1"><a href="wrangle-columns.html#cb191-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(loc,<span class="at">.before=</span>weight.kg)</span>
+<span id="cb191-2"><a href="wrangle-columns.html#cb191-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm loc      weight.kg
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -589,8 +597,8 @@ All columns
 <ul>
 <li>Move <code>length.cm</code> to the end.</li>
 </ul>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb190-1"><a href="wrangle-columns.html#cb190-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(length.cm,<span class="at">.after=</span><span class="fu">last_col</span>())</span>
-<span id="cb190-2"><a href="wrangle-columns.html#cb190-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb193-1"><a href="wrangle-columns.html#cb193-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(length.cm,<span class="at">.after=</span><span class="fu">last_col</span>())</span>
+<span id="cb193-2"><a href="wrangle-columns.html#cb193-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     weight.kg loc      length.cm
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -605,8 +613,8 @@ All columns
 <ul>
 <li>Move both <code>length.cm</code> and <code>weight.kg</code> to the beginning.</li>
 </ul>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb192-1"><a href="wrangle-columns.html#cb192-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(<span class="fu">contains</span>(<span class="st">&quot;.&quot;</span>))</span>
-<span id="cb192-2"><a href="wrangle-columns.html#cb192-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb195-1"><a href="wrangle-columns.html#cb195-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(<span class="fu">contains</span>(<span class="st">&quot;.&quot;</span>))</span>
+<span id="cb195-2"><a href="wrangle-columns.html#cb195-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg loc     
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -626,8 +634,8 @@ All columns
 <ul>
 <li>Rename <code>loc</code> to <code>Location</code>.</li>
 </ul>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb194-1"><a href="wrangle-columns.html#cb194-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Location=</span>loc)</span>
-<span id="cb194-2"><a href="wrangle-columns.html#cb194-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb197-1"><a href="wrangle-columns.html#cb197-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Location=</span>loc)</span>
+<span id="cb197-2"><a href="wrangle-columns.html#cb197-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     length.cm weight.kg Location
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -642,8 +650,8 @@ All columns
 <ul>
 <li>Rename both <code>length.cm</code> and <code>weight.kg</code>.</li>
 </ul>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb196-1"><a href="wrangle-columns.html#cb196-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Length=</span>length.cm,<span class="at">Weight=</span>weight.kg)</span>
-<span id="cb196-2"><a href="wrangle-columns.html#cb196-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb199-1"><a href="wrangle-columns.html#cb199-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Length=</span>length.cm,<span class="at">Weight=</span>weight.kg)</span>
+<span id="cb199-2"><a href="wrangle-columns.html#cb199-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     Length Weight loc     
 #R&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   
@@ -656,7 +664,7 @@ All columns
 #R&gt;   7   130.    105 Douglas 
 #R&gt;   8   150     110 Douglas</code></pre>
 <p>Non-standard names of variables must be included in “backticks” when renaming them. For example, suppose that the names of variables in <code>bears2</code> looked like this (note spaces in the names of the first two variables).</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb198-1"><a href="wrangle-columns.html#cb198-1" aria-hidden="true" tabindex="-1"></a>bears2</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb201-1"><a href="wrangle-columns.html#cb201-1" aria-hidden="true" tabindex="-1"></a>bears2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     `length (cm)` `weight (kg)` loc     
 #R&gt;             &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;   
@@ -669,8 +677,8 @@ All columns
 #R&gt;   7          130.           105 Douglas 
 #R&gt;   8          150            110 Douglas</code></pre>
 <p>The following code is used to sensibly rename these variables with non-standard names.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb200-1"><a href="wrangle-columns.html#cb200-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Length=</span><span class="st">`</span><span class="at">length (cm)</span><span class="st">`</span>,<span class="at">Weight=</span><span class="st">`</span><span class="at">weight (kg)</span><span class="st">`</span>)</span>
-<span id="cb200-2"><a href="wrangle-columns.html#cb200-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb203-1"><a href="wrangle-columns.html#cb203-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears2 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Length=</span><span class="st">`</span><span class="at">length (cm)</span><span class="st">`</span>,<span class="at">Weight=</span><span class="st">`</span><span class="at">weight (kg)</span><span class="st">`</span>)</span>
+<span id="cb203-2"><a href="wrangle-columns.html#cb203-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 3
 #R&gt;     Length Weight loc     
 #R&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   
@@ -690,8 +698,8 @@ All columns
 <ul>
 <li>Add a <code>year</code> variable that is a constant value.</li>
 </ul>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb202-1"><a href="wrangle-columns.html#cb202-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2021</span>)</span>
-<span id="cb202-2"><a href="wrangle-columns.html#cb202-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb205-1"><a href="wrangle-columns.html#cb205-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2021</span>)</span>
+<span id="cb205-2"><a href="wrangle-columns.html#cb205-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 4
 #R&gt;     length.cm weight.kg loc       year
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
@@ -706,8 +714,8 @@ All columns
 <ul>
 <li>Add a length in inches variable derived from <code>length.cm</code>.</li>
 </ul>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb204-1"><a href="wrangle-columns.html#cb204-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">length.in=</span>length.cm<span class="sc">/</span><span class="fl">2.54</span>)</span>
-<span id="cb204-2"><a href="wrangle-columns.html#cb204-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb207-1"><a href="wrangle-columns.html#cb207-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">length.in=</span>length.cm<span class="sc">/</span><span class="fl">2.54</span>)</span>
+<span id="cb207-2"><a href="wrangle-columns.html#cb207-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 4
 #R&gt;     length.cm weight.kg loc      length.in
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -720,10 +728,10 @@ All columns
 #R&gt;   7      130.       105 Douglas       51.0
 #R&gt;   8      150        110 Douglas       59.1</code></pre>
 <p>Multiple variables can be created at one time by including more arguments to <code>mutate()</code>. Subsequent arguments in <code>mutate()</code> may use variables created previously in the same <code>mutate()</code>. For example, the code below adds new variables that represent the weight of the bear if it were “healthy” (based on its length), the difference between the observed weight and this “healthy” weight, and a note if the bear is more or less than the healthy weight.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb206-1"><a href="wrangle-columns.html#cb206-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">healthy.wt=</span><span class="fl">0.1129</span><span class="sc">*</span>length.cm<span class="sc">^</span><span class="fl">1.366</span>,</span>
-<span id="cb206-2"><a href="wrangle-columns.html#cb206-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_weight=</span>weight.kg<span class="sc">-</span>healthy.wt,</span>
-<span id="cb206-3"><a href="wrangle-columns.html#cb206-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_health=</span><span class="fu">ifelse</span>(rel_weight<span class="sc">&gt;</span><span class="dv">0</span>,<span class="st">&quot;more&quot;</span>,<span class="st">&quot;less&quot;</span>))</span>
-<span id="cb206-4"><a href="wrangle-columns.html#cb206-4" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb209-1"><a href="wrangle-columns.html#cb209-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">healthy.wt=</span><span class="fl">0.1129</span><span class="sc">*</span>length.cm<span class="sc">^</span><span class="fl">1.366</span>,</span>
+<span id="cb209-2"><a href="wrangle-columns.html#cb209-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_weight=</span>weight.kg<span class="sc">-</span>healthy.wt,</span>
+<span id="cb209-3"><a href="wrangle-columns.html#cb209-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_health=</span><span class="fu">ifelse</span>(rel_weight<span class="sc">&gt;</span><span class="dv">0</span>,<span class="st">&quot;more&quot;</span>,<span class="st">&quot;less&quot;</span>))</span>
+<span id="cb209-4"><a href="wrangle-columns.html#cb209-4" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 6
 #R&gt;     length.cm weight.kg loc      healthy.wt rel_weight rel_health
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;     
@@ -737,15 +745,15 @@ All columns
 #R&gt;   8      150        110 Douglas       106.        4.02 more</code></pre>
 <p>In the above example <code>ifelse()</code> was used to create the new variable that stated whether the beath was more or less healthy based on the <code>rel_weight</code> varible. The <code>ifelse()</code> functions contains three arguments – a conditioning expression that evaluates to either TRUE or FALSE, an item to return if the expression evaluates to TRUE, and an item to return if the expression evaluates to FALSE. This <code>ifelse()</code> statement can be read as “if the relative weight is greater than 0 then return ‘more’ otherwise return ‘less.’”</p>
 <p>The <code>ifelse()</code> function is quite powerful for converting values to <strong>binary</strong> groups. However, <code>case_when()</code> is more flexible when more groups will be created. The <code>case_when()</code> function consists of several arguments of the form <code>condition ~ return</code> where <code>condition</code> is a condition expression that evaluates to TRUE or FALSE, and <code>return</code> is the item that will be returned if that condition expression evaluates to TRUE. The conditions in the arguments are sequential such that the result for the first condition that evaluates to TRUE is returned. The last condition expression in <code>case_when()</code> should be <code>TRUE</code> which will always evaluate to TRUE and will thus return its if all previous conditions were not met. For example, the code below is used to create a variable that provides a more detailed description of the relative health of the bears.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb208-1"><a href="wrangle-columns.html#cb208-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">healthy.wt=</span><span class="fl">0.1129</span><span class="sc">*</span>length.cm<span class="sc">^</span><span class="fl">1.366</span>,</span>
-<span id="cb208-2"><a href="wrangle-columns.html#cb208-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_weight=</span>weight.kg<span class="sc">-</span>healthy.wt,</span>
-<span id="cb208-3"><a href="wrangle-columns.html#cb208-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_health=</span><span class="fu">case_when</span>(</span>
-<span id="cb208-4"><a href="wrangle-columns.html#cb208-4" aria-hidden="true" tabindex="-1"></a>                          rel_weight<span class="sc">&gt;</span><span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;much more&quot;</span>,</span>
-<span id="cb208-5"><a href="wrangle-columns.html#cb208-5" aria-hidden="true" tabindex="-1"></a>                          rel_weight<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;some more&quot;</span>,</span>
-<span id="cb208-6"><a href="wrangle-columns.html#cb208-6" aria-hidden="true" tabindex="-1"></a>                          rel_weight<span class="sc">&gt;-</span><span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;some less&quot;</span>,</span>
-<span id="cb208-7"><a href="wrangle-columns.html#cb208-7" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;much less&quot;</span></span>
-<span id="cb208-8"><a href="wrangle-columns.html#cb208-8" aria-hidden="true" tabindex="-1"></a>                        ))</span>
-<span id="cb208-9"><a href="wrangle-columns.html#cb208-9" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb211-1"><a href="wrangle-columns.html#cb211-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">healthy.wt=</span><span class="fl">0.1129</span><span class="sc">*</span>length.cm<span class="sc">^</span><span class="fl">1.366</span>,</span>
+<span id="cb211-2"><a href="wrangle-columns.html#cb211-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_weight=</span>weight.kg<span class="sc">-</span>healthy.wt,</span>
+<span id="cb211-3"><a href="wrangle-columns.html#cb211-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">rel_health=</span><span class="fu">case_when</span>(</span>
+<span id="cb211-4"><a href="wrangle-columns.html#cb211-4" aria-hidden="true" tabindex="-1"></a>                          rel_weight<span class="sc">&gt;</span><span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;much more&quot;</span>,</span>
+<span id="cb211-5"><a href="wrangle-columns.html#cb211-5" aria-hidden="true" tabindex="-1"></a>                          rel_weight<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;some more&quot;</span>,</span>
+<span id="cb211-6"><a href="wrangle-columns.html#cb211-6" aria-hidden="true" tabindex="-1"></a>                          rel_weight<span class="sc">&gt;-</span><span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;some less&quot;</span>,</span>
+<span id="cb211-7"><a href="wrangle-columns.html#cb211-7" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;much less&quot;</span></span>
+<span id="cb211-8"><a href="wrangle-columns.html#cb211-8" aria-hidden="true" tabindex="-1"></a>                        ))</span>
+<span id="cb211-9"><a href="wrangle-columns.html#cb211-9" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 6
 #R&gt;     length.cm weight.kg loc      healthy.wt rel_weight rel_health
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;     
@@ -759,11 +767,11 @@ All columns
 #R&gt;   8      150        110 Douglas       106.        4.02 some more</code></pre>
 <p>Finally, <code>mapvalues()</code> from <code>plyr</code> can be used to efficiently convert the groups of a categorical variable to different groups in a new categorical variables. The arguments to <code>mapvalues</code> are the name of the first categorical variable followed by the names of the groups of this variable in <code>from=</code> and the new names for the groups in the new variable in <code>to=</code>. Note that all group names not listed in <code>from=</code> will simply carry-over as-is in the new variable. The <code>plyr</code> package is not part of <code>tidyverse</code> and we will not typically use any other functions from <code>plyr</code>; thus, when using <code>mapvalues()</code> you should precede it with <code>plyr::</code> as demonstrated below.</p>
 <p>As an example suppose that the locations in <code>loc</code> need to be converted to abbreviations to save space when graphing.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb210-1"><a href="wrangle-columns.html#cb210-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> </span>
-<span id="cb210-2"><a href="wrangle-columns.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc_abb=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(loc,</span>
-<span id="cb210-3"><a href="wrangle-columns.html#cb210-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>),</span>
-<span id="cb210-4"><a href="wrangle-columns.html#cb210-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;ASH&quot;</span>,<span class="st">&quot;BAY&quot;</span>,<span class="st">&quot;DOU&quot;</span>)))</span>
-<span id="cb210-5"><a href="wrangle-columns.html#cb210-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb213-1"><a href="wrangle-columns.html#cb213-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> </span>
+<span id="cb213-2"><a href="wrangle-columns.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc_abb=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(loc,</span>
+<span id="cb213-3"><a href="wrangle-columns.html#cb213-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>),</span>
+<span id="cb213-4"><a href="wrangle-columns.html#cb213-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;ASH&quot;</span>,<span class="st">&quot;BAY&quot;</span>,<span class="st">&quot;DOU&quot;</span>)))</span>
+<span id="cb213-5"><a href="wrangle-columns.html#cb213-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 4
 #R&gt;     length.cm weight.kg loc      loc_abb
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  
@@ -776,11 +784,11 @@ All columns
 #R&gt;   7      130.       105 Douglas  DOU    
 #R&gt;   8      150        110 Douglas  DOU</code></pre>
 <p>Alternatively suppose that Ashland and Bayfield need to be combined into one group for some reason. This can be accomplished by giving the combined name for counties in the positions of <code>to=</code> that match the two counties in <code>from=</code>. For example,</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb212-1"><a href="wrangle-columns.html#cb212-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> </span>
-<span id="cb212-2"><a href="wrangle-columns.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc_abb=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(loc,</span>
-<span id="cb212-3"><a href="wrangle-columns.html#cb212-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>),</span>
-<span id="cb212-4"><a href="wrangle-columns.html#cb212-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;Ashland/Bayfield&quot;</span>,<span class="st">&quot;Ashland/Bayfield&quot;</span>)))</span>
-<span id="cb212-5"><a href="wrangle-columns.html#cb212-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb215-1"><a href="wrangle-columns.html#cb215-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> </span>
+<span id="cb215-2"><a href="wrangle-columns.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc_abb=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(loc,</span>
+<span id="cb215-3"><a href="wrangle-columns.html#cb215-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>),</span>
+<span id="cb215-4"><a href="wrangle-columns.html#cb215-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;Ashland/Bayfield&quot;</span>,<span class="st">&quot;Ashland/Bayfield&quot;</span>)))</span>
+<span id="cb215-5"><a href="wrangle-columns.html#cb215-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 4
 #R&gt;     length.cm weight.kg loc      loc_abb         
 #R&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;           
@@ -800,10 +808,10 @@ All columns
 <div id="columns-nba" class="section level3" number="6.7.1">
 <h3><span class="header-section-number">6.7.1</span> NBA Players</h3>
 <p>Data on every player who has ever played in the National Basketball Association was read into R in Section <a href="read-external-data-files.html#csv-files">3.3.1</a>. The structure of that data frame is shown below.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb214-1"><a href="wrangle-columns.html#cb214-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
-<span id="cb214-2"><a href="wrangle-columns.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(players,<span class="at">give.attr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb217-1"><a href="wrangle-columns.html#cb217-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
+<span id="cb217-2"><a href="wrangle-columns.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(players,<span class="at">give.attr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   spec_tbl_df [4,393 x 15] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-#R&gt;    $ X1                       : num [1:4393] 0 1 2 3 4 5 6 7 8 9 ...
+#R&gt;    $ ...1                     : num [1:4393] 0 1 2 3 4 5 6 7 8 9 ...
 #R&gt;    $ DISPLAY_FIRST_LAST       : chr [1:4393] &quot;Alaa Abdelnaby&quot; &quot;Zaid Abdul-Aziz&quot; &quot;Kareem Abdul-Jabbar&quot; &quot;Mahmoud Abdul-Rauf&quot; ...
 #R&gt;    $ DISPLAY_LAST_COMMA_FIRST : chr [1:4393] &quot;Abdelnaby, Alaa&quot; &quot;Abdul-Aziz, Zaid&quot; &quot;Abdul-Jabbar, Kareem&quot; &quot;Abdul-Rauf, Mahmoud&quot; ...
 #R&gt;    $ FROM_YEAR                : num [1:4393] 1990 1968 1969 1990 1997 ...
@@ -825,15 +833,15 @@ All columns
 <li>rename long variable names (and remove the capitalization);</li>
 <li>calculate the amount of time they were in the NBA by subtracting their start year from their end year;</li>
 <li>create a new variable called “modern” that is “yes” for players that ended their careers in 1980 or later and is “no” otherwise; and</li>
-<li>order the data from most to least years played;<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></li>
+<li>order the data from most to least years played;<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></li>
 </ol>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb216-1"><a href="wrangle-columns.html#cb216-1" aria-hidden="true" tabindex="-1"></a>players2 <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span></span>
-<span id="cb216-2"><a href="wrangle-columns.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DISPLAY_LAST_COMMA_FIRST,FROM_YEAR,TO_YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb216-3"><a href="wrangle-columns.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name=</span>DISPLAY_LAST_COMMA_FIRST,<span class="at">start=</span>FROM_YEAR,<span class="at">end=</span>TO_YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb216-4"><a href="wrangle-columns.html#cb216-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_played=</span>end<span class="sc">-</span>start,</span>
-<span id="cb216-5"><a href="wrangle-columns.html#cb216-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">modern=</span><span class="fu">ifelse</span>(end<span class="sc">&gt;=</span><span class="dv">1980</span>,<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb216-6"><a href="wrangle-columns.html#cb216-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(years_played))</span>
-<span id="cb216-7"><a href="wrangle-columns.html#cb216-7" aria-hidden="true" tabindex="-1"></a>players2</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb219-1"><a href="wrangle-columns.html#cb219-1" aria-hidden="true" tabindex="-1"></a>players2 <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span></span>
+<span id="cb219-2"><a href="wrangle-columns.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DISPLAY_LAST_COMMA_FIRST,FROM_YEAR,TO_YEAR) <span class="sc">%&gt;%</span></span>
+<span id="cb219-3"><a href="wrangle-columns.html#cb219-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name=</span>DISPLAY_LAST_COMMA_FIRST,<span class="at">start=</span>FROM_YEAR,<span class="at">end=</span>TO_YEAR) <span class="sc">%&gt;%</span></span>
+<span id="cb219-4"><a href="wrangle-columns.html#cb219-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_played=</span>end<span class="sc">-</span>start,</span>
+<span id="cb219-5"><a href="wrangle-columns.html#cb219-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">modern=</span><span class="fu">ifelse</span>(end<span class="sc">&gt;=</span><span class="dv">1980</span>,<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb219-6"><a href="wrangle-columns.html#cb219-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(years_played))</span>
+<span id="cb219-7"><a href="wrangle-columns.html#cb219-7" aria-hidden="true" tabindex="-1"></a>players2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 4,393 x 5
 #R&gt;      name                 start   end years_played modern
 #R&gt;      &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
@@ -850,15 +858,15 @@ All columns
 #R&gt;   # ... with 4,383 more rows</code></pre>
 <p> </p>
 <p>For fun, this is what one plot of the results might look like.</p>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-124-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-136-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
 <div id="columns-isle-royale" class="section level3" number="6.7.2">
 <h3><span class="header-section-number">6.7.2</span> Wolves and Moose of Isle Royale</h3>
-<p>For a module in my <a href="http://derekogle.com/NCGraphing/">“Great Graphs” course</a> I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether an ice bridge formed between the mainland and Isle Royale. Fortunately, these data<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> are available at <a href="https://isleroyalewolf.org/data/data/home.html">Wolves &amp; Moose of Isle Royale</a>. I downloaded the data file provided there and read it into R below.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb218-1"><a href="wrangle-columns.html#cb218-1" aria-hidden="true" tabindex="-1"></a>irmw <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Data_wolves_moose_Isle_Royale_June2019.xlsx&quot;</span>),</span>
-<span id="cb218-2"><a href="wrangle-columns.html#cb218-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sheet=</span><span class="st">&quot;1. population level data&quot;</span>,<span class="at">skip=</span><span class="dv">1</span>,<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;N/A&quot;</span>))</span>
-<span id="cb218-3"><a href="wrangle-columns.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(irmw,<span class="at">give.attr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p>For a module in my <a href="http://derekogle.com/NCGraphing/">“Great Graphs” course</a> I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether an ice bridge formed between the mainland and Isle Royale. Fortunately, these data<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> are available at <a href="https://isleroyalewolf.org/data/data/home.html">Wolves &amp; Moose of Isle Royale</a>. I downloaded the data file provided there and read it into R below.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb221-1"><a href="wrangle-columns.html#cb221-1" aria-hidden="true" tabindex="-1"></a>irmw <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Data_wolves_moose_Isle_Royale_June2019.xlsx&quot;</span>),</span>
+<span id="cb221-2"><a href="wrangle-columns.html#cb221-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sheet=</span><span class="st">&quot;1. population level data&quot;</span>,<span class="at">skip=</span><span class="dv">1</span>,<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;N/A&quot;</span>))</span>
+<span id="cb221-3"><a href="wrangle-columns.html#cb221-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(irmw,<span class="at">give.attr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   tibble [61 x 33] (S3: tbl_df/tbl/data.frame)
 #R&gt;    $ year                                             : num [1:61] 1959 1960 1961 1962 1963 ...
 #R&gt;    $ wolves                                           : num [1:61] 20 22 22 23 20 26 28 26 22 22 ...
@@ -902,19 +910,19 @@ All columns
 <li>move the “era” variable to be next to the year variable (for aesthetic reasons), and</li>
 <li>make sure the data are ordered from earliest to latest year.</li>
 </ol>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb220-1"><a href="wrangle-columns.html#cb220-1" aria-hidden="true" tabindex="-1"></a>irmw2 <span class="ot">&lt;-</span> irmw <span class="sc">%&gt;%</span></span>
-<span id="cb220-2"><a href="wrangle-columns.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,wolves,moose,<span class="st">`</span><span class="at">Jan-Feb (temp, F)</span><span class="st">`</span>,<span class="st">`</span><span class="at">ice bridges (0=none, 1 = present)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb220-3"><a href="wrangle-columns.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">winter_temp=</span><span class="st">`</span><span class="at">Jan-Feb (temp, F)</span><span class="st">`</span>,</span>
-<span id="cb220-4"><a href="wrangle-columns.html#cb220-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ice_bridges=</span><span class="st">`</span><span class="at">ice bridges (0=none, 1 = present)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb220-5"><a href="wrangle-columns.html#cb220-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ice_bridges=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(ice_bridges,<span class="at">from=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)),</span>
-<span id="cb220-6"><a href="wrangle-columns.html#cb220-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">era=</span><span class="fu">case_when</span>(</span>
-<span id="cb220-7"><a href="wrangle-columns.html#cb220-7" aria-hidden="true" tabindex="-1"></a>           year<span class="sc">&lt;</span><span class="dv">1975</span> <span class="sc">~</span> <span class="st">&quot;early&quot;</span>,</span>
-<span id="cb220-8"><a href="wrangle-columns.html#cb220-8" aria-hidden="true" tabindex="-1"></a>           year<span class="sc">&lt;=</span><span class="dv">2000</span> <span class="sc">~</span> <span class="st">&quot;middle&quot;</span>,</span>
-<span id="cb220-9"><a href="wrangle-columns.html#cb220-9" aria-hidden="true" tabindex="-1"></a>           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;recent&quot;</span></span>
-<span id="cb220-10"><a href="wrangle-columns.html#cb220-10" aria-hidden="true" tabindex="-1"></a>         )) <span class="sc">%&gt;%</span></span>
-<span id="cb220-11"><a href="wrangle-columns.html#cb220-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(era,<span class="at">.after=</span>year) <span class="sc">%&gt;%</span></span>
-<span id="cb220-12"><a href="wrangle-columns.html#cb220-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
-<span id="cb220-13"><a href="wrangle-columns.html#cb220-13" aria-hidden="true" tabindex="-1"></a>irmw2</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb223-1"><a href="wrangle-columns.html#cb223-1" aria-hidden="true" tabindex="-1"></a>irmw2 <span class="ot">&lt;-</span> irmw <span class="sc">%&gt;%</span></span>
+<span id="cb223-2"><a href="wrangle-columns.html#cb223-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,wolves,moose,<span class="st">`</span><span class="at">Jan-Feb (temp, F)</span><span class="st">`</span>,<span class="st">`</span><span class="at">ice bridges (0=none, 1 = present)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb223-3"><a href="wrangle-columns.html#cb223-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">winter_temp=</span><span class="st">`</span><span class="at">Jan-Feb (temp, F)</span><span class="st">`</span>,</span>
+<span id="cb223-4"><a href="wrangle-columns.html#cb223-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ice_bridges=</span><span class="st">`</span><span class="at">ice bridges (0=none, 1 = present)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb223-5"><a href="wrangle-columns.html#cb223-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ice_bridges=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(ice_bridges,<span class="at">from=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)),</span>
+<span id="cb223-6"><a href="wrangle-columns.html#cb223-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">era=</span><span class="fu">case_when</span>(</span>
+<span id="cb223-7"><a href="wrangle-columns.html#cb223-7" aria-hidden="true" tabindex="-1"></a>           year<span class="sc">&lt;</span><span class="dv">1975</span> <span class="sc">~</span> <span class="st">&quot;early&quot;</span>,</span>
+<span id="cb223-8"><a href="wrangle-columns.html#cb223-8" aria-hidden="true" tabindex="-1"></a>           year<span class="sc">&lt;=</span><span class="dv">2000</span> <span class="sc">~</span> <span class="st">&quot;middle&quot;</span>,</span>
+<span id="cb223-9"><a href="wrangle-columns.html#cb223-9" aria-hidden="true" tabindex="-1"></a>           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;recent&quot;</span></span>
+<span id="cb223-10"><a href="wrangle-columns.html#cb223-10" aria-hidden="true" tabindex="-1"></a>         )) <span class="sc">%&gt;%</span></span>
+<span id="cb223-11"><a href="wrangle-columns.html#cb223-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(era,<span class="at">.after=</span>year) <span class="sc">%&gt;%</span></span>
+<span id="cb223-12"><a href="wrangle-columns.html#cb223-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
+<span id="cb223-13"><a href="wrangle-columns.html#cb223-13" aria-hidden="true" tabindex="-1"></a>irmw2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 61 x 6
 #R&gt;       year era   wolves moose winter_temp ice_bridges
 #R&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -935,12 +943,12 @@ All columns
 </div>
 <div class="footnotes">
 <hr />
-<ol start="14">
-<li id="fn14"><p>If all columns do not exist in the data frame then an error will occur.<a href="wrangle-columns.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>These selections are likely not needed because <code>bears</code> is so small; however, they are used here to demonstrate the selection techniques.<a href="wrangle-columns.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>You will learn this in the next module<a href="wrangle-columns.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>Along with a wide variety of other data about Wolves and Moose on Isle Royale.<a href="wrangle-columns.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>You may want to review the purpose of some of these arguments to <code>read_excel()</code> in Section <a href="read-external-data-files.html#excel-files">3.3.2</a>.<a href="wrangle-columns.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<ol start="17">
+<li id="fn17"><p>If all columns do not exist in the data frame then an error will occur.<a href="wrangle-columns.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>These selections are likely not needed because <code>bears</code> is so small; however, they are used here to demonstrate the selection techniques.<a href="wrangle-columns.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>You will learn this in the next module<a href="wrangle-columns.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>Along with a wide variety of other data about Wolves and Moose on Isle Royale.<a href="wrangle-columns.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>You may want to review the purpose of some of these arguments to <code>read_excel()</code> in Section <a href="read-external-data-files.html#excel-files">3.3.2</a>.<a href="wrangle-columns.html#fnref21" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

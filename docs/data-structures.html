@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,7 +142,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="preparation.html"><a href="preparation.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#mac"><i class="fa fa-check"></i><b>1.2</b> Mac</a></li>
+<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.3</b> Optimally Configuring RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.4</b> Install Tidyverse and Other Packages</a></li>
+<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.5</b> RStudio Projects</a></li>
+<li class="chapter" data-level="1.6" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.6</b> Using the Notebook Template</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a></li>
@@ -240,20 +248,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="vectors" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Vectors</h2>
 <p>The vector is the primary unit for storing data in R. You can think of a vector as a set of similar items. Vectors are created in R by combining or concatenating together the individual items into a single set with <code>c()</code>. For example, the code below creates a vector of county names stored in an object called <code>cn</code> (perhaps, short for “county names”).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="data-structures.html#cb4-1" aria-hidden="true" tabindex="-1"></a>cn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Iron&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb7-1"><a href="data-structures.html#cb7-1" aria-hidden="true" tabindex="-1"></a>cn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Iron&quot;</span>)</span></code></pre></div>
 <p>Similarly the code below creates a vector of the population size in four counties stored in an object called <code>pop</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb5-1"><a href="data-structures.html#cb5-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15512</span>,<span class="dv">15056</span>,<span class="dv">43164</span>,<span class="dv">5687</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb8-1"><a href="data-structures.html#cb8-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15512</span>,<span class="dv">15056</span>,<span class="dv">43164</span>,<span class="dv">5687</span>)</span></code></pre></div>
 <div class="defn">
 <p><strong>Vector</strong>: The variable thought to depend upon, be explained by, or be predicted by other variables.</p>
 </div>
 <p> </p>
 <p>Individual items in a vector can be accessed by following the vector’s object name with <strong>square brackets</strong> that contain the numeric position of the item. For example, the second county in <code>cn</code> and the third population size in <code>pop</code> are extracted below.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb6-1"><a href="data-structures.html#cb6-1" aria-hidden="true" tabindex="-1"></a>cn[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="data-structures.html#cb9-1" aria-hidden="true" tabindex="-1"></a>cn[<span class="dv">2</span>]</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Bayfield&quot;</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb8-1"><a href="data-structures.html#cb8-1" aria-hidden="true" tabindex="-1"></a>pop[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb11-1"><a href="data-structures.html#cb11-1" aria-hidden="true" tabindex="-1"></a>pop[<span class="dv">3</span>]</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 43164</code></pre>
 <p>Multiple items can be accessed by combining their position indices into a vector.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb10-1"><a href="data-structures.html#cb10-1" aria-hidden="true" tabindex="-1"></a>cn[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb13-1"><a href="data-structures.html#cb13-1" aria-hidden="true" tabindex="-1"></a>cn[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Bayfield&quot; &quot;Douglas&quot;</code></pre>
 </div>
 <div id="data-classes" class="section level2" number="2.2">
@@ -266,31 +274,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>log</strong>ical: Logical that must be either <code>TRUE</code> or <code>FALSE</code>.</li>
 </ul>
 <p>The primary difference between numeric and integer classes is how the data are stored in memory. For most of our purposes this will be irrelevant, so there is no practical difference between these two classes for our work. However, integer values are entered into a vector by appending the value with an “L.”</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="data-structures.html#cb12-1" aria-hidden="true" tabindex="-1"></a>nabors <span class="ot">&lt;-</span> <span class="fu">c</span>(4L,3L,3L,3L)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb15-1"><a href="data-structures.html#cb15-1" aria-hidden="true" tabindex="-1"></a>nabors <span class="ot">&lt;-</span> <span class="fu">c</span>(4L,3L,3L,3L)</span></code></pre></div>
 <p>The values in a logical vector must be either <code>TRUE</code> or <code>FALSE</code>. Make sure to note that both of these values are in all capital letters.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb13-1"><a href="data-structures.html#cb13-1" aria-hidden="true" tabindex="-1"></a>cheqbay <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb16-1"><a href="data-structures.html#cb16-1" aria-hidden="true" tabindex="-1"></a>cheqbay <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)</span></code></pre></div>
 <p> </p>
 <p>The class (i.e., type) of data in a vector is found with <code>class()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb14-1"><a href="data-structures.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cn)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb17-1"><a href="data-structures.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cn)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb16-1"><a href="data-structures.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(pop)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb19-1"><a href="data-structures.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(pop)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb18-1"><a href="data-structures.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(nabors)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb21-1"><a href="data-structures.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(nabors)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;integer&quot;</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb20-1"><a href="data-structures.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cheqbay)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb23-1"><a href="data-structures.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cheqbay)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;logical&quot;</code></pre>
 <p>A <strong>factor</strong> is a special class of data where character items are specifically classified as representing groups or levels of items. A vector can be converted to a factor class with <code>factor()</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb22-1"><a href="data-structures.html#cb22-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="fu">factor</span>(cn)</span>
-<span id="cb22-2"><a href="data-structures.html#cb22-2" aria-hidden="true" tabindex="-1"></a>fcn</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb25-1"><a href="data-structures.html#cb25-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="fu">factor</span>(cn)</span>
+<span id="cb25-2"><a href="data-structures.html#cb25-2" aria-hidden="true" tabindex="-1"></a>fcn</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] Ashland  Bayfield Douglas  Iron    
 #R&gt;   Levels: Ashland Bayfield Douglas Iron</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="data-structures.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(fcn)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb27-1"><a href="data-structures.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(fcn)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;factor&quot;</code></pre>
 <p>Factors have useful properties that will be discussed in more detail in Module <a href="factors.html#factors">10</a>.</p>
 <p>As stated above, a vector should consist of items of the same class type. For example, this code does not make sense in most instances.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb26-1"><a href="data-structures.html#cb26-1" aria-hidden="true" tabindex="-1"></a>huh <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="dv">15512</span>,<span class="cn">TRUE</span>,<span class="fl">3.65</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb29-1"><a href="data-structures.html#cb29-1" aria-hidden="true" tabindex="-1"></a>huh <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="dv">15512</span>,<span class="cn">TRUE</span>,<span class="fl">3.65</span>)</span></code></pre></div>
 <p>However, this will not produce an error, though it likely will not be what you want it to be. For example, examine the class of this object.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb27-1"><a href="data-structures.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(huh)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb30-1"><a href="data-structures.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(huh)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;character&quot;</code></pre>
 <p>R uses hierarchical rules to assign a class for these odd situations. Rather than focusing on these rules it is more beneficial to remember that each vector should be of the same class type.</p>
 <div class="tip">
@@ -301,11 +309,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.3</span> Data Frames</h2>
 <p>Vectors are useful for small numbers of items that have a single purpose. However, a data frame is more useful if you have multiple types of items (e.g., variables) recorded on a large number of individuals. Here we explore small data frames; larger data frames will be imported from external data sources in Module <a href="read-external-data-files.html#read-external-data-files">3</a>.</p>
 <p>A data frame is a rectangular data structure where columns are vectors of the same class that represent variables recorded on individuals which are represented in rows. Simple data frames can be constructed with <code>data.frame()</code> with named arguments set equal to vectors of data. For example, the following code produces a data frame object called <code>counties</code> that has three variables called <code>name</code>, <code>pop</code>, and <code>party</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb29-1"><a href="data-structures.html#cb29-1" aria-hidden="true" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Iron&quot;</span>,<span class="st">&quot;Sawyer&quot;</span>),</span>
-<span id="cb29-2"><a href="data-structures.html#cb29-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop=</span><span class="fu">c</span>(<span class="dv">15512</span>,<span class="dv">15056</span>,<span class="dv">43164</span>,<span class="dv">5687</span>,<span class="dv">16746</span>),</span>
-<span id="cb29-3"><a href="data-structures.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">party=</span><span class="fu">c</span>(<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Rep&quot;</span>,<span class="st">&quot;Rep&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb32-1"><a href="data-structures.html#cb32-1" aria-hidden="true" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Iron&quot;</span>,<span class="st">&quot;Sawyer&quot;</span>),</span>
+<span id="cb32-2"><a href="data-structures.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop=</span><span class="fu">c</span>(<span class="dv">15512</span>,<span class="dv">15056</span>,<span class="dv">43164</span>,<span class="dv">5687</span>,<span class="dv">16746</span>),</span>
+<span id="cb32-3"><a href="data-structures.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">party=</span><span class="fu">c</span>(<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Rep&quot;</span>,<span class="st">&quot;Rep&quot;</span>))</span></code></pre></div>
 <p>Type the name of the data frame object to see its contents.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb30-1"><a href="data-structures.html#cb30-1" aria-hidden="true" tabindex="-1"></a>counties</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb33-1"><a href="data-structures.html#cb33-1" aria-hidden="true" tabindex="-1"></a>counties</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;         name   pop party
 #R&gt;   1  Ashland 15512   Dem
 #R&gt;   2 Bayfield 15056   Dem
@@ -316,38 +324,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Columns of data frames correspond to variables whereas rows correspond to individuals.</p>
 </div>
 <p>Use <code>str()</code> to examine the structure of the data frame object, which will show that the object is a <code>data.frame</code>, show the number of individuals (label as <code>obs</code> for observations) and variables, and show the name of each column/variable along with its class type abbreviation and a snapshot of the first few items in each row.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb32-1"><a href="data-structures.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(counties)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb35-1"><a href="data-structures.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(counties)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 5 obs. of  3 variables:
 #R&gt;    $ name : chr  &quot;Ashland&quot; &quot;Bayfield&quot; &quot;Douglas&quot; &quot;Iron&quot; ...
 #R&gt;    $ pop  : num  15512 15056 43164 5687 16746
 #R&gt;    $ party: chr  &quot;Dem&quot; &quot;Dem&quot; &quot;Dem&quot; &quot;Rep&quot; ...</code></pre>
 <p>As data frames are rectangular, individual items are accessed by using both the row and column positions within square brackets after the data frame object name.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb34-1"><a href="data-structures.html#cb34-1" aria-hidden="true" tabindex="-1"></a>counties[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co"># first row, second column</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb37-1"><a href="data-structures.html#cb37-1" aria-hidden="true" tabindex="-1"></a>counties[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co"># first row, second column</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 15512</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb36-1"><a href="data-structures.html#cb36-1" aria-hidden="true" tabindex="-1"></a>counties[<span class="dv">3</span>,<span class="dv">1</span>]  <span class="co"># third row, first column</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb39-1"><a href="data-structures.html#cb39-1" aria-hidden="true" tabindex="-1"></a>counties[<span class="dv">3</span>,<span class="dv">1</span>]  <span class="co"># third row, first column</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Douglas&quot;</code></pre>
 <p>Entire rows or columns are accessed by providing the numerical position of the row or column and leaving the other indice blank.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb38-1"><a href="data-structures.html#cb38-1" aria-hidden="true" tabindex="-1"></a>counties[<span class="dv">1</span>,]  <span class="co"># First row</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb41-1"><a href="data-structures.html#cb41-1" aria-hidden="true" tabindex="-1"></a>counties[<span class="dv">1</span>,]  <span class="co"># First row</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;        name   pop party
 #R&gt;   1 Ashland 15512   Dem</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb40-1"><a href="data-structures.html#cb40-1" aria-hidden="true" tabindex="-1"></a>counties[,<span class="dv">1</span>]  <span class="co"># First column</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb43-1"><a href="data-structures.html#cb43-1" aria-hidden="true" tabindex="-1"></a>counties[,<span class="dv">1</span>]  <span class="co"># First column</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Ashland&quot;  &quot;Bayfield&quot; &quot;Douglas&quot;  &quot;Iron&quot;     &quot;Sawyer&quot;</code></pre>
 <p>Note that choosing rows or more than one column will return a data frame as it will likely have data of different classes.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb42-1"><a href="data-structures.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counties[<span class="dv">1</span>,])      <span class="co"># one row is a data frame</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb45-1"><a href="data-structures.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counties[<span class="dv">1</span>,])      <span class="co"># one row is a data frame</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb44-1"><a href="data-structures.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counties[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]) <span class="co"># two columns is a data frame</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb47-1"><a href="data-structures.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counties[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]) <span class="co"># two columns is a data frame</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;data.frame&quot;</code></pre>
 <p>However, choosing one column will return a vector of items all of the same class.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb46-1"><a href="data-structures.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counties[,<span class="dv">1</span>])      <span class="co"># one column is a vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb49-1"><a href="data-structures.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counties[,<span class="dv">1</span>])      <span class="co"># one column is a vector</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;character&quot;</code></pre>
 <p>As columns are named we can also use the name to access a specific column.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb48-1"><a href="data-structures.html#cb48-1" aria-hidden="true" tabindex="-1"></a>counties[,<span class="st">&quot;pop&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb51-1"><a href="data-structures.html#cb51-1" aria-hidden="true" tabindex="-1"></a>counties[,<span class="st">&quot;pop&quot;</span>]</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 15512 15056 43164  5687 16746</code></pre>
 <p>This same column can be accessed by separating the data frame object name from the column name with a <code>$</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb50-1"><a href="data-structures.html#cb50-1" aria-hidden="true" tabindex="-1"></a>counties<span class="sc">$</span>pop</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb53-1"><a href="data-structures.html#cb53-1" aria-hidden="true" tabindex="-1"></a>counties<span class="sc">$</span>pop</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 15512 15056 43164  5687 16746</code></pre>
 <p>Again a column is simply a vector so you access single items in this vector in the usual way.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb52-1"><a href="data-structures.html#cb52-1" aria-hidden="true" tabindex="-1"></a>counties<span class="sc">$</span>pop[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb55-1"><a href="data-structures.html#cb55-1" aria-hidden="true" tabindex="-1"></a>counties<span class="sc">$</span>pop[<span class="dv">3</span>]</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 43164</code></pre>
 <div class="tip">
 <p>A <code>$</code> is only used to separate a data frame name from the variable name within that data frame.</p>
@@ -355,11 +363,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tibbles" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Tibbles</h3>
 <p>Tibbles are a special form of data frame that was introduced as part of the “tidyverse.” Tibbles are created using <code>tibble()</code> in the same way that we used <code>data.frame()</code> previously.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb54-1"><a href="data-structures.html#cb54-1" aria-hidden="true" tabindex="-1"></a>counties2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Iron&quot;</span>,<span class="st">&quot;Sawyer&quot;</span>),</span>
-<span id="cb54-2"><a href="data-structures.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pop=</span><span class="fu">c</span>(<span class="dv">15512</span>,<span class="dv">15056</span>,<span class="dv">43164</span>,<span class="dv">5687</span>,<span class="dv">16746</span>),</span>
-<span id="cb54-3"><a href="data-structures.html#cb54-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">party=</span><span class="fu">c</span>(<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Rep&quot;</span>,<span class="st">&quot;Rep&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb57-1"><a href="data-structures.html#cb57-1" aria-hidden="true" tabindex="-1"></a>counties2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;Ashland&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Iron&quot;</span>,<span class="st">&quot;Sawyer&quot;</span>),</span>
+<span id="cb57-2"><a href="data-structures.html#cb57-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pop=</span><span class="fu">c</span>(<span class="dv">15512</span>,<span class="dv">15056</span>,<span class="dv">43164</span>,<span class="dv">5687</span>,<span class="dv">16746</span>),</span>
+<span id="cb57-3"><a href="data-structures.html#cb57-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">party=</span><span class="fu">c</span>(<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Dem&quot;</span>,<span class="st">&quot;Rep&quot;</span>,<span class="st">&quot;Rep&quot;</span>))</span></code></pre></div>
 <p>For most of our purposes a tibble will behave exactly as a data frame. For example,</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb55-1"><a href="data-structures.html#cb55-1" aria-hidden="true" tabindex="-1"></a>counties2</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb58-1"><a href="data-structures.html#cb58-1" aria-hidden="true" tabindex="-1"></a>counties2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 5 x 3
 #R&gt;     name       pop party
 #R&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;
@@ -368,12 +376,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   3 Douglas  43164 Dem  
 #R&gt;   4 Iron      5687 Rep  
 #R&gt;   5 Sawyer   16746 Rep</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb57-1"><a href="data-structures.html#cb57-1" aria-hidden="true" tabindex="-1"></a>counties2<span class="sc">$</span>pop</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb60-1"><a href="data-structures.html#cb60-1" aria-hidden="true" tabindex="-1"></a>counties2<span class="sc">$</span>pop</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 15512 15056 43164  5687 16746</code></pre>
 <p>There are, however, differences between tibbles and data frames as described in <a href="https://r4ds.had.co.nz/tibbles.html">this introduction to tibbles</a>. The primary difference that you will notice in this course is that when you examine the contents of a tibble with a larger number of rows, columns, or both. For example the code below converts a data frame from the <code>FSA</code> package into a tibble.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb59-1"><a href="data-structures.html#cb59-1" aria-hidden="true" tabindex="-1"></a>tibex <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(FSA<span class="sc">::</span>WhitefishLC)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb62-1"><a href="data-structures.html#cb62-1" aria-hidden="true" tabindex="-1"></a>tibex <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(FSA<span class="sc">::</span>WhitefishLC)</span></code></pre></div>
 <p>However, when you try to display the data in this tibble you can see that only first 10 rows and as many columns as will fit on the width of your display are shown. In this case, 141 rows and one variable are not shown as seen in the note at the bottom.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb60-1"><a href="data-structures.html#cb60-1" aria-hidden="true" tabindex="-1"></a>tibex</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb63-1"><a href="data-structures.html#cb63-1" aria-hidden="true" tabindex="-1"></a>tibex</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 151 x 11
 #R&gt;      fishID    tl scale1 scale2 scaleC finray1 finray2 finrayC otolith1 otolith2
 #R&gt;       &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
@@ -433,12 +441,12 @@ Figure 2.1: Schematic illustration the structure of tidy data (from <a href="htt
 <pre><code>  impacted   0.011  0.054  0.056  0.095  0.051  0.077
   reference  0.031  0.040  0.029  0.066  0.018  0.042  0.044</code></pre>
 <p>In this case, you must realize that one “observation” is a methyl mercury measurement on a mussel AND to which group the mussel belongs. Thus, each observation results in the recording of two variables. For example, the first mussel had a methyl mercury level of 0.011 AND it was at the impacted site. With this understanding these data are entered in a tidy format as follows.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb65-1"><a href="data-structures.html#cb65-1" aria-hidden="true" tabindex="-1"></a>mussels <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">loc=</span><span class="fu">c</span>(<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,</span>
-<span id="cb65-2"><a href="data-structures.html#cb65-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,</span>
-<span id="cb65-3"><a href="data-structures.html#cb65-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>),</span>
-<span id="cb65-4"><a href="data-structures.html#cb65-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">merc=</span><span class="fu">c</span>(<span class="fl">0.011</span>,<span class="fl">0.054</span>,<span class="fl">0.056</span>,<span class="fl">0.095</span>,<span class="fl">0.051</span>,<span class="fl">0.077</span>,</span>
-<span id="cb65-5"><a href="data-structures.html#cb65-5" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.031</span>,<span class="fl">0.040</span>,<span class="fl">0.029</span>,<span class="fl">0.066</span>,<span class="fl">0.018</span>,<span class="fl">0.042</span>,<span class="fl">0.044</span>))</span>
-<span id="cb65-6"><a href="data-structures.html#cb65-6" aria-hidden="true" tabindex="-1"></a>mussels</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb68-1"><a href="data-structures.html#cb68-1" aria-hidden="true" tabindex="-1"></a>mussels <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">loc=</span><span class="fu">c</span>(<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,<span class="st">&quot;impacted&quot;</span>,</span>
+<span id="cb68-2"><a href="data-structures.html#cb68-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,</span>
+<span id="cb68-3"><a href="data-structures.html#cb68-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>,<span class="st">&quot;reference&quot;</span>),</span>
+<span id="cb68-4"><a href="data-structures.html#cb68-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">merc=</span><span class="fu">c</span>(<span class="fl">0.011</span>,<span class="fl">0.054</span>,<span class="fl">0.056</span>,<span class="fl">0.095</span>,<span class="fl">0.051</span>,<span class="fl">0.077</span>,</span>
+<span id="cb68-5"><a href="data-structures.html#cb68-5" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.031</span>,<span class="fl">0.040</span>,<span class="fl">0.029</span>,<span class="fl">0.066</span>,<span class="fl">0.018</span>,<span class="fl">0.042</span>,<span class="fl">0.044</span>))</span>
+<span id="cb68-6"><a href="data-structures.html#cb68-6" aria-hidden="true" tabindex="-1"></a>mussels</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   # A tibble: 13 x 2
 #R&gt;      loc        merc
 #R&gt;      &lt;chr&gt;     &lt;dbl&gt;

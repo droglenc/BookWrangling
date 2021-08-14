@@ -1,5 +1,192 @@
 # Preparation {#preparation}
-XXX
+The material for this course will be use R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio but below are four videos to introduce you to these tools.
+
+* [What is R?](https://www.youtube.com/watch?v=XcBLEVknqvY)
+* [What's Up With R?](https://www.youtube.com/watch?v=ZwYQPtU2Pa0) [*stop at 1:51*]
+* [What is RStudio (part 1)](https://www.youtube.com/watch?v=riONFzJdXcs) [*stop at 2:27*]
+* [What is RStudio (part 2)](https://www.youtube.com/watch?v=riONFzJdXcs) [*only from 3:26 to 4:13*]
+
+The remainder of this module will explain how to install R, RStudio, and helper packages and how to configure and use RStudio in an efficient manner for the course.
+
+&nbsp;
+
+## Installing R and RStudio
+R and RStudio can be installed to your personal computer, but does not work well if you have a ChromeBook or if your machine is old (especially Macs). If you have a ChromeBook or old machine then please see me for potential alternatives
+
+### Windows
+To install R on a Windows machine, download the installer from [this site](https://cloud.r-project.org/bin/windows/base/) by selecting the “Download R X.X.X for Windows” link at the top.^[The X's will be replaced with version numbers; e.g., 4.1.2.] Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this class.
 
 
+To install RStudio on a Windows machine, download the installer from [this link](https://rstudio.com/products/rstudio/download/#download) by selecting the “DOWNLOAD RSTUDIO FOR WINDOWS” button. Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this class.
 
+## Mac
+To install R on a Mac, download the installer from [this site](https://cloud.r-project.org/bin/macosx/) by selecting one of the “R-X.X.X.pkg” links appropriate for your operating system under the “Latest Release” section.^[The X's will be replaced with version numbers; e.g., 4.1.2.] Locate the “.pkg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this class.
+
+To install RStudio on a Mac, download the installer from [this link](https://rstudio.com/products/rstudio/download/#download) by selecting the “DOWNLOAD RSTUDIO FOR MACOS” button (you can also select the MacOS option under the “All Installers” section). Locate the “.dmg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this class.
+
+&nbsp;
+
+## Optimally Configuring RStudio
+I suggest changing the following default settings in RStudio for optimal efficiency.
+
+* In RStudio select the "Tools" menu and "Global Options" submenu.
+  * Under the "Workspace" heading (assuming that "General" on the left is selected) ...
+    * Turn off (unselect) the "Restore .RData into workspace at startup" item.
+    * Change "Ask" following "Save Workspace to .RData on exit:" to "Never".
+  * Select "Code" on the left and "Display" at the top ...
+    * Turn on (select) "Highlight selected line".
+    * Turn on (select) "Show margin" (and I usually put 80 as the "Margin column").
+    * Turn on (select) "Rainbow Parentheses".
+  * Select "Console" on the left ...
+    * Turn on (select) "Show syntax highlighting in console input.
+  * Press "OK".
+
+I also suggest reorganizing the panes in RStudio with the "Tools" menu and "Global Options" submenu (as above). Then select "Pane Layout" on the left and change the options to look like that below.
+
+```{r echo=FALSE, out.width='65%'}
+knitr::include_graphics("zimgs/RStudio_PaneLayout.JPG")
+```
+
+&nbsp;
+
+With this arrangement, I usually have my scripting window (upper-left) fill the entire left side of RStudio and the console window (upper-right) fill the entire right side of RStudio. I will usually only open up the two lower panes when I need the tabs within them (and at times they will open on their own).
+
+Finally, I prefer to have lighter text on a darker background (as you can see with my RStudio screen captures). You can try different RStudio editor themes by again selecting the "Tools" menu and "Global Options" submenu and then selecting the "Appearance" item on the left. My personal preference is to then select "Tomorrow Night 80s" under the "Editor Theme" list. I have seen students use other themes that match their eye better. This is just personal preference.
+
+&nbsp;
+
+## Install Tidyverse and Other Packages
+Methods in this course will depend heavily on functions from the `tidyverse`, `magrittr`, and `lubridate` packages. You can load these packages in RStudio with the following steps.
+
+1. Open the "Packages" tab (in the lower-left pane if you rearranged your RStudio panes to match my preferences).
+1. Press the "Install" button on the toolbar.
+1. Enter the names of the three packages in the "Packages ..." box.
+
+```{r echo=FALSE, out.width='50%'}
+knitr::include_graphics("zimgs/R_InstallPackages_1.JPG")
+```
+
+4. Press the "Install" button.
+1. Check to see if `tidyverse` is installed by typing `library(tidyverse)` in the console to see if you get a message similar to that below (*version numbers may be different but they should be at or greater than those shown below*).
+
+```{r message=TRUE}
+library(tidyverse)
+```
+
+&nbsp;
+
+## RStudio Projects
+Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. I generally use a separate project for each data anaysis project that I am working on. Here, I suggest that you create a project for all of your work in this course. 
+
+### Creating a Project
+A project can be started in RStudio with
+
+* Select the "File" menu, "New Project" submenu, "New Directory" item, and "New Project" item (use "Existing Directory" item if you have already created a folder outside of RStudio),
+* enter the name for the directory and the project under "Directory Name",
+* browse to an appropriate place for this new folder as shown below "Create Project as Subdirectory of", and
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("zimgs/RStudio_Project_MakeName.JPG")
+```
+
+* select "Create Directory"
+
+This will refresh RStudio (i.e., like starting anew) but you will see the name of your project above the upper-right corner of the upper-right pane in RStudio.
+
+```{r echo=FALSE, out.width='15%'}
+knitr::include_graphics("zimgs/RStudio_Project_ShowName.JPG")
+```
+
+### Opening an Existing Project
+An existing project can be opened with "File" menu and "Open Project" submenu, browsing to the folder where the project exists, and then selecting the .Rproj file in that folder. Alternatively, you can open a project (or create a new project) by selecting the small "down arrow" next to where the project name will appear. You can select "Open Project" near the top of the box that appears or select a recently opened project from the list further down.
+
+```{r echo=FALSE, out.width='30%'}
+knitr::include_graphics("zimgs/RStudio_Project_OpenProjectList.JPG")
+```
+
+A project will open in a new RStudio window by selecting the small icon to the right of an existing project name or "Open Project in New Session ...".
+
+### Project Benefits
+The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you do not need to worry about using `setwd()` and all of the hassles that come with that. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without having to modify the working directory structure.
+
+::: {.tip data-latex=""}
+You do not need to use `setwd()` with RStudio projects!!
+:::
+
+&nbsp;
+
+## Using the Notebook Template
+Notebooks in RStudio are an efficient way to enter R code, show results of R code, write answers to assignment questions, and compile all of that to a document that can be handed in.
+
+For class assignments, start by downloading [this template](https://raw.githubusercontent.com/droglenc/NCWrangling/main/resources/TEMPLATE.Rmd) (right-click, don't change the name) to a folder where you plan to store all of your class-related work. Then open the template in RStudio and change the Author in line 3 to your name. Save the template with this change.
+
+Every time you start an assignment you should open the template file in RStudio and immediately save it (File .. Save As) with a different name (e.g., "Assignment1" ... make sure that the name does not have a "dot" in it). Then edit the Title in line 2 to something that represents the assignment (e.g., "Wrangling Columns"). Do not change anything else in the first 23 lines.
+
+```{r echo=FALSE, out.width='90%'}
+knitr::include_graphics("zimgs/Notebook_TopLines.JPG")
+```
+
+&nbsp;
+
+### Including Text in the Notebook
+#### Creating Sections {-}
+Most assignments will have several questions, each of which is identified with a section heading. Your answers to the assignments should be shown under section headings with the same name as on the assignment. Section headings are created by preceding the section heading name with a hashtag. The template has one section heading started that looks like this ...
+
+::: {.tip data-latex=""}
+Subsequent section headings can be inserted by preceding text with a hashtag, making sure that there is a blank line prior to section heading line.
+:::
+
+```
+# EDIT THIS WITH FIRST SECTION HEADING TEXT
+```
+
+You should change this text to create the section heading that you want; e.g., 
+
+```
+# Arctic Penguins
+```
+
+::: {.tip data-latex=""}
+Subsequent section headings can be inserted by preceding text with a hashtag, making sure that there is a blank line prior to section heading line.
+:::
+
+#### Writing Text for Your Answers {-}
+Sentences can be included by typing the text at the beginning of any line. A new paragraph is created by pressing return twice so that there is a blank line between paragraphs.
+
+#### Numbered Lists for Your Answers {-}
+A numbered list is created by starting a line with "1. " followed by what you want after the number (e.g., your answer). If there are no blank lines between consecutive "1. " items then RStudio will automatically iterate the number when the document is compiled.^[Note the space after the dot and before the text that will form the list item.] For example, typing this ...
+
+```{r echo=FALSE, out.width='40%'}
+knitr::include_graphics("zimgs/Notebook_OrderedList_1.JPG")
+```
+
+... produces this text ...
+
+
+```{r echo=FALSE, out.width='40%'}
+knitr::include_graphics("zimgs/Notebook_OrderedList_Out1.JPG")
+```
+
+However, typing this ...
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("zimgs/Notebook_OrderedList_2.JPG")
+```
+
+... produces this text ...
+
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("zimgs/Notebook_OrderedList_Out2.JPG")
+```
+
+&nbsp;
+
+### Compile Notebook to HTML Document
+Once you are comfortable that your R code runs without error and that you have answered all questions for the assignment, then compile your Notebook to an HTML document by pressing the "Knit" button on the console window toolbar. Make sure to check your document for completeness and neatness before turning in.
+
+If the document does not produce an HTML document (this make take several seconds) then there may be an error in your R code.
+
+```{r echo=FALSE, out.width='20%'}
+knitr::include_graphics("zimgs/Notebook_Knit.JPG")
+```
