@@ -1,5 +1,5 @@
 # Wrangle Columns
-Previous modules were primarily focused on reading data into R and making sure the data were tidy. In this module we will start wrangling data by manipulating columns, which with tidy data contain variables. Module \@ref(wrangle-rows) will further describe how to wrangle data through manipulating rows which contain observations. More complex wrangling topics will be discussed in subsequent modules
+Previous modules were primarily focused on reading data into R and making sure the data were tidy. In this module we start wrangling data by manipulating columns, which with tidy data contain variables. Module \@ref(wrangle-rows) will further describe how to wrangle data through manipulating rows which contain observations. More complex wrangling topics will be discussed in subsequent modules.
 
 ::: {.tip data-latex=""}
 Manipulating **columns** means you are manipulating **variables**.
@@ -15,12 +15,12 @@ bears
 &nbsp;
 
 ## `dplyr` verbs
-The primary tools for manipulating data frames used in this course are "verbs" from the `dplyr` package. These functions are described in more detail in subsequent sections and modules but each function has the same following characteristics:
+The primary tools for manipulating data frames used in this course are "verbs" from the `dplyr` package (which is part of the `tidyverse`). These functions are described in more detail in subsequent sections and modules but each function has the same following characteristics:
 
 * The first argument is a data frame or tibble.
 * Further arguments are directives explaining how to manipulate the data frame.
 * Variables do not need to be given in quotes.
-* A data frame or tibble is returned from the function.
+* A data frame or tibble is returned by the function.
 
 Thus, these verbs are used in this general format;
 
@@ -34,20 +34,18 @@ where `new_df` is a new data frame created by the verb function, `verb` is the n
 The first argument to `dplyr` verb functions is a data frame.
 :::
 
-&nbsp;
-
 ## Pipe
-As you will see in future modules, several `dplyr` verbs may be used consecutively. For example, you may use verbs to select just the females in the data frame, add on a new variable that calculates body mass index, and then order the observations from lowest to highest BMI. 
+As you will see in future modules, several `dplyr` verbs may be used consecutively. For example, you may use verbs to select just the females in the data frame, add a new variable that calculates body mass index, and then order the observations from lowest to highest BMI. 
 
-The "pipe" operator, `%>%`, allows consecutive verbs to be connected in a more efficient and readable manner. The pipe takes the data frame from in front of `%>%` and places it into the first argument (by default) of the function after the `%>%`. For example, the general format of a `dplyr` verb from above could be rewritten like this 
+The "pipe" operator, `%>%`{.inline}, allows consecutive verbs to be connected in a more efficient and readable manner. The pipe takes the data frame from in front of `%>%`{.inline} and places it into the first argument (by default) of the function after the `%>%`{.inline}. For example, the general format of a `dplyr` verb from above could be rewritten like this 
 
 ```
 new_df <- old_df %>% verb(...)
 ```
 
-because `%>%` will "pipe" `old_df` into the first argument of `verb()`{.inline}.
+because `%>%`{.inline} will "pipe" `old_df` into the first argument of `verb()`{.inline}.
 
-This may not look simpler in this case, but it allows for code like this
+This may not look simpler in this case, but it allows for code like this ...
 
 ```
 new_df <- verb1(old_df,...)
@@ -55,7 +53,7 @@ new_df <- verb2(new_df,...)
 new_df <- verb3(new_df,...)
 ```
 
-to be written more efficiently and expressively like this
+... to be written more efficiently and expressively like this ...
 
 ```
 new_df <- old_df %>%
@@ -64,9 +62,13 @@ new_df <- old_df %>%
   verb3(...)
 ```
 
-When reading this code think of replacing the pipe operator with "and then." For example, the last code above could be read as "a new data frame is created by starting with an old data frame *and THEN* applying verb1 *and THEN* verb2 *and THEN* verb3."
+When reading this code think of replacing `%>%`{.inline} with "and then." For example, the last code above could be read as "a new data frame is created by starting with an old data frame *and THEN* applying verb1 *and THEN* verb2 *and THEN* verb3."
 
-The "pipe and assign" operator, `%<>%`, will also be used in this and subsequent modules. This operator takes the data frame to the left and puts it in the first argument of the function on the right **AND** then takes the results of the function and assigns it to the name of the data frame to the left of the pipe operator. In other words, code like
+::: {.tip data-latex=""}
+The pipe operator, `%>%`{.inline}, places the data frame to the left of `%>%`{.inline} in the first agument of the function after `%>%`{.inline}.
+:::
+
+The "pipe and assign" operator, `%<>%`{.inline}, will also be used in this and subsequent modules. This operator takes the data frame to the left and puts it in the first argument of the function on the right **AND** then takes the results of the function and assigns it to the name of the data frame to the left of the pipe operator. In other words, code like
 
 ```
 old_df <- old_df %>% verb()
@@ -78,42 +80,48 @@ can be replaced with
 old_df %<>% verb()
 ```
 
-Be careful with this operator as the "old" data frame will be replaced with the result of the verb.
+::: {.tip data-latex=""}
+The pipe-and-assign operator, `%<>%`{.inline}, places the data frame to the left of `%<>%`{.inline} in the first agument of the function after `%<>%`{.inline} and then assigns the result back to the name to the left of `%<>%`{.inline}.
+:::
+
+::: {.tip data-latex=""}
+Be careful with `%<>%`{.inline} because the "old" data frame will be replaced with the result of the verb function.
+:::
 
 These pipe operators will be used hereafter, even for single lines of code so that you become more familiar with their use for more involved future examples.
 
 &nbsp;
 
 ## Selecting Variables
-Recall from Section \@ref(data-frames) that an individual variable (i.e., column) can be selected from a data frame by separating the data frame name and the variable name with a `$`. For example, the following selects `loc` from the `bears` data frame.
+Recall from Section \@ref(data-frames) that an individual variable (i.e., column) can be selected from a data frame by separating the data frame name and the variable name with a `$`. For example, the following selects `loc` from `bears`.
 
 ```{r}
 bears$loc
 ```
 
-However, in this section, we are more interested in selecting multiple variables, rather than a single variable, from a data frame to form a new data frame.
+However, in this section, interest is in selecting multiple variables, rather than a single variable, from a data frame to form a new data frame.
 
-Variables are selected from a data frame with `select()`{.inline}. The directive arguments to `select()`{.inline} indicate which variables to retain, which can be given in a wide variety of ways (Table \@ref(tab:selectors)). Multiple methods may be used to select the same variables but you may find that some ways make your code more succinct and readable.
+Variables are selected from a data frame with `select()`{.inline}. The directive arguments to `select()`{.inline} indicate which variables to retain. Multiple methods may be used to select the same variable(s) (Table \@ref(tab:selectors)) but you may find that some ways make your code more succinct and readable.
 
 &nbsp;
 
 ```{r selectors, echo=FALSE}
 tribble(
   ~Selector,~`Column/Variables Returned`,
-  '`2`','2nd column',
-  '`c(2,3)`','2nd & 3rd columns',
-  '`2:5`','All columns between 2nd and 5th columns',
-  '`-2`','All but the 2nd column',
-  '`x`','Column named `x`',
-  '`c(x,y)`','Columns named `x` and `y`',
-  '`x:z`','All columns between columns named `x` and `z`',
-  '`-x`','All but the column named `x`',
-  '`starts_with("x")`','All columns with names that start with x',
-  '`starts_with(c("x","y"))`','All columns with names that start with x or y',
-  '`ends_with("x")`','All columns with names that end with x',
-  '`contains("x")`','All columns with names that contain an x',
-  '`any_of(c("x","y"))`','Any (or all) of the columns named x or y (exactly)',
-  '`all_of(c("x","y"))`','All columns named x or y (exactly)^[If all columns do not exist in the data frame then an error will occur.]',
+  '`2`{.inline}','2nd column',
+  '`c(2,3)`{.inline}','2nd & 3rd columns',
+  '`2:5`{.inline}','All columns between 2nd and 5th columns',
+  '`-2`{.inline}','All but the 2nd column',
+  '`x`{.inline}','Column named `x`',
+  '`c(x,y)`{.inline}','Columns named `x` and `y`',
+  '`x:z`{.inline}','All columns between columns named `x` and `z`',
+  '`-x`{.inline}','All but the column named `x`',
+  '`starts_with("x")`{.inline}','All columns with names that start with x',
+  '`starts_with(c("x","y"))`{.inline}','All columns with names that start with x or y',
+  '`ends_with("x")`{.inline}','All columns with names that end with x',
+  '`contains("x")`{.inline}','All columns with names that contain an x',
+  '`any_of(c("x","y"))`{.inline}','Any (or all) of the columns named x or y (exactly)',
+  '`all_of(c("x","y"))`{.inline}','All columns named x or y (exactly)^[If all columns do not exist in the data frame then an error will occur.]',
   '`last_col()`{.inline}','Last column',
   '`everything()`{.inline}','All columns'
 ) %>%
@@ -125,7 +133,7 @@ tribble(
 
 &nbsp;
 
-Below are examples of selecting variables from `bears`.^[These selections are likely not needed because `bears` is so small; however, they are used here to demonstrate the selection techniques.] Note that each resulting data frame is called `tmp` (for temporary) because it will not be used further here.
+Below are examples of selecting variables from `bears`.^[These selections are likely not needed because `bears` is so small; however, they are used here to demonstrate the selection techniques.] Note that each resulting data frame is called `tmp` (for temporary) because it will not be used further here. If the data frames were to be used further than it would be best to assign them to an informative name.
 
 * Select first two variables.
 
@@ -162,10 +170,12 @@ tmp <- bears %>% select(-loc)
 tmp
 ```
 
-&nbsp;
+::: {.tip data-latex=""}
+Variables of interest are often selected (or variables not of interest are excluded) to make a smaller data frame that is simply easier to work with. You do not have to restrict a data frame just to variables of interest.
+:::
 
 ## Moving Variables
-It is not necessary that variables be in a particular order in a data frame; however, you may find it easier to work with variables in a particular order. Variables can be moved within a data frame with `relocate()`{.inline}. By default the selected columns are moved to the beginning of the data frame. However, they can be placed before or after a particular column by using `.before=` and `.after=`. Note that columns to be moved can be selected with methods shown in Table \@ref(tab:selectors). Below are examples of moving variables within `bears`.
+Variables can be moved within a data frame with `relocate()`{.inline}. By default the selected columns are moved to the beginning of the data frame. However, they can be placed before or after a particular column by using `.before=`{.inline} and `.after=`{.inline}. Note that columns to be moved can be selected with methods shown in Table \@ref(tab:selectors). Below are examples of moving variables within `bears`.
 
 * Move `loc` to the beginning.
 
@@ -202,10 +212,12 @@ tmp <- bears %>% relocate(contains("."))
 tmp
 ```
 
-&nbsp;
+::: {.tip data-latex=""}
+It is not necessary that variables be in a particular order in a data frame; however, you may find it easier to work with variables in a particular order.
+:::
 
 ## Renaming Variables
-Variables may be given new names with `rename()`{.inline}. Each directive argument in `rename()`{.inline} has the form `newname=oldname` where `newname` will be the new name for the `oldname` variable in the data frame. Below are examples of renaming variables in `bears`.
+Variables may be given new names with `rename()`{.inline}. Each directive argument in `rename()`{.inline} has the form `newname=oldname`{.inline} where `newname` will be the new name for the `oldname` variable in the data frame. Below are examples of renaming variables in `bears`.
 
 * Rename `loc` to `Location`.
 
@@ -237,10 +249,12 @@ tmp <- bears2 %>% rename(Length=`length (cm)`,Weight=`weight (kg)`)
 tmp
 ```
 
-&nbsp;
+::: {.tip data-latex=""}
+Non-standard names of variables must be included in "backticks" when renaming them.
+:::
 
 ## Adding Variables
-New variables are added to a data frame with `mutate()`{.inline}. The directive arguments to this function have the form `newvar=XXX` where `newvar` will be the name of the new variable and `XXX` will create a new variable. There are a wide variety of expressions and functions that can be used to construct a new variable. A few of these will be illustrated below with `bears` but it is impossible to demonstrate all possibilities. Thus, other examples will be shown in the full context examples below as well as in subsequent modules.
+New variables are added to a data frame with `mutate()`{.inline}. The directive arguments to this function have the form `newvar=XXX`{.inline} where `newvar` will be the name of the new variable and `XXX` will create a new variable. There are a wide variety of expressions and functions that can be used to construct a new variable. A few of these will be illustrated below with `bears` but it is impossible to demonstrate all possibilities. Thus, other examples will be shown in the full context examples below as well as in subsequent modules.
 
 * Add a `year` variable that is a constant value.
 
@@ -265,9 +279,11 @@ tmp <- bears %>% mutate(healthy.wt=0.1129*length.cm^1.366,
 tmp
 ```
 
-In the above example `ifelse()`{.inline} was used to create the new variable that stated whether the beath was more or less healthy based on the `rel_weight` varible. The `ifelse()`{.inline} functions contains three arguments -- a conditioning expression that evaluates to either TRUE or FALSE, an item to return if the expression evaluates to TRUE, and an item to return if the expression evaluates to FALSE. This `ifelse()`{.inline} statement can be read as "if the relative weight is greater than 0 then return 'more' otherwise return 'less'."
+In the above example `ifelse()`{.inline} was used to create the new variable that stated whether the bear was more or less healthy based on the `rel_weight` variable. The `ifelse()`{.inline} functions contains three arguments -- a conditioning expression that evaluates to either TRUE or FALSE, an item to return if the expression evaluates to TRUE, and an item to return if the expression evaluates to FALSE. This `ifelse()`{.inline} statement can be read as "if the relative weight is greater than 0 then return 'more' otherwise return 'less'."
 
-The `ifelse()`{.inline} function is quite powerful for converting values to **binary** groups. However, `case_when()`{.inline} is more flexible when more groups will be created. The `case_when()`{.inline} function consists of several arguments of the form `condition ~ return` where `condition` is a condition expression that evaluates to TRUE or FALSE, and `return` is the item that will be returned if that condition expression evaluates to TRUE. The conditions in the arguments are sequential such that the result for the first condition that evaluates to TRUE is returned. The last condition expression in `case_when()`{.inline} should be `TRUE` which will always evaluate to TRUE and will thus return its if all previous conditions were not met. For example, the code below is used to create a variable that provides a more detailed description of the relative health of the bears.
+The `ifelse()`{.inline} function is quite powerful for converting values to **binary** groups. However, `case_when()`{.inline} is more flexible when more groups will be created. The `case_when()`{.inline} function consists of several arguments of the form `condition ~ return`{.inline} where `condition` is a condition expression that evaluates to TRUE or FALSE, and `return` is the item that will be returned if that condition expression evaluates to TRUE. The conditions in the arguments are sequential such that the result for the first condition that evaluates to TRUE is returned. The last condition expression in `case_when()`{.inline} should be `TRUE`{.inline} which will always evaluate to TRUE and will thus return its value if all previous conditions were not met.
+
+For example, the code below is used to create a variable that provides a more detailed description of the relative health of the bears. This code could be read as "I the relative weight is greater than 10 then return 'much more', otherwise if it is greater than 0 then return 'some more', otherwise if it is greater than -10 then return 'some less', otherwise (i.e., value must be less than -10) return 'much less'."
 
 ```{r}
 tmp <- bears %>% mutate(healthy.wt=0.1129*length.cm^1.366,
@@ -281,7 +297,7 @@ tmp <- bears %>% mutate(healthy.wt=0.1129*length.cm^1.366,
 tmp
 ```
 
-Finally, `mapvalues()`{.inline} from `plyr` can be used to efficiently convert the groups of a categorical variable to different groups in a new categorical variables. The arguments to `mapvalues` are the name of the first categorical variable followed by the names of the groups of this variable in `from=` and the new names for the groups in the new variable in `to=`. Note that all group names not listed in `from=` will simply carry-over as-is in the new variable. The `plyr` package is not part of `tidyverse` and we will not typically use any other functions from `plyr`; thus, when using `mapvalues()`{.inline} you should precede it with `plyr::` as demonstrated below.
+Finally, `mapvalues()`{.inline} from `plyr` can be used to efficiently convert the groups of a categorical variable to different groups in a new categorical variables. The arguments to `mapvalues()`{.inline} are the name of the first categorical variable followed by the names of the groups of this variable in `from=`{.inline} and the new names for the groups in the new variable in `to=`{.inline}. Note that all group names not listed in `from=`{.inline} will simply carry-over as-is in the new variable. The `plyr` package is not part of `tidyverse` and we will not typically use any other functions from `plyr`; thus, when using `mapvalues()`{.inline} you should precede it with `plyr::`{.inline} as demonstrated below.
 
 As an example suppose that the locations in `loc` need to be converted to abbreviations to save space when graphing.
 
@@ -293,7 +309,7 @@ tmp <- bears %>%
 tmp
 ```
 
-Alternatively suppose that Ashland and Bayfield need to be combined into one group for some reason. This can be accomplished by giving the combined name for counties in the positions of `to=` that match the two counties in `from=`. For example,
+Alternatively suppose that Ashland and Bayfield need to be combined into one group for some reason. This can be accomplished by giving the combined name for counties in the positions of `to=`{.inline} that match the two counties in `from=`{.inline}.
 
 ```{r}
 tmp <- bears %>% 
@@ -303,13 +319,14 @@ tmp <- bears %>%
 tmp
 ```
 
-Note in the code above that I did not include "Douglas" in either `from=` or `to=` because it was not to be modified for this situation.
+Note in the code above that I did not include "Douglas" in either `from=`{.inline} or `to=`{.inline} because it was not to be modified for this situation.
 
 &nbsp;
 
 ## Examples in Context {#columns-examples}
 ### NBA Players {#columns-nba}
-Data on every player who has ever played in the National Basketball Association was read into R in Section \@ref(csv-files). The structure of that data frame is shown below.
+Data on every player who has ever played in the National Basketball Association was read into R in Section \@ref(csv-files), and below along with its structure.
+
 ```{r cache=TRUE}
 players <- read_csv("https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv")
 str(players,give.attr=FALSE)
@@ -323,7 +340,7 @@ Suppose that we ultimately want to make a graph related to the length of time th
 1. rename long variable names (and remove the capitalization);
 1. calculate the amount of time they were in the NBA by subtracting their start year from their end year;
 1. create a new variable called "modern" that is "yes" for players that ended their careers in 1980 or later and is "no" otherwise; and
-1. order the data from most to least years played;^[You will learn this in the next module]
+1. order the data from most to least years played.^[You will learn this in the next module.]
 
 ```{r}
 players2 <- players %>%
@@ -357,7 +374,7 @@ ggplot(filter(players2,years_played>18)) +
 &nbsp;
 
 ### Wolves and Moose of Isle Royale {#columns-isle-royale}
-For a module in my ["Great Graphs" course](http://derekogle.com/NCGraphing/) I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether an ice bridge formed between the mainland and Isle Royale. Fortunately, these data^[Along with a wide variety of other data about Wolves and Moose on Isle Royale.] are available at [Wolves & Moose of Isle Royale](https://isleroyalewolf.org/data/data/home.html). I downloaded the data file provided there and read it into R below.^[You may want to review the purpose of some of these arguments to `read_excel()`{.inline} in Section \@ref(excel-files).]
+For a module in my ["Great Graphs" course](http://derekogle.com/NCGraphing/) I wanted to demonstrate to students how to create graphs that examined the abundance of Moose and Wolves on Isle Royale over time and in relation to winter temperatures and whether an ice bridge formed between the mainland and Isle Royale. Fortunately, these data^[Along with a wide variety of other data about Wolves and Moose on Isle Royale.] are available at [Wolves & Moose of Isle Royale](https://isleroyalewolf.org/data/data/home.html). I downloaded the data file provided there and read it into R below,^[You may want to review the purpose of some of these arguments to `read_excel()`{.inline} in Section \@ref(excel-files).] where I also examined the structure of the data frame.
 
 ```{r}
 irmw <- readxl::read_excel(file.path("data","Data_wolves_moose_Isle_Royale_June2019.xlsx"),
@@ -365,7 +382,7 @@ irmw <- readxl::read_excel(file.path("data","Data_wolves_moose_Isle_Royale_June2
 str(irmw,give.attr=FALSE)
 ```
 
-The structure of this file shows that there are many variables, most of which I was not interested in for this demonstration, and the variable names are non-standard (i.e., they contains spaces). Thus, to prepare the data for the graphing course, I wanted to ..
+The structure of this file shows that there are many variables, most of which I was not interested in for this demonstration, and the variable names are non-standard (i.e., they contain spaces). Thus, to prepare the data for the graphing course, I wanted to ..
 
 1. reduce the data frame to only the variables that I was interested in,
 1. rename the variables to be shorter and in standard format, 

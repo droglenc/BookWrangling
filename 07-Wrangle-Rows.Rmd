@@ -12,7 +12,7 @@ bears <- read_csv(file.path("data","Bears.csv"))
 bears
 ```
 
-The code here will also use the pipe operator, `%>%`, to again help you become more comfortable with its use.
+The code here will also use the pipe operator, `%>%`{.inline}, to again help you become more comfortable with its use.
 
 &nbsp;
 
@@ -26,7 +26,7 @@ bears %>% slice(-1)               # All but the first row
 bears %>% slice(-c(1,3,5))        # All but the first, third, and fifth rows
 ```
 
-Rows from the beginning (i.e., the "head") or end (i.e., the "tail") of the data frame may also be selected with `slice_head()`{.inline} or `slice_tail()`{.inline}, respectively. You may select a certain number of rows with `n=` or an approximate proportion of rows with `prop=`. Below are four examples.
+Rows from the beginning (i.e., the "head") or end (i.e., the "tail") of the data frame may also be selected with `slice_head()`{.inline} or `slice_tail()`{.inline}, respectively. You may select a certain number of rows with `n=`{.inline} or an approximate proportion of rows with `prop=`{.inline}. Below are four examples.
 
 ```{r}
 bears %>% slice_head(n=3)         # First three rows
@@ -35,7 +35,7 @@ bears %>% slice_tail(n=3)         # Last three rows
 bears %>% slice_tail(prop=0.33)   # Approx. last 33% of rows
 ```
 
-Finally a random sample of rows from the data frame may be selected with `slice_sample()`{.inline}, again either using `n=` or `prop=`.
+Finally a random sample of rows from the data frame may be selected with `slice_sample()`{.inline}, again either using `n=`{.inline} or `prop=`{.inline}.
 
 ```{r}
 bears %>% slice_sample(n=3)       # 3 random rows
@@ -46,8 +46,6 @@ bears %>% slice_sample(prop=0.33) # Random approx. 33% rows.
 Use the `slice()`{.inline} family of functions to select specific (or random) rows from a data frame.
 :::
 
-&nbsp;
-
 ## Filtering Rows
 Observations or rows can be selected from a data frame with `filter()`{.inline}. The directive arguments to `filter()`{.inline} are conditional expressions describing which observations from the data frame to maintain. Common operators used in these conditional expressions are in Table \@ref(tab:filterComps).
 
@@ -56,20 +54,21 @@ Observations or rows can be selected from a data frame with `filter()`{.inline}.
 ```{r filterComps, echo=FALSE}
 data.frame(
   "Comparison Operator"=
-    c('`var==value`','`var!=value`','`var %in% c(value1,value2)`',
-      '`var`>`value`','`var`>=`value`','`var`<`value`','`var`<=`value`',
+    c('`var==value`{.inline}','`var!=value`{.inline}',
+      '`var %in% c(value1,value2)`{.inline}','`var`>`value`{.inline}',
+      '`var`>=`value`{.inline}','`var`<`value`{.inline}','`var`<=`value`{.inline}',
       'condition1,condition2','condition1 | condition2'),
   "Rows Returned from Original Data Frame"=
-    c('All rows where `var` **IS equal** to `value`',
-      'All rows where `var` **is NOT equal** to `value`',
-      'All rows where `var` **IS IN** (or one of the) vector of `value`s^[`value` should be a character, factor, or integer.]',
-      'All rows where `var` is **greater than** `value`^[`value` must be numeric.]',
-      'All rows where `var` is **greater than or equal to** `value`^[`value` must be numeric.]',
-      'All rows where `var` is **less than** `value`^[`value` must be numeric.]',
-      'All rows where `var` is **less than or equal to** `value`^[`value` must be numeric.]',
+    c('All rows where `var`{.inline} **IS equal** to `value`{.inline}',
+      'All rows where `var`{.inline} **is NOT equal** to `value`{.inline}',
+      'All rows where `var`{.inline} **IS IN** (or one of the) vector of `value`{.inline}s^[`value`{.inline} should be a character, factor, or integer.]',
+      'All rows where `var`{.inline} is **greater than** `value`{.inline}^[`value`{.inline} must be numeric.]',
+      'All rows where `var`{.inline} is **greater than or equal to** `value`{.inline}^[`value`{.inline} must be numeric.]',
+      'All rows where `var`{.inline} is **less than** `value`{.inline}^[`value`{.inline} must be numeric.]',
+      'All rows where `var`{.inline} is **less than or equal to** `value`{.inline}^[`value`{.inline} must be numeric.]',
       'All rows where **BOTH** conditions are true',
       'All rows where **ONE or BOTH** conditions are true^[Note that this "or" operator is a "vertical line"" which is typed with the shift-backslash key.]'),check.names=FALSE) %>%
-  knitr::kable(booktabs=TRUE,caption="Comparison operators used in `filterD()`{.inline} and their results. Note that `var` generically represents a variable in the original data frame and `value` is a generic value or level. Both `var` and `val` would be replaced with specific items (see examples in main text).") %>%
+  knitr::kable(booktabs=TRUE,caption="Comparison operators used in `filterD()`{.inline} and their results. Note that `var`{.inline} generically represents a variable in the original data frame and `value`{.inline} is a generic value or level. Both `var`{.inline} and `val`{.inline} would be replaced with specific items (see examples in main text).") %>%
   kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
   kableExtra::row_spec(0,bold=TRUE)%>%
   kableExtra::column_spec(1,width="2.5in")
@@ -120,8 +119,6 @@ The last example above illustrates that multiple conditional expressions in `fil
 Use `filter()`{.inline} to select rows from a data frame that match a logical condition.
 :::
 
-&nbsp;
-
 It is good practice to examine a data frame after filtering to be sure that the new data frame contains the observations that you want. The data frames above are so small that you can simply and easily examine the entire data frame. However, this will not be the case with more realistic larger data frames. Thus, I suggest the following methods for "checking your filtering."
 
 * Simply display the data frame or the structure of the data frame to identify any obvious issues. For example, the code below should return all bears from Douglas County with a weight greater than 150 kg. Showing the data frame or the structure of the data frame both show that this data frame contains no data.
@@ -149,8 +146,6 @@ summary(tmp$length.cm)
 ::: {.tip data-latex=''}
 Examine the new data frame after filtering to ensure that it contains the observations you intended.
 :::
-
-&nbsp;
 
 ## Arranging Rows
 The `arrange()`{.inline} function is used to sort rows based on values in one or more variables.^[Some examples of `arrange()`{.inline} are in Section \@ref(columns-examples).] The default is ascending order. To sort in descending order then wrap the variable name in `desc()`{.inline}. If more than one variable is given then the rows are first sorted based on the first variable and then ties in the first variable are sorted based on the second variable. Examples of sorting are shown below.
@@ -187,8 +182,6 @@ bears
 Use `arrange()`{.inline} to sort rows in a data frame by the value(s) of variable(s).
 :::
 
-&nbsp;
-
 ## Appending Rows
 Two data frames can be combined with `bind_rows()`{.inline} **IF** they have the same column names and classes. For example suppose that two other data frames exist -- `bears2` has more information about bears and `bobcats` has similar information about bobcats.
 
@@ -213,7 +206,7 @@ newbears <- bind_rows(bears,bears2) %>%
 newbears
 ```
 
-The same could be done with the `bears` and `bobcats` data frames but there will be no way to then tell which observations are for bears and which are for bobcats. This deficiency can be overcome by giving names to the data frames within `bind_rows()`{.inline} and giving a variable name to `.id=` for the new variable that will identify the groups. For example,
+The same could be done with the `bears` and `bobcats` data frames but there will be no way to then tell which observations are for bears and which are for bobcats. This deficiency can be overcome by giving names to the data frames within `bind_rows()`{.inline} and giving a variable name to `.id=`{.inline} for the new variable that will identify the groups. For example,
 
 ```{r}
 animals <- bind_rows("bear"=bears,"bobcat"=bobcats,.id="animal")
@@ -225,8 +218,6 @@ Note that more than two data frames can be combined with `bind_rows()`{.inline}.
 ::: {.tip data-latex=""}
 Use `bind_rows()`{.inline} to combine two (or more) data frames that have the same variables (i.e., columns).
 :::
-
-&nbsp;
 
 ## Examples in Context
 ### NBA Players {#rows-nba}

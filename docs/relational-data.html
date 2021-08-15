@@ -263,28 +263,204 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Key Variable</strong>: A variable in a data table that connects related data. This is often a unique “identification” variable.</p>
 </div>
 <p>Relational data can be more efficient and, thus, lead to fewer data entry errors. For example consider a very simple set of data where the occurrence of plant species in plots is recorded, along with information about the plot. For example, the data for <strong>one</strong> plot that had five species may look like this …</p>
-<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 5
-#R&gt;    plotID   lat  long loc        species          
-#R&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;            
-#R&gt;  1    101  43.5 -91.2 Baffle Is. Big Bluestem     
-#R&gt;  2    101  43.5 -91.2 Baffle Is. Fox Sedge        
-#R&gt;  3    101  43.5 -91.2 Baffle Is. Indian Grass     
-#R&gt;  4    101  43.5 -91.2 Baffle Is. Prairie Dropseed 
-#R&gt;  5    101  43.5 -91.2 Baffle Is. Tufted Hair Grass</code></pre>
+<table class=" lightable-minimal table table-hover table-condensed" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+plotID
+</th>
+<th style="text-align:center;font-weight: bold;">
+lat
+</th>
+<th style="text-align:center;font-weight: bold;">
+long
+</th>
+<th style="text-align:center;font-weight: bold;">
+loc
+</th>
+<th style="text-align:center;font-weight: bold;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+43.458
+</td>
+<td style="text-align:center;">
+-91.2304
+</td>
+<td style="text-align:center;">
+Baffle Is.
+</td>
+<td style="text-align:center;">
+Big Bluestem
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+43.458
+</td>
+<td style="text-align:center;">
+-91.2304
+</td>
+<td style="text-align:center;">
+Baffle Is.
+</td>
+<td style="text-align:center;">
+Fox Sedge
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+43.458
+</td>
+<td style="text-align:center;">
+-91.2304
+</td>
+<td style="text-align:center;">
+Baffle Is.
+</td>
+<td style="text-align:center;">
+Indian Grass
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+43.458
+</td>
+<td style="text-align:center;">
+-91.2304
+</td>
+<td style="text-align:center;">
+Baffle Is.
+</td>
+<td style="text-align:center;">
+Prairie Dropseed
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+43.458
+</td>
+<td style="text-align:center;">
+-91.2304
+</td>
+<td style="text-align:center;">
+Baffle Is.
+</td>
+<td style="text-align:center;">
+Tufted Hair Grass
+</td>
+</tr>
+</tbody>
+</table>
 <p>However, with this data entry the four variables related to the plot (e.g., <code>plotID</code>, <code>lat</code>, <code>long</code>, and <code>loc</code>) must be repeated multiple times for each <code>species</code>. This repetition is both inefficient and error-prone. A better structure is to create one data frame, with <code>plotID</code>, with the characteristics for each plot …</p>
-<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 1 x 4
-#R&gt;    plotID   lat  long loc       
-#R&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
-#R&gt;  1    101  43.5 -91.2 Baffle Is.</code></pre>
+<table class=" lightable-minimal table table-hover table-condensed" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+plotID
+</th>
+<th style="text-align:center;font-weight: bold;">
+lat
+</th>
+<th style="text-align:center;font-weight: bold;">
+long
+</th>
+<th style="text-align:center;font-weight: bold;">
+loc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+43.458
+</td>
+<td style="text-align:center;">
+-91.2304
+</td>
+<td style="text-align:center;">
+Baffle Is.
+</td>
+</tr>
+</tbody>
+</table>
 <p>… and then a second data frame, again with <code>plotID</code>, with the species observed …</p>
-<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 2
-#R&gt;    plotID species          
-#R&gt;     &lt;dbl&gt; &lt;chr&gt;            
-#R&gt;  1    101 Big Bluestem     
-#R&gt;  2    101 Fox Sedge        
-#R&gt;  3    101 Indian Grass     
-#R&gt;  4    101 Prairie Dropseed 
-#R&gt;  5    101 Tufted Hair Grass</code></pre>
+<table class=" lightable-minimal table table-hover table-condensed" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+plotID
+</th>
+<th style="text-align:center;font-weight: bold;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+Big Bluestem
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+Fox Sedge
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+Indian Grass
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+Prairie Dropseed
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+101
+</td>
+<td style="text-align:center;">
+Tufted Hair Grass
+</td>
+</tr>
+</tbody>
+</table>
 <p>With this structure the only variable that is repeated is <code>plotID</code>, which will save time and reduce errors upon data entry.</p>
 <div class="tip">
 <p>If you find yourself repeat values when entering data, stop and determine if you can use a relational structure to be more efficient and reduce errors.</p>
@@ -5111,15 +5287,15 @@ x4
 <h2><span class="header-section-number">4.3</span> Joins in R</h2>
 <p>Performing the joins described in the previous section is straightforward with <code>dplyr</code> (part of the <code>tidyverse</code>) using, conveniently enough, <code class="inline">inner_join()</code>, <code class="inline">left_join()</code>, <code class="inline">right_join()</code>, <code class="inline">full_join()</code>, <code class="inline">semi_join()</code>, and <code class="inline">anti_join()</code>. The first two arguments to each of these functions are the two data frames to join. In addition, the name of the key variable should be given, in quotes, to <code>by=</code>.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 <p>The two data frames used in the previous section are created below as objects in R.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb110-1"><a href="relational-data.html#cb110-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">102</span>,<span class="dv">103</span>),<span class="at">val1=</span><span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
-<span id="cb110-2"><a href="relational-data.html#cb110-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb107-1"><a href="relational-data.html#cb107-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">102</span>,<span class="dv">103</span>),<span class="at">val1=</span><span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb107-2"><a href="relational-data.html#cb107-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1
 #R&gt;  1 101   x1
 #R&gt;  2 102   x2
 #R&gt;  3 102   x3
 #R&gt;  4 103   x4</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb112-1"><a href="relational-data.html#cb112-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">104</span>,<span class="dv">104</span>),<span class="at">val2=</span><span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">val3=</span><span class="fu">paste0</span>(<span class="st">&quot;z&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
-<span id="cb112-2"><a href="relational-data.html#cb112-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb109-1"><a href="relational-data.html#cb109-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">104</span>,<span class="dv">104</span>),<span class="at">val2=</span><span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">val3=</span><span class="fu">paste0</span>(<span class="st">&quot;z&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb109-2"><a href="relational-data.html#cb109-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val2 val3
 #R&gt;  1 101   y1   z1
 #R&gt;  2 102   y2   z2
@@ -5127,37 +5303,37 @@ x4
 #R&gt;  4 104   y4   z4</code></pre>
 <p> </p>
 <p>The six joins discussed in the previous section are completed below. You should compare the results here to the visual results above.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb114-1"><a href="relational-data.html#cb114-1" aria-hidden="true" tabindex="-1"></a>ij <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
-<span id="cb114-2"><a href="relational-data.html#cb114-2" aria-hidden="true" tabindex="-1"></a>ij</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb111-1"><a href="relational-data.html#cb111-1" aria-hidden="true" tabindex="-1"></a>ij <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb111-2"><a href="relational-data.html#cb111-2" aria-hidden="true" tabindex="-1"></a>ij</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1 val2 val3
 #R&gt;  1 101   x1   y1   z1
 #R&gt;  2 102   x2   y2   z2
 #R&gt;  3 102   x3   y2   z2</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb116-1"><a href="relational-data.html#cb116-1" aria-hidden="true" tabindex="-1"></a>lj <span class="ot">&lt;-</span> <span class="fu">left_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
-<span id="cb116-2"><a href="relational-data.html#cb116-2" aria-hidden="true" tabindex="-1"></a>lj</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb113-1"><a href="relational-data.html#cb113-1" aria-hidden="true" tabindex="-1"></a>lj <span class="ot">&lt;-</span> <span class="fu">left_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb113-2"><a href="relational-data.html#cb113-2" aria-hidden="true" tabindex="-1"></a>lj</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1 val2 val3
 #R&gt;  1 101   x1   y1   z1
 #R&gt;  2 102   x2   y2   z2
 #R&gt;  3 102   x3   y2   z2
 #R&gt;  4 103   x4 &lt;NA&gt; &lt;NA&gt;</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb118-1"><a href="relational-data.html#cb118-1" aria-hidden="true" tabindex="-1"></a>rj <span class="ot">&lt;-</span> <span class="fu">right_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
-<span id="cb118-2"><a href="relational-data.html#cb118-2" aria-hidden="true" tabindex="-1"></a>rj</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb115-1"><a href="relational-data.html#cb115-1" aria-hidden="true" tabindex="-1"></a>rj <span class="ot">&lt;-</span> <span class="fu">right_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb115-2"><a href="relational-data.html#cb115-2" aria-hidden="true" tabindex="-1"></a>rj</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1 val2 val3
 #R&gt;  1 101   x1   y1   z1
 #R&gt;  2 102   x2   y2   z2
 #R&gt;  3 102   x3   y2   z2
 #R&gt;  4 104 &lt;NA&gt;   y3   z3
 #R&gt;  5 104 &lt;NA&gt;   y4   z4</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb120-1"><a href="relational-data.html#cb120-1" aria-hidden="true" tabindex="-1"></a>rj2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(y,x,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)  <span class="co"># right_join as left_join with x &amp; y reversed</span></span>
-<span id="cb120-2"><a href="relational-data.html#cb120-2" aria-hidden="true" tabindex="-1"></a>rj2</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb117-1"><a href="relational-data.html#cb117-1" aria-hidden="true" tabindex="-1"></a>rj2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(y,x,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)  <span class="co"># right_join as left_join with x &amp; y reversed</span></span>
+<span id="cb117-2"><a href="relational-data.html#cb117-2" aria-hidden="true" tabindex="-1"></a>rj2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val2 val3 val1
 #R&gt;  1 101   y1   z1   x1
 #R&gt;  2 102   y2   z2   x2
 #R&gt;  3 102   y2   z2   x3
 #R&gt;  4 104   y3   z3 &lt;NA&gt;
 #R&gt;  5 104   y4   z4 &lt;NA&gt;</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb122-1"><a href="relational-data.html#cb122-1" aria-hidden="true" tabindex="-1"></a>fj <span class="ot">&lt;-</span> <span class="fu">full_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
-<span id="cb122-2"><a href="relational-data.html#cb122-2" aria-hidden="true" tabindex="-1"></a>fj</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb119-1"><a href="relational-data.html#cb119-1" aria-hidden="true" tabindex="-1"></a>fj <span class="ot">&lt;-</span> <span class="fu">full_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb119-2"><a href="relational-data.html#cb119-2" aria-hidden="true" tabindex="-1"></a>fj</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1 val2 val3
 #R&gt;  1 101   x1   y1   z1
 #R&gt;  2 102   x2   y2   z2
@@ -5165,14 +5341,14 @@ x4
 #R&gt;  4 103   x4 &lt;NA&gt; &lt;NA&gt;
 #R&gt;  5 104 &lt;NA&gt;   y3   z3
 #R&gt;  6 104 &lt;NA&gt;   y4   z4</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb124-1"><a href="relational-data.html#cb124-1" aria-hidden="true" tabindex="-1"></a>sj <span class="ot">&lt;-</span> <span class="fu">semi_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
-<span id="cb124-2"><a href="relational-data.html#cb124-2" aria-hidden="true" tabindex="-1"></a>sj</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb121-1"><a href="relational-data.html#cb121-1" aria-hidden="true" tabindex="-1"></a>sj <span class="ot">&lt;-</span> <span class="fu">semi_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb121-2"><a href="relational-data.html#cb121-2" aria-hidden="true" tabindex="-1"></a>sj</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1
 #R&gt;  1 101   x1
 #R&gt;  2 102   x2
 #R&gt;  3 102   x3</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb126-1"><a href="relational-data.html#cb126-1" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
-<span id="cb126-2"><a href="relational-data.html#cb126-2" aria-hidden="true" tabindex="-1"></a>aj</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb123-1"><a href="relational-data.html#cb123-1" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(x,y,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb123-2"><a href="relational-data.html#cb123-2" aria-hidden="true" tabindex="-1"></a>aj</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     id val1
 #R&gt;  1 103   x4</code></pre>
 <p> </p>
@@ -5183,13 +5359,13 @@ x4
 <div id="student-data" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Student Data (One-to-One)</h3>
 <p>In large institutions or in complicated data environments, data about specific individuals may be housed in a variety of departments, each of which maintains its own database. Preferably these data sources can be related via a primary key variable, such as a unique student ID number. As an example, suppose that a college’s admissions office maintains a database of personal information about every student at the college. For example it might look like that below for a fictitious five students.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb128-1"><a href="relational-data.html#cb128-1" aria-hidden="true" tabindex="-1"></a>personal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
-<span id="cb128-2"><a href="relational-data.html#cb128-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">first_nm=</span><span class="fu">c</span>(<span class="st">&quot;Rolando&quot;</span>,<span class="st">&quot;Catherine&quot;</span>,<span class="st">&quot;James&quot;</span>,<span class="st">&quot;Rachel&quot;</span>,<span class="st">&quot;Esteban&quot;</span>),</span>
-<span id="cb128-3"><a href="relational-data.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">last_nm=</span><span class="fu">c</span>(<span class="st">&quot;Blackman&quot;</span>,<span class="st">&quot;Johnson&quot;</span>,<span class="st">&quot;Carmichael&quot;</span>,<span class="st">&quot;Brown&quot;</span>,<span class="st">&quot;Perez&quot;</span>),</span>
-<span id="cb128-4"><a href="relational-data.html#cb128-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">hometown=</span><span class="fu">c</span>(<span class="st">&quot;Windsor&quot;</span>,<span class="st">&quot;Eden Prairie&quot;</span>,<span class="st">&quot;Marion&quot;</span>,<span class="st">&quot;Milwaukee&quot;</span>,<span class="st">&quot;El Paso&quot;</span>),</span>
-<span id="cb128-5"><a href="relational-data.html#cb128-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">homestate=</span><span class="fu">c</span>(<span class="st">&quot;MI&quot;</span>,<span class="st">&quot;MN&quot;</span>,<span class="st">&quot;IA&quot;</span>,<span class="st">&quot;WI&quot;</span>,<span class="st">&quot;TX&quot;</span>))</span>
-<span id="cb128-6"><a href="relational-data.html#cb128-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-7"><a href="relational-data.html#cb128-7" aria-hidden="true" tabindex="-1"></a>personal</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb125-1"><a href="relational-data.html#cb125-1" aria-hidden="true" tabindex="-1"></a>personal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
+<span id="cb125-2"><a href="relational-data.html#cb125-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">first_nm=</span><span class="fu">c</span>(<span class="st">&quot;Rolando&quot;</span>,<span class="st">&quot;Catherine&quot;</span>,<span class="st">&quot;James&quot;</span>,<span class="st">&quot;Rachel&quot;</span>,<span class="st">&quot;Esteban&quot;</span>),</span>
+<span id="cb125-3"><a href="relational-data.html#cb125-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">last_nm=</span><span class="fu">c</span>(<span class="st">&quot;Blackman&quot;</span>,<span class="st">&quot;Johnson&quot;</span>,<span class="st">&quot;Carmichael&quot;</span>,<span class="st">&quot;Brown&quot;</span>,<span class="st">&quot;Perez&quot;</span>),</span>
+<span id="cb125-4"><a href="relational-data.html#cb125-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">hometown=</span><span class="fu">c</span>(<span class="st">&quot;Windsor&quot;</span>,<span class="st">&quot;Eden Prairie&quot;</span>,<span class="st">&quot;Marion&quot;</span>,<span class="st">&quot;Milwaukee&quot;</span>,<span class="st">&quot;El Paso&quot;</span>),</span>
+<span id="cb125-5"><a href="relational-data.html#cb125-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">homestate=</span><span class="fu">c</span>(<span class="st">&quot;MI&quot;</span>,<span class="st">&quot;MN&quot;</span>,<span class="st">&quot;IA&quot;</span>,<span class="st">&quot;WI&quot;</span>,<span class="st">&quot;TX&quot;</span>))</span>
+<span id="cb125-6"><a href="relational-data.html#cb125-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-7"><a href="relational-data.html#cb125-7" aria-hidden="true" tabindex="-1"></a>personal</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 5
 #R&gt;    studentID first_nm  last_nm    hometown     homestate
 #R&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;    
@@ -5199,11 +5375,11 @@ x4
 #R&gt;  4     89874 Rachel    Brown      Milwaukee    WI       
 #R&gt;  5     98222 Esteban   Perez      El Paso      TX</code></pre>
 <p>In addition the financial aid office may have a database of financial aid information.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb130-1"><a href="relational-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a>finaid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
-<span id="cb130-2"><a href="relational-data.html#cb130-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">income_cat=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
-<span id="cb130-3"><a href="relational-data.html#cb130-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pell_elig=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>),</span>
-<span id="cb130-4"><a href="relational-data.html#cb130-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">work_study=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>))</span>
-<span id="cb130-5"><a href="relational-data.html#cb130-5" aria-hidden="true" tabindex="-1"></a>finaid</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb127-1"><a href="relational-data.html#cb127-1" aria-hidden="true" tabindex="-1"></a>finaid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
+<span id="cb127-2"><a href="relational-data.html#cb127-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">income_cat=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb127-3"><a href="relational-data.html#cb127-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pell_elig=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>),</span>
+<span id="cb127-4"><a href="relational-data.html#cb127-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">work_study=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>))</span>
+<span id="cb127-5"><a href="relational-data.html#cb127-5" aria-hidden="true" tabindex="-1"></a>finaid</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 4
 #R&gt;    studentID income_cat pell_elig work_study
 #R&gt;        &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;     &lt;lgl&gt;     
@@ -5213,11 +5389,11 @@ x4
 #R&gt;  4     89874          2 TRUE      FALSE     
 #R&gt;  5     98222          3 TRUE      TRUE</code></pre>
 <p>Furthermore the registrar’s office has a database of academic information.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb132-1"><a href="relational-data.html#cb132-1" aria-hidden="true" tabindex="-1"></a>academics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
-<span id="cb132-2"><a href="relational-data.html#cb132-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">standing=</span><span class="fu">c</span>(<span class="st">&quot;FY&quot;</span>,<span class="st">&quot;FY&quot;</span>,<span class="st">&quot;SO&quot;</span>,<span class="st">&quot;SR&quot;</span>,<span class="st">&quot;JR&quot;</span>),</span>
-<span id="cb132-3"><a href="relational-data.html#cb132-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">major=</span><span class="fu">c</span>(<span class="st">&quot;undecided&quot;</span>,<span class="st">&quot;NRS&quot;</span>,<span class="st">&quot;Biology&quot;</span>,<span class="st">&quot;SCD&quot;</span>,<span class="st">&quot;SCD&quot;</span>),</span>
-<span id="cb132-4"><a href="relational-data.html#cb132-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cum_gpa=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">3.12</span>,<span class="fl">3.67</span>,<span class="fl">2.89</span>))</span>
-<span id="cb132-5"><a href="relational-data.html#cb132-5" aria-hidden="true" tabindex="-1"></a>academics</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb129-1"><a href="relational-data.html#cb129-1" aria-hidden="true" tabindex="-1"></a>academics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">45423</span>,<span class="dv">73424</span>,<span class="dv">89874</span>,<span class="dv">98222</span>),</span>
+<span id="cb129-2"><a href="relational-data.html#cb129-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">standing=</span><span class="fu">c</span>(<span class="st">&quot;FY&quot;</span>,<span class="st">&quot;FY&quot;</span>,<span class="st">&quot;SO&quot;</span>,<span class="st">&quot;SR&quot;</span>,<span class="st">&quot;JR&quot;</span>),</span>
+<span id="cb129-3"><a href="relational-data.html#cb129-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">major=</span><span class="fu">c</span>(<span class="st">&quot;undecided&quot;</span>,<span class="st">&quot;NRS&quot;</span>,<span class="st">&quot;Biology&quot;</span>,<span class="st">&quot;SCD&quot;</span>,<span class="st">&quot;SCD&quot;</span>),</span>
+<span id="cb129-4"><a href="relational-data.html#cb129-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cum_gpa=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">3.12</span>,<span class="fl">3.67</span>,<span class="fl">2.89</span>))</span>
+<span id="cb129-5"><a href="relational-data.html#cb129-5" aria-hidden="true" tabindex="-1"></a>academics</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 4
 #R&gt;    studentID standing major     cum_gpa
 #R&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;
@@ -5229,8 +5405,8 @@ x4
 <p>Note how each of these databases has the <code>studentID</code> variable that will serve as the key variable to connect each student’s information across each of the databases.</p>
 <p>These databases form what is called a <em>one-to-one relationship</em> because each observation record in each database can be connected to one and only one observation record in the other databases. In this example, each database would ideally have an entry for every student.</p>
 <p>These data frames can generally be joined with inner, left, or right joins depending on the purpose. For example, an institutional researcher may want to examine whether student gpa differed between students that were eligible for a Pell Grant or not. In this case, the researcher would join the <code>finaid</code> and <code>academics</code> data frames so that the <code>pell_elig</code> and <code>cum_gpa</code> variables for each student would be in one data frame.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb134-1"><a href="relational-data.html#cb134-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(finaid,academics,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
-<span id="cb134-2"><a href="relational-data.html#cb134-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb131-1"><a href="relational-data.html#cb131-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(finaid,academics,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb131-2"><a href="relational-data.html#cb131-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 7
 #R&gt;    studentID income_cat pell_elig work_study standing major     cum_gpa
 #R&gt;        &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;     &lt;lgl&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;
@@ -5242,8 +5418,8 @@ x4
 <p>An inner join was used here because the researcher only wants to include students that are in both databases (i.e., would likely have an entry for both <code>pell_elig</code> and <code>cum_gpa</code>). Note, however, that a left join or a right join would accomplish the same task as long as both databases had entries for every student (i.e., the databases had the same set of students).</p>
 <p> </p>
 <p>Further suppose that academic advisors would like to have the students’ names attached to these records so that they could reach out to students who could use some help academically.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb136-1"><a href="relational-data.html#cb136-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(personal,tmp,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
-<span id="cb136-2"><a href="relational-data.html#cb136-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb133-1"><a href="relational-data.html#cb133-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(personal,tmp,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb133-2"><a href="relational-data.html#cb133-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 11
 #R&gt;    studentID first_nm  last_nm    hometown homestate income_cat pell_elig work_study
 #R&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;lgl&gt;     &lt;lgl&gt;     
@@ -5255,17 +5431,17 @@ x4
 #R&gt;  # ... with 3 more variables: standing &lt;chr&gt;, major &lt;chr&gt;, cum_gpa &lt;dbl&gt;</code></pre>
 <p> </p>
 <p>Continuing with this example, suppose that the registrar’s office also maintains a database that contains each students’ current class schedule.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb138-1"><a href="relational-data.html#cb138-1" aria-hidden="true" tabindex="-1"></a>schedules <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">34535</span>,<span class="dv">34535</span>,<span class="dv">34535</span>,</span>
-<span id="cb138-2"><a href="relational-data.html#cb138-2" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,</span>
-<span id="cb138-3"><a href="relational-data.html#cb138-3" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">73424</span>,<span class="dv">73424</span>,<span class="dv">73424</span>,<span class="dv">73424</span>,</span>
-<span id="cb138-4"><a href="relational-data.html#cb138-4" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">89874</span>,<span class="dv">89874</span>,<span class="dv">89874</span>,</span>
-<span id="cb138-5"><a href="relational-data.html#cb138-5" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">98222</span>,<span class="dv">98222</span>,<span class="dv">98222</span>,<span class="dv">98222</span>),</span>
-<span id="cb138-6"><a href="relational-data.html#cb138-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;MTH107&quot;</span>,<span class="st">&quot;BIO115&quot;</span>,<span class="st">&quot;CHM110&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,</span>
-<span id="cb138-7"><a href="relational-data.html#cb138-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD110&quot;</span>,<span class="st">&quot;PSY110&quot;</span>,<span class="st">&quot;MTH140&quot;</span>,<span class="st">&quot;OED212&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,</span>
-<span id="cb138-8"><a href="relational-data.html#cb138-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;BIO234&quot;</span>,<span class="st">&quot;CHM220&quot;</span>,<span class="st">&quot;BIO370&quot;</span>,<span class="st">&quot;SCD110&quot;</span>,</span>
-<span id="cb138-9"><a href="relational-data.html#cb138-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;PSY370&quot;</span>,<span class="st">&quot;IDS490&quot;</span>,</span>
-<span id="cb138-10"><a href="relational-data.html#cb138-10" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;SCD330&quot;</span>,<span class="st">&quot;SOC480&quot;</span>,<span class="st">&quot;ART220&quot;</span>))</span>
-<span id="cb138-11"><a href="relational-data.html#cb138-11" aria-hidden="true" tabindex="-1"></a>schedules</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb135-1"><a href="relational-data.html#cb135-1" aria-hidden="true" tabindex="-1"></a>schedules <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">studentID=</span><span class="fu">c</span>(<span class="dv">34535</span>,<span class="dv">34535</span>,<span class="dv">34535</span>,<span class="dv">34535</span>,</span>
+<span id="cb135-2"><a href="relational-data.html#cb135-2" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,<span class="dv">45423</span>,</span>
+<span id="cb135-3"><a href="relational-data.html#cb135-3" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">73424</span>,<span class="dv">73424</span>,<span class="dv">73424</span>,<span class="dv">73424</span>,</span>
+<span id="cb135-4"><a href="relational-data.html#cb135-4" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">89874</span>,<span class="dv">89874</span>,<span class="dv">89874</span>,</span>
+<span id="cb135-5"><a href="relational-data.html#cb135-5" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">98222</span>,<span class="dv">98222</span>,<span class="dv">98222</span>,<span class="dv">98222</span>),</span>
+<span id="cb135-6"><a href="relational-data.html#cb135-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;MTH107&quot;</span>,<span class="st">&quot;BIO115&quot;</span>,<span class="st">&quot;CHM110&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,</span>
+<span id="cb135-7"><a href="relational-data.html#cb135-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD110&quot;</span>,<span class="st">&quot;PSY110&quot;</span>,<span class="st">&quot;MTH140&quot;</span>,<span class="st">&quot;OED212&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,</span>
+<span id="cb135-8"><a href="relational-data.html#cb135-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;BIO234&quot;</span>,<span class="st">&quot;CHM220&quot;</span>,<span class="st">&quot;BIO370&quot;</span>,<span class="st">&quot;SCD110&quot;</span>,</span>
+<span id="cb135-9"><a href="relational-data.html#cb135-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;PSY370&quot;</span>,<span class="st">&quot;IDS490&quot;</span>,</span>
+<span id="cb135-10"><a href="relational-data.html#cb135-10" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;SCD330&quot;</span>,<span class="st">&quot;SOC480&quot;</span>,<span class="st">&quot;ART220&quot;</span>))</span>
+<span id="cb135-11"><a href="relational-data.html#cb135-11" aria-hidden="true" tabindex="-1"></a>schedules</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 20 x 2
 #R&gt;     studentID course
 #R&gt;         &lt;dbl&gt; &lt;chr&gt; 
@@ -5290,17 +5466,17 @@ x4
 #R&gt;  19     98222 SOC480
 #R&gt;  20     98222 ART220</code></pre>
 <p>The registrar’s office also maintains a database of information about every course taught at the college. A partial example of such a database is shown below.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb140-1"><a href="relational-data.html#cb140-1" aria-hidden="true" tabindex="-1"></a>courses <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;ART220&quot;</span>,<span class="st">&quot;ART330&quot;</span>,<span class="st">&quot;BIO115&quot;</span>,<span class="st">&quot;BIO234&quot;</span>,<span class="st">&quot;BIO370&quot;</span>,<span class="st">&quot;BIO490&quot;</span>,</span>
-<span id="cb140-2"><a href="relational-data.html#cb140-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;CHM110&quot;</span>,<span class="st">&quot;CHM220&quot;</span>,<span class="st">&quot;CHM360&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,<span class="st">&quot;IDS490&quot;</span>,<span class="st">&quot;MTH107&quot;</span>,</span>
-<span id="cb140-3"><a href="relational-data.html#cb140-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MTH140&quot;</span>,<span class="st">&quot;MTH230&quot;</span>,<span class="st">&quot;OED212&quot;</span>,<span class="st">&quot;OED330&quot;</span>,<span class="st">&quot;OED360&quot;</span>,<span class="st">&quot;PSY110&quot;</span>,</span>
-<span id="cb140-4"><a href="relational-data.html#cb140-4" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;PSY370&quot;</span>,<span class="st">&quot;SCD110&quot;</span>,<span class="st">&quot;SCD330&quot;</span>,<span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;SOC111&quot;</span>,<span class="st">&quot;SOC480&quot;</span>),</span>
-<span id="cb140-5"><a href="relational-data.html#cb140-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">credits=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>),</span>
-<span id="cb140-6"><a href="relational-data.html#cb140-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">instructor=</span><span class="fu">c</span>(<span class="st">&quot;Duffy&quot;</span>,<span class="st">&quot;Terry&quot;</span>,<span class="st">&quot;Johnson&quot;</span>,<span class="st">&quot;Goyke&quot;</span>,<span class="st">&quot;Anich&quot;</span>,<span class="st">&quot;Anich&quot;</span>,</span>
-<span id="cb140-7"><a href="relational-data.html#cb140-7" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Carlson&quot;</span>,<span class="st">&quot;Robertson&quot;</span>,<span class="st">&quot;Carlson&quot;</span>,<span class="st">&quot;Goyke&quot;</span>,<span class="st">&quot;Hannickel&quot;</span>,<span class="st">&quot;Ogle&quot;</span>,</span>
-<span id="cb140-8"><a href="relational-data.html#cb140-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Jensen&quot;</span>,<span class="st">&quot;Jensen&quot;</span>,<span class="st">&quot;Andre&quot;</span>,<span class="st">&quot;Andre&quot;</span>,<span class="st">&quot;Coulson&quot;</span>,<span class="st">&quot;Sneyd&quot;</span>,</span>
-<span id="cb140-9"><a href="relational-data.html#cb140-9" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Sneyd&quot;</span>,<span class="st">&quot;Tochterman&quot;</span>,<span class="st">&quot;Tochterman&quot;</span>,<span class="st">&quot;Foster&quot;</span>,</span>
-<span id="cb140-10"><a href="relational-data.html#cb140-10" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Schanning&quot;</span>,<span class="st">&quot;Schanning&quot;</span>))</span>
-<span id="cb140-11"><a href="relational-data.html#cb140-11" aria-hidden="true" tabindex="-1"></a>courses</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb137-1"><a href="relational-data.html#cb137-1" aria-hidden="true" tabindex="-1"></a>courses <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;ART220&quot;</span>,<span class="st">&quot;ART330&quot;</span>,<span class="st">&quot;BIO115&quot;</span>,<span class="st">&quot;BIO234&quot;</span>,<span class="st">&quot;BIO370&quot;</span>,<span class="st">&quot;BIO490&quot;</span>,</span>
+<span id="cb137-2"><a href="relational-data.html#cb137-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;CHM110&quot;</span>,<span class="st">&quot;CHM220&quot;</span>,<span class="st">&quot;CHM360&quot;</span>,<span class="st">&quot;IDS101&quot;</span>,<span class="st">&quot;IDS490&quot;</span>,<span class="st">&quot;MTH107&quot;</span>,</span>
+<span id="cb137-3"><a href="relational-data.html#cb137-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MTH140&quot;</span>,<span class="st">&quot;MTH230&quot;</span>,<span class="st">&quot;OED212&quot;</span>,<span class="st">&quot;OED330&quot;</span>,<span class="st">&quot;OED360&quot;</span>,<span class="st">&quot;PSY110&quot;</span>,</span>
+<span id="cb137-4"><a href="relational-data.html#cb137-4" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;PSY370&quot;</span>,<span class="st">&quot;SCD110&quot;</span>,<span class="st">&quot;SCD330&quot;</span>,<span class="st">&quot;SCD440&quot;</span>,<span class="st">&quot;SOC111&quot;</span>,<span class="st">&quot;SOC480&quot;</span>),</span>
+<span id="cb137-5"><a href="relational-data.html#cb137-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">credits=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>),</span>
+<span id="cb137-6"><a href="relational-data.html#cb137-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">instructor=</span><span class="fu">c</span>(<span class="st">&quot;Duffy&quot;</span>,<span class="st">&quot;Terry&quot;</span>,<span class="st">&quot;Johnson&quot;</span>,<span class="st">&quot;Goyke&quot;</span>,<span class="st">&quot;Anich&quot;</span>,<span class="st">&quot;Anich&quot;</span>,</span>
+<span id="cb137-7"><a href="relational-data.html#cb137-7" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Carlson&quot;</span>,<span class="st">&quot;Robertson&quot;</span>,<span class="st">&quot;Carlson&quot;</span>,<span class="st">&quot;Goyke&quot;</span>,<span class="st">&quot;Hannickel&quot;</span>,<span class="st">&quot;Ogle&quot;</span>,</span>
+<span id="cb137-8"><a href="relational-data.html#cb137-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Jensen&quot;</span>,<span class="st">&quot;Jensen&quot;</span>,<span class="st">&quot;Andre&quot;</span>,<span class="st">&quot;Andre&quot;</span>,<span class="st">&quot;Coulson&quot;</span>,<span class="st">&quot;Sneyd&quot;</span>,</span>
+<span id="cb137-9"><a href="relational-data.html#cb137-9" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Sneyd&quot;</span>,<span class="st">&quot;Tochterman&quot;</span>,<span class="st">&quot;Tochterman&quot;</span>,<span class="st">&quot;Foster&quot;</span>,</span>
+<span id="cb137-10"><a href="relational-data.html#cb137-10" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Schanning&quot;</span>,<span class="st">&quot;Schanning&quot;</span>))</span>
+<span id="cb137-11"><a href="relational-data.html#cb137-11" aria-hidden="true" tabindex="-1"></a>courses</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 24 x 3
 #R&gt;     course credits instructor
 #R&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     
@@ -5316,8 +5492,8 @@ x4
 #R&gt;  10 IDS101       3 Goyke     
 #R&gt;  # ... with 14 more rows</code></pre>
 <p>These two data frames are related via the common <code>course</code> variable; thus for these two data frames <code>course</code> is the key variable. This type of database organization is particularly useful because the information about any one course only needs to be entered once in <code>courses</code> even though the actual course may appear many times in <code>schedules</code>. The specific course information (credits and instructor) from <code>courses</code> can be added to the student’s course information in <code>schedules</code> with a <code class="inline">left_join()</code>.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb142-1"><a href="relational-data.html#cb142-1" aria-hidden="true" tabindex="-1"></a>schedules2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(schedules,courses,<span class="at">by=</span><span class="st">&quot;course&quot;</span>)</span>
-<span id="cb142-2"><a href="relational-data.html#cb142-2" aria-hidden="true" tabindex="-1"></a>schedules2</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb139-1"><a href="relational-data.html#cb139-1" aria-hidden="true" tabindex="-1"></a>schedules2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(schedules,courses,<span class="at">by=</span><span class="st">&quot;course&quot;</span>)</span>
+<span id="cb139-2"><a href="relational-data.html#cb139-2" aria-hidden="true" tabindex="-1"></a>schedules2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 20 x 4
 #R&gt;     studentID course credits instructor
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     
@@ -5344,8 +5520,8 @@ x4
 <p>Note here that if we consider <code>schedules</code> as the primary data frame of interest then this relationship is still a <em>one-to-one relationship</em> because each course in <code>schedules</code> can be connected to only one course record in <code>courses</code>.</p>
 <p> </p>
 <p>The student’s personal information can also be added to these results with a <code class="inline">left_join()</code> but now using the <code>studentID</code> key variable.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="relational-data.html#cb144-1" aria-hidden="true" tabindex="-1"></a>schedules2A <span class="ot">&lt;-</span> <span class="fu">left_join</span>(personal,schedules2,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
-<span id="cb144-2"><a href="relational-data.html#cb144-2" aria-hidden="true" tabindex="-1"></a>schedules2A</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb141-1"><a href="relational-data.html#cb141-1" aria-hidden="true" tabindex="-1"></a>schedules2A <span class="ot">&lt;-</span> <span class="fu">left_join</span>(personal,schedules2,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb141-2"><a href="relational-data.html#cb141-2" aria-hidden="true" tabindex="-1"></a>schedules2A</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 20 x 8
 #R&gt;     studentID first_nm  last_nm    hometown     homestate course credits instructor
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     
@@ -5376,10 +5552,10 @@ x4
 <h3><span class="header-section-number">4.4.2</span> Resource Sampling Data (One-to-Many Relationship)</h3>
 <p>In sampling of natural resources it is common to have one database for information about the unit of sampling and another database specific to items within that sampling unit. For example, in fisheries we may have one database to record information about a particular net (e.g., where it is located, the date it was set) and a second database that records the species of fish caught and number of the species caught. You may be tempted to do this all in one database with a separate field for each fish species but this is inefficient as you may not know which species you may catch. Thus, every time you catch a new species you would need to add a new field or column to your database. In addition, this would be highly inefficient if you were to record information about individual fish (e.g., length and weight) as the amount of this information may vary from net to net.</p>
 <p>In this simple example, information about five specific settings of a net is stored in <code>nets</code>, which has a unique identifier for each net setting called <code>net_num</code>.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="relational-data.html#cb146-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb146-2"><a href="relational-data.html#cb146-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">lake=</span><span class="fu">c</span>(<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Millicent&quot;</span>),</span>
-<span id="cb146-3"><a href="relational-data.html#cb146-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">date=</span><span class="fu">c</span>(<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;5-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>))</span>
-<span id="cb146-4"><a href="relational-data.html#cb146-4" aria-hidden="true" tabindex="-1"></a>nets</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb143-1"><a href="relational-data.html#cb143-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb143-2"><a href="relational-data.html#cb143-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">lake=</span><span class="fu">c</span>(<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Hart&quot;</span>,<span class="st">&quot;Eagle&quot;</span>,<span class="st">&quot;Millicent&quot;</span>),</span>
+<span id="cb143-3"><a href="relational-data.html#cb143-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">date=</span><span class="fu">c</span>(<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;3-Jul-21&quot;</span>,<span class="st">&quot;5-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>,<span class="st">&quot;6-Jul-21&quot;</span>))</span>
+<span id="cb143-4"><a href="relational-data.html#cb143-4" aria-hidden="true" tabindex="-1"></a>nets</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;    net_num      lake     date
 #R&gt;  1       1     Eagle 3-Jul-21
 #R&gt;  2       2      Hart 3-Jul-21
@@ -5387,13 +5563,13 @@ x4
 #R&gt;  4       4     Eagle 6-Jul-21
 #R&gt;  5       5 Millicent 6-Jul-21</code></pre>
 <p>In a separate data frame the researchers recorded the species and number of each species caught in each net. Here there is a separate row for each species and its number caught with each row indexed to the specific net with the <code>net_num</code> key variable.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb148-1"><a href="relational-data.html#cb148-1" aria-hidden="true" tabindex="-1"></a>catch <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb148-2"><a href="relational-data.html#cb148-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
-<span id="cb148-3"><a href="relational-data.html#cb148-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,<span class="st">&quot;Bluntnose Minnow&quot;</span>,</span>
-<span id="cb148-4"><a href="relational-data.html#cb148-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
-<span id="cb148-5"><a href="relational-data.html#cb148-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Largemouth Bass&quot;</span>),</span>
-<span id="cb148-6"><a href="relational-data.html#cb148-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">19</span>,<span class="dv">2</span>,<span class="dv">56</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb148-7"><a href="relational-data.html#cb148-7" aria-hidden="true" tabindex="-1"></a>catch</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="relational-data.html#cb145-1" aria-hidden="true" tabindex="-1"></a>catch <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">net_num=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb145-2"><a href="relational-data.html#cb145-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
+<span id="cb145-3"><a href="relational-data.html#cb145-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,<span class="st">&quot;Bluntnose Minnow&quot;</span>,</span>
+<span id="cb145-4"><a href="relational-data.html#cb145-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Bluegill&quot;</span>,<span class="st">&quot;Largemouth Bass&quot;</span>,</span>
+<span id="cb145-5"><a href="relational-data.html#cb145-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Largemouth Bass&quot;</span>),</span>
+<span id="cb145-6"><a href="relational-data.html#cb145-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">19</span>,<span class="dv">2</span>,<span class="dv">56</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">3</span>))</span>
+<span id="cb145-7"><a href="relational-data.html#cb145-7" aria-hidden="true" tabindex="-1"></a>catch</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;    net_num          species number
 #R&gt;  1       1         Bluegill      7
 #R&gt;  2       1  Largemouth Bass      3
@@ -5405,8 +5581,8 @@ x4
 #R&gt;  8       5  Largemouth Bass      3</code></pre>
 <p>These data frames illustrate a <em>one-to-many</em> relationship as each record in <code>nets</code> may be connected to multiple records in <code>catch</code>.</p>
 <p>The catch data will be joined to the net data using a <code class="inline">left_join()</code> because it is important to keep track of nets that also did not catch fish. An <code class="inline">inner_join()</code> would only return nets where some fish were caught.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="relational-data.html#cb150-1" aria-hidden="true" tabindex="-1"></a>fishcatch <span class="ot">&lt;-</span> <span class="fu">left_join</span>(nets,catch,<span class="at">by=</span><span class="st">&quot;net_num&quot;</span>)</span>
-<span id="cb150-2"><a href="relational-data.html#cb150-2" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb147-1"><a href="relational-data.html#cb147-1" aria-hidden="true" tabindex="-1"></a>fishcatch <span class="ot">&lt;-</span> <span class="fu">left_join</span>(nets,catch,<span class="at">by=</span><span class="st">&quot;net_num&quot;</span>)</span>
+<span id="cb147-2"><a href="relational-data.html#cb147-2" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;    net_num      lake     date          species number
 #R&gt;  1       1     Eagle 3-Jul-21         Bluegill      7
 #R&gt;  2       1     Eagle 3-Jul-21  Largemouth Bass      3
