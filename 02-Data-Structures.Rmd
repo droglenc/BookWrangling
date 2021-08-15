@@ -3,7 +3,7 @@
 ## Vectors
 The vector is the primary unit for storing data in R. You can think of a vector as a set of similar items. Vectors are created in R by combining or concatenating together the individual items into a single set with `c()`. For example, the code below creates a vector of county names stored in an object called `cn` (perhaps, short for "county names").
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 cn <- c("Ashland","Bayfield","Douglas","Iron")
 ```
 
@@ -16,8 +16,6 @@ pop <- c(15512,15056,43164,5687)
 ::: {.defn data-latex=""}
 **Vector**: The variable thought to depend upon, be explained by, or be predicted by other variables.
 :::
-
-&nbsp;
 
 Individual items in a vector can be accessed by following the vector's object name with **square brackets** that contain the numeric position of the item. For example, the second county in `cn` and the third population size in `pop` are extracted below.
 
@@ -42,7 +40,7 @@ Vectors must contain the same "type" or class of items. There are four main clas
 
 The primary difference between numeric and integer classes is how the data are stored in memory. For most of our purposes this will be irrelevant, so there is no practical difference between these two classes for our work. However, integer values are entered into a vector by appending the value with an "L".
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 nabors <- c(4L,3L,3L,3L)
 ```
 
@@ -75,7 +73,7 @@ Factors have useful properties that will be discussed in more detail in Module \
 
 As stated above, a vector should consist of items of the same class type. For example, this code does not make sense in most instances.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 huh <- c("Ashland",15512,TRUE,3.65)
 ```
 
@@ -96,7 +94,7 @@ Vectors are useful for small numbers of items that have a single purpose. Howeve
 
 A data frame is a rectangular data structure where columns are vectors of the same class that represent variables recorded on individuals which are represented in rows. Simple data frames can be constructed with `data.frame()` with named arguments set equal to vectors of data. For example, the following code produces a data frame object called `counties` that has three variables called `name`, `pop`, and `party`.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 counties <- data.frame(name=c("Ashland","Bayfield","Douglas","Iron","Sawyer"),
                        pop=c(15512,15056,43164,5687,16746),
                        party=c("Dem","Dem","Dem","Rep","Rep"))
@@ -172,7 +170,7 @@ A `$` is only used to separate a data frame name from the variable name within t
 ### Tibbles
 Tibbles are a special form of data frame that was introduced as part of the "tidyverse." Tibbles are created using `tibble()` in the same way that we used `data.frame()` previously.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 counties2 <- tibble(name=c("Ashland","Bayfield","Douglas","Iron","Sawyer"),
                     pop=c(15512,15056,43164,5687,16746),
                     party=c("Dem","Dem","Dem","Rep","Rep"))
@@ -187,7 +185,7 @@ counties2$pop
 
 There are, however, differences between tibbles and data frames as described in [this introduction to tibbles](https://r4ds.had.co.nz/tibbles.html). The primary difference that you will notice in this course is that when you examine the contents of a tibble with a larger number of rows, columns, or both. For example the code below converts a data frame from the `FSA` package into a tibble.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 tibex <- as_tibble(FSA::WhitefishLC)
 ```
 

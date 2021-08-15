@@ -44,52 +44,47 @@ div.defn {
   line-height: normal;
 }
 
-.RCODE {
+.RCODE, .RCODE_ALONE, .ROUTPUT, .RMESSAGE, .RWARNING, .RERROR {
   line-height: normal !important;
-  margin-top: 0.25em !important;
-  margin-bottom: 0.1em !important;
   padding-top: 0.2em !important;
   padding-bottom: 0.2em !important;
+  margin-top: 0.1em !important;
+}
+
+.RCODE {
+  margin-top: 0.25em !important;
+  margin-bottom: 0.1em !important;
+  background-color: Linen !important;
+  border-left: 3px solid SaddleBrown !important;
+}
+
+.RCODE_ALONE {
+  margin-top: 0.25em !important;
+  margin-bottom: 1em !important;
   background-color: Linen !important;
   border-left: 3px solid SaddleBrown !important;
 }
 
 .ROUTPUT {
-  line-height: normal !important;
-  margin-top: 0.1em !important;
   margin-bottom: 1em !important;;
-  padding-top: 0.2em !important;
-  padding-bottom: 0.2em !important;
   background-color: WhiteSmoke !important;
   border-left: 3px solid SlateGray !important;
 }
 
 .RMESSAGE {
-  line-height: normal !important;
-  margin-top: 0.1em !important;
   margin-bottom: 0.1em !important;;
-  padding-top: 0.2em !important;
-  padding-bottom: 0.2em !important;
   background-color: LemonChiffon !important;
   border-left: 3px solid Olive !important;
 }
 
 .RWARNING {
-  line-height: normal !important;
-  margin-top: 0.1em !important;
   margin-bottom: 0.1em !important;;
-  padding-top: 0.2em !important;
-  padding-bottom: 0.2em !important;
   background-color: Khaki !important;
   border-left: 3px solid DarkKhaki !important;
 }
 
 .RERROR {
-  line-height: normal !important;
-  margin-top: 0.1em !important;
   margin-bottom: 1em !important;;
-  padding-top: 0.2em !important;
-  padding-bottom: 0.2em !important;
   background-color: LightCoral !important;
   border-left: 3px solid FireBrick !important;
 }
