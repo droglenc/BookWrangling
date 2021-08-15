@@ -145,11 +145,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="preparation.html"><a href="preparation.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#mac"><i class="fa fa-check"></i><b>1.2</b> Mac</a></li>
-<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.3</b> Optimally Configuring RStudio</a></li>
-<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.4</b> Install Tidyverse and Other Packages</a></li>
-<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.5</b> RStudio Projects</a></li>
-<li class="chapter" data-level="1.6" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.6</b> Using the Notebook Template</a></li>
+<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.2</b> Optimally Configuring RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.3</b> Install Tidyverse and Other Packages</a></li>
+<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.4</b> RStudio Projects</a></li>
+<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.5</b> Using the Notebook Template</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
 <ul>
@@ -221,7 +220,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="factors.html"><a href="factors.html#examples-in-context-3"><i class="fa fa-check"></i><b>10.4</b> Examples in Context</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
 <li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
@@ -245,32 +243,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="preparation" class="section level1" number="1">
 <h1><span class="header-section-number">Module 1</span> Preparation</h1>
-<p>The material for this course will be use R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio but below are four videos to introduce you to these tools.</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=XcBLEVknqvY">What is R?</a></li>
-<li><a href="https://www.youtube.com/watch?v=ZwYQPtU2Pa0">What’s Up With R?</a> [<em>stop at 1:51</em>]</li>
-<li><a href="https://www.youtube.com/watch?v=riONFzJdXcs">What is RStudio (part 1)</a> [<em>stop at 2:27</em>]</li>
-<li><a href="https://www.youtube.com/watch?v=riONFzJdXcs">What is RStudio (part 2)</a> [<em>only from 3:26 to 4:13</em>]</li>
-</ul>
-<p>The remainder of this module will explain how to install R, RStudio, and helper packages and how to configure and use RStudio in an efficient manner for the course.</p>
+<p>The material for this course will use R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio from the prerequisite courses. This module will explain how to install R, RStudio, and helper packages, and how to configure and use RStudio in an efficient manner for the course.</p>
 <p> </p>
 <div id="installing-r-and-rstudio" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Installing R and RStudio</h2>
 <p>R and RStudio can be installed to your personal computer, but does not work well if you have a ChromeBook or if your machine is old (especially Macs). If you have a ChromeBook or old machine then please see me for potential alternatives</p>
 <div id="windows" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Windows</h3>
-<p>To install R on a Windows machine, download the installer from <a href="https://cloud.r-project.org/bin/windows/base/">this site</a> by selecting the “Download R X.X.X for Windows” link at the top.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this class.</p>
-<p>To install RStudio on a Windows machine, download the installer from <a href="https://rstudio.com/products/rstudio/download/#download">this link</a> by selecting the “DOWNLOAD RSTUDIO FOR WINDOWS” button. Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this class.</p>
+<p>To install R on a Windows machine, download the installer from <a href="https://cloud.r-project.org/bin/windows/base/">this site</a> by selecting the “Download R X.X.X for Windows” link at the top.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this course.</p>
+<p>To install RStudio on a Windows machine, download the installer from <a href="https://rstudio.com/products/rstudio/download/#download">this link</a> by selecting the “DOWNLOAD RSTUDIO FOR WINDOWS” button. Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this course.</p>
 </div>
-</div>
-<div id="mac" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Mac</h2>
-<p>To install R on a Mac, download the installer from <a href="https://cloud.r-project.org/bin/macosx/">this site</a> by selecting one of the “R-X.X.X.pkg” links appropriate for your operating system under the “Latest Release” section.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Locate the “.pkg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this class.</p>
-<p>To install RStudio on a Mac, download the installer from <a href="https://rstudio.com/products/rstudio/download/#download">this link</a> by selecting the “DOWNLOAD RSTUDIO FOR MACOS” button (you can also select the MacOS option under the “All Installers” section). Locate the “.dmg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this class.</p>
+<div id="mac" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Mac</h3>
+<p>To install R on a Mac, download the installer from <a href="https://cloud.r-project.org/bin/macosx/">this site</a> by selecting one of the “R-X.X.X.pkg” links appropriate for your operating system under the “Latest Release” section.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Locate the “.pkg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this course.</p>
+<p>To install RStudio on a Mac, download the installer from <a href="https://rstudio.com/products/rstudio/download/#download">this link</a> by selecting the “DOWNLOAD RSTUDIO FOR MACOS” button (you can also select the MacOS option under the “All Installers” section). Locate the “.dmg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this course.</p>
 <p> </p>
 </div>
-<div id="optimally-configuring-rstudio" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Optimally Configuring RStudio</h2>
+</div>
+<div id="optimally-configuring-rstudio" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Optimally Configuring RStudio</h2>
 <p>I suggest changing the following default settings in RStudio for optimal efficiency.</p>
 <ul>
 <li>In RStudio select the “Tools” menu and “Global Options” submenu.
@@ -297,12 +288,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="zimgs/RStudio_PaneLayout.JPG" width="65%" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>With this arrangement, I usually have my scripting window (upper-left) fill the entire left side of RStudio and the console window (upper-right) fill the entire right side of RStudio. I will usually only open up the two lower panes when I need the tabs within them (and at times they will open on their own).</p>
-<p>Finally, I prefer to have lighter text on a darker background (as you can see with my RStudio screen captures). You can try different RStudio editor themes by again selecting the “Tools” menu and “Global Options” submenu and then selecting the “Appearance” item on the left. My personal preference is to then select “Tomorrow Night 80s” under the “Editor Theme” list. I have seen students use other themes that match their eye better. This is just personal preference.</p>
+<p>Finally, I prefer to have lighter text on a darker background (as you can see with my RStudio screen captures). You can try different RStudio editor themes by again selecting the “Tools” menu and “Global Options” submenu and then selecting the “Appearance” item on the left. My personal preference is to select “Tomorrow Night 80s” under the “Editor Theme” list. This is just personal preference, I have seen students use other themes that match their eye better.</p>
 <p> </p>
 </div>
-<div id="install-tidyverse-and-other-packages" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Install Tidyverse and Other Packages</h2>
-<p>Methods in this course will depend heavily on functions from the <code>tidyverse</code>, <code>magrittr</code>, and <code>lubridate</code> packages. You can load these packages in RStudio with the following steps.</p>
+<div id="install-tidyverse-and-other-packages" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Install Tidyverse and Other Packages</h2>
+<p>Methods in this course will depend heavily on functions from the <code>tidyverse</code>, <code>magrittr</code>, and <code>lubridate</code> packages. Use the following steps in RStudio to install these packages.</p>
 <ol style="list-style-type: decimal">
 <li>Open the “Packages” tab (in the lower-left pane if you rearranged your RStudio panes to match my preferences).</li>
 <li>Press the “Install” button on the toolbar.</li>
@@ -311,16 +302,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="zimgs/R_InstallPackages_1.JPG" width="50%" style="display: block; margin: auto;" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Press the “Install” button.</li>
-<li>Check to see if <code>tidyverse</code> is installed by typing <code>library(tidyverse)</code> in the console to see if you get a message similar to that below (<em>version numbers may be different but they should be at or greater than those shown below</em>).</li>
+<li>Check to see if the installations worked by typing the codes below into the console (upper-right pane if you rearranged the panes) to see if you get the results shown below (<em>version numbers may be different but they should be at or greater than those shown below</em>).</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="preparation.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="preparation.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre class="RMESSAGE"><code>#R&gt;  -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre class="RMESSAGE"><code>#R&gt;  v ggplot2 3.3.5     v purrr   0.3.4
+#R&gt;  v tibble  3.1.3     v dplyr   1.0.7
+#R&gt;  v tidyr   1.1.3     v stringr 1.4.0
+#R&gt;  v readr   2.0.1     v forcats 0.5.1</code></pre>
+<pre class="RMESSAGE"><code>#R&gt;  -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+#R&gt;  x dplyr::filter() masks stats::filter()
+#R&gt;  x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb13-1"><a href="preparation.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
+<pre class="RMESSAGE"><code>#R&gt;  
+#R&gt;  Attaching package: &#39;magrittr&#39;</code></pre>
+<pre class="RMESSAGE"><code>#R&gt;  The following object is masked from &#39;package:purrr&#39;:
+#R&gt;  
+#R&gt;      set_names</code></pre>
+<pre class="RMESSAGE"><code>#R&gt;  The following object is masked from &#39;package:tidyr&#39;:
+#R&gt;  
+#R&gt;      extract</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb17-1"><a href="preparation.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<pre class="RMESSAGE"><code>#R&gt;  
+#R&gt;  Attaching package: &#39;lubridate&#39;</code></pre>
+<pre class="RMESSAGE"><code>#R&gt;  The following objects are masked from &#39;package:base&#39;:
+#R&gt;  
+#R&gt;      date, intersect, setdiff, union</code></pre>
 <p> </p>
 </div>
-<div id="rstudio-projects" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> RStudio Projects</h2>
+<div id="rstudio-projects" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> RStudio Projects</h2>
 <p>Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. I generally use a separate project for each data anaysis project that I am working on. Here, I suggest that you create a project for all of your work in this course.</p>
-<div id="creating-a-project" class="section level3" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Creating a Project</h3>
+<div id="creating-a-project" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Creating a Project</h3>
 <p>A project can be started in RStudio with</p>
 <ul>
 <li>Select the “File” menu, “New Project” submenu, “New Directory” item, and “New Project” item (use “Existing Directory” item if you have already created a folder outside of RStudio),</li>
@@ -334,14 +348,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This will refresh RStudio (i.e., like starting anew) but you will see the name of your project above the upper-right corner of the upper-right pane in RStudio.</p>
 <p><img src="zimgs/RStudio_Project_ShowName.JPG" width="15%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="opening-an-existing-project" class="section level3" number="1.5.2">
-<h3><span class="header-section-number">1.5.2</span> Opening an Existing Project</h3>
+<div id="opening-an-existing-project" class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Opening an Existing Project</h3>
 <p>An existing project can be opened with “File” menu and “Open Project” submenu, browsing to the folder where the project exists, and then selecting the .Rproj file in that folder. Alternatively, you can open a project (or create a new project) by selecting the small “down arrow” next to where the project name will appear. You can select “Open Project” near the top of the box that appears or select a recently opened project from the list further down.</p>
 <p><img src="zimgs/RStudio_Project_OpenProjectList.JPG" width="30%" style="display: block; margin: auto;" /></p>
 <p>A project will open in a new RStudio window by selecting the small icon to the right of an existing project name or “Open Project in New Session ….”</p>
 </div>
-<div id="project-benefits" class="section level3" number="1.5.3">
-<h3><span class="header-section-number">1.5.3</span> Project Benefits</h3>
+<div id="project-benefits" class="section level3" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Project Benefits</h3>
 <p>The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you do not need to worry about using <code>setwd()</code> and all of the hassles that come with that. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without having to modify the working directory structure.</p>
 <div class="tip">
 <p>You do not need to use <code>setwd()</code> with RStudio projects!!</p>
@@ -349,15 +363,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 </div>
 </div>
-<div id="using-the-notebook-template" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Using the Notebook Template</h2>
+<div id="using-the-notebook-template" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Using the Notebook Template</h2>
 <p>Notebooks in RStudio are an efficient way to enter R code, show results of R code, write answers to assignment questions, and compile all of that to a document that can be handed in.</p>
 <p>For class assignments, start by downloading <a href="https://raw.githubusercontent.com/droglenc/NCWrangling/main/resources/TEMPLATE.Rmd">this template</a> (right-click, don’t change the name) to a folder where you plan to store all of your class-related work. Then open the template in RStudio and change the Author in line 3 to your name. Save the template with this change.</p>
 <p>Every time you start an assignment you should open the template file in RStudio and immediately save it (File .. Save As) with a different name (e.g., “Assignment1” … make sure that the name does not have a “dot” in it). Then edit the Title in line 2 to something that represents the assignment (e.g., “Wrangling Columns”). Do not change anything else in the first 23 lines.</p>
 <p><img src="zimgs/Notebook_TopLines.JPG" width="90%" style="display: block; margin: auto;" /></p>
 <p> </p>
-<div id="including-text-in-the-notebook" class="section level3" number="1.6.1">
-<h3><span class="header-section-number">1.6.1</span> Including Text in the Notebook</h3>
+<div id="including-text-in-the-notebook" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Including Text in the Notebook</h3>
 <div id="creating-sections" class="section level4 unnumbered">
 <h4>Creating Sections</h4>
 <p>Most assignments will have several questions, each of which is identified with a section heading. Your answers to the assignments should be shown under section headings with the same name as on the assignment. Section headings are created by preceding the section heading name with a hashtag. The template has one section heading started that looks like this …</p>
@@ -388,8 +402,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 </div>
 </div>
-<div id="compile-notebook-to-html-document" class="section level3" number="1.6.2">
-<h3><span class="header-section-number">1.6.2</span> Compile Notebook to HTML Document</h3>
+<div id="compile-notebook-to-html-document" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Compile Notebook to HTML Document</h3>
 <p>Once you are comfortable that your R code runs without error and that you have answered all questions for the assignment, then compile your Notebook to an HTML document by pressing the “Knit” button on the console window toolbar. Make sure to check your document for completeness and neatness before turning in.</p>
 <p>If the document does not produce an HTML document (this make take several seconds) then there may be an error in your R code.</p>
 <p><img src="zimgs/Notebook_Knit.JPG" width="20%" style="display: block; margin: auto;" /></p>

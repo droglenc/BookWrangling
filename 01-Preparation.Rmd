@@ -1,12 +1,5 @@
 # Preparation {#preparation}
-The material for this course will be use R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio but below are four videos to introduce you to these tools.
-
-* [What is R?](https://www.youtube.com/watch?v=XcBLEVknqvY)
-* [What's Up With R?](https://www.youtube.com/watch?v=ZwYQPtU2Pa0) [*stop at 1:51*]
-* [What is RStudio (part 1)](https://www.youtube.com/watch?v=riONFzJdXcs) [*stop at 2:27*]
-* [What is RStudio (part 2)](https://www.youtube.com/watch?v=riONFzJdXcs) [*only from 3:26 to 4:13*]
-
-The remainder of this module will explain how to install R, RStudio, and helper packages and how to configure and use RStudio in an efficient manner for the course.
+The material for this course will use R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio from the prerequisite courses. This module will explain how to install R, RStudio, and helper packages, and how to configure and use RStudio in an efficient manner for the course.
 
 &nbsp;
 
@@ -14,15 +7,15 @@ The remainder of this module will explain how to install R, RStudio, and helper 
 R and RStudio can be installed to your personal computer, but does not work well if you have a ChromeBook or if your machine is old (especially Macs). If you have a ChromeBook or old machine then please see me for potential alternatives
 
 ### Windows
-To install R on a Windows machine, download the installer from [this site](https://cloud.r-project.org/bin/windows/base/) by selecting the “Download R X.X.X for Windows” link at the top.^[The X's will be replaced with version numbers; e.g., 4.1.2.] Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this class.
+To install R on a Windows machine, download the installer from [this site](https://cloud.r-project.org/bin/windows/base/) by selecting the “Download R X.X.X for Windows” link at the top.^[The X's will be replaced with version numbers; e.g., 4.1.2.] Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this course.
 
 
-To install RStudio on a Windows machine, download the installer from [this link](https://rstudio.com/products/rstudio/download/#download) by selecting the “DOWNLOAD RSTUDIO FOR WINDOWS” button. Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this class.
+To install RStudio on a Windows machine, download the installer from [this link](https://rstudio.com/products/rstudio/download/#download) by selecting the “DOWNLOAD RSTUDIO FOR WINDOWS” button. Locate the installer on your computer and run it. Using all of the default choices will perform an acceptable install for this course.
 
-## Mac
-To install R on a Mac, download the installer from [this site](https://cloud.r-project.org/bin/macosx/) by selecting one of the “R-X.X.X.pkg” links appropriate for your operating system under the “Latest Release” section.^[The X's will be replaced with version numbers; e.g., 4.1.2.] Locate the “.pkg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this class.
+### Mac
+To install R on a Mac, download the installer from [this site](https://cloud.r-project.org/bin/macosx/) by selecting one of the “R-X.X.X.pkg” links appropriate for your operating system under the “Latest Release” section.^[The X's will be replaced with version numbers; e.g., 4.1.2.] Locate the “.pkg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this course.
 
-To install RStudio on a Mac, download the installer from [this link](https://rstudio.com/products/rstudio/download/#download) by selecting the “DOWNLOAD RSTUDIO FOR MACOS” button (you can also select the MacOS option under the “All Installers” section). Locate the “.dmg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this class.
+To install RStudio on a Mac, download the installer from [this link](https://rstudio.com/products/rstudio/download/#download) by selecting the “DOWNLOAD RSTUDIO FOR MACOS” button (you can also select the MacOS option under the “All Installers” section). Locate the “.dmg” file on your computer and install it per usual. Using all of the default choices will perform an acceptable install for this course.
 
 &nbsp;
 
@@ -51,12 +44,12 @@ knitr::include_graphics("zimgs/RStudio_PaneLayout.JPG")
 
 With this arrangement, I usually have my scripting window (upper-left) fill the entire left side of RStudio and the console window (upper-right) fill the entire right side of RStudio. I will usually only open up the two lower panes when I need the tabs within them (and at times they will open on their own).
 
-Finally, I prefer to have lighter text on a darker background (as you can see with my RStudio screen captures). You can try different RStudio editor themes by again selecting the "Tools" menu and "Global Options" submenu and then selecting the "Appearance" item on the left. My personal preference is to then select "Tomorrow Night 80s" under the "Editor Theme" list. I have seen students use other themes that match their eye better. This is just personal preference.
+Finally, I prefer to have lighter text on a darker background (as you can see with my RStudio screen captures). You can try different RStudio editor themes by again selecting the "Tools" menu and "Global Options" submenu and then selecting the "Appearance" item on the left. My personal preference is to select "Tomorrow Night 80s" under the "Editor Theme" list. This is just personal preference, I have seen students use other themes that match their eye better.
 
 &nbsp;
 
 ## Install Tidyverse and Other Packages
-Methods in this course will depend heavily on functions from the `tidyverse`, `magrittr`, and `lubridate` packages. You can load these packages in RStudio with the following steps.
+Methods in this course will depend heavily on functions from the `tidyverse`, `magrittr`, and `lubridate` packages. Use the following steps in RStudio to install these packages.
 
 1. Open the "Packages" tab (in the lower-left pane if you rearranged your RStudio panes to match my preferences).
 1. Press the "Install" button on the toolbar.
@@ -67,10 +60,12 @@ knitr::include_graphics("zimgs/R_InstallPackages_1.JPG")
 ```
 
 4. Press the "Install" button.
-1. Check to see if `tidyverse` is installed by typing `library(tidyverse)` in the console to see if you get a message similar to that below (*version numbers may be different but they should be at or greater than those shown below*).
+1. Check to see if the installations worked by typing the codes below into the console (upper-right pane if you rearranged the panes) to see if you get the results shown below (*version numbers may be different but they should be at or greater than those shown below*).
 
 ```{r message=TRUE}
 library(tidyverse)
+library(magrittr)
+library(lubridate)
 ```
 
 &nbsp;
@@ -190,3 +185,12 @@ If the document does not produce an HTML document (this make take several second
 ```{r echo=FALSE, out.width='20%'}
 knitr::include_graphics("zimgs/Notebook_Knit.JPG")
 ```
+
+
+```{r echo=FALSE}
+## These are loaded here to avoid conflicts above and because they are not
+## needed until later modules.
+library(kableExtra)
+library(ggpmisc)
+```
+

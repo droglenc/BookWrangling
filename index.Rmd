@@ -13,15 +13,13 @@ github-repo: droglenc/BookWrangling
 description: "This book contains the readings for MTH250W at Northland College."
 ---
 
-```{r setup, include=FALSE}
-library(tidyverse)
-library(kableExtra)
-library(ggpmisc)
-library(magrittr)
-library(lubridate)
-knitr::opts_chunk$set(comment="#R>  ",message=FALSE,warning=FALSE,
+```{r setup}
+## Some packages loaded at end of 01-Preparation to avoid conflicts there.
+knitr::opts_chunk$set(comment="#R> ",
+                      message=FALSE,warning=FALSE,
                       fig.align='center',fig.width=3.5,fig.height=3.5,
-                      class.source="RCODE",class.output="ROUTPUT",
+                      class.source="RCODE",
+                      class.output="ROUTPUT",
                       class.warning="RWARNING",
                       class.error="RERROR",
                       class.message="RMESSAGE",
@@ -32,7 +30,7 @@ khfont <- "Cambria"
 ```
 
 # Preface {-}
-XXX However, there are likely still errors or descriptions that don't make sense. Please feel free to ask questions or post errors on the appropriate channel of the course MS Team.
+This book is currently a first draft of materials for learning how to wrangle data for more efficient further analyses and visualizations. I have worked hard to only provide information that you need to know to work on the module exercises. I have also tried to make it easy to read and pvoide visuals and explanations for all concepts. However, there are likely still errors or descriptions that don't make sense. Please ask questions or post errors on the appropriate channel of the course MS Team.
 
 The book highlights definitions and tips in special boxes.
 
@@ -44,25 +42,23 @@ The book highlights definitions and tips in special boxes.
 This is a tip.
 :::
 
-R Code and results are also shown in special boxes. Code in the R box can be copied verbatim from the box with the icon that appears when you hover over the upper right corner of the code box.
+R Code and results are also shown in special boxes. R code is shown in a slight orange shade with the output in gray. Code in the R box can be copied from the box with the icon that appears when you hover over the upper right corner of the code box.
 
 ```{r}
 dat <- c(3,4,5,2,8)
 mean(dat)
 ```
 
+Error results are shown in a reddish box.
+
+```{r error=TRUE}
+3*x
+```
+
+Results with a warning are shown in a goldish box.
+
+```{r warning=TRUE}
+c(2,2)*c(3,3,3)
+```
+
 The material presented in this book can be challenging to master. Please don't hesitate to ask me questions as you have them!
-
-
-
-## Package Needs {.unlisted .unnumbered}
-
-```{r}
-library(tidyverse)
-```
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(.packages(), 'tidyverse'), 'packages.bib')
-```

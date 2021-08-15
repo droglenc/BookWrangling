@@ -145,11 +145,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="preparation.html"><a href="preparation.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#mac"><i class="fa fa-check"></i><b>1.2</b> Mac</a></li>
-<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.3</b> Optimally Configuring RStudio</a></li>
-<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.4</b> Install Tidyverse and Other Packages</a></li>
-<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.5</b> RStudio Projects</a></li>
-<li class="chapter" data-level="1.6" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.6</b> Using the Notebook Template</a></li>
+<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.2</b> Optimally Configuring RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.3</b> Install Tidyverse and Other Packages</a></li>
+<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.4</b> RStudio Projects</a></li>
+<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.5</b> Using the Notebook Template</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
 <ul>
@@ -221,7 +220,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="factors.html"><a href="factors.html#examples-in-context-3"><i class="fa fa-check"></i><b>10.4</b> Examples in Context</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
 <li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
@@ -247,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Module 9</span> Dates and Times</h1>
 <p>One of the most common and most difficult types of data to wrangle is date, time, or date and time data. Dates, for example, can be entered in a variety of formats (with different “standards” for different parts of the world) and there are different numbers of days in months, leap years, and starts of the week. Times have complications related to, for example, different formats (e.g., 12- versue 24-hour clock) and time zones. The most common (rather than all) difficulties with dates and times will be addressed in this module.</p>
 <p>The methods in this module depend on functions from <code>lubridate</code>, which must be explicitly loaded as it is not part of <code>tidyverse</code>.<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb377-1"><a href="dates-and-times.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb392-1"><a href="dates-and-times.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
 <p> </p>
 <div id="obtaining-dates-data" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Obtaining Dates Data</h2>
@@ -256,179 +254,179 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Dates are often entered as string or character class data, which can make them fairly easily to deal with. However, dates can be entered in many different formats, some of which can be ambiguous as to what date they represent. For example, July 15th in 2021 could be formatted as “July 15, 2021,” “15-Jul-2021,” “15-Jul-21,” “15-July-2021,” or “2021-Jul-15,” among other possibilities. Fortunately, <code>lubridate</code> has a suite of functions that can easily convert strings to dates as long as all dates are entered in the same format and you know what that format is.</p>
 <p>The <code>lubridate</code> function names are combinations of <code>y</code>, <code>m</code>, and <code>d</code> in order of the year, month, and day components of the date format. For example, if dates are given as year, month, and day then use <code>ymd()</code>. Alternatively, if dates are given as month, day, and year then use <code>mdy()</code>.</p>
 <p>Each <code>lubridate</code> function is good at deciphering the proper dates regardless of how the components are separated (dashes, slashes, commas, spaces) or whether words or numbers are used for months. For example, a data frame is created below that has dates in year-month-day format in the <code>DSTR</code> variable which is then converted with <code>ymd()</code> to the <code>DATE</code> variable. Note how the <code>DATE</code> variable is of the “date” data class, which is what is needed for proper graphing and calculation as shown in later sections.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb378-1"><a href="dates-and-times.html#cb378-1" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;2021-7-15&quot;</span>,<span class="st">&quot;2020-9-21&quot;</span>,<span class="st">&quot;2019-3-3&quot;</span>),</span>
-<span id="cb378-2"><a href="dates-and-times.html#cb378-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">ymd</span>(DSTR))</span>
-<span id="cb378-3"><a href="dates-and-times.html#cb378-3" aria-hidden="true" tabindex="-1"></a>ex1</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
-#R&gt;     DSTR      DATE      
-#R&gt;     &lt;chr&gt;     &lt;date&gt;    
-#R&gt;   1 2021-7-15 2021-07-15
-#R&gt;   2 2020-9-21 2020-09-21
-#R&gt;   3 2019-3-3  2019-03-03</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb393-1"><a href="dates-and-times.html#cb393-1" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;2021-7-15&quot;</span>,<span class="st">&quot;2020-9-21&quot;</span>,<span class="st">&quot;2019-3-3&quot;</span>),</span>
+<span id="cb393-2"><a href="dates-and-times.html#cb393-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">ymd</span>(DSTR))</span>
+<span id="cb393-3"><a href="dates-and-times.html#cb393-3" aria-hidden="true" tabindex="-1"></a>ex1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
+#R&gt;    DSTR      DATE      
+#R&gt;    &lt;chr&gt;     &lt;date&gt;    
+#R&gt;  1 2021-7-15 2021-07-15
+#R&gt;  2 2020-9-21 2020-09-21
+#R&gt;  3 2019-3-3  2019-03-03</code></pre>
 <p>The following examples are similar except that the date strings are in different formats so different <code>lubridate</code> functions are used. Note how the <code>DATE</code> variable in each example has the same year-month-day format. Thus, regardless of the original format of the date, the “date” class variable will be the same format.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb380-1"><a href="dates-and-times.html#cb380-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;July 15, 2021&quot;</span>,<span class="st">&quot;September 11, 2020&quot;</span>,<span class="st">&quot;March 3, 2019&quot;</span>),</span>
-<span id="cb380-2"><a href="dates-and-times.html#cb380-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
-<span id="cb380-3"><a href="dates-and-times.html#cb380-3" aria-hidden="true" tabindex="-1"></a>ex2</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
-#R&gt;     DSTR               DATE      
-#R&gt;     &lt;chr&gt;              &lt;date&gt;    
-#R&gt;   1 July 15, 2021      2021-07-15
-#R&gt;   2 September 11, 2020 2020-09-11
-#R&gt;   3 March 3, 2019      2019-03-03</code></pre>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb382-1"><a href="dates-and-times.html#cb382-1" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;Jul-15, 2021&quot;</span>,<span class="st">&quot;Sep-11, 2020&quot;</span>,<span class="st">&quot;Mar-3, 2019&quot;</span>),</span>
-<span id="cb382-2"><a href="dates-and-times.html#cb382-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
-<span id="cb382-3"><a href="dates-and-times.html#cb382-3" aria-hidden="true" tabindex="-1"></a>ex3</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
-#R&gt;     DSTR         DATE      
-#R&gt;     &lt;chr&gt;        &lt;date&gt;    
-#R&gt;   1 Jul-15, 2021 2021-07-15
-#R&gt;   2 Sep-11, 2020 2020-09-11
-#R&gt;   3 Mar-3, 2019  2019-03-03</code></pre>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb384-1"><a href="dates-and-times.html#cb384-1" aria-hidden="true" tabindex="-1"></a>ex4 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;7/15/2021&quot;</span>,<span class="st">&quot;9/11/2020&quot;</span>,<span class="st">&quot;3/3/2019&quot;</span>),</span>
-<span id="cb384-2"><a href="dates-and-times.html#cb384-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
-<span id="cb384-3"><a href="dates-and-times.html#cb384-3" aria-hidden="true" tabindex="-1"></a>ex4</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
-#R&gt;     DSTR      DATE      
-#R&gt;     &lt;chr&gt;     &lt;date&gt;    
-#R&gt;   1 7/15/2021 2021-07-15
-#R&gt;   2 9/11/2020 2020-09-11
-#R&gt;   3 3/3/2019  2019-03-03</code></pre>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb386-1"><a href="dates-and-times.html#cb386-1" aria-hidden="true" tabindex="-1"></a>ex5 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;15-Jul 2021&quot;</span>,<span class="st">&quot;11-Sep 2020&quot;</span>,<span class="st">&quot;3-Mar 2019&quot;</span>),</span>
-<span id="cb386-2"><a href="dates-and-times.html#cb386-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">dmy</span>(DSTR))</span>
-<span id="cb386-3"><a href="dates-and-times.html#cb386-3" aria-hidden="true" tabindex="-1"></a>ex5</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
-#R&gt;     DSTR        DATE      
-#R&gt;     &lt;chr&gt;       &lt;date&gt;    
-#R&gt;   1 15-Jul 2021 2021-07-15
-#R&gt;   2 11-Sep 2020 2020-09-11
-#R&gt;   3 3-Mar 2019  2019-03-03</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb395-1"><a href="dates-and-times.html#cb395-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;July 15, 2021&quot;</span>,<span class="st">&quot;September 11, 2020&quot;</span>,<span class="st">&quot;March 3, 2019&quot;</span>),</span>
+<span id="cb395-2"><a href="dates-and-times.html#cb395-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
+<span id="cb395-3"><a href="dates-and-times.html#cb395-3" aria-hidden="true" tabindex="-1"></a>ex2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
+#R&gt;    DSTR               DATE      
+#R&gt;    &lt;chr&gt;              &lt;date&gt;    
+#R&gt;  1 July 15, 2021      2021-07-15
+#R&gt;  2 September 11, 2020 2020-09-11
+#R&gt;  3 March 3, 2019      2019-03-03</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb397-1"><a href="dates-and-times.html#cb397-1" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;Jul-15, 2021&quot;</span>,<span class="st">&quot;Sep-11, 2020&quot;</span>,<span class="st">&quot;Mar-3, 2019&quot;</span>),</span>
+<span id="cb397-2"><a href="dates-and-times.html#cb397-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
+<span id="cb397-3"><a href="dates-and-times.html#cb397-3" aria-hidden="true" tabindex="-1"></a>ex3</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
+#R&gt;    DSTR         DATE      
+#R&gt;    &lt;chr&gt;        &lt;date&gt;    
+#R&gt;  1 Jul-15, 2021 2021-07-15
+#R&gt;  2 Sep-11, 2020 2020-09-11
+#R&gt;  3 Mar-3, 2019  2019-03-03</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb399-1"><a href="dates-and-times.html#cb399-1" aria-hidden="true" tabindex="-1"></a>ex4 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;7/15/2021&quot;</span>,<span class="st">&quot;9/11/2020&quot;</span>,<span class="st">&quot;3/3/2019&quot;</span>),</span>
+<span id="cb399-2"><a href="dates-and-times.html#cb399-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
+<span id="cb399-3"><a href="dates-and-times.html#cb399-3" aria-hidden="true" tabindex="-1"></a>ex4</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
+#R&gt;    DSTR      DATE      
+#R&gt;    &lt;chr&gt;     &lt;date&gt;    
+#R&gt;  1 7/15/2021 2021-07-15
+#R&gt;  2 9/11/2020 2020-09-11
+#R&gt;  3 3/3/2019  2019-03-03</code></pre>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb401-1"><a href="dates-and-times.html#cb401-1" aria-hidden="true" tabindex="-1"></a>ex5 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DSTR=</span><span class="fu">c</span>(<span class="st">&quot;15-Jul 2021&quot;</span>,<span class="st">&quot;11-Sep 2020&quot;</span>,<span class="st">&quot;3-Mar 2019&quot;</span>),</span>
+<span id="cb401-2"><a href="dates-and-times.html#cb401-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">DATE=</span><span class="fu">dmy</span>(DSTR))</span>
+<span id="cb401-3"><a href="dates-and-times.html#cb401-3" aria-hidden="true" tabindex="-1"></a>ex5</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
+#R&gt;    DSTR        DATE      
+#R&gt;    &lt;chr&gt;       &lt;date&gt;    
+#R&gt;  1 15-Jul 2021 2021-07-15
+#R&gt;  2 11-Sep 2020 2020-09-11
+#R&gt;  3 3-Mar 2019  2019-03-03</code></pre>
 <p> </p>
 </div>
 <div id="making-dates-from-components" class="section level3" number="9.1.2">
 <h3><span class="header-section-number">9.1.2</span> Making Dates from Components</h3>
 <p>It is also common to need to created dates from three separate variables that contain the year, month, and day components of the date, respectively.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb388-1"><a href="dates-and-times.html#cb388-1" aria-hidden="true" tabindex="-1"></a>ex6 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">yr=</span><span class="fu">c</span>(<span class="dv">2021</span>,<span class="dv">2020</span>,<span class="dv">2019</span>),</span>
-<span id="cb388-2"><a href="dates-and-times.html#cb388-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">mon=</span><span class="fu">c</span>(<span class="st">&quot;Jul&quot;</span>,<span class="st">&quot;Sep&quot;</span>,<span class="st">&quot;Mar&quot;</span>),</span>
-<span id="cb388-3"><a href="dates-and-times.html#cb388-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">d=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">11</span>,<span class="dv">3</span>))</span>
-<span id="cb388-4"><a href="dates-and-times.html#cb388-4" aria-hidden="true" tabindex="-1"></a>ex6</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
-#R&gt;        yr mon       d
-#R&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
-#R&gt;   1  2021 Jul      15
-#R&gt;   2  2020 Sep      11
-#R&gt;   3  2019 Mar       3</code></pre>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb403-1"><a href="dates-and-times.html#cb403-1" aria-hidden="true" tabindex="-1"></a>ex6 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">yr=</span><span class="fu">c</span>(<span class="dv">2021</span>,<span class="dv">2020</span>,<span class="dv">2019</span>),</span>
+<span id="cb403-2"><a href="dates-and-times.html#cb403-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">mon=</span><span class="fu">c</span>(<span class="st">&quot;Jul&quot;</span>,<span class="st">&quot;Sep&quot;</span>,<span class="st">&quot;Mar&quot;</span>),</span>
+<span id="cb403-3"><a href="dates-and-times.html#cb403-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">d=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">11</span>,<span class="dv">3</span>))</span>
+<span id="cb403-4"><a href="dates-and-times.html#cb403-4" aria-hidden="true" tabindex="-1"></a>ex6</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
+#R&gt;       yr mon       d
+#R&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+#R&gt;  1  2021 Jul      15
+#R&gt;  2  2020 Sep      11
+#R&gt;  3  2019 Mar       3</code></pre>
 <p>An easy way to deal with these date components is to first combine them into a string with <code>paste()</code>.</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb390-1"><a href="dates-and-times.html#cb390-1" aria-hidden="true" tabindex="-1"></a>ex6a <span class="ot">&lt;-</span> ex6 <span class="sc">%&gt;%</span></span>
-<span id="cb390-2"><a href="dates-and-times.html#cb390-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DSTR=</span><span class="fu">paste</span>(mon,d,yr))</span>
-<span id="cb390-3"><a href="dates-and-times.html#cb390-3" aria-hidden="true" tabindex="-1"></a>ex6a</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 4
-#R&gt;        yr mon       d DSTR       
-#R&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      
-#R&gt;   1  2021 Jul      15 Jul 15 2021
-#R&gt;   2  2020 Sep      11 Sep 11 2020
-#R&gt;   3  2019 Mar       3 Mar 3 2019</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb405-1"><a href="dates-and-times.html#cb405-1" aria-hidden="true" tabindex="-1"></a>ex6a <span class="ot">&lt;-</span> ex6 <span class="sc">%&gt;%</span></span>
+<span id="cb405-2"><a href="dates-and-times.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DSTR=</span><span class="fu">paste</span>(mon,d,yr))</span>
+<span id="cb405-3"><a href="dates-and-times.html#cb405-3" aria-hidden="true" tabindex="-1"></a>ex6a</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 4
+#R&gt;       yr mon       d DSTR       
+#R&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      
+#R&gt;  1  2021 Jul      15 Jul 15 2021
+#R&gt;  2  2020 Sep      11 Sep 11 2020
+#R&gt;  3  2019 Mar       3 Mar 3 2019</code></pre>
 <p>The “date” class variable is then created with <code>mdy()</code> (in this case because of the order in which the components were pasted).</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb392-1"><a href="dates-and-times.html#cb392-1" aria-hidden="true" tabindex="-1"></a>ex6a <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
-<span id="cb392-2"><a href="dates-and-times.html#cb392-2" aria-hidden="true" tabindex="-1"></a>ex6a</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 5
-#R&gt;        yr mon       d DSTR        DATE      
-#R&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;date&gt;    
-#R&gt;   1  2021 Jul      15 Jul 15 2021 2021-07-15
-#R&gt;   2  2020 Sep      11 Sep 11 2020 2020-09-11
-#R&gt;   3  2019 Mar       3 Mar 3 2019  2019-03-03</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb407-1"><a href="dates-and-times.html#cb407-1" aria-hidden="true" tabindex="-1"></a>ex6a <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">DATE=</span><span class="fu">mdy</span>(DSTR))</span>
+<span id="cb407-2"><a href="dates-and-times.html#cb407-2" aria-hidden="true" tabindex="-1"></a>ex6a</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 5
+#R&gt;       yr mon       d DSTR        DATE      
+#R&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;date&gt;    
+#R&gt;  1  2021 Jul      15 Jul 15 2021 2021-07-15
+#R&gt;  2  2020 Sep      11 Sep 11 2020 2020-09-11
+#R&gt;  3  2019 Mar       3 Mar 3 2019  2019-03-03</code></pre>
 <p>The <code>paste()</code> is often used inside of <code>mdy()</code> to eliminate the need to create the intermediate <code>DSTR</code> variable. This is shown below, along with eliminating the original component variables to make a cleaner data frame to use in the next sections.</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb394-1"><a href="dates-and-times.html#cb394-1" aria-hidden="true" tabindex="-1"></a>ex6a <span class="ot">&lt;-</span> ex6 <span class="sc">%&gt;%</span></span>
-<span id="cb394-2"><a href="dates-and-times.html#cb394-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATE=</span><span class="fu">mdy</span>(<span class="fu">paste</span>(mon,d,yr))) <span class="sc">%&gt;%</span></span>
-<span id="cb394-3"><a href="dates-and-times.html#cb394-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DATE)</span>
-<span id="cb394-4"><a href="dates-and-times.html#cb394-4" aria-hidden="true" tabindex="-1"></a>ex6a</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 1
-#R&gt;     DATE      
-#R&gt;     &lt;date&gt;    
-#R&gt;   1 2021-07-15
-#R&gt;   2 2020-09-11
-#R&gt;   3 2019-03-03</code></pre>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb409-1"><a href="dates-and-times.html#cb409-1" aria-hidden="true" tabindex="-1"></a>ex6a <span class="ot">&lt;-</span> ex6 <span class="sc">%&gt;%</span></span>
+<span id="cb409-2"><a href="dates-and-times.html#cb409-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATE=</span><span class="fu">mdy</span>(<span class="fu">paste</span>(mon,d,yr))) <span class="sc">%&gt;%</span></span>
+<span id="cb409-3"><a href="dates-and-times.html#cb409-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DATE)</span>
+<span id="cb409-4"><a href="dates-and-times.html#cb409-4" aria-hidden="true" tabindex="-1"></a>ex6a</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 1
+#R&gt;    DATE      
+#R&gt;    &lt;date&gt;    
+#R&gt;  1 2021-07-15
+#R&gt;  2 2020-09-11
+#R&gt;  3 2019-03-03</code></pre>
 <p> </p>
 </div>
 </div>
 <div id="extracting-date-components" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Extracting Date Components</h2>
 <p>The year, month, and day (within the month) can be extracted from a “date” class variable with <code>year()</code>, <code>month()</code>, and <code>day()</code>, respectively. The numeric month is extracted by <code>month()</code> by default. The abbreviated month will be returned if <code>label=TRUE</code> is used and the full month name is returned by also including <code>abbr=FALSE</code>.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb396-1"><a href="dates-and-times.html#cb396-1" aria-hidden="true" tabindex="-1"></a>ex6b <span class="ot">&lt;-</span> ex6a <span class="sc">%&gt;%</span></span>
-<span id="cb396-2"><a href="dates-and-times.html#cb396-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yr=</span><span class="fu">year</span>(DATE),</span>
-<span id="cb396-3"><a href="dates-and-times.html#cb396-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(DATE),</span>
-<span id="cb396-4"><a href="dates-and-times.html#cb396-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon1=</span><span class="fu">month</span>(DATE,<span class="at">label=</span><span class="cn">TRUE</span>),</span>
-<span id="cb396-5"><a href="dates-and-times.html#cb396-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon2=</span><span class="fu">month</span>(DATE,<span class="at">label=</span><span class="cn">TRUE</span>,<span class="at">abbr=</span><span class="cn">FALSE</span>),</span>
-<span id="cb396-6"><a href="dates-and-times.html#cb396-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">d=</span><span class="fu">day</span>(DATE))</span>
-<span id="cb396-7"><a href="dates-and-times.html#cb396-7" aria-hidden="true" tabindex="-1"></a>ex6b</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 6
-#R&gt;     DATE          yr   mon mon1  mon2          d
-#R&gt;     &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
-#R&gt;   1 2021-07-15  2021     7 Jul   July         15
-#R&gt;   2 2020-09-11  2020     9 Sep   September    11
-#R&gt;   3 2019-03-03  2019     3 Mar   March         3</code></pre>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb411-1"><a href="dates-and-times.html#cb411-1" aria-hidden="true" tabindex="-1"></a>ex6b <span class="ot">&lt;-</span> ex6a <span class="sc">%&gt;%</span></span>
+<span id="cb411-2"><a href="dates-and-times.html#cb411-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yr=</span><span class="fu">year</span>(DATE),</span>
+<span id="cb411-3"><a href="dates-and-times.html#cb411-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(DATE),</span>
+<span id="cb411-4"><a href="dates-and-times.html#cb411-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon1=</span><span class="fu">month</span>(DATE,<span class="at">label=</span><span class="cn">TRUE</span>),</span>
+<span id="cb411-5"><a href="dates-and-times.html#cb411-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon2=</span><span class="fu">month</span>(DATE,<span class="at">label=</span><span class="cn">TRUE</span>,<span class="at">abbr=</span><span class="cn">FALSE</span>),</span>
+<span id="cb411-6"><a href="dates-and-times.html#cb411-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">d=</span><span class="fu">day</span>(DATE))</span>
+<span id="cb411-7"><a href="dates-and-times.html#cb411-7" aria-hidden="true" tabindex="-1"></a>ex6b</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 6
+#R&gt;    DATE          yr   mon mon1  mon2          d
+#R&gt;    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
+#R&gt;  1 2021-07-15  2021     7 Jul   July         15
+#R&gt;  2 2020-09-11  2020     9 Sep   September    11
+#R&gt;  3 2019-03-03  2019     3 Mar   March         3</code></pre>
 <p>Note that the two variables of month names are of the “ord” class, which means that the natural order of the months is maintained. This is useful for graphing and for making comparisons. For example,</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb398-1"><a href="dates-and-times.html#cb398-1" aria-hidden="true" tabindex="-1"></a>ex6b<span class="sc">$</span>mon1 <span class="sc">&gt;</span> <span class="st">&quot;Apr&quot;</span></span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1]  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb413-1"><a href="dates-and-times.html#cb413-1" aria-hidden="true" tabindex="-1"></a>ex6b<span class="sc">$</span>mon1 <span class="sc">&gt;</span> <span class="st">&quot;Apr&quot;</span></span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1]  TRUE  TRUE FALSE</code></pre>
 <p>There are other useful extractor functions in <code>lubridate</code>. Day number within the year is returned with <code>yday()</code>.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb400-1"><a href="dates-and-times.html#cb400-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yday</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 196 255  62</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb415-1"><a href="dates-and-times.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yday</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 196 255  62</code></pre>
 <p>Numeric day of the week is returned by <code>wday()</code>.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a> The abbreviated name of the week is returned when <code>label=TRUE</code> is included and the full names is returned when <code>abbr=FALSE</code> is also included. The data type will also be “ord” when labels are returned.</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb402-1"><a href="dates-and-times.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 5 6 1</code></pre>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb404-1"><a href="dates-and-times.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(ex6a<span class="sc">$</span>DATE,<span class="at">label=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] Thu Fri Sun
-#R&gt;   Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb406-1"><a href="dates-and-times.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(ex6a<span class="sc">$</span>DATE,<span class="at">label=</span><span class="cn">TRUE</span>,<span class="at">abbr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] Thursday Friday   Sunday  
-#R&gt;   7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb417-1"><a href="dates-and-times.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 5 6 1</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb419-1"><a href="dates-and-times.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(ex6a<span class="sc">$</span>DATE,<span class="at">label=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] Thu Fri Sun
+#R&gt;  Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb421-1"><a href="dates-and-times.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(ex6a<span class="sc">$</span>DATE,<span class="at">label=</span><span class="cn">TRUE</span>,<span class="at">abbr=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] Thursday Friday   Sunday  
+#R&gt;  7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
 <p>Week number within the year is returned with <code>week()</code>.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb408-1"><a href="dates-and-times.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">week</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 28 37  9</code></pre>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb423-1"><a href="dates-and-times.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">week</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 28 37  9</code></pre>
 <p>Numeric day within a “quarter” is returned by <code>qday()</code>, whereas the actual “quarter” in which the day falls is returned by <code>quarter()</code>.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb410-1"><a href="dates-and-times.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarter</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 3 3 1</code></pre>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb412-1"><a href="dates-and-times.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qday</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 15 73 62</code></pre>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb425-1"><a href="dates-and-times.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarter</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 3 3 1</code></pre>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb427-1"><a href="dates-and-times.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qday</span>(ex6a<span class="sc">$</span>DATE)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 15 73 62</code></pre>
 <p>Whether or not a year is a leap year can be determined with <code>leap_year()</code>.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb414-1"><a href="dates-and-times.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leap_year</span>(<span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;    [1] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb429-1"><a href="dates-and-times.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leap_year</span>(<span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE</code></pre>
 <p>Finally, the current date is found with <code>today()</code>.</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb416-1"><a href="dates-and-times.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;2021-08-14&quot;</code></pre>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb431-1"><a href="dates-and-times.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] &quot;2021-08-14&quot;</code></pre>
 <p> </p>
 </div>
 <div id="calculations-with-dates" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Calculations with Dates</h2>
 <p>Performing calculations on dates introduces new data classes. The main one that we will use in this course is <strong>interval</strong>. An interval is a special date class that records the start and end date of an interval of time. Intervals are created from two dates with <code>%--%</code>. For example, the code below creates one interval from that date in <code>DATE</code> to today’s date and another constant interval from January 1, 2019 to January 1, 2021. Note in the second example that the date strings must be converted to a date format first (using <code>ymd()</code> in this case).</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb418-1"><a href="dates-and-times.html#cb418-1" aria-hidden="true" tabindex="-1"></a>ex6c <span class="ot">&lt;-</span> ex6a <span class="sc">%&gt;%</span></span>
-<span id="cb418-2"><a href="dates-and-times.html#cb418-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int2now=</span>DATE <span class="sc">%--%</span> <span class="fu">today</span>(),</span>
-<span id="cb418-3"><a href="dates-and-times.html#cb418-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">int2Jan20=</span><span class="fu">ymd</span>(<span class="st">&quot;2019-Jan-1&quot;</span>) <span class="sc">%--%</span> <span class="fu">ymd</span>(<span class="st">&quot;2021-Jan-1&quot;</span>))</span>
-<span id="cb418-4"><a href="dates-and-times.html#cb418-4" aria-hidden="true" tabindex="-1"></a>ex6c</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
-#R&gt;     DATE       int2now                        int2Jan20                     
-#R&gt;     &lt;date&gt;     &lt;Interval&gt;                     &lt;Interval&gt;                    
-#R&gt;   1 2021-07-15 2021-07-15 UTC--2021-08-14 UTC 2019-01-01 UTC--2021-01-01 UTC
-#R&gt;   2 2020-09-11 2020-09-11 UTC--2021-08-14 UTC 2019-01-01 UTC--2021-01-01 UTC
-#R&gt;   3 2019-03-03 2019-03-03 UTC--2021-08-14 UTC 2019-01-01 UTC--2021-01-01 UTC</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb433-1"><a href="dates-and-times.html#cb433-1" aria-hidden="true" tabindex="-1"></a>ex6c <span class="ot">&lt;-</span> ex6a <span class="sc">%&gt;%</span></span>
+<span id="cb433-2"><a href="dates-and-times.html#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int2now=</span>DATE <span class="sc">%--%</span> <span class="fu">today</span>(),</span>
+<span id="cb433-3"><a href="dates-and-times.html#cb433-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">int2Jan20=</span><span class="fu">ymd</span>(<span class="st">&quot;2019-Jan-1&quot;</span>) <span class="sc">%--%</span> <span class="fu">ymd</span>(<span class="st">&quot;2021-Jan-1&quot;</span>))</span>
+<span id="cb433-4"><a href="dates-and-times.html#cb433-4" aria-hidden="true" tabindex="-1"></a>ex6c</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
+#R&gt;    DATE       int2now                        int2Jan20                     
+#R&gt;    &lt;date&gt;     &lt;Interval&gt;                     &lt;Interval&gt;                    
+#R&gt;  1 2021-07-15 2021-07-15 UTC--2021-08-14 UTC 2019-01-01 UTC--2021-01-01 UTC
+#R&gt;  2 2020-09-11 2020-09-11 UTC--2021-08-14 UTC 2019-01-01 UTC--2021-01-01 UTC
+#R&gt;  3 2019-03-03 2019-03-03 UTC--2021-08-14 UTC 2019-01-01 UTC--2021-01-01 UTC</code></pre>
 <p>Here you can see that the two new variables contain start and end dates for the interval on either side of the <code>--</code>.</p>
 <p>Use <code>%within%</code> to determine if a date is within an interval and <code>int_overlaps()</code> to determine if two intervals overlap.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb420-1"><a href="dates-and-times.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">&quot;2020-Jan-1&quot;</span>) <span class="sc">%within%</span> ex6c<span class="sc">$</span>int2now</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb422-1"><a href="dates-and-times.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">int_overlaps</span>(ex6c<span class="sc">$</span>int2now,ex6c<span class="sc">$</span>int2Jan20)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] FALSE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb435-1"><a href="dates-and-times.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">&quot;2020-Jan-1&quot;</span>) <span class="sc">%within%</span> ex6c<span class="sc">$</span>int2now</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb437-1"><a href="dates-and-times.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">int_overlaps</span>(ex6c<span class="sc">$</span>int2now,ex6c<span class="sc">$</span>int2Jan20)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] FALSE  TRUE  TRUE</code></pre>
 <p>The amount of time within an interval is found with <code>time_length()</code> with units of measurement supplied to <code>unit=</code>. When <code>units=</code> <code>"months"</code> or <code>"years"</code> then <code>time_length()</code> will take into account that not all months and years have the same number of days.<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a></p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb424-1"><a href="dates-and-times.html#cb424-1" aria-hidden="true" tabindex="-1"></a>ex6d <span class="ot">&lt;-</span> ex6a <span class="sc">%&gt;%</span></span>
-<span id="cb424-2"><a href="dates-and-times.html#cb424-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int2now=</span>ex1<span class="sc">$</span>DATE <span class="sc">%--%</span> <span class="fu">today</span>(),</span>
-<span id="cb424-3"><a href="dates-and-times.html#cb424-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">dur2now_days=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>),</span>
-<span id="cb424-4"><a href="dates-and-times.html#cb424-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">dur2now_yrs=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;years&quot;</span>),</span>
-<span id="cb424-5"><a href="dates-and-times.html#cb424-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">dur2now_mons=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;months&quot;</span>))</span>
-<span id="cb424-6"><a href="dates-and-times.html#cb424-6" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(ex6d,<span class="sc">-</span>DATE)  <span class="co"># only so that the new variables can be seen</span></span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 4
-#R&gt;     int2now                        dur2now_days dur2now_yrs dur2now_mons
-#R&gt;     &lt;Interval&gt;                            &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-#R&gt;   1 2021-07-15 UTC--2021-08-14 UTC           30      0.0822        0.968
-#R&gt;   2 2020-09-21 UTC--2021-08-14 UTC          327      0.896        10.8  
-#R&gt;   3 2019-03-03 UTC--2021-08-14 UTC          895      2.45         29.4</code></pre>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb439-1"><a href="dates-and-times.html#cb439-1" aria-hidden="true" tabindex="-1"></a>ex6d <span class="ot">&lt;-</span> ex6a <span class="sc">%&gt;%</span></span>
+<span id="cb439-2"><a href="dates-and-times.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int2now=</span>ex1<span class="sc">$</span>DATE <span class="sc">%--%</span> <span class="fu">today</span>(),</span>
+<span id="cb439-3"><a href="dates-and-times.html#cb439-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">dur2now_days=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>),</span>
+<span id="cb439-4"><a href="dates-and-times.html#cb439-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">dur2now_yrs=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;years&quot;</span>),</span>
+<span id="cb439-5"><a href="dates-and-times.html#cb439-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">dur2now_mons=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;months&quot;</span>))</span>
+<span id="cb439-6"><a href="dates-and-times.html#cb439-6" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(ex6d,<span class="sc">-</span>DATE)  <span class="co"># only so that the new variables can be seen</span></span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 4
+#R&gt;    int2now                        dur2now_days dur2now_yrs dur2now_mons
+#R&gt;    &lt;Interval&gt;                            &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+#R&gt;  1 2021-07-15 UTC--2021-08-14 UTC           30      0.0822        0.968
+#R&gt;  2 2020-09-21 UTC--2021-08-14 UTC          327      0.896        10.8  
+#R&gt;  3 2019-03-03 UTC--2021-08-14 UTC          895      2.45         29.4</code></pre>
 <p> </p>
 </div>
 <div id="obtaining-time-data" class="section level2" number="9.4">
@@ -436,219 +434,219 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="just-times" class="section level3" number="9.4.1">
 <h3><span class="header-section-number">9.4.1</span> Just Times</h3>
 <p>One can work with just time in R, but I find it easier to append a constant “dummy date” to the times and then work with date-time objects. For example, suppose that the data frame below with just times (as a character variable) exists.</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb426-1"><a href="dates-and-times.html#cb426-1" aria-hidden="true" tabindex="-1"></a>exT1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">TSTR=</span><span class="fu">c</span>(<span class="st">&quot;12:15:01&quot;</span>,<span class="st">&quot;9:14:56&quot;</span>,<span class="st">&quot;19:34:01&quot;</span>))</span>
-<span id="cb426-2"><a href="dates-and-times.html#cb426-2" aria-hidden="true" tabindex="-1"></a>exT1</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 1
-#R&gt;     TSTR    
-#R&gt;     &lt;chr&gt;   
-#R&gt;   1 12:15:01
-#R&gt;   2 9:14:56 
-#R&gt;   3 19:34:01</code></pre>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb441-1"><a href="dates-and-times.html#cb441-1" aria-hidden="true" tabindex="-1"></a>exT1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">TSTR=</span><span class="fu">c</span>(<span class="st">&quot;12:15:01&quot;</span>,<span class="st">&quot;9:14:56&quot;</span>,<span class="st">&quot;19:34:01&quot;</span>))</span>
+<span id="cb441-2"><a href="dates-and-times.html#cb441-2" aria-hidden="true" tabindex="-1"></a>exT1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 1
+#R&gt;    TSTR    
+#R&gt;    &lt;chr&gt;   
+#R&gt;  1 12:15:01
+#R&gt;  2 9:14:56 
+#R&gt;  3 19:34:01</code></pre>
 <p>Here, I prepend a “dummy date” of “1-Jan-2021” to each time.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb428-1"><a href="dates-and-times.html#cb428-1" aria-hidden="true" tabindex="-1"></a>exT1 <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">DTSTR=</span><span class="fu">paste</span>(<span class="st">&quot;1-Jan-2021&quot;</span>,TSTR))</span>
-<span id="cb428-2"><a href="dates-and-times.html#cb428-2" aria-hidden="true" tabindex="-1"></a>exT1</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 2
-#R&gt;     TSTR     DTSTR              
-#R&gt;     &lt;chr&gt;    &lt;chr&gt;              
-#R&gt;   1 12:15:01 1-Jan-2021 12:15:01
-#R&gt;   2 9:14:56  1-Jan-2021 9:14:56 
-#R&gt;   3 19:34:01 1-Jan-2021 19:34:01</code></pre>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb443-1"><a href="dates-and-times.html#cb443-1" aria-hidden="true" tabindex="-1"></a>exT1 <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">DTSTR=</span><span class="fu">paste</span>(<span class="st">&quot;1-Jan-2021&quot;</span>,TSTR))</span>
+<span id="cb443-2"><a href="dates-and-times.html#cb443-2" aria-hidden="true" tabindex="-1"></a>exT1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
+#R&gt;    TSTR     DTSTR              
+#R&gt;    &lt;chr&gt;    &lt;chr&gt;              
+#R&gt;  1 12:15:01 1-Jan-2021 12:15:01
+#R&gt;  2 9:14:56  1-Jan-2021 9:14:56 
+#R&gt;  3 19:34:01 1-Jan-2021 19:34:01</code></pre>
 <p>This date and time string can then be handled as shown in the Section <a href="dates-and-times.html#calculations-with-date-times">9.6</a>.</p>
 </div>
 <div id="dates-and-times-1" class="section level3" number="9.4.2">
 <h3><span class="header-section-number">9.4.2</span> Dates and Times</h3>
 <p>Date and time strings should be in a general format that has the date first followed by the time with the two separated by a space. The date portion can be in any format as described in Section <a href="dates-and-times.html#obtaining-dates-data">9.1</a> for dates and the time should generally be in hour-minute or hour-minute-second format. The time components can be separated by nearly any character but it will usually be a “:” The <code>DTSTR</code> variable in the data frame created in the previous section is in this format, as is the same variable in the data frame below.</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb430-1"><a href="dates-and-times.html#cb430-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DTSTR=</span><span class="fu">c</span>(<span class="st">&quot;2021-7-15 12:15:01&quot;</span>,<span class="st">&quot;2020-9-21 9:14:56&quot;</span>,<span class="st">&quot;2019-3-3 19:34:01&quot;</span>))</span>
-<span id="cb430-2"><a href="dates-and-times.html#cb430-2" aria-hidden="true" tabindex="-1"></a>exT2</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 1
-#R&gt;     DTSTR             
-#R&gt;     &lt;chr&gt;             
-#R&gt;   1 2021-7-15 12:15:01
-#R&gt;   2 2020-9-21 9:14:56 
-#R&gt;   3 2019-3-3 19:34:01</code></pre>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb445-1"><a href="dates-and-times.html#cb445-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">DTSTR=</span><span class="fu">c</span>(<span class="st">&quot;2021-7-15 12:15:01&quot;</span>,<span class="st">&quot;2020-9-21 9:14:56&quot;</span>,<span class="st">&quot;2019-3-3 19:34:01&quot;</span>))</span>
+<span id="cb445-2"><a href="dates-and-times.html#cb445-2" aria-hidden="true" tabindex="-1"></a>exT2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 1
+#R&gt;    DTSTR             
+#R&gt;    &lt;chr&gt;             
+#R&gt;  1 2021-7-15 12:15:01
+#R&gt;  2 2020-9-21 9:14:56 
+#R&gt;  3 2019-3-3 19:34:01</code></pre>
 <p>a character variable with date and times in these formats are converted to a date-time class variable with the <code>lubridate</code> functions described in Section <a href="dates-and-times.html#obtaining-dates-data">9.1</a> but with <code>_hm</code> or <code>_hms</code> appended depending on whether the time portion is hour-minute or hour-minute-second data. For example, if the dates are in year-month-day format and the times are in hours-minutes-seconds then use <code>ymd_hms()</code>.</p>
 <p>Another concern with converting to a date-time class is concerns about the time zone. This most likely becomes an issue if you are finding intervals of time from a base time (say, New Years at 12 am) or among times from different time zones (e.g., airline flight data). The time zone for a date-time variable can be set with <code>tz=</code>. The time-zone is set with so-called “Olson Names.” You can see all names recognized in R with <code>OlsonNames()</code>. Most Olson Names begin with a continentent separated by a place on that continent by a forward slash. For example, <code>America/Chicago</code> would use the time zone for Chicago in America (i.e., “Central” time). Time zones in the United States can also generally be set with <code>US/Eastern</code>, <code>US/Central</code>, <code>US/Mountain</code>, and <code>US/Pacific</code>. Note, however, that time zones are “odd” for some areas so there are special codes for those places. One of regional note is <code>US/Michigan</code>.</p>
 <p>The code below converts the <code>DTSTR</code> string in <code>exT2</code> to a date-time class using the <code>US/Central</code> time zone and removes the original string (for aesthetics only). Note how the new variable is a “datetime” class.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb432-1"><a href="dates-and-times.html#cb432-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb432-2"><a href="dates-and-times.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATETIME=</span><span class="fu">ymd_hms</span>(DTSTR,<span class="at">tz=</span><span class="st">&quot;US/Central&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb432-3"><a href="dates-and-times.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>DTSTR)</span>
-<span id="cb432-4"><a href="dates-and-times.html#cb432-4" aria-hidden="true" tabindex="-1"></a>exT2</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 1
-#R&gt;     DATETIME           
-#R&gt;     &lt;dttm&gt;             
-#R&gt;   1 2021-07-15 12:15:01
-#R&gt;   2 2020-09-21 09:14:56
-#R&gt;   3 2019-03-03 19:34:01</code></pre>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb447-1"><a href="dates-and-times.html#cb447-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb447-2"><a href="dates-and-times.html#cb447-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATETIME=</span><span class="fu">ymd_hms</span>(DTSTR,<span class="at">tz=</span><span class="st">&quot;US/Central&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb447-3"><a href="dates-and-times.html#cb447-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>DTSTR)</span>
+<span id="cb447-4"><a href="dates-and-times.html#cb447-4" aria-hidden="true" tabindex="-1"></a>exT2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 1
+#R&gt;    DATETIME           
+#R&gt;    &lt;dttm&gt;             
+#R&gt;  1 2021-07-15 12:15:01
+#R&gt;  2 2020-09-21 09:14:56
+#R&gt;  3 2019-03-03 19:34:01</code></pre>
 </div>
 </div>
 <div id="extracting-time-components" class="section level2" number="9.5">
 <h2><span class="header-section-number">9.5</span> Extracting Time Components</h2>
 <p>Hours, minutes, and seconds from a date-time object can be extracted with <code>hour()</code>, <code>minute()</code>, and <code>second()</code>.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb434-1"><a href="dates-and-times.html#cb434-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="sc">%&gt;%</span></span>
-<span id="cb434-2"><a href="dates-and-times.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hr=</span><span class="fu">hour</span>(DATETIME),</span>
-<span id="cb434-3"><a href="dates-and-times.html#cb434-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">min=</span><span class="fu">minute</span>(DATETIME),</span>
-<span id="cb434-4"><a href="dates-and-times.html#cb434-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">sec=</span><span class="fu">second</span>(DATETIME))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 4
-#R&gt;     DATETIME               hr   min   sec
-#R&gt;     &lt;dttm&gt;              &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-#R&gt;   1 2021-07-15 12:15:01    12    15     1
-#R&gt;   2 2020-09-21 09:14:56     9    14    56
-#R&gt;   3 2019-03-03 19:34:01    19    34     1</code></pre>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb449-1"><a href="dates-and-times.html#cb449-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="sc">%&gt;%</span></span>
+<span id="cb449-2"><a href="dates-and-times.html#cb449-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hr=</span><span class="fu">hour</span>(DATETIME),</span>
+<span id="cb449-3"><a href="dates-and-times.html#cb449-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">min=</span><span class="fu">minute</span>(DATETIME),</span>
+<span id="cb449-4"><a href="dates-and-times.html#cb449-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">sec=</span><span class="fu">second</span>(DATETIME))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 4
+#R&gt;    DATETIME               hr   min   sec
+#R&gt;    &lt;dttm&gt;              &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+#R&gt;  1 2021-07-15 12:15:01    12    15     1
+#R&gt;  2 2020-09-21 09:14:56     9    14    56
+#R&gt;  3 2019-03-03 19:34:01    19    34     1</code></pre>
 </div>
 <div id="calculations-with-date-times" class="section level2" number="9.6">
 <h2><span class="header-section-number">9.6</span> Calculations with Date-Times</h2>
 <p>As shown with dates in Section <a href="dates-and-times.html#calculations-with-dates">9.3</a>, intervals of time can be found between two times. In the example below <code>int2now</code> contains the interval of time between the date-time in <code>DATETIME</code> and the current date-time as returned by <code>now()</code>.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> The number of hours and days are then found using <code>time_length()</code> in the same was as shown for dates in Section <a href="dates-and-times.html#calculations-with-dates">9.3</a>. I moved the <code>int2now</code> variable to the end simply so that the other two variables would show in the tibble.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb436-1"><a href="dates-and-times.html#cb436-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb436-2"><a href="dates-and-times.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int2now=</span>DATETIME <span class="sc">%--%</span> <span class="fu">now</span>(),</span>
-<span id="cb436-3"><a href="dates-and-times.html#cb436-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">hrs2now=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;hours&quot;</span>),</span>
-<span id="cb436-4"><a href="dates-and-times.html#cb436-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">days2now=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb436-5"><a href="dates-and-times.html#cb436-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(int2now,<span class="at">.after=</span><span class="fu">last_col</span>())</span>
-<span id="cb436-6"><a href="dates-and-times.html#cb436-6" aria-hidden="true" tabindex="-1"></a>exT2</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 4
-#R&gt;     DATETIME            hrs2now days2now
-#R&gt;     &lt;dttm&gt;                &lt;dbl&gt;    &lt;dbl&gt;
-#R&gt;   1 2021-07-15 12:15:01    725.     30.2
-#R&gt;   2 2020-09-21 09:14:56   7856.    327. 
-#R&gt;   3 2019-03-03 19:34:01  21477.    895. 
-#R&gt;   # ... with 1 more variable: int2now &lt;Interval&gt;</code></pre>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb451-1"><a href="dates-and-times.html#cb451-1" aria-hidden="true" tabindex="-1"></a>exT2 <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb451-2"><a href="dates-and-times.html#cb451-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int2now=</span>DATETIME <span class="sc">%--%</span> <span class="fu">now</span>(),</span>
+<span id="cb451-3"><a href="dates-and-times.html#cb451-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">hrs2now=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;hours&quot;</span>),</span>
+<span id="cb451-4"><a href="dates-and-times.html#cb451-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">days2now=</span><span class="fu">time_length</span>(int2now,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb451-5"><a href="dates-and-times.html#cb451-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(int2now,<span class="at">.after=</span><span class="fu">last_col</span>())</span>
+<span id="cb451-6"><a href="dates-and-times.html#cb451-6" aria-hidden="true" tabindex="-1"></a>exT2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 4
+#R&gt;    DATETIME            hrs2now days2now
+#R&gt;    &lt;dttm&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+#R&gt;  1 2021-07-15 12:15:01    730.     30.4
+#R&gt;  2 2020-09-21 09:14:56   7861.    328. 
+#R&gt;  3 2019-03-03 19:34:01  21482.    895. 
+#R&gt;  # ... with 1 more variable: int2now &lt;Interval&gt;</code></pre>
 <p> </p>
 <p>A quick return to the data frame from Section <a href="dates-and-times.html#just-times">9.4.1</a>. Suppose that the researcher wants to find the number of minutes between the given time (which was converted to a date-time) and dinner at 6 pm. Note that if you use the trick of adding a dummy date then you must use the same dummy date here.</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb438-1"><a href="dates-and-times.html#cb438-1" aria-hidden="true" tabindex="-1"></a>exT1a <span class="ot">&lt;-</span> exT1 <span class="sc">%&gt;%</span></span>
-<span id="cb438-2"><a href="dates-and-times.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATETIME=</span><span class="fu">dmy_hms</span>(DTSTR,<span class="at">tz=</span><span class="st">&quot;US/Central&quot;</span>),</span>
-<span id="cb438-3"><a href="dates-and-times.html#cb438-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">int2dinner=</span>DATETIME <span class="sc">%--%</span> <span class="fu">dmy_hms</span>(<span class="st">&quot;1-Jan-2021 18:00:00&quot;</span>,<span class="at">tz=</span><span class="st">&quot;US/Central&quot;</span>),</span>
-<span id="cb438-4"><a href="dates-and-times.html#cb438-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mins2dinner=</span><span class="fu">time_length</span>(int2dinner,<span class="at">unit=</span><span class="st">&quot;minutes&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb438-5"><a href="dates-and-times.html#cb438-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>TSTR,<span class="sc">-</span>DTSTR) <span class="sc">%&gt;%</span></span>
-<span id="cb438-6"><a href="dates-and-times.html#cb438-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(mins2dinner,<span class="at">.after=</span>DATETIME)</span>
-<span id="cb438-7"><a href="dates-and-times.html#cb438-7" aria-hidden="true" tabindex="-1"></a>exT1a</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 3 x 3
-#R&gt;     DATETIME            mins2dinner
-#R&gt;     &lt;dttm&gt;                    &lt;dbl&gt;
-#R&gt;   1 2021-01-01 12:15:01       345. 
-#R&gt;   2 2021-01-01 09:14:56       525. 
-#R&gt;   3 2021-01-01 19:34:01       -94.0
-#R&gt;   # ... with 1 more variable: int2dinner &lt;Interval&gt;</code></pre>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb453-1"><a href="dates-and-times.html#cb453-1" aria-hidden="true" tabindex="-1"></a>exT1a <span class="ot">&lt;-</span> exT1 <span class="sc">%&gt;%</span></span>
+<span id="cb453-2"><a href="dates-and-times.html#cb453-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATETIME=</span><span class="fu">dmy_hms</span>(DTSTR,<span class="at">tz=</span><span class="st">&quot;US/Central&quot;</span>),</span>
+<span id="cb453-3"><a href="dates-and-times.html#cb453-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">int2dinner=</span>DATETIME <span class="sc">%--%</span> <span class="fu">dmy_hms</span>(<span class="st">&quot;1-Jan-2021 18:00:00&quot;</span>,<span class="at">tz=</span><span class="st">&quot;US/Central&quot;</span>),</span>
+<span id="cb453-4"><a href="dates-and-times.html#cb453-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mins2dinner=</span><span class="fu">time_length</span>(int2dinner,<span class="at">unit=</span><span class="st">&quot;minutes&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb453-5"><a href="dates-and-times.html#cb453-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>TSTR,<span class="sc">-</span>DTSTR) <span class="sc">%&gt;%</span></span>
+<span id="cb453-6"><a href="dates-and-times.html#cb453-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(mins2dinner,<span class="at">.after=</span>DATETIME)</span>
+<span id="cb453-7"><a href="dates-and-times.html#cb453-7" aria-hidden="true" tabindex="-1"></a>exT1a</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
+#R&gt;    DATETIME            mins2dinner
+#R&gt;    &lt;dttm&gt;                    &lt;dbl&gt;
+#R&gt;  1 2021-01-01 12:15:01       345. 
+#R&gt;  2 2021-01-01 09:14:56       525. 
+#R&gt;  3 2021-01-01 19:34:01       -94.0
+#R&gt;  # ... with 1 more variable: int2dinner &lt;Interval&gt;</code></pre>
 </div>
 <div id="examples-in-context-2" class="section level2" number="9.7">
 <h2><span class="header-section-number">9.7</span> Examples in Context</h2>
 <div id="sales-transactions" class="section level3" number="9.7.1">
 <h3><span class="header-section-number">9.7.1</span> Sales Transactions</h3>
 <p>This example examines results for a trading company as presented in <a href="https://blog.rsquaredacademy.com/handling-date-and-time-in-r/">an RSquared Academy blogpost</a>. The data in <a href="https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/transact.csv">transact.csv</a><a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> represent the dates that an invoice was sent, payment of the invoice was due, and payment was received. As you can see from the data frame below, <code>read_csv()</code> accurately determined that each column contained dates and thus automatically read those columns in as of the date class.</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb440-1"><a href="dates-and-times.html#cb440-1" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;transact.csv&quot;</span>))</span>
-<span id="cb440-2"><a href="dates-and-times.html#cb440-2" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 2,466 x 3
-#R&gt;      Invoice    Due        Payment   
-#R&gt;      &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    
-#R&gt;    1 2013-01-02 2013-02-01 2013-01-15
-#R&gt;    2 2013-01-26 2013-02-25 2013-03-03
-#R&gt;    3 2013-07-03 2013-08-02 2013-07-08
-#R&gt;    4 2013-02-10 2013-03-12 2013-03-17
-#R&gt;    5 2012-10-25 2012-11-24 2012-11-28
-#R&gt;    6 2012-01-27 2012-02-26 2012-02-22
-#R&gt;    7 2013-08-13 2013-09-12 2013-09-09
-#R&gt;    8 2012-12-16 2013-01-15 2013-01-12
-#R&gt;    9 2012-05-14 2012-06-13 2012-07-01
-#R&gt;   10 2013-07-01 2013-07-31 2013-07-26
-#R&gt;   # ... with 2,456 more rows</code></pre>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb455-1"><a href="dates-and-times.html#cb455-1" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;transact.csv&quot;</span>))</span>
+<span id="cb455-2"><a href="dates-and-times.html#cb455-2" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2,466 x 3
+#R&gt;     Invoice    Due        Payment   
+#R&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    
+#R&gt;   1 2013-01-02 2013-02-01 2013-01-15
+#R&gt;   2 2013-01-26 2013-02-25 2013-03-03
+#R&gt;   3 2013-07-03 2013-08-02 2013-07-08
+#R&gt;   4 2013-02-10 2013-03-12 2013-03-17
+#R&gt;   5 2012-10-25 2012-11-24 2012-11-28
+#R&gt;   6 2012-01-27 2012-02-26 2012-02-22
+#R&gt;   7 2013-08-13 2013-09-12 2013-09-09
+#R&gt;   8 2012-12-16 2013-01-15 2013-01-12
+#R&gt;   9 2012-05-14 2012-06-13 2012-07-01
+#R&gt;  10 2013-07-01 2013-07-31 2013-07-26
+#R&gt;  # ... with 2,456 more rows</code></pre>
 <p>Part of the analysis will require summarizing results by years, quarters, and months. Thus, these variables were added to the data frame below.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb442-1"><a href="dates-and-times.html#cb442-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb442-2"><a href="dates-and-times.html#cb442-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yr=</span><span class="fu">year</span>(Due),</span>
-<span id="cb442-3"><a href="dates-and-times.html#cb442-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(Due,<span class="at">label=</span><span class="cn">TRUE</span>),</span>
-<span id="cb442-4"><a href="dates-and-times.html#cb442-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">qrtr=</span><span class="fu">quarter</span>(Due)) <span class="sc">%&gt;%</span></span>
-<span id="cb442-5"><a href="dates-and-times.html#cb442-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(yr<span class="sc">:</span>qrtr)</span>
-<span id="cb442-6"><a href="dates-and-times.html#cb442-6" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 2,466 x 6
-#R&gt;         yr mon    qrtr Invoice    Due        Payment   
-#R&gt;      &lt;dbl&gt; &lt;ord&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    
-#R&gt;    1  2013 Feb       1 2013-01-02 2013-02-01 2013-01-15
-#R&gt;    2  2013 Feb       1 2013-01-26 2013-02-25 2013-03-03
-#R&gt;    3  2013 Aug       3 2013-07-03 2013-08-02 2013-07-08
-#R&gt;    4  2013 Mar       1 2013-02-10 2013-03-12 2013-03-17
-#R&gt;    5  2012 Nov       4 2012-10-25 2012-11-24 2012-11-28
-#R&gt;    6  2012 Feb       1 2012-01-27 2012-02-26 2012-02-22
-#R&gt;    7  2013 Sep       3 2013-08-13 2013-09-12 2013-09-09
-#R&gt;    8  2013 Jan       1 2012-12-16 2013-01-15 2013-01-12
-#R&gt;    9  2012 Jun       2 2012-05-14 2012-06-13 2012-07-01
-#R&gt;   10  2013 Jul       3 2013-07-01 2013-07-31 2013-07-26
-#R&gt;   # ... with 2,456 more rows</code></pre>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb457-1"><a href="dates-and-times.html#cb457-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb457-2"><a href="dates-and-times.html#cb457-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yr=</span><span class="fu">year</span>(Due),</span>
+<span id="cb457-3"><a href="dates-and-times.html#cb457-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(Due,<span class="at">label=</span><span class="cn">TRUE</span>),</span>
+<span id="cb457-4"><a href="dates-and-times.html#cb457-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">qrtr=</span><span class="fu">quarter</span>(Due)) <span class="sc">%&gt;%</span></span>
+<span id="cb457-5"><a href="dates-and-times.html#cb457-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(yr<span class="sc">:</span>qrtr)</span>
+<span id="cb457-6"><a href="dates-and-times.html#cb457-6" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2,466 x 6
+#R&gt;        yr mon    qrtr Invoice    Due        Payment   
+#R&gt;     &lt;dbl&gt; &lt;ord&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    
+#R&gt;   1  2013 Feb       1 2013-01-02 2013-02-01 2013-01-15
+#R&gt;   2  2013 Feb       1 2013-01-26 2013-02-25 2013-03-03
+#R&gt;   3  2013 Aug       3 2013-07-03 2013-08-02 2013-07-08
+#R&gt;   4  2013 Mar       1 2013-02-10 2013-03-12 2013-03-17
+#R&gt;   5  2012 Nov       4 2012-10-25 2012-11-24 2012-11-28
+#R&gt;   6  2012 Feb       1 2012-01-27 2012-02-26 2012-02-22
+#R&gt;   7  2013 Sep       3 2013-08-13 2013-09-12 2013-09-09
+#R&gt;   8  2013 Jan       1 2012-12-16 2013-01-15 2013-01-12
+#R&gt;   9  2012 Jun       2 2012-05-14 2012-06-13 2012-07-01
+#R&gt;  10  2013 Jul       3 2013-07-01 2013-07-31 2013-07-26
+#R&gt;  # ... with 2,456 more rows</code></pre>
 <p>Two questions that the team wanted to ask from these data were (1) what is the average days it took to make payment (from when the invoice was issued and (2) the average days past due for payments that were not paid on time. Answering the first question requires making an interval of the invoice to payment time and then determining how long that interval was.</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb444-1"><a href="dates-and-times.html#cb444-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb444-2"><a href="dates-and-times.html#cb444-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">settle_days=</span><span class="fu">time_length</span>(Invoice <span class="sc">%--%</span> Payment,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>))</span>
-<span id="cb444-3"><a href="dates-and-times.html#cb444-3" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 2,466 x 7
-#R&gt;         yr mon    qrtr Invoice    Due        Payment    settle_days
-#R&gt;      &lt;dbl&gt; &lt;ord&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;           &lt;dbl&gt;
-#R&gt;    1  2013 Feb       1 2013-01-02 2013-02-01 2013-01-15          13
-#R&gt;    2  2013 Feb       1 2013-01-26 2013-02-25 2013-03-03          36
-#R&gt;    3  2013 Aug       3 2013-07-03 2013-08-02 2013-07-08           5
-#R&gt;    4  2013 Mar       1 2013-02-10 2013-03-12 2013-03-17          35
-#R&gt;    5  2012 Nov       4 2012-10-25 2012-11-24 2012-11-28          34
-#R&gt;    6  2012 Feb       1 2012-01-27 2012-02-26 2012-02-22          26
-#R&gt;    7  2013 Sep       3 2013-08-13 2013-09-12 2013-09-09          27
-#R&gt;    8  2013 Jan       1 2012-12-16 2013-01-15 2013-01-12          27
-#R&gt;    9  2012 Jun       2 2012-05-14 2012-06-13 2012-07-01          48
-#R&gt;   10  2013 Jul       3 2013-07-01 2013-07-31 2013-07-26          25
-#R&gt;   # ... with 2,456 more rows</code></pre>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb459-1"><a href="dates-and-times.html#cb459-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb459-2"><a href="dates-and-times.html#cb459-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">settle_days=</span><span class="fu">time_length</span>(Invoice <span class="sc">%--%</span> Payment,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>))</span>
+<span id="cb459-3"><a href="dates-and-times.html#cb459-3" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2,466 x 7
+#R&gt;        yr mon    qrtr Invoice    Due        Payment    settle_days
+#R&gt;     &lt;dbl&gt; &lt;ord&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;           &lt;dbl&gt;
+#R&gt;   1  2013 Feb       1 2013-01-02 2013-02-01 2013-01-15          13
+#R&gt;   2  2013 Feb       1 2013-01-26 2013-02-25 2013-03-03          36
+#R&gt;   3  2013 Aug       3 2013-07-03 2013-08-02 2013-07-08           5
+#R&gt;   4  2013 Mar       1 2013-02-10 2013-03-12 2013-03-17          35
+#R&gt;   5  2012 Nov       4 2012-10-25 2012-11-24 2012-11-28          34
+#R&gt;   6  2012 Feb       1 2012-01-27 2012-02-26 2012-02-22          26
+#R&gt;   7  2013 Sep       3 2013-08-13 2013-09-12 2013-09-09          27
+#R&gt;   8  2013 Jan       1 2012-12-16 2013-01-15 2013-01-12          27
+#R&gt;   9  2012 Jun       2 2012-05-14 2012-06-13 2012-07-01          48
+#R&gt;  10  2013 Jul       3 2013-07-01 2013-07-31 2013-07-26          25
+#R&gt;  # ... with 2,456 more rows</code></pre>
 <p>The results are summarized by quarter within each year below.</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb446-1"><a href="dates-and-times.html#cb446-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&gt;%</span></span>
-<span id="cb446-2"><a href="dates-and-times.html#cb446-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(yr,qrtr) <span class="sc">%&gt;%</span></span>
-<span id="cb446-3"><a href="dates-and-times.html#cb446-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(settle_days),</span>
-<span id="cb446-4"><a href="dates-and-times.html#cb446-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(settle_days),</span>
-<span id="cb446-5"><a href="dates-and-times.html#cb446-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(settle_days),</span>
-<span id="cb446-6"><a href="dates-and-times.html#cb446-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(settle_days))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 9 x 6
-#R&gt;   # Groups:   yr [3]
-#R&gt;        yr  qrtr  mean    sd   min   max
-#R&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#R&gt;   1  2012     1  29.6  12.4     3    64
-#R&gt;   2  2012     2  28.6  12.2     1    63
-#R&gt;   3  2012     3  27.7  12.5     1    67
-#R&gt;   4  2012     4  27.3  11.4     2    75
-#R&gt;   5  2013     1  25.8  12.1     1    64
-#R&gt;   6  2013     2  26.3  13.2     0    64
-#R&gt;   7  2013     3  24.8  12.0     0    59
-#R&gt;   8  2013     4  22.7  11.8     1    57
-#R&gt;   9  2014     1  23    10.3    11    36</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb461-1"><a href="dates-and-times.html#cb461-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&gt;%</span></span>
+<span id="cb461-2"><a href="dates-and-times.html#cb461-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(yr,qrtr) <span class="sc">%&gt;%</span></span>
+<span id="cb461-3"><a href="dates-and-times.html#cb461-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(settle_days),</span>
+<span id="cb461-4"><a href="dates-and-times.html#cb461-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(settle_days),</span>
+<span id="cb461-5"><a href="dates-and-times.html#cb461-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(settle_days),</span>
+<span id="cb461-6"><a href="dates-and-times.html#cb461-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(settle_days))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 9 x 6
+#R&gt;  # Groups:   yr [3]
+#R&gt;       yr  qrtr  mean    sd   min   max
+#R&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#R&gt;  1  2012     1  29.6  12.4     3    64
+#R&gt;  2  2012     2  28.6  12.2     1    63
+#R&gt;  3  2012     3  27.7  12.5     1    67
+#R&gt;  4  2012     4  27.3  11.4     2    75
+#R&gt;  5  2013     1  25.8  12.1     1    64
+#R&gt;  6  2013     2  26.3  13.2     0    64
+#R&gt;  7  2013     3  24.8  12.0     0    59
+#R&gt;  8  2013     4  22.7  11.8     1    57
+#R&gt;  9  2014     1  23    10.3    11    36</code></pre>
 <p>Answering the second question requires finding the length of interval between the due and payment dates and then replacing all of the negative numbers with <code>NA</code> because they do not represent an overdue payment.</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb448-1"><a href="dates-and-times.html#cb448-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb448-2"><a href="dates-and-times.html#cb448-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">overdue_days=</span><span class="fu">time_length</span>(Due <span class="sc">%--%</span> Payment,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>),</span>
-<span id="cb448-3"><a href="dates-and-times.html#cb448-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">overdue_days=</span><span class="fu">ifelse</span>(overdue_days<span class="sc">&gt;</span><span class="dv">0</span>,overdue_days,<span class="cn">NA_real_</span>))</span>
-<span id="cb448-4"><a href="dates-and-times.html#cb448-4" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 2,466 x 8
-#R&gt;         yr mon    qrtr Invoice    Due        Payment    settle_days overdue_days
-#R&gt;      &lt;dbl&gt; &lt;ord&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;           &lt;dbl&gt;        &lt;dbl&gt;
-#R&gt;    1  2013 Feb       1 2013-01-02 2013-02-01 2013-01-15          13           NA
-#R&gt;    2  2013 Feb       1 2013-01-26 2013-02-25 2013-03-03          36            6
-#R&gt;    3  2013 Aug       3 2013-07-03 2013-08-02 2013-07-08           5           NA
-#R&gt;    4  2013 Mar       1 2013-02-10 2013-03-12 2013-03-17          35            5
-#R&gt;    5  2012 Nov       4 2012-10-25 2012-11-24 2012-11-28          34            4
-#R&gt;    6  2012 Feb       1 2012-01-27 2012-02-26 2012-02-22          26           NA
-#R&gt;    7  2013 Sep       3 2013-08-13 2013-09-12 2013-09-09          27           NA
-#R&gt;    8  2013 Jan       1 2012-12-16 2013-01-15 2013-01-12          27           NA
-#R&gt;    9  2012 Jun       2 2012-05-14 2012-06-13 2012-07-01          48           18
-#R&gt;   10  2013 Jul       3 2013-07-01 2013-07-31 2013-07-26          25           NA
-#R&gt;   # ... with 2,456 more rows</code></pre>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb463-1"><a href="dates-and-times.html#cb463-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb463-2"><a href="dates-and-times.html#cb463-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">overdue_days=</span><span class="fu">time_length</span>(Due <span class="sc">%--%</span> Payment,<span class="at">unit=</span><span class="st">&quot;days&quot;</span>),</span>
+<span id="cb463-3"><a href="dates-and-times.html#cb463-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">overdue_days=</span><span class="fu">ifelse</span>(overdue_days<span class="sc">&gt;</span><span class="dv">0</span>,overdue_days,<span class="cn">NA_real_</span>))</span>
+<span id="cb463-4"><a href="dates-and-times.html#cb463-4" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2,466 x 8
+#R&gt;        yr mon    qrtr Invoice    Due        Payment    settle_days overdue_days
+#R&gt;     &lt;dbl&gt; &lt;ord&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+#R&gt;   1  2013 Feb       1 2013-01-02 2013-02-01 2013-01-15          13           NA
+#R&gt;   2  2013 Feb       1 2013-01-26 2013-02-25 2013-03-03          36            6
+#R&gt;   3  2013 Aug       3 2013-07-03 2013-08-02 2013-07-08           5           NA
+#R&gt;   4  2013 Mar       1 2013-02-10 2013-03-12 2013-03-17          35            5
+#R&gt;   5  2012 Nov       4 2012-10-25 2012-11-24 2012-11-28          34            4
+#R&gt;   6  2012 Feb       1 2012-01-27 2012-02-26 2012-02-22          26           NA
+#R&gt;   7  2013 Sep       3 2013-08-13 2013-09-12 2013-09-09          27           NA
+#R&gt;   8  2013 Jan       1 2012-12-16 2013-01-15 2013-01-12          27           NA
+#R&gt;   9  2012 Jun       2 2012-05-14 2012-06-13 2012-07-01          48           18
+#R&gt;  10  2013 Jul       3 2013-07-01 2013-07-31 2013-07-26          25           NA
+#R&gt;  # ... with 2,456 more rows</code></pre>
 <p>The results are summarized by quarter within each year below.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb450-1"><a href="dates-and-times.html#cb450-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&gt;%</span></span>
-<span id="cb450-2"><a href="dates-and-times.html#cb450-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(yr,qrtr) <span class="sc">%&gt;%</span></span>
-<span id="cb450-3"><a href="dates-and-times.html#cb450-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_n=</span><span class="fu">n</span>(),</span>
-<span id="cb450-4"><a href="dates-and-times.html#cb450-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">overdue_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(overdue_days)),</span>
-<span id="cb450-5"><a href="dates-and-times.html#cb450-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb450-6"><a href="dates-and-times.html#cb450-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb450-7"><a href="dates-and-times.html#cb450-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb450-8"><a href="dates-and-times.html#cb450-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 9 x 8
-#R&gt;   # Groups:   yr [3]
-#R&gt;        yr  qrtr total_n overdue_n  mean    sd   min   max
-#R&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#R&gt;   1  2012     1     189        84 10.9   7.14     1    34
-#R&gt;   2  2012     2     324       129 10.6   7.43     1    33
-#R&gt;   3  2012     3     309       121 10.0   7.29     1    37
-#R&gt;   4  2012     4     345       124  9.20  7.37     1    45
-#R&gt;   5  2013     1     327       115  9.15  6.70     1    34
-#R&gt;   6  2013     2     337       121 10.3   8.05     1    34
-#R&gt;   7  2013     3     309        97  8.98  6.33     1    29
-#R&gt;   8  2013     4     321        85  7.89  5.79     1    27
-#R&gt;   9  2014     1       5         1  6    NA        6     6</code></pre>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb465-1"><a href="dates-and-times.html#cb465-1" aria-hidden="true" tabindex="-1"></a>trans <span class="sc">%&gt;%</span></span>
+<span id="cb465-2"><a href="dates-and-times.html#cb465-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(yr,qrtr) <span class="sc">%&gt;%</span></span>
+<span id="cb465-3"><a href="dates-and-times.html#cb465-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_n=</span><span class="fu">n</span>(),</span>
+<span id="cb465-4"><a href="dates-and-times.html#cb465-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">overdue_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(overdue_days)),</span>
+<span id="cb465-5"><a href="dates-and-times.html#cb465-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb465-6"><a href="dates-and-times.html#cb465-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb465-7"><a href="dates-and-times.html#cb465-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb465-8"><a href="dates-and-times.html#cb465-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(overdue_days,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 9 x 8
+#R&gt;  # Groups:   yr [3]
+#R&gt;       yr  qrtr total_n overdue_n  mean    sd   min   max
+#R&gt;    &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#R&gt;  1  2012     1     189        84 10.9   7.14     1    34
+#R&gt;  2  2012     2     324       129 10.6   7.43     1    33
+#R&gt;  3  2012     3     309       121 10.0   7.29     1    37
+#R&gt;  4  2012     4     345       124  9.20  7.37     1    45
+#R&gt;  5  2013     1     327       115  9.15  6.70     1    34
+#R&gt;  6  2013     2     337       121 10.3   8.05     1    34
+#R&gt;  7  2013     3     309        97  8.98  6.33     1    29
+#R&gt;  8  2013     4     321        85  7.89  5.79     1    27
+#R&gt;  9  2014     1       5         1  6    NA        6     6</code></pre>
 <p> </p>
 </div>
 <div id="stream-discharge" class="section level3" number="9.7.2">
@@ -661,24 +659,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Selected only “00060 Discharge” from “Available Parameters,” “Tab-separated” from “Output format,” and enter “2021-01-01” into “Begin Date.” Pressed “GO” button.</li>
 <li>Copied URL from the ensuing page into <code>read_tsv()</code> below. [<em>Note that the top of the file has many lines of comments each preceded by a ‘#,’ which precipates the use of <code>comment=</code> below.</em>]</li>
 </ul>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb452-1"><a href="dates-and-times.html#cb452-1" aria-hidden="true" tabindex="-1"></a>wcd <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://nwis.waterdata.usgs.gov/usa/nwis/uv/?cb_00045=on&amp;cb_00060=on&amp;format=rdb&amp;site_no=040263205&amp;period=&amp;begin_date=2021-01-01&amp;end_date=2021-08-03&quot;</span>,</span>
-<span id="cb452-2"><a href="dates-and-times.html#cb452-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">comment=</span><span class="st">&quot;#&quot;</span>)</span>
-<span id="cb452-3"><a href="dates-and-times.html#cb452-3" aria-hidden="true" tabindex="-1"></a>wcd</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 61,896 x 8
-#R&gt;      agency_cd site_no   datetime         tz_cd `157029_00060` `157029_00060_cd`
-#R&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;            
-#R&gt;    1 5s        15s       20d              6s    14n            10s              
-#R&gt;    2 USGS      040263205 2021-01-01 00:00 CST   17.7           P                
-#R&gt;    3 USGS      040263205 2021-01-01 00:05 CST   17.7           P                
-#R&gt;    4 USGS      040263205 2021-01-01 00:10 CST   17.7           P                
-#R&gt;    5 USGS      040263205 2021-01-01 00:15 CST   17.7           P                
-#R&gt;    6 USGS      040263205 2021-01-01 00:20 CST   17.8           P                
-#R&gt;    7 USGS      040263205 2021-01-01 00:25 CST   17.8           P                
-#R&gt;    8 USGS      040263205 2021-01-01 00:30 CST   17.8           P                
-#R&gt;    9 USGS      040263205 2021-01-01 00:35 CST   17.7           P                
-#R&gt;   10 USGS      040263205 2021-01-01 00:40 CST   17.7           P                
-#R&gt;   # ... with 61,886 more rows, and 2 more variables: 157030_00045 &lt;chr&gt;,
-#R&gt;   #   157030_00045_cd &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb467-1"><a href="dates-and-times.html#cb467-1" aria-hidden="true" tabindex="-1"></a>wcd <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://nwis.waterdata.usgs.gov/usa/nwis/uv/?cb_00045=on&amp;cb_00060=on&amp;format=rdb&amp;site_no=040263205&amp;period=&amp;begin_date=2021-01-01&amp;end_date=2021-08-03&quot;</span>,</span>
+<span id="cb467-2"><a href="dates-and-times.html#cb467-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">comment=</span><span class="st">&quot;#&quot;</span>)</span>
+<span id="cb467-3"><a href="dates-and-times.html#cb467-3" aria-hidden="true" tabindex="-1"></a>wcd</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 61,896 x 8
+#R&gt;     agency_cd site_no   datetime         tz_cd `157029_00060` `157029_00060_cd`
+#R&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;            
+#R&gt;   1 5s        15s       20d              6s    14n            10s              
+#R&gt;   2 USGS      040263205 2021-01-01 00:00 CST   17.7           P                
+#R&gt;   3 USGS      040263205 2021-01-01 00:05 CST   17.7           P                
+#R&gt;   4 USGS      040263205 2021-01-01 00:10 CST   17.7           P                
+#R&gt;   5 USGS      040263205 2021-01-01 00:15 CST   17.7           P                
+#R&gt;   6 USGS      040263205 2021-01-01 00:20 CST   17.8           P                
+#R&gt;   7 USGS      040263205 2021-01-01 00:25 CST   17.8           P                
+#R&gt;   8 USGS      040263205 2021-01-01 00:30 CST   17.8           P                
+#R&gt;   9 USGS      040263205 2021-01-01 00:35 CST   17.7           P                
+#R&gt;  10 USGS      040263205 2021-01-01 00:40 CST   17.7           P                
+#R&gt;  # ... with 61,886 more rows, and 2 more variables: 157030_00045 &lt;chr&gt;,
+#R&gt;  #   157030_00045_cd &lt;chr&gt;</code></pre>
 <p>There are several issues with the way these data load into R.</p>
 <ol style="list-style-type: decimal">
 <li>The first line of the data frame is not data at all; this row is removed with <code>slice()</code> below.</li>
@@ -688,96 +686,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The <code>datetime</code> variable needs to be converted from a character to datetime class.</li>
 <li>The <code>discharge</code> and <code>precip</code> variables need to be converted from a character to a numeric class (with <code>as.numeric()</code> below).</li>
 </ol>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb454-1"><a href="dates-and-times.html#cb454-1" aria-hidden="true" tabindex="-1"></a>wcd <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb454-2"><a href="dates-and-times.html#cb454-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb454-3"><a href="dates-and-times.html#cb454-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">&quot;cd&quot;</span>),<span class="sc">-</span>site_no) <span class="sc">%&gt;%</span></span>
-<span id="cb454-4"><a href="dates-and-times.html#cb454-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">discharge=</span><span class="fu">ends_with</span>(<span class="st">&quot;00060&quot;</span>),</span>
-<span id="cb454-5"><a href="dates-and-times.html#cb454-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">precip=</span><span class="fu">ends_with</span>(<span class="st">&quot;00045&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb454-6"><a href="dates-and-times.html#cb454-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">datetime=</span><span class="fu">ymd_hm</span>(datetime),</span>
-<span id="cb454-7"><a href="dates-and-times.html#cb454-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">discharge=</span><span class="fu">as.numeric</span>(discharge),</span>
-<span id="cb454-8"><a href="dates-and-times.html#cb454-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">precip=</span><span class="fu">as.numeric</span>(precip))</span>
-<span id="cb454-9"><a href="dates-and-times.html#cb454-9" aria-hidden="true" tabindex="-1"></a>wcd</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 61,895 x 3
-#R&gt;      datetime            discharge precip
-#R&gt;      &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt;
-#R&gt;    1 2021-01-01 00:00:00      17.7     NA
-#R&gt;    2 2021-01-01 00:05:00      17.7     NA
-#R&gt;    3 2021-01-01 00:10:00      17.7     NA
-#R&gt;    4 2021-01-01 00:15:00      17.7     NA
-#R&gt;    5 2021-01-01 00:20:00      17.8     NA
-#R&gt;    6 2021-01-01 00:25:00      17.8     NA
-#R&gt;    7 2021-01-01 00:30:00      17.8     NA
-#R&gt;    8 2021-01-01 00:35:00      17.7     NA
-#R&gt;    9 2021-01-01 00:40:00      17.7     NA
-#R&gt;   10 2021-01-01 00:45:00      17.8     NA
-#R&gt;   # ... with 61,885 more rows</code></pre>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb469-1"><a href="dates-and-times.html#cb469-1" aria-hidden="true" tabindex="-1"></a>wcd <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb469-2"><a href="dates-and-times.html#cb469-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb469-3"><a href="dates-and-times.html#cb469-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">&quot;cd&quot;</span>),<span class="sc">-</span>site_no) <span class="sc">%&gt;%</span></span>
+<span id="cb469-4"><a href="dates-and-times.html#cb469-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">discharge=</span><span class="fu">ends_with</span>(<span class="st">&quot;00060&quot;</span>),</span>
+<span id="cb469-5"><a href="dates-and-times.html#cb469-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">precip=</span><span class="fu">ends_with</span>(<span class="st">&quot;00045&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb469-6"><a href="dates-and-times.html#cb469-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">datetime=</span><span class="fu">ymd_hm</span>(datetime),</span>
+<span id="cb469-7"><a href="dates-and-times.html#cb469-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">discharge=</span><span class="fu">as.numeric</span>(discharge),</span>
+<span id="cb469-8"><a href="dates-and-times.html#cb469-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">precip=</span><span class="fu">as.numeric</span>(precip))</span>
+<span id="cb469-9"><a href="dates-and-times.html#cb469-9" aria-hidden="true" tabindex="-1"></a>wcd</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 61,895 x 3
+#R&gt;     datetime            discharge precip
+#R&gt;     &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt;
+#R&gt;   1 2021-01-01 00:00:00      17.7     NA
+#R&gt;   2 2021-01-01 00:05:00      17.7     NA
+#R&gt;   3 2021-01-01 00:10:00      17.7     NA
+#R&gt;   4 2021-01-01 00:15:00      17.7     NA
+#R&gt;   5 2021-01-01 00:20:00      17.8     NA
+#R&gt;   6 2021-01-01 00:25:00      17.8     NA
+#R&gt;   7 2021-01-01 00:30:00      17.8     NA
+#R&gt;   8 2021-01-01 00:35:00      17.7     NA
+#R&gt;   9 2021-01-01 00:40:00      17.7     NA
+#R&gt;  10 2021-01-01 00:45:00      17.8     NA
+#R&gt;  # ... with 61,885 more rows</code></pre>
 <p>The discharge data can then be plotted as follows (note the log scale).</p>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-239-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-240-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>Suppose that the researchers want to examine discharge for various periods of time (say weekly and monthly). The data frame then needs to include variables that identify weeks and months.</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb456-1"><a href="dates-and-times.html#cb456-1" aria-hidden="true" tabindex="-1"></a>wcd <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb456-2"><a href="dates-and-times.html#cb456-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wk=</span><span class="fu">week</span>(datetime),</span>
-<span id="cb456-3"><a href="dates-and-times.html#cb456-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(datetime,<span class="at">label=</span><span class="cn">TRUE</span>))</span>
-<span id="cb456-4"><a href="dates-and-times.html#cb456-4" aria-hidden="true" tabindex="-1"></a>wcd</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 61,895 x 5
-#R&gt;      datetime            discharge precip    wk mon  
-#R&gt;      &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;
-#R&gt;    1 2021-01-01 00:00:00      17.7     NA     1 Jan  
-#R&gt;    2 2021-01-01 00:05:00      17.7     NA     1 Jan  
-#R&gt;    3 2021-01-01 00:10:00      17.7     NA     1 Jan  
-#R&gt;    4 2021-01-01 00:15:00      17.7     NA     1 Jan  
-#R&gt;    5 2021-01-01 00:20:00      17.8     NA     1 Jan  
-#R&gt;    6 2021-01-01 00:25:00      17.8     NA     1 Jan  
-#R&gt;    7 2021-01-01 00:30:00      17.8     NA     1 Jan  
-#R&gt;    8 2021-01-01 00:35:00      17.7     NA     1 Jan  
-#R&gt;    9 2021-01-01 00:40:00      17.7     NA     1 Jan  
-#R&gt;   10 2021-01-01 00:45:00      17.8     NA     1 Jan  
-#R&gt;   # ... with 61,885 more rows</code></pre>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb471-1"><a href="dates-and-times.html#cb471-1" aria-hidden="true" tabindex="-1"></a>wcd <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb471-2"><a href="dates-and-times.html#cb471-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wk=</span><span class="fu">week</span>(datetime),</span>
+<span id="cb471-3"><a href="dates-and-times.html#cb471-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(datetime,<span class="at">label=</span><span class="cn">TRUE</span>))</span>
+<span id="cb471-4"><a href="dates-and-times.html#cb471-4" aria-hidden="true" tabindex="-1"></a>wcd</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 61,895 x 5
+#R&gt;     datetime            discharge precip    wk mon  
+#R&gt;     &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;
+#R&gt;   1 2021-01-01 00:00:00      17.7     NA     1 Jan  
+#R&gt;   2 2021-01-01 00:05:00      17.7     NA     1 Jan  
+#R&gt;   3 2021-01-01 00:10:00      17.7     NA     1 Jan  
+#R&gt;   4 2021-01-01 00:15:00      17.7     NA     1 Jan  
+#R&gt;   5 2021-01-01 00:20:00      17.8     NA     1 Jan  
+#R&gt;   6 2021-01-01 00:25:00      17.8     NA     1 Jan  
+#R&gt;   7 2021-01-01 00:30:00      17.8     NA     1 Jan  
+#R&gt;   8 2021-01-01 00:35:00      17.7     NA     1 Jan  
+#R&gt;   9 2021-01-01 00:40:00      17.7     NA     1 Jan  
+#R&gt;  10 2021-01-01 00:45:00      17.8     NA     1 Jan  
+#R&gt;  # ... with 61,885 more rows</code></pre>
 <p>For example, statistical summaries can then be computed by, for example, month.</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb458-1"><a href="dates-and-times.html#cb458-1" aria-hidden="true" tabindex="-1"></a>wcd_sum_mon <span class="ot">&lt;-</span> wcd <span class="sc">%&gt;%</span></span>
-<span id="cb458-2"><a href="dates-and-times.html#cb458-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mon) <span class="sc">%&gt;%</span></span>
-<span id="cb458-3"><a href="dates-and-times.html#cb458-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb458-4"><a href="dates-and-times.html#cb458-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(discharge),</span>
-<span id="cb458-5"><a href="dates-and-times.html#cb458-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(discharge),</span>
-<span id="cb458-6"><a href="dates-and-times.html#cb458-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(discharge),</span>
-<span id="cb458-7"><a href="dates-and-times.html#cb458-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(discharge))</span>
-<span id="cb458-8"><a href="dates-and-times.html#cb458-8" aria-hidden="true" tabindex="-1"></a>wcd_sum_mon</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 8 x 6
-#R&gt;     mon       n  mean     sd   min   max
-#R&gt;     &lt;ord&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#R&gt;   1 Jan    8928  17.6  0.272  16.9  18.9
-#R&gt;   2 Feb    8064  17.0  0.223  16.3  17.7
-#R&gt;   3 Mar    8916  33.4 31.8    16.5 257  
-#R&gt;   4 Apr    8640  28.3 19.1    18.3 196  
-#R&gt;   5 May    8915  20.3  5.16   17.4  85.5
-#R&gt;   6 Jun    8640  NA   NA      NA    NA  
-#R&gt;   7 Jul    8928  17.7  0.745  16.6  27.7
-#R&gt;   8 Aug     864  17.9  0.257  17.2  18.4</code></pre>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb473-1"><a href="dates-and-times.html#cb473-1" aria-hidden="true" tabindex="-1"></a>wcd_sum_mon <span class="ot">&lt;-</span> wcd <span class="sc">%&gt;%</span></span>
+<span id="cb473-2"><a href="dates-and-times.html#cb473-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mon) <span class="sc">%&gt;%</span></span>
+<span id="cb473-3"><a href="dates-and-times.html#cb473-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb473-4"><a href="dates-and-times.html#cb473-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(discharge),</span>
+<span id="cb473-5"><a href="dates-and-times.html#cb473-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(discharge),</span>
+<span id="cb473-6"><a href="dates-and-times.html#cb473-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(discharge),</span>
+<span id="cb473-7"><a href="dates-and-times.html#cb473-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(discharge))</span>
+<span id="cb473-8"><a href="dates-and-times.html#cb473-8" aria-hidden="true" tabindex="-1"></a>wcd_sum_mon</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 6
+#R&gt;    mon       n  mean     sd   min   max
+#R&gt;    &lt;ord&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#R&gt;  1 Jan    8928  17.6  0.272  16.9  18.9
+#R&gt;  2 Feb    8064  17.0  0.223  16.3  17.7
+#R&gt;  3 Mar    8916  33.4 31.8    16.5 257  
+#R&gt;  4 Apr    8640  28.3 19.1    18.3 196  
+#R&gt;  5 May    8915  20.3  5.16   17.4  85.5
+#R&gt;  6 Jun    8640  NA   NA      NA    NA  
+#R&gt;  7 Jul    8928  17.7  0.745  16.6  27.7
+#R&gt;  8 Aug     864  17.9  0.257  17.2  18.4</code></pre>
 <p>From this it is clear that discharge was relatively constant (low SD values) with an average between 17 and 18 cfs in January, February, June, July, and August, but more variable and with greater mean discharge in March, April, and, to a lesser degree, May.</p>
 <p>For fun, it is often interesting to look at the discharge plot around a “flashy” event. The code below finds the “datetime” for the maximum discharge.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb460-1"><a href="dates-and-times.html#cb460-1" aria-hidden="true" tabindex="-1"></a>wcd<span class="sc">$</span>datetime[<span class="fu">which.max</span>(wcd<span class="sc">$</span>discharge)]</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;2021-03-10 23:00:00 UTC&quot;</code></pre>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb475-1"><a href="dates-and-times.html#cb475-1" aria-hidden="true" tabindex="-1"></a>wcd<span class="sc">$</span>datetime[<span class="fu">which.max</span>(wcd<span class="sc">$</span>discharge)]</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] &quot;2021-03-10 23:00:00 UTC&quot;</code></pre>
 <p>A new data frame that is around this point of maximum discharge is then created with <code>filter()</code>.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb462-1"><a href="dates-and-times.html#cb462-1" aria-hidden="true" tabindex="-1"></a>wcd1 <span class="ot">&lt;-</span> wcd <span class="sc">%&gt;%</span></span>
-<span id="cb462-2"><a href="dates-and-times.html#cb462-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(datetime<span class="sc">&gt;=</span><span class="fu">ymd_hms</span>(<span class="st">&quot;2021-03-09 12:00:00&quot;</span>),</span>
-<span id="cb462-3"><a href="dates-and-times.html#cb462-3" aria-hidden="true" tabindex="-1"></a>         datetime<span class="sc">&lt;=</span><span class="fu">ymd_hms</span>(<span class="st">&quot;2021-03-12 6:00:00&quot;</span>))</span>
-<span id="cb462-4"><a href="dates-and-times.html#cb462-4" aria-hidden="true" tabindex="-1"></a>wcd1</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   # A tibble: 793 x 5
-#R&gt;      datetime            discharge precip    wk mon  
-#R&gt;      &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;
-#R&gt;    1 2021-03-09 12:00:00      19       NA    10 Mar  
-#R&gt;    2 2021-03-09 12:05:00      19       NA    10 Mar  
-#R&gt;    3 2021-03-09 12:10:00      19       NA    10 Mar  
-#R&gt;    4 2021-03-09 12:15:00      19       NA    10 Mar  
-#R&gt;    5 2021-03-09 12:20:00      19       NA    10 Mar  
-#R&gt;    6 2021-03-09 12:25:00      19       NA    10 Mar  
-#R&gt;    7 2021-03-09 12:30:00      19.1     NA    10 Mar  
-#R&gt;    8 2021-03-09 12:35:00      19.1     NA    10 Mar  
-#R&gt;    9 2021-03-09 12:40:00      19.1     NA    10 Mar  
-#R&gt;   10 2021-03-09 12:45:00      19.2     NA    10 Mar  
-#R&gt;   # ... with 783 more rows</code></pre>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb477-1"><a href="dates-and-times.html#cb477-1" aria-hidden="true" tabindex="-1"></a>wcd1 <span class="ot">&lt;-</span> wcd <span class="sc">%&gt;%</span></span>
+<span id="cb477-2"><a href="dates-and-times.html#cb477-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(datetime<span class="sc">&gt;=</span><span class="fu">ymd_hms</span>(<span class="st">&quot;2021-03-09 12:00:00&quot;</span>),</span>
+<span id="cb477-3"><a href="dates-and-times.html#cb477-3" aria-hidden="true" tabindex="-1"></a>         datetime<span class="sc">&lt;=</span><span class="fu">ymd_hms</span>(<span class="st">&quot;2021-03-12 6:00:00&quot;</span>))</span>
+<span id="cb477-4"><a href="dates-and-times.html#cb477-4" aria-hidden="true" tabindex="-1"></a>wcd1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 793 x 5
+#R&gt;     datetime            discharge precip    wk mon  
+#R&gt;     &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;
+#R&gt;   1 2021-03-09 12:00:00      19       NA    10 Mar  
+#R&gt;   2 2021-03-09 12:05:00      19       NA    10 Mar  
+#R&gt;   3 2021-03-09 12:10:00      19       NA    10 Mar  
+#R&gt;   4 2021-03-09 12:15:00      19       NA    10 Mar  
+#R&gt;   5 2021-03-09 12:20:00      19       NA    10 Mar  
+#R&gt;   6 2021-03-09 12:25:00      19       NA    10 Mar  
+#R&gt;   7 2021-03-09 12:30:00      19.1     NA    10 Mar  
+#R&gt;   8 2021-03-09 12:35:00      19.1     NA    10 Mar  
+#R&gt;   9 2021-03-09 12:40:00      19.1     NA    10 Mar  
+#R&gt;  10 2021-03-09 12:45:00      19.2     NA    10 Mar  
+#R&gt;  # ... with 783 more rows</code></pre>
 <p>Which can then be plotted.</p>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-244-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-245-1.png" width="432" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

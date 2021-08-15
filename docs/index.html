@@ -145,11 +145,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> Preparation</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="preparation.html"><a href="preparation.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#mac"><i class="fa fa-check"></i><b>1.2</b> Mac</a></li>
-<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.3</b> Optimally Configuring RStudio</a></li>
-<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.4</b> Install Tidyverse and Other Packages</a></li>
-<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.5</b> RStudio Projects</a></li>
-<li class="chapter" data-level="1.6" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.6</b> Using the Notebook Template</a></li>
+<li class="chapter" data-level="1.2" data-path="preparation.html"><a href="preparation.html#optimally-configuring-rstudio"><i class="fa fa-check"></i><b>1.2</b> Optimally Configuring RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="preparation.html"><a href="preparation.html#install-tidyverse-and-other-packages"><i class="fa fa-check"></i><b>1.3</b> Install Tidyverse and Other Packages</a></li>
+<li class="chapter" data-level="1.4" data-path="preparation.html"><a href="preparation.html#rstudio-projects"><i class="fa fa-check"></i><b>1.4</b> RStudio Projects</a></li>
+<li class="chapter" data-level="1.5" data-path="preparation.html"><a href="preparation.html#using-the-notebook-template"><i class="fa fa-check"></i><b>1.5</b> Using the Notebook Template</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2</b> Data Structures</a>
 <ul>
@@ -221,7 +220,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="factors.html"><a href="factors.html#examples-in-context-3"><i class="fa fa-check"></i><b>10.4</b> Examples in Context</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
 <li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
@@ -250,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
-<p>XXX However, there are likely still errors or descriptions that don’t make sense. Please feel free to ask questions or post errors on the appropriate channel of the course MS Team.</p>
+<p>This book is currently a first draft of materials for learning how to wrangle data for more efficient further analyses and visualizations. I have worked hard to only provide information that you need to know to work on the module exercises. I have also tried to make it easy to read and pvoide visuals and explanations for all concepts. However, there are likely still errors or descriptions that don’t make sense. Please ask questions or post errors on the appropriate channel of the course MS Team.</p>
 <p>The book highlights definitions and tips in special boxes.</p>
 <div class="defn">
 <p><strong>Definition</strong>: This is a definition.</p>
@@ -258,16 +256,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="tip">
 <p>This is a tip.</p>
 </div>
-<p>R Code and results are also shown in special boxes. Code in the R box can be copied verbatim from the box with the icon that appears when you hover over the upper right corner of the code box.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">8</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 4.4</code></pre>
+<p>R Code and results are also shown in special boxes. R code is shown in a slight orange shade with the output in gray. Code in the R box can be copied from the box with the icon that appears when you hover over the upper right corner of the code box.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">8</span>)</span>
+<span id="cb2-2"><a href="index.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 4.4</code></pre>
+<p>Error results are shown in a reddish box.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">*</span>x</span></code></pre></div>
+<pre class="RERROR"><code>#R&gt;  Error in eval(expr, envir, enclos): object &#39;x&#39; not found</code></pre>
+<p>Results with a warning are shown in a goldish box.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)<span class="sc">*</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span></code></pre></div>
+<pre class="RWARNING"><code>#R&gt;  Warning in c(2, 2) * c(3, 3, 3): longer object length is not a multiple of
+#R&gt;  shorter object length</code></pre>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 6 6 6</code></pre>
 <p>The material presented in this book can be challenging to master. Please don’t hesitate to ask me questions as you have them!</p>
-<div id="package-needs" class="section level2 unlisted unnumbered">
-<h2>Package Needs</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 
-</div>
 </div>
             </section>
 
