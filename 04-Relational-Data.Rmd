@@ -1,4 +1,5 @@
 # Relational Data
+## Nature of Relational Data
 Some situations will have multiple data frames with related data. A particular analysis may require combining these data frames into a single data frame. If the data in the separate data frames are connected by a *key* variable then the data are said to be **relational** -- i.e., they relate to each other through a common variable (or variables).
 
 As an example a college may have the following four data frames with respect to its students.
@@ -11,6 +12,46 @@ As an example a college may have the following four data frames with respect to 
 Each of these data frames would also contain a student ID variable so that a student's personal information can be connect with the students financial aid, academic, or course information. This student ID variable is the key variable for these relational data frames.
 
 Data from related data frames can be *join*ed in a variety of ways. This module will explain several types of joins and how to accomplish those joins in R.
+
+::: {.defn data-latex=""}
+**Relational Data**: Data tables that are connected by a common key variable.
+:::
+
+::: {.defn data-latex=""}
+**Key Variable**: A variable in a data table that connects related data. This is often a unique "identification" variable.
+:::
+
+Relational data can be more efficient and, thus, lead to fewer data entry errors. For example consider a very simple set of data where the occurrence of plant species in plots is recorded, along with information about the plot. For example, the data for **one** plot that had five species may look like this ...
+
+```{r echo=FALSE}
+tmp1 <- tribble(
+  ~plotID,~lat,~long,~loc,~species,
+  101,43.4580,-91.2304,"Baffle Is.","Big Bluestem",
+  101,43.4580,-91.2304,"Baffle Is.","Fox Sedge",
+  101,43.4580,-91.2304,"Baffle Is.","Indian Grass",
+  101,43.4580,-91.2304,"Baffle Is.","Prairie Dropseed",
+  101,43.4580,-91.2304,"Baffle Is.","Tufted Hair Grass"
+)
+tmp1
+```
+
+However, with this data entry the four variables related to the plot (e.g., `plotID`, `lat`, `long`, and `loc`) must be repeated multiple times for each `species`. This repetition is both inefficient and error-prone. A better structure is to create one data frame, with `plotID`, with the characteristics for each plot ...
+
+```{r echo=FALSE}
+tmp1 %>% select(-species) %>% filter(!duplicated(.))
+```
+
+... and then a second data frame, again with `plotID`, with the species observed ...
+
+```{r echo=FALSE}
+tmp1 %>% select(plotID,species)
+```
+
+With this structure the only variable that is repeated is `plotID`, which will save time and reduce errors upon data entry.
+
+::: {.tip data-latex=""}
+If you find yourself repeat values when entering data, stop and determine if you can use a relational structure to be more efficient and reduce errors.
+:::
 
 ## Join Concepts
 ```{r echo=FALSE}
@@ -37,7 +78,7 @@ knitr::kable(x,align="c") %>%
   column_spec(1,background=clrs.x,bold=TRUE)
 ```
 
-Further suppose that a second data frame `y` has the same `id` key variable and different `val2` and `val3` measurement variables.^[In this treatment, the unique `id` values are also uniquely color coded to help track individual observations in the descriptions below.]
+Further suppose that a second data frame `y` has the same `id` key variable, though it may have different values, and different `val2` and `val3` measurement variables.^[In this treatment, the unique `id` values are also uniquely colored to help track individual observations in the descriptions below.]
 
 ```{r echo=FALSE}
 clrs.y <- clrs[c(1,2,4,4)]
@@ -48,7 +89,7 @@ knitr::kable(y,align="c") %>%
   column_spec(1,background=clrs.y,bold=TRUE)
 ```
 
-It is instructive when learning about joins to visualize all combinations of observations in the two data frames.^[Finding all combinations, however, is not needed to actually join two data frames.] As some key variable values may be missing in the data frames we also consider combinations with a missing key variable value (and the measurement variables set to `NA`), All combinations of the rows in `x` and `y` with the missing key values are shown on the left for each join type in the subsections below.
+It is instructive when learning about joins to visualize all combinations of observations in the two data frames.^[Finding all combinations, however, is not needed to actually join two data frames.] As some key variable values may not be present in one of the data frames, combinations with a missing key variable value (and the measurement variables set to `NA`) must also be considered. All combinations of the rows in `x` and `y` with missing key variable values are shown on the left for each join type in the subsections below.
 
 ```{r echo=FALSE}
 clrs.xA <- rep(c(clrs.x,"white"),each=5)[-25]
@@ -92,7 +133,7 @@ tbl_IJ %>%
 <div style="clear:both;"></div>
 
 ::: {.defn data-latex=""}
-**Inner Join**: Rows from both data frames where the key variable columns match.
+**Inner Join**: Rows from both data frames where the key variable values match.
 
 ```{r echo=FALSE, out.width='20%'}
 knitr::include_graphics("zimgs/Inner_Join.png")
@@ -141,7 +182,7 @@ tbl_LJ %>%
 <div style="clear:both;"></div>
 
 ::: {.defn data-latex=""}
-**Left Join**: All rows from the first data frame with variables from the second data frame where the key variable columns match (NA otherwise).
+**Left Join**: All rows from the first data frame with variables from the second data frame where the key variable values match (NA otherwise).
 
 ```{r echo=FALSE, out.width='20%'}
 knitr::include_graphics("zimgs/Left_Join.png")
@@ -152,7 +193,7 @@ knitr::include_graphics("zimgs/Left_Join.png")
 A **right join** works just like a left join except that the result will include all rows from the *second* data frame that don't have a key variable match in the *first* data frame. A right join can also be accomplished with a left join by reversing the order of the two data frames.
 
 ::: {.defn data-latex=""}
-**Right Join**: All rows from the second data frame with variables from the first data frame where the key variable columns match (NA otherwise).
+**Right Join**: All rows from the second data frame with variables from the first data frame where the key variable values match (NA otherwise).
 
 ```{r echo=FALSE, out.width='20%'}
 knitr::include_graphics("zimgs/Right_Join.png")
@@ -160,7 +201,7 @@ knitr::include_graphics("zimgs/Right_Join.png")
 :::
 
 ### Full Join
-A **full join** returns the same rows as an inner join (i.e., all rows where the key variable match) AND all rows from each data frame that don't have a key variable match in the other data frame. So a full join will include rows for all key variables from both data frames.
+A **full join** returns the same rows as an inner join (i.e., all rows where the key variable match) AND all rows from each data frame that don't have a key variable match in the other data frame. So a full join will include rows for all key variable values from both data frames.
 
 ```{r echo=FALSE}
 fj_rows1 <- with(all_combos,which(id.x==103 & id.y==""))
@@ -202,7 +243,7 @@ tbl_FJ %>%
 <div style="clear:both;"></div>
 
 ::: {.defn data-latex=""}
-**Full Join**: All rows from both data frame with variables from the other data frame where the key variable columns match (NA otherwise).
+**Full Join**: All rows from both data frames with variables from the other data frame where the key variable columns match (NA otherwise).
 
 ```{r echo=FALSE, out.width='20%'}
 knitr::include_graphics("zimgs/Full_Join.png")
@@ -276,7 +317,7 @@ tbl_AJ %>%
 &nbsp;
 
 ## Joins in R
-Performing the joins described in the previous section is straightforward with `dplyr` (part of the `tidyverse`) using, conveniently enough, `inner_join()`, `left_join()`, `right_join()`, `full_join()`, `semi_join()`, and `anti_join()`. The first two arguments to each of these functions are the two data frames to join. In addition, the name of the key variable should be given, in quotes, to `by=`.^[If `by=` is not explicitly set by the user then the two data frames will be joined using the variable(s) that the two data frames have in common for `by=`. A message will be displayed about which variable(s) was used; check this message carefully to make sure you are joining by the variables that you want to join by.]
+Performing the joins described in the previous section is straightforward with `dplyr` (part of the `tidyverse`) using, conveniently enough, `inner_join()`{.inline}, `left_join()`{.inline}, `right_join()`{.inline}, `full_join()`{.inline}, `semi_join()`{.inline}, and `anti_join()`{.inline}. The first two arguments to each of these functions are the two data frames to join. In addition, the name of the key variable should be given, in quotes, to `by=`.^[If `by=` is not explicitly set by the user then the two data frames will be joined using the variable(s) that the two data frames have in common for `by=`. A message will be displayed about which variable(s) was used; check this message carefully to make sure you are joining by the variables that you want to join by.]
 
 The two data frames used in the previous section are created below as objects in R.
 
@@ -314,14 +355,14 @@ aj
 The following examples demonstrate different types of joins within fictitious, but realistic, contexts. Please examine each data frame and the joined results carefully to help further understand what each type of join does.
 
 ### Student Data (One-to-One) {#student-data}
-In large institutions or in complicated data environments, data about specific individuals may be housed in a variety of departments each of which maintains its own database. Preferably these data sources can be related via a primary key variable, such as a unique student ID number. As an example, suppose that a college's admissions office maintains a database of personal information about every student at the college. For example it might look like that below for a fictitious five students.
+In large institutions or in complicated data environments, data about specific individuals may be housed in a variety of departments, each of which maintains its own database. Preferably these data sources can be related via a primary key variable, such as a unique student ID number. As an example, suppose that a college's admissions office maintains a database of personal information about every student at the college. For example it might look like that below for a fictitious five students.
 
 ```{r}
-personal <- data.frame(studentID=c(34535,45423,73424,89874,98222),
-                       first_nm=c("Rolando","Catherine","James","Rachel","Esteban"),
-                       last_nm=c("Blackman","Johnson","Carmichael","Brown","Perez"),
-                       hometown=c("Windsor","Eden Prairie","Marion","Milwaukee","El Paso"),
-                       homestate=c("MI","MN","IA","WI","TX"))
+personal <- tibble(studentID=c(34535,45423,73424,89874,98222),
+                   first_nm=c("Rolando","Catherine","James","Rachel","Esteban"),
+                   last_nm=c("Blackman","Johnson","Carmichael","Brown","Perez"),
+                   hometown=c("Windsor","Eden Prairie","Marion","Milwaukee","El Paso"),
+                   homestate=c("MI","MN","IA","WI","TX"))
 
 personal
 ```
@@ -329,35 +370,35 @@ personal
 In addition the financial aid office may have a database of financial aid information.
 
 ```{r}
-finaid <- data.frame(studentID=c(34535,45423,73424,89874,98222),
-                     income_cat=c(4,5,3,2,3),
-                     pell_elig=c(TRUE,FALSE,TRUE,TRUE,TRUE),
-                     work_study=c(TRUE,FALSE,FALSE,FALSE,TRUE))
+finaid <- tibble(studentID=c(34535,45423,73424,89874,98222),
+                 income_cat=c(4,5,3,2,3),
+                 pell_elig=c(TRUE,FALSE,TRUE,TRUE,TRUE),
+                 work_study=c(TRUE,FALSE,FALSE,FALSE,TRUE))
 finaid
 ```
 
 Furthermore the registrar's office has a database of academic information.
 
 ```{r}
-academics <- data.frame(studentID=c(34535,45423,73424,89874,98222),
-                        standing=c("FY","FY","SO","SR","JR"),
-                        major=c("undecided","NRS","Biology","SCD","SCD"),
-                        cum_gpa=c(0,0,3.12,3.67,2.89))
+academics <- tibble(studentID=c(34535,45423,73424,89874,98222),
+                    standing=c("FY","FY","SO","SR","JR"),
+                    major=c("undecided","NRS","Biology","SCD","SCD"),
+                    cum_gpa=c(0,0,3.12,3.67,2.89))
 academics
 ```
 
 Note how each of these databases has the `studentID` variable that will serve as the key variable to connect each student's information across each of the databases.
 
-These databases form what is called a *one-to-one relationship* because as each observation record in each database can be connected to one and only one observation record in the other databases. In this example, each database would ideally have an entry for every student.
+These databases form what is called a *one-to-one relationship* because each observation record in each database can be connected to one and only one observation record in the other databases. In this example, each database would ideally have an entry for every student.
 
-These data frames can generally be joined with inner, left, or right joins depending on the purpose. For example, an institutional researcher may want to examine whether student gpa differed between students that were eligible for a Pell Grant or not. In this case, the researcher would join the `finaid` and `academics` data frames so that the `pell_elig` and `cum_gpa` variables would be in one data frame.
+These data frames can generally be joined with inner, left, or right joins depending on the purpose. For example, an institutional researcher may want to examine whether student gpa differed between students that were eligible for a Pell Grant or not. In this case, the researcher would join the `finaid` and `academics` data frames so that the `pell_elig` and `cum_gpa` variables for each student would be in one data frame.
 
 ```{r}
 tmp <- inner_join(finaid,academics,by="studentID")
 tmp
 ```
 
-An inner join was used here because the researcher only wants to include students that are in both databases (i.e., would likely have an entry for both `pell_elig` and `cum_gpa`). Note, however, that a left join or a right join would accomplish the same task as long as both databases had entries for every student (i.e., the databases have the same set of students).
+An inner join was used here because the researcher only wants to include students that are in both databases (i.e., would likely have an entry for both `pell_elig` and `cum_gpa`). Note, however, that a left join or a right join would accomplish the same task as long as both databases had entries for every student (i.e., the databases had the same set of students).
 
 &nbsp;
 
@@ -386,7 +427,7 @@ schedules <- tibble(studentID=c(34535,34535,34535,34535,
 schedules
 ```
 
-The registrar's office also maintains a database of information about every course taught at the college. A partial example of such a database is shown below.^[I switched to using `tibble()` in the last two data frams only so that they may potentially print in a more concise manner.]
+The registrar's office also maintains a database of information about every course taught at the college. A partial example of such a database is shown below.
 
 ```{r}
 courses <- tibble(course=c("ART220","ART330","BIO115","BIO234","BIO370","BIO490",
@@ -402,7 +443,7 @@ courses <- tibble(course=c("ART220","ART330","BIO115","BIO234","BIO370","BIO490"
 courses
 ```
 
-These two data frames are related via the common `course` variable. This type of database organization is particularly useful because the information about any one course only needs to be entered once in `courses` even though the actual course may appear many times in `schedules`. This helps save time and reduces data entry errors. It is easy to add the specific course information (credits and instructor) from `courses` to the student's course information in `schedules` with a `left_join()`.
+These two data frames are related via the common `course` variable; thus for these two data frames `course` is the key variable. This type of database organization is particularly useful because the information about any one course only needs to be entered once in `courses` even though the actual course may appear many times in `schedules`. The specific course information (credits and instructor) from `courses` can be added to the student's course information in `schedules` with a `left_join()`{.inline}.
 
 ```{r}
 schedules2 <- left_join(schedules,courses,by="course")
@@ -413,14 +454,14 @@ Note here that if we consider `schedules` as the primary data frame of interest 
 
 &nbsp;
 
-The student's personal information can also be added to these results with a `left_join()` but now using the `studentID` key variable.
+The student's personal information can also be added to these results with a `left_join()`{.inline} but now using the `studentID` key variable.
 
 ```{r}
 schedules2A <- left_join(personal,schedules2,by="studentID")
 schedules2A
 ```
 
-These data frames represents a *one-to-many relationship* because `studentID` in `personal` is connected to many `studentID` records in `schedules2` (one for each course the student is enrolled in).
+These data frames represent a *one-to-many relationship* because `studentID` in `personal` is connected to many `studentID` records in `schedules2` (one for each course the student is enrolled in).
 
 &nbsp;
 
@@ -450,7 +491,7 @@ catch
 
 These data frames illustrate a *one-to-many* relationship as each record in `nets` may be connected to multiple records in `catch`. 
 
-The catch data will be joined to the net data using a `left_join()` because it is important to keep track of nets that also did not catch fish. An `inner_join()` would only return nets where some fish were caught.
+The catch data will be joined to the net data using a `left_join()`{.inline} because it is important to keep track of nets that also did not catch fish. An `inner_join()`{.inline} would only return nets where some fish were caught.
 
 ```{r}
 fishcatch <- left_join(nets,catch,by="net_num")

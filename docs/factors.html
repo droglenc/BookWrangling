@@ -161,13 +161,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="read-external-data-files.html"><a href="read-external-data-files.html#entering-data"><i class="fa fa-check"></i><b>3.1</b> Entering Data</a></li>
 <li class="chapter" data-level="3.2" data-path="read-external-data-files.html"><a href="read-external-data-files.html#saving-the-external-file"><i class="fa fa-check"></i><b>3.2</b> Saving the External File</a></li>
-<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-the-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading the External File</a></li>
+<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-an-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading an External File</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>4</b> Relational Data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.1</b> Join Concepts</a></li>
-<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.2</b> Joins in R</a></li>
-<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.3</b> Examples With Context</a></li>
+<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#nature-of-relational-data"><i class="fa fa-check"></i><b>4.1</b> Nature of Relational Data</a></li>
+<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.2</b> Join Concepts</a></li>
+<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.3</b> Joins in R</a></li>
+<li class="chapter" data-level="4.4" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.4</b> Examples With Context</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="pivot.html"><a href="pivot.html"><i class="fa fa-check"></i><b>5</b> Pivot</a>
 <ul>
@@ -244,11 +245,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="factors" class="section level1" number="10">
 <h1><span class="header-section-number">Module 10</span> Factors</h1>
 <p>Factors are a special case of character variables in R. Factors are primarily used for categorical data, especially if summaries of that data are to be displayed in other than alphabetical order. For example, a simple count of the number of observations in each <code>loc</code> of the <code>bears</code> data frame introduced in Section <a href="read-external-data-files.html#csv-files">3.3.1</a> shows that the categories of the character variable are displayed alphabetically by default.</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb478-1"><a href="factors.html#cb478-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
-<span id="cb478-2"><a href="factors.html#cb478-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb478-3"><a href="factors.html#cb478-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
-<span id="cb478-4"><a href="factors.html#cb478-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span>
-<span id="cb478-5"><a href="factors.html#cb478-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb481-1"><a href="factors.html#cb481-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
+<span id="cb481-2"><a href="factors.html#cb481-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb481-3"><a href="factors.html#cb481-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
+<span id="cb481-4"><a href="factors.html#cb481-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb481-5"><a href="factors.html#cb481-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
 #R&gt;    loc          n
 #R&gt;    &lt;chr&gt;    &lt;int&gt;
@@ -260,10 +261,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 <div id="creating-factors" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> Creating Factors</h2>
-<p>A variable is converted to a factor class by including that variable in <code>factor()</code>. The code below creates a new data frame where <code>loc</code> is now a factor, as indicated by <code>&lt;fct&gt;</code> below <code>loc</code> when the tibble is printed.</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb480-1"><a href="factors.html#cb480-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb480-2"><a href="factors.html#cb480-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc))</span>
-<span id="cb480-3"><a href="factors.html#cb480-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>A variable is converted to a factor class by including that variable in <code class="inline">factor()</code>. The code below creates a new data frame where <code>loc</code> is now a factor, as indicated by <code>&lt;fct&gt;</code> below <code>loc</code> when the tibble is printed.</p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb483-1"><a href="factors.html#cb483-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb483-2"><a href="factors.html#cb483-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc))</span>
+<span id="cb483-3"><a href="factors.html#cb483-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;   
@@ -276,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order here is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes “1” is mapped to “Ashland,” “2” to “Bayfield,” and “3” to “Douglas.” This mapping is shown below.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb482-1"><a href="factors.html#cb482-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">loc_nums=</span><span class="fu">as.numeric</span>(loc))</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb485-1"><a href="factors.html#cb485-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">loc_nums=</span><span class="fu">as.numeric</span>(loc))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 4
 #R&gt;    length.cm weight.kg loc      loc_nums
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;
@@ -288,10 +289,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  6      150         85 Douglas         3
 #R&gt;  7      130.       105 Douglas         3
 #R&gt;  8      150        110 Douglas         3</code></pre>
-<p>Suppose, however, that we prefer that the levels of the <code>loc</code> variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to <code>levels=</code> within <code>factor()</code>.</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb484-1"><a href="factors.html#cb484-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb484-2"><a href="factors.html#cb484-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>)))</span>
-<span id="cb484-3"><a href="factors.html#cb484-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>Suppose, however, that we prefer that the levels of the <code>loc</code> variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to <code>levels=</code> within <code class="inline">factor()</code>.</p>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb487-1"><a href="factors.html#cb487-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb487-2"><a href="factors.html#cb487-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>)))</span>
+<span id="cb487-3"><a href="factors.html#cb487-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;   
@@ -304,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Again, the data are not fundamentally altered, but the codes underlying the factor variables are.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb486-1"><a href="factors.html#cb486-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">loc_nums=</span><span class="fu">as.numeric</span>(loc))</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb489-1"><a href="factors.html#cb489-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">loc_nums=</span><span class="fu">as.numeric</span>(loc))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 4
 #R&gt;    length.cm weight.kg loc      loc_nums
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;
@@ -317,9 +318,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas         1
 #R&gt;  8      150        110 Douglas         1</code></pre>
 <p>When setting the levels of a factor variable make sure that all levels are spelled exactly as they are in the original variable. For example, see the major problem created below when a level is erroneously set (i.e., “bayfield” is not capitalized).</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb488-1"><a href="factors.html#cb488-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb488-2"><a href="factors.html#cb488-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>)))</span>
-<span id="cb488-3"><a href="factors.html#cb488-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb491-1"><a href="factors.html#cb491-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb491-2"><a href="factors.html#cb491-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>)))</span>
+<span id="cb491-3"><a href="factors.html#cb491-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc    
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;  
@@ -332,9 +333,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Additionally, make sure that you include all possible levels when creating the levels.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb490-1"><a href="factors.html#cb490-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb490-2"><a href="factors.html#cb490-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Ashland&quot;</span>)))</span>
-<span id="cb490-3"><a href="factors.html#cb490-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb493-1"><a href="factors.html#cb493-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb493-2"><a href="factors.html#cb493-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">factor</span>(loc,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Douglas&quot;</span>,<span class="st">&quot;Ashland&quot;</span>)))</span>
+<span id="cb493-3"><a href="factors.html#cb493-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc    
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;  
@@ -346,27 +347,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  6      150         85 Douglas
 #R&gt;  7      130.       105 Douglas
 #R&gt;  8      150        110 Douglas</code></pre>
-<p>Given these last two issues it is important to understand what levels exist within a variable. If the variable is a character class (and not yet a factor) then use <code>unique()</code> to see the list of levels.</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb492-1"><a href="factors.html#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(bears<span class="sc">$</span>loc)</span></code></pre></div>
+<p>Given these last two issues it is important to understand what levels exist within a variable. If the variable is a character class (and not yet a factor) then use <code class="inline">unique()</code> to see the list of levels.</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb495-1"><a href="factors.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(bears<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Bayfield&quot; &quot;Ashland&quot;  &quot;Douglas&quot;</code></pre>
-<p>However, if the variable is a factor class already then use <code>levels()</code> to see the list of levels along with their order.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb494-1"><a href="factors.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
+<p>However, if the variable is a factor class already then use <code class="inline">levels()</code> to see the list of levels along with their order.</p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb497-1"><a href="factors.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Douglas&quot; &quot;Ashland&quot;</code></pre>
 <p> </p>
 </div>
 <div id="changing-factor-order" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Changing Factor Order</h2>
 <p>Factor levels can be manually reordered using <code>levels=</code> as shown in the previous section. However functions in <code>forcats</code> provide other methods to simplify reordering levels for common situations.</p>
-<p>Levels can be reordered based on the value of another variable with <code>fct_reorder()</code>. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called <code>.fun</code> can be used to calculate a summary of the numeric variable to use for reordering.<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a></p>
+<p>Levels can be reordered based on the value of another variable with <code class="inline">fct_reorder()</code>. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called <code>.fun</code> can be used to calculate a summary of the numeric variable to use for reordering.<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a></p>
 <p>For example, the code below orders the levels in <code>loc</code> by the median length of the bears.</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb496-1"><a href="factors.html#cb496-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb496-2"><a href="factors.html#cb496-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm))</span>
-<span id="cb496-3"><a href="factors.html#cb496-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb499-1"><a href="factors.html#cb499-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb499-2"><a href="factors.html#cb499-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm))</span>
+<span id="cb499-3"><a href="factors.html#cb499-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Bayfield&quot; &quot;Ashland&quot;  &quot;Douglas&quot;</code></pre>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb498-1"><a href="factors.html#cb498-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb498-2"><a href="factors.html#cb498-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
-<span id="cb498-3"><a href="factors.html#cb498-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb498-4"><a href="factors.html#cb498-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mdn=</span><span class="fu">median</span>(length.cm))</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb501-1"><a href="factors.html#cb501-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb501-2"><a href="factors.html#cb501-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
+<span id="cb501-3"><a href="factors.html#cb501-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb501-4"><a href="factors.html#cb501-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mdn=</span><span class="fu">median</span>(length.cm))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
 #R&gt;    loc          n   mdn
 #R&gt;    &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -374,14 +375,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  2 Ashland      2   141
 #R&gt;  3 Douglas      3   150</code></pre>
 <p>Alternatively, the code below orders the levels of <code>loc</code> by the minimum length of the bears.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb500-1"><a href="factors.html#cb500-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb500-2"><a href="factors.html#cb500-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm,<span class="at">.fun=</span>min))</span>
-<span id="cb500-3"><a href="factors.html#cb500-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb503-1"><a href="factors.html#cb503-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb503-2"><a href="factors.html#cb503-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm,<span class="at">.fun=</span>min))</span>
+<span id="cb503-3"><a href="factors.html#cb503-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Bayfield&quot; &quot;Douglas&quot;  &quot;Ashland&quot;</code></pre>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb502-1"><a href="factors.html#cb502-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb502-2"><a href="factors.html#cb502-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
-<span id="cb502-3"><a href="factors.html#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb502-4"><a href="factors.html#cb502-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(length.cm))</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb505-1"><a href="factors.html#cb505-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb505-2"><a href="factors.html#cb505-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
+<span id="cb505-3"><a href="factors.html#cb505-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb505-4"><a href="factors.html#cb505-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(length.cm))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
 #R&gt;    loc          n   min
 #R&gt;    &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -389,31 +390,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  2 Douglas      3  130.
 #R&gt;  3 Ashland      2  141</code></pre>
 <p> </p>
-<p>Specific levels are moved to the beginning of the order of levels with <code>fct_relevel()</code>. The first argument to this function is the factor variable and subsequent arguments are levels to move to the “beginning of the line.” For example, the following code moves “Bayfield” to the beginning of the order.</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb504-1"><a href="factors.html#cb504-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb504-2"><a href="factors.html#cb504-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_relevel</span>(loc,<span class="st">&quot;Bayfield&quot;</span>))</span>
-<span id="cb504-3"><a href="factors.html#cb504-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
+<p>Specific levels are moved to the beginning of the order of levels with <code class="inline">fct_relevel()</code>. The first argument to this function is the factor variable and subsequent arguments are levels to move to the “beginning of the line.” For example, the following code moves “Bayfield” to the beginning of the order.</p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb507-1"><a href="factors.html#cb507-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb507-2"><a href="factors.html#cb507-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_relevel</span>(loc,<span class="st">&quot;Bayfield&quot;</span>))</span>
+<span id="cb507-3"><a href="factors.html#cb507-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Bayfield&quot; &quot;Ashland&quot;  &quot;Douglas&quot;</code></pre>
 <p>Alternatively, both “Bayfield” and “Douglas” are moved to the beginning below</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb506-1"><a href="factors.html#cb506-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb506-2"><a href="factors.html#cb506-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_relevel</span>(loc,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>))</span>
-<span id="cb506-3"><a href="factors.html#cb506-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb509-1"><a href="factors.html#cb509-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb509-2"><a href="factors.html#cb509-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_relevel</span>(loc,<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Douglas&quot;</span>))</span>
+<span id="cb509-3"><a href="factors.html#cb509-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Bayfield&quot; &quot;Douglas&quot;  &quot;Ashland&quot;</code></pre>
 <p> </p>
-<p>The order of levels for a factor variable are reversed with <code>fct_rev()</code>.</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb508-1"><a href="factors.html#cb508-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb508-2"><a href="factors.html#cb508-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_rev</span>(loc))</span>
-<span id="cb508-3"><a href="factors.html#cb508-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
+<p>The order of levels for a factor variable are reversed with <code class="inline">fct_rev()</code>.</p>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb511-1"><a href="factors.html#cb511-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb511-2"><a href="factors.html#cb511-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_rev</span>(loc))</span>
+<span id="cb511-3"><a href="factors.html#cb511-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Douglas&quot;  &quot;Bayfield&quot; &quot;Ashland&quot;</code></pre>
-<p>The <code>fct_rev()</code> function can be used with <code>fct_reorder()</code> to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb510-1"><a href="factors.html#cb510-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb510-2"><a href="factors.html#cb510-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm,<span class="at">.fun=</span>min),</span>
-<span id="cb510-3"><a href="factors.html#cb510-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">loc=</span><span class="fu">fct_rev</span>(loc))</span>
-<span id="cb510-4"><a href="factors.html#cb510-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb510-5"><a href="factors.html#cb510-5" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb510-6"><a href="factors.html#cb510-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
-<span id="cb510-7"><a href="factors.html#cb510-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb510-8"><a href="factors.html#cb510-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(length.cm))</span></code></pre></div>
+<p>The <code class="inline">fct_rev()</code> function can be used with <code class="inline">fct_reorder()</code> to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.</p>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb513-1"><a href="factors.html#cb513-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb513-2"><a href="factors.html#cb513-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_reorder</span>(loc,length.cm,<span class="at">.fun=</span>min),</span>
+<span id="cb513-3"><a href="factors.html#cb513-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">loc=</span><span class="fu">fct_rev</span>(loc))</span>
+<span id="cb513-4"><a href="factors.html#cb513-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb513-5"><a href="factors.html#cb513-5" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb513-6"><a href="factors.html#cb513-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
+<span id="cb513-7"><a href="factors.html#cb513-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb513-8"><a href="factors.html#cb513-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(length.cm))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
 #R&gt;    loc          n   min
 #R&gt;    &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -421,26 +422,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  2 Douglas      3  130.
 #R&gt;  3 Bayfield     3  120.</code></pre>
 <p> </p>
-<p>The <code>fct_infreq()</code> function is used to order the levels by <strong>de</strong>creasing frequency of their occurrence.</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb512-1"><a href="factors.html#cb512-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb512-2"><a href="factors.html#cb512-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_infreq</span>(loc))</span>
-<span id="cb512-3"><a href="factors.html#cb512-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb512-4"><a href="factors.html#cb512-4" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb512-5"><a href="factors.html#cb512-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
-<span id="cb512-6"><a href="factors.html#cb512-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<p>The <code class="inline">fct_infreq()</code> function is used to order the levels by <strong>de</strong>creasing frequency of their occurrence.</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb515-1"><a href="factors.html#cb515-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb515-2"><a href="factors.html#cb515-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_infreq</span>(loc))</span>
+<span id="cb515-3"><a href="factors.html#cb515-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb515-4"><a href="factors.html#cb515-4" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb515-5"><a href="factors.html#cb515-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
+<span id="cb515-6"><a href="factors.html#cb515-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
 #R&gt;    loc          n
 #R&gt;    &lt;fct&gt;    &lt;int&gt;
 #R&gt;  1 Bayfield     3
 #R&gt;  2 Douglas      3
 #R&gt;  3 Ashland      2</code></pre>
-<p>Of course, using <code>fct_rev()</code> with <code>fct_infreq()</code> would order the levels in ascending frequency of occurrence.</p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb514-1"><a href="factors.html#cb514-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
-<span id="cb514-2"><a href="factors.html#cb514-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_rev</span>(<span class="fu">fct_infreq</span>(loc)))</span>
-<span id="cb514-3"><a href="factors.html#cb514-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb514-4"><a href="factors.html#cb514-4" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb514-5"><a href="factors.html#cb514-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
-<span id="cb514-6"><a href="factors.html#cb514-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<p>Of course, using <code class="inline">fct_rev()</code> with <code class="inline">fct_infreq()</code> would order the levels in ascending frequency of occurrence.</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb517-1"><a href="factors.html#cb517-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span></span>
+<span id="cb517-2"><a href="factors.html#cb517-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">loc=</span><span class="fu">fct_rev</span>(<span class="fu">fct_infreq</span>(loc)))</span>
+<span id="cb517-3"><a href="factors.html#cb517-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb517-4"><a href="factors.html#cb517-4" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb517-5"><a href="factors.html#cb517-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span></span>
+<span id="cb517-6"><a href="factors.html#cb517-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
 #R&gt;    loc          n
 #R&gt;    &lt;fct&gt;    &lt;int&gt;
@@ -451,8 +452,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="changing-factor-levels" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Changing Factor Levels</h2>
 <p>In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as “Balsam Fir” plots. These data were extracted from <a href="https://irma.nps.gov/DataStore/DownloadFile/454366">Sanders and Grochowski (2012)</a><a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> and are stored in <a href="https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx">APIS_FirPlots.xlsx</a>.</p>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb516-1"><a href="factors.html#cb516-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;APIS_FirPlots.xlsx&quot;</span>))</span>
-<span id="cb516-2"><a href="factors.html#cb516-2" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb519-1"><a href="factors.html#cb519-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;APIS_FirPlots.xlsx&quot;</span>))</span>
+<span id="cb519-2"><a href="factors.html#cb519-2" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 26 x 4
 #R&gt;      plot species                 density basal_area
 #R&gt;     &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;      &lt;dbl&gt;
@@ -468,12 +469,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  10  1031 Betula papyrifera          33.3        1.5
 #R&gt;  # ... with 16 more rows</code></pre>
 <p>These data are read in and briefly summarized below.</p>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb518-1"><a href="factors.html#cb518-1" aria-hidden="true" tabindex="-1"></a>aip_sum1 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb518-2"><a href="factors.html#cb518-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
-<span id="cb518-3"><a href="factors.html#cb518-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb518-4"><a href="factors.html#cb518-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
-<span id="cb518-5"><a href="factors.html#cb518-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
-<span id="cb518-6"><a href="factors.html#cb518-6" aria-hidden="true" tabindex="-1"></a>aip_sum1</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb521-1"><a href="factors.html#cb521-1" aria-hidden="true" tabindex="-1"></a>aip_sum1 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb521-2"><a href="factors.html#cb521-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb521-3"><a href="factors.html#cb521-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb521-4"><a href="factors.html#cb521-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
+<span id="cb521-5"><a href="factors.html#cb521-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
+<span id="cb521-6"><a href="factors.html#cb521-6" aria-hidden="true" tabindex="-1"></a>aip_sum1</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 14 x 4
 #R&gt;     species                     n ttl_density ttl_barea
 #R&gt;     &lt;chr&gt;                   &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -492,19 +493,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  13 unknown tree - hardwood     4       111         4.3
 #R&gt;  14 unknown tree - softwood     2       144.        1.2</code></pre>
 <p>The summary above shows several species within a few genera. A research may wish to collapse these species into a one level that represents the genera. For example, one may want to collapse “Acer rubrum,” “Acer saccharum,” “Acer spicatum,” and “Acer sp.” into a single level of “Acer sp.”</p>
-<p>The “collapsing” of multiple levels into one level is accomplished with <code>fct_collapse()</code>. The first argument to this function is the factor variable containing the “old” levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.</p>
-<p>For example the code below uses <code>fct_collapse()</code> to create a new <code>species2</code> variable that collapses the multiple “Acer” and “Betula” levels into two levels specific to each genera. The levels of <code>species2</code> are then ordered in descending order of the sum of <code>density</code> (using <code>fct_reorder()</code> and <code>fct_rev()</code>).<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
-<div class="sourceCode" id="cb520"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb520-1"><a href="factors.html#cb520-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb520-2"><a href="factors.html#cb520-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species2=</span><span class="fu">fct_collapse</span>(species,</span>
-<span id="cb520-3"><a href="factors.html#cb520-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Acer sp.&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Acer rubrum&quot;</span>,<span class="st">&quot;Acer saccharum&quot;</span>,</span>
-<span id="cb520-4"><a href="factors.html#cb520-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&quot;Acer sp.&quot;</span>,<span class="st">&quot;Acer spicatum&quot;</span>),</span>
-<span id="cb520-5"><a href="factors.html#cb520-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Betula sp.&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Betula alleghaniensis&quot;</span>,</span>
-<span id="cb520-6"><a href="factors.html#cb520-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Betula papyrifera&quot;</span>,</span>
-<span id="cb520-7"><a href="factors.html#cb520-7" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Betula sp.&quot;</span>),</span>
-<span id="cb520-8"><a href="factors.html#cb520-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Unknown&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;unknown tree - hardwood&quot;</span>,</span>
-<span id="cb520-9"><a href="factors.html#cb520-9" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;unknown tree - softwood&quot;</span>)),</span>
-<span id="cb520-10"><a href="factors.html#cb520-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">species2=</span><span class="fu">fct_rev</span>(<span class="fu">fct_reorder</span>(species2,density,<span class="at">.fun=</span>sum)))</span>
-<span id="cb520-11"><a href="factors.html#cb520-11" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
+<p>The “collapsing” of multiple levels into one level is accomplished with <code class="inline">fct_collapse()</code>. The first argument to this function is the factor variable containing the “old” levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.</p>
+<p>For example the code below uses <code class="inline">fct_collapse()</code> to create a new <code>species2</code> variable that collapses the multiple “Acer” and “Betula” levels into two levels specific to each genera. The levels of <code>species2</code> are then ordered in descending order of the sum of <code>density</code> (using <code class="inline">fct_reorder()</code> and <code class="inline">fct_rev()</code>).<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb523-1"><a href="factors.html#cb523-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb523-2"><a href="factors.html#cb523-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species2=</span><span class="fu">fct_collapse</span>(species,</span>
+<span id="cb523-3"><a href="factors.html#cb523-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Acer sp.&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Acer rubrum&quot;</span>,<span class="st">&quot;Acer saccharum&quot;</span>,</span>
+<span id="cb523-4"><a href="factors.html#cb523-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&quot;Acer sp.&quot;</span>,<span class="st">&quot;Acer spicatum&quot;</span>),</span>
+<span id="cb523-5"><a href="factors.html#cb523-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Betula sp.&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Betula alleghaniensis&quot;</span>,</span>
+<span id="cb523-6"><a href="factors.html#cb523-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Betula papyrifera&quot;</span>,</span>
+<span id="cb523-7"><a href="factors.html#cb523-7" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Betula sp.&quot;</span>),</span>
+<span id="cb523-8"><a href="factors.html#cb523-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;Unknown&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;unknown tree - hardwood&quot;</span>,</span>
+<span id="cb523-9"><a href="factors.html#cb523-9" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;unknown tree - softwood&quot;</span>)),</span>
+<span id="cb523-10"><a href="factors.html#cb523-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">species2=</span><span class="fu">fct_rev</span>(<span class="fu">fct_reorder</span>(species2,density,<span class="at">.fun=</span>sum)))</span>
+<span id="cb523-11"><a href="factors.html#cb523-11" aria-hidden="true" tabindex="-1"></a>aip</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 26 x 5
 #R&gt;      plot species                 density basal_area species2      
 #R&gt;     &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;         
@@ -520,12 +521,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  10  1031 Betula papyrifera          33.3        1.5 Betula sp.    
 #R&gt;  # ... with 16 more rows</code></pre>
 <p>Total density and total basal area by level of <code>species2</code>, where the levels of <code>species2</code> are ordered in descending order of the total density is shown below.</p>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb522-1"><a href="factors.html#cb522-1" aria-hidden="true" tabindex="-1"></a>aip_sum2 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb522-2"><a href="factors.html#cb522-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species2) <span class="sc">%&gt;%</span></span>
-<span id="cb522-3"><a href="factors.html#cb522-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb522-4"><a href="factors.html#cb522-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
-<span id="cb522-5"><a href="factors.html#cb522-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
-<span id="cb522-6"><a href="factors.html#cb522-6" aria-hidden="true" tabindex="-1"></a>aip_sum2</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb525-1"><a href="factors.html#cb525-1" aria-hidden="true" tabindex="-1"></a>aip_sum2 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb525-2"><a href="factors.html#cb525-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species2) <span class="sc">%&gt;%</span></span>
+<span id="cb525-3"><a href="factors.html#cb525-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb525-4"><a href="factors.html#cb525-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
+<span id="cb525-5"><a href="factors.html#cb525-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
+<span id="cb525-6"><a href="factors.html#cb525-6" aria-hidden="true" tabindex="-1"></a>aip_sum2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 4
 #R&gt;    species2                n ttl_density ttl_barea
 #R&gt;    &lt;fct&gt;               &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -537,16 +538,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  6 Populus tremuloides     1        22.2       1.5
 #R&gt;  7 Thuja occidentalis      1        11.1       0.7
 #R&gt;  8 Quercus rubra           1        11.1       0</code></pre>
-<p>The result above indicate that four of the “species” dominated the results. It may be useful (especially if graphing these results) to “lump” the four infrequent species into an “Other” category. This type of “lumping” can be accomplished with <code>fct_lump_n()</code> which requires the factor variable as its first argument and<code>n=</code> to indicate the top <code>n</code> levels to <strong>not</strong> lump into an “Other” category. For example, the code below will lump all levels in <code>species2</code> after the top four into an “Other” category of the new <code>species3</code> variable. The summary results illustrate the lumping.</p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb524-1"><a href="factors.html#cb524-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb524-2"><a href="factors.html#cb524-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species3=</span><span class="fu">fct_lump_n</span>(species2,<span class="at">n=</span><span class="dv">4</span>))</span>
-<span id="cb524-3"><a href="factors.html#cb524-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb524-4"><a href="factors.html#cb524-4" aria-hidden="true" tabindex="-1"></a>aip_sum3 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb524-5"><a href="factors.html#cb524-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species3) <span class="sc">%&gt;%</span></span>
-<span id="cb524-6"><a href="factors.html#cb524-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb524-7"><a href="factors.html#cb524-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
-<span id="cb524-8"><a href="factors.html#cb524-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
-<span id="cb524-9"><a href="factors.html#cb524-9" aria-hidden="true" tabindex="-1"></a>aip_sum3</span></code></pre></div>
+<p>The result above indicate that four of the “species” dominated the results. It may be useful (especially if graphing these results) to “lump” the four infrequent species into an “Other” category. This type of “lumping” can be accomplished with <code class="inline">fct_lump_n()</code> which requires the factor variable as its first argument and<code>n=</code> to indicate the top <code>n</code> levels to <strong>not</strong> lump into an “Other” category. For example, the code below will lump all levels in <code>species2</code> after the top four into an “Other” category of the new <code>species3</code> variable. The summary results illustrate the lumping.</p>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb527-1"><a href="factors.html#cb527-1" aria-hidden="true" tabindex="-1"></a>aip <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb527-2"><a href="factors.html#cb527-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species3=</span><span class="fu">fct_lump_n</span>(species2,<span class="at">n=</span><span class="dv">4</span>))</span>
+<span id="cb527-3"><a href="factors.html#cb527-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb527-4"><a href="factors.html#cb527-4" aria-hidden="true" tabindex="-1"></a>aip_sum3 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb527-5"><a href="factors.html#cb527-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species3) <span class="sc">%&gt;%</span></span>
+<span id="cb527-6"><a href="factors.html#cb527-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb527-7"><a href="factors.html#cb527-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
+<span id="cb527-8"><a href="factors.html#cb527-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
+<span id="cb527-9"><a href="factors.html#cb527-9" aria-hidden="true" tabindex="-1"></a>aip_sum3</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 4
 #R&gt;    species3           n ttl_density ttl_barea
 #R&gt;    &lt;fct&gt;          &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -555,20 +556,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  3 Unknown            6       255.        5.5
 #R&gt;  4 Acer sp.           6       144.        0.9
 #R&gt;  5 Other              4        66.6       2.4</code></pre>
-<p>Other versions of <code>fct_lump_XXX()</code>, such as <code>fct_lump_prop()</code> and <code>fct_lump_min()</code>, can be used when ordering by frequency rather than be another variable as shown here.</p>
-<p>Finally, the names of specific levels can be changed with <code>fct_recode()</code>. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in <code>fct_recode()</code> will be retained with their original names. For example, the code below creates a new <code>species4</code> variable with new common names for the three “species” levels remaining in <code>species3</code>. The results are seen in the summary below.</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb526-1"><a href="factors.html#cb526-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb526-2"><a href="factors.html#cb526-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species4=</span><span class="fu">fct_recode</span>(species3,</span>
-<span id="cb526-3"><a href="factors.html#cb526-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Maple&quot;</span> <span class="ot">=</span> <span class="st">&quot;Acer sp.&quot;</span>,</span>
-<span id="cb526-4"><a href="factors.html#cb526-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Birch&quot;</span> <span class="ot">=</span> <span class="st">&quot;Betula sp.&quot;</span>,</span>
-<span id="cb526-5"><a href="factors.html#cb526-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Balsam Fir&quot;</span> <span class="ot">=</span> <span class="st">&quot;Abies balsamea&quot;</span>))</span>
-<span id="cb526-6"><a href="factors.html#cb526-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb526-7"><a href="factors.html#cb526-7" aria-hidden="true" tabindex="-1"></a>aip_sum4 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
-<span id="cb526-8"><a href="factors.html#cb526-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species4) <span class="sc">%&gt;%</span></span>
-<span id="cb526-9"><a href="factors.html#cb526-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb526-10"><a href="factors.html#cb526-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
-<span id="cb526-11"><a href="factors.html#cb526-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
-<span id="cb526-12"><a href="factors.html#cb526-12" aria-hidden="true" tabindex="-1"></a>aip_sum4</span></code></pre></div>
+<p>Other versions of <code class="inline">fct_lump_XXX()</code>, such as <code class="inline">fct_lump_prop()</code> and <code class="inline">fct_lump_min()</code>, can be used when ordering by frequency rather than be another variable as shown here.</p>
+<p>Finally, the names of specific levels can be changed with <code class="inline">fct_recode()</code>. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in <code class="inline">fct_recode()</code> will be retained with their original names. For example, the code below creates a new <code>species4</code> variable with new common names for the three “species” levels remaining in <code>species3</code>. The results are seen in the summary below.</p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb529-1"><a href="factors.html#cb529-1" aria-hidden="true" tabindex="-1"></a>aip <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb529-2"><a href="factors.html#cb529-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species4=</span><span class="fu">fct_recode</span>(species3,</span>
+<span id="cb529-3"><a href="factors.html#cb529-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Maple&quot;</span> <span class="ot">=</span> <span class="st">&quot;Acer sp.&quot;</span>,</span>
+<span id="cb529-4"><a href="factors.html#cb529-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Birch&quot;</span> <span class="ot">=</span> <span class="st">&quot;Betula sp.&quot;</span>,</span>
+<span id="cb529-5"><a href="factors.html#cb529-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Balsam Fir&quot;</span> <span class="ot">=</span> <span class="st">&quot;Abies balsamea&quot;</span>))</span>
+<span id="cb529-6"><a href="factors.html#cb529-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb529-7"><a href="factors.html#cb529-7" aria-hidden="true" tabindex="-1"></a>aip_sum4 <span class="ot">&lt;-</span> aip <span class="sc">%&gt;%</span></span>
+<span id="cb529-8"><a href="factors.html#cb529-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species4) <span class="sc">%&gt;%</span></span>
+<span id="cb529-9"><a href="factors.html#cb529-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb529-10"><a href="factors.html#cb529-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_density=</span><span class="fu">sum</span>(density),</span>
+<span id="cb529-11"><a href="factors.html#cb529-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_barea=</span><span class="fu">sum</span>(basal_area))</span>
+<span id="cb529-12"><a href="factors.html#cb529-12" aria-hidden="true" tabindex="-1"></a>aip_sum4</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 4
 #R&gt;    species4       n ttl_density ttl_barea
 #R&gt;    &lt;fct&gt;      &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -583,8 +584,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="pulse-of-the-nation-survey" class="section level3" number="10.4.1">
 <h3><span class="header-section-number">10.4.1</span> Pulse of the Nation Survey</h3>
 <p><a href="https://www.cardsagainsthumanitysavesamerica.com/">Cards Against Humanity Saves America</a> created monthly polls to assess what they called the “Pulse of the Nation.” “Cards” partnered with Survey Sampling International — a professional research firm — to contact a nationally representative sample of the American public. For the first three polls, they interrupted people’s dinners on both their cell phones and landlines, and a total of about 3000 adults did not hang up immediately. Results from the first poll are in <a href="https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/201709-CAH_PulseOfTheNation.csv">201709-CAH_PulseOfTheNation.csv</a><a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a>, which are read in below.</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb528-1"><a href="factors.html#cb528-1" aria-hidden="true" tabindex="-1"></a>PON <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;201709-CAH_PulseOfTheNation.csv&quot;</span>))</span>
-<span id="cb528-2"><a href="factors.html#cb528-2" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb531-1"><a href="factors.html#cb531-1" aria-hidden="true" tabindex="-1"></a>PON <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;201709-CAH_PulseOfTheNation.csv&quot;</span>))</span>
+<span id="cb531-2"><a href="factors.html#cb531-2" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 1,000 x 28
 #R&gt;     Income Gender   Age `Age Range` `Political Affiliation` `Do you approve or d~
 #R&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;                
@@ -605,8 +606,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  #   What would you say is the likelihood that your current job will be entirely performed by robots or computers within the next decade? &lt;chr&gt;,
 #R&gt;  #   Do you believe that climate change is real and caused by people, real but not caused by people, or not real at all? &lt;chr&gt;,
 #R&gt;  #   How many Transformers movies have you seen? &lt;dbl&gt;, q11x &lt;chr&gt;, ...</code></pre>
-<p>The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used <code>names()</code>, which when given a data frame returns all the variable names of that data frame.</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb530-1"><a href="factors.html#cb530-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(PON)</span></code></pre></div>
+<p>The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used <code class="inline">names()</code>, which when given a data frame returns all the variable names of that data frame.</p>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb533-1"><a href="factors.html#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(PON)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Income&quot;                                                                                                                              
 #R&gt;   [2] &quot;Gender&quot;                                                                                                                              
 #R&gt;   [3] &quot;Age&quot;                                                                                                                                 
@@ -636,11 +637,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  [27] &quot;If you had to choose: would you rather be smart and sad, or dumb and happy?&quot;                                                         
 #R&gt;  [28] &quot;Do you think it is acceptable or unacceptable to urinate in the shower?&quot;</code></pre>
 <p>For this analysis I want to focus on the <code>Political Affiliation</code>, <code>Age Range</code>, and the three variable related to education, opinion about climate change, and opinion about the honesty of scientists. These last three variables have very long names so it will be easier to refer to them by their column <strong>number</strong>. From above, it is noted that the “education” variable is column 7, the climate change variable is in column 15, and the “scientists honesty” question is in column 18. In the code below, I rename each of the columns (and <code>Age Range</code>) and then reduce the data frame to just those variables.</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb532-1"><a href="factors.html#cb532-1" aria-hidden="true" tabindex="-1"></a>PON <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb532-2"><a href="factors.html#cb532-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">polit_aff=</span><span class="st">`</span><span class="at">Political Affiliation</span><span class="st">`</span>,<span class="at">age_range=</span><span class="st">`</span><span class="at">Age Range</span><span class="st">`</span>,</span>
-<span id="cb532-3"><a href="factors.html#cb532-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">education=</span><span class="dv">7</span>,<span class="at">climate=</span><span class="dv">15</span>,<span class="at">scihon=</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb532-4"><a href="factors.html#cb532-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(polit_aff,age_range,education,climate,scihon)</span>
-<span id="cb532-5"><a href="factors.html#cb532-5" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb535-1"><a href="factors.html#cb535-1" aria-hidden="true" tabindex="-1"></a>PON <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb535-2"><a href="factors.html#cb535-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">polit_aff=</span><span class="st">`</span><span class="at">Political Affiliation</span><span class="st">`</span>,<span class="at">age_range=</span><span class="st">`</span><span class="at">Age Range</span><span class="st">`</span>,</span>
+<span id="cb535-3"><a href="factors.html#cb535-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">education=</span><span class="dv">7</span>,<span class="at">climate=</span><span class="dv">15</span>,<span class="at">scihon=</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb535-4"><a href="factors.html#cb535-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(polit_aff,age_range,education,climate,scihon)</span>
+<span id="cb535-5"><a href="factors.html#cb535-5" aria-hidden="true" tabindex="-1"></a>PON</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 1,000 x 5
 #R&gt;     polit_aff   age_range education      climate                       scihon    
 #R&gt;     &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;                         &lt;chr&gt;     
@@ -656,17 +657,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  10 Democrat    65+       Some college   Real and Caused by People     Somewhat ~
 #R&gt;  # ... with 990 more rows</code></pre>
 <p>All remaining variables are categorical and for my analysis purposes I want each to be a factor. Before converting these variables to factors I will examine the levels that appear in each.</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb534-1"><a href="factors.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb537-1"><a href="factors.html#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Democrat&quot;    &quot;Independent&quot; &quot;Republican&quot;  &quot;DK/REF&quot;</code></pre>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb536-1"><a href="factors.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>age_range)</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb539-1"><a href="factors.html#cb539-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>age_range)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;55-64&quot; &quot;45-54&quot; &quot;25-34&quot; &quot;65+&quot;   &quot;35-44&quot; &quot;18-24&quot;</code></pre>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb538-1"><a href="factors.html#cb538-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>education)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb541-1"><a href="factors.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>education)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;College degree&quot;  &quot;High school&quot;     &quot;Some college&quot;    &quot;Graduate degree&quot;
 #R&gt;  [5] &quot;DK/REF&quot;          &quot;Other&quot;</code></pre>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb540-1"><a href="factors.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>climate)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb543-1"><a href="factors.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>climate)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Real and Caused by People&quot;     &quot;DK/REF&quot;                       
 #R&gt;  [3] &quot;Real but not Caused by People&quot; &quot;Not Real At All&quot;</code></pre>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb542-1"><a href="factors.html#cb542-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>scihon)</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb545-1"><a href="factors.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(PON<span class="sc">$</span>scihon)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Strongly Agree&quot;             &quot;Somewhat Agree&quot;            
 #R&gt;  [3] &quot;Somewhat Disagree&quot;          &quot;Strongly Disagree&quot;         
 #R&gt;  [5] &quot;DK/REF&quot;                     &quot;Neither Agree nor Disagree&quot;</code></pre>
@@ -678,42 +679,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>I will order the levels for <code>climate</code> based on my understanding of what the correct answer is (i.e., I will order the answers from correct to less correct).</li>
 <li>I will order the levels of <code>polit_aff</code> so that “Independent” is in the middle (which will happen alphabetically) and “DK/REF” is last.</li>
 </ul>
-<p>Creation of these factors is below. Note that to move “DK/REF” to the end of <code>polit_aff</code> I used <code>fct_relevel()</code> with <code>after=Inf</code> to move the level to the last position.</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb544-1"><a href="factors.html#cb544-1" aria-hidden="true" tabindex="-1"></a>PON <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb544-2"><a href="factors.html#cb544-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">polit_aff=</span><span class="fu">factor</span>(polit_aff),</span>
-<span id="cb544-3"><a href="factors.html#cb544-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">polit_aff=</span><span class="fu">fct_relevel</span>(polit_aff,<span class="st">&quot;DK/REF&quot;</span>,<span class="at">after=</span><span class="cn">Inf</span>),</span>
-<span id="cb544-4"><a href="factors.html#cb544-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_range=</span><span class="fu">factor</span>(age_range),</span>
-<span id="cb544-5"><a href="factors.html#cb544-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">education=</span><span class="fu">factor</span>(education,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;High school&quot;</span>,<span class="st">&quot;Some college&quot;</span>,</span>
-<span id="cb544-6"><a href="factors.html#cb544-6" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;College degree&quot;</span>,<span class="st">&quot;Graduate degree&quot;</span>,</span>
-<span id="cb544-7"><a href="factors.html#cb544-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Other&quot;</span>,<span class="st">&quot;DK/REF&quot;</span>)),</span>
-<span id="cb544-8"><a href="factors.html#cb544-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">climate=</span><span class="fu">factor</span>(climate,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Real and Caused by People&quot;</span>,</span>
-<span id="cb544-9"><a href="factors.html#cb544-9" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Real but not Caused by People&quot;</span>,</span>
-<span id="cb544-10"><a href="factors.html#cb544-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Not Real At All&quot;</span>,</span>
-<span id="cb544-11"><a href="factors.html#cb544-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;DK/REF&quot;</span>)),</span>
-<span id="cb544-12"><a href="factors.html#cb544-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">scihon=</span><span class="fu">factor</span>(scihon,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,<span class="st">&quot;Somewhat Disagree&quot;</span>,</span>
-<span id="cb544-13"><a href="factors.html#cb544-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
-<span id="cb544-14"><a href="factors.html#cb544-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Somewhat Agree&quot;</span>,<span class="st">&quot;Strongly Agree&quot;</span>,</span>
-<span id="cb544-15"><a href="factors.html#cb544-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;DK/REF&quot;</span>)))</span></code></pre></div>
-<p>I then used <code>levels()</code> to double-check that each factor has the levels and the order of levels that I expected.</p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb545-1"><a href="factors.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
+<p>Creation of these factors is below. Note that to move “DK/REF” to the end of <code>polit_aff</code> I used <code class="inline">fct_relevel()</code> with <code>after=Inf</code> to move the level to the last position.</p>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb547-1"><a href="factors.html#cb547-1" aria-hidden="true" tabindex="-1"></a>PON <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb547-2"><a href="factors.html#cb547-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">polit_aff=</span><span class="fu">factor</span>(polit_aff),</span>
+<span id="cb547-3"><a href="factors.html#cb547-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">polit_aff=</span><span class="fu">fct_relevel</span>(polit_aff,<span class="st">&quot;DK/REF&quot;</span>,<span class="at">after=</span><span class="cn">Inf</span>),</span>
+<span id="cb547-4"><a href="factors.html#cb547-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_range=</span><span class="fu">factor</span>(age_range),</span>
+<span id="cb547-5"><a href="factors.html#cb547-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">education=</span><span class="fu">factor</span>(education,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;High school&quot;</span>,<span class="st">&quot;Some college&quot;</span>,</span>
+<span id="cb547-6"><a href="factors.html#cb547-6" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;College degree&quot;</span>,<span class="st">&quot;Graduate degree&quot;</span>,</span>
+<span id="cb547-7"><a href="factors.html#cb547-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Other&quot;</span>,<span class="st">&quot;DK/REF&quot;</span>)),</span>
+<span id="cb547-8"><a href="factors.html#cb547-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">climate=</span><span class="fu">factor</span>(climate,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Real and Caused by People&quot;</span>,</span>
+<span id="cb547-9"><a href="factors.html#cb547-9" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Real but not Caused by People&quot;</span>,</span>
+<span id="cb547-10"><a href="factors.html#cb547-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Not Real At All&quot;</span>,</span>
+<span id="cb547-11"><a href="factors.html#cb547-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;DK/REF&quot;</span>)),</span>
+<span id="cb547-12"><a href="factors.html#cb547-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">scihon=</span><span class="fu">factor</span>(scihon,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,<span class="st">&quot;Somewhat Disagree&quot;</span>,</span>
+<span id="cb547-13"><a href="factors.html#cb547-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
+<span id="cb547-14"><a href="factors.html#cb547-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Somewhat Agree&quot;</span>,<span class="st">&quot;Strongly Agree&quot;</span>,</span>
+<span id="cb547-15"><a href="factors.html#cb547-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;DK/REF&quot;</span>)))</span></code></pre></div>
+<p>I then used <code class="inline">levels()</code> to double-check that each factor has the levels and the order of levels that I expected.</p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb548-1"><a href="factors.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>polit_aff)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Democrat&quot;    &quot;Independent&quot; &quot;Republican&quot;  &quot;DK/REF&quot;</code></pre>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb547-1"><a href="factors.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>age_range)</span></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb550-1"><a href="factors.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>age_range)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;18-24&quot; &quot;25-34&quot; &quot;35-44&quot; &quot;45-54&quot; &quot;55-64&quot; &quot;65+&quot;</code></pre>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb549-1"><a href="factors.html#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>education)</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb552-1"><a href="factors.html#cb552-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>education)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;High school&quot;     &quot;Some college&quot;    &quot;College degree&quot;  &quot;Graduate degree&quot;
 #R&gt;  [5] &quot;Other&quot;           &quot;DK/REF&quot;</code></pre>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb551-1"><a href="factors.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>climate)</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb554-1"><a href="factors.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>climate)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Real and Caused by People&quot;     &quot;Real but not Caused by People&quot;
 #R&gt;  [3] &quot;Not Real At All&quot;               &quot;DK/REF&quot;</code></pre>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb553-1"><a href="factors.html#cb553-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>scihon)</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb556-1"><a href="factors.html#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(PON<span class="sc">$</span>scihon)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Strongly Disagree&quot;          &quot;Somewhat Disagree&quot;         
 #R&gt;  [3] &quot;Neither Agree nor Disagree&quot; &quot;Somewhat Agree&quot;            
 #R&gt;  [5] &quot;Strongly Agree&quot;             &quot;DK/REF&quot;</code></pre>
 <p>Suppose the first analysis of interest is examining responses to the “scientists are generally honest and are serving the public good” question.</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb555-1"><a href="factors.html#cb555-1" aria-hidden="true" tabindex="-1"></a>sci_sum1 <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
-<span id="cb555-2"><a href="factors.html#cb555-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scihon) <span class="sc">%&gt;%</span></span>
-<span id="cb555-3"><a href="factors.html#cb555-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>())</span>
-<span id="cb555-4"><a href="factors.html#cb555-4" aria-hidden="true" tabindex="-1"></a>sci_sum1</span></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb558-1"><a href="factors.html#cb558-1" aria-hidden="true" tabindex="-1"></a>sci_sum1 <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb558-2"><a href="factors.html#cb558-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scihon) <span class="sc">%&gt;%</span></span>
+<span id="cb558-3"><a href="factors.html#cb558-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>())</span>
+<span id="cb558-4"><a href="factors.html#cb558-4" aria-hidden="true" tabindex="-1"></a>sci_sum1</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 6 x 2
 #R&gt;    scihon                      freq
 #R&gt;    &lt;fct&gt;                      &lt;int&gt;
@@ -724,15 +725,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  5 Strongly Agree               349
 #R&gt;  6 DK/REF                        60</code></pre>
 <p>Suppose that the analysts want to simplify this result for their audience by ignoring the “Don’t know or refused to answer” responses and collapsing all disagree answers to one level and all agree answers to one level.</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb557-1"><a href="factors.html#cb557-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
-<span id="cb557-2"><a href="factors.html#cb557-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scihon<span class="sc">!=</span><span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb557-3"><a href="factors.html#cb557-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scihon=</span><span class="fu">fct_collapse</span>(scihon,</span>
-<span id="cb557-4"><a href="factors.html#cb557-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Disagree&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,<span class="st">&quot;Somewhat Disagree&quot;</span>),</span>
-<span id="cb557-5"><a href="factors.html#cb557-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Agree&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Agree&quot;</span>,<span class="st">&quot;Somewhat Agree&quot;</span>)))</span>
-<span id="cb557-6"><a href="factors.html#cb557-6" aria-hidden="true" tabindex="-1"></a>sci_sum2 <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
-<span id="cb557-7"><a href="factors.html#cb557-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scihon) <span class="sc">%&gt;%</span></span>
-<span id="cb557-8"><a href="factors.html#cb557-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>())</span>
-<span id="cb557-9"><a href="factors.html#cb557-9" aria-hidden="true" tabindex="-1"></a>sci_sum2</span></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb560-1"><a href="factors.html#cb560-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb560-2"><a href="factors.html#cb560-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scihon<span class="sc">!=</span><span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb560-3"><a href="factors.html#cb560-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scihon=</span><span class="fu">fct_collapse</span>(scihon,</span>
+<span id="cb560-4"><a href="factors.html#cb560-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Disagree&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,<span class="st">&quot;Somewhat Disagree&quot;</span>),</span>
+<span id="cb560-5"><a href="factors.html#cb560-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Agree&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Strongly Agree&quot;</span>,<span class="st">&quot;Somewhat Agree&quot;</span>)))</span>
+<span id="cb560-6"><a href="factors.html#cb560-6" aria-hidden="true" tabindex="-1"></a>sci_sum2 <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
+<span id="cb560-7"><a href="factors.html#cb560-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scihon) <span class="sc">%&gt;%</span></span>
+<span id="cb560-8"><a href="factors.html#cb560-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>())</span>
+<span id="cb560-9"><a href="factors.html#cb560-9" aria-hidden="true" tabindex="-1"></a>sci_sum2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 2
 #R&gt;    scihon                      freq
 #R&gt;    &lt;fct&gt;                      &lt;int&gt;
@@ -740,14 +741,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  2 Neither Agree nor Disagree    19
 #R&gt;  3 Agree                        684</code></pre>
 <p>For fun, a graph of this summary is below.</p>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-277-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-280-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p>Further suppose that the analysts want to summarize the question about climate change separately by political affiliation (for which an answer was provided).</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb559-1"><a href="factors.html#cb559-1" aria-hidden="true" tabindex="-1"></a>polclim_sum1 <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
-<span id="cb559-2"><a href="factors.html#cb559-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polit_aff <span class="sc">!=</span> <span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb559-3"><a href="factors.html#cb559-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(polit_aff,climate) <span class="sc">%&gt;%</span></span>
-<span id="cb559-4"><a href="factors.html#cb559-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb559-5"><a href="factors.html#cb559-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc=</span>freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>)</span>
-<span id="cb559-6"><a href="factors.html#cb559-6" aria-hidden="true" tabindex="-1"></a>polclim_sum1</span></code></pre></div>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb562-1"><a href="factors.html#cb562-1" aria-hidden="true" tabindex="-1"></a>polclim_sum1 <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb562-2"><a href="factors.html#cb562-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polit_aff <span class="sc">!=</span> <span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb562-3"><a href="factors.html#cb562-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(polit_aff,climate) <span class="sc">%&gt;%</span></span>
+<span id="cb562-4"><a href="factors.html#cb562-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb562-5"><a href="factors.html#cb562-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc=</span>freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb562-6"><a href="factors.html#cb562-6" aria-hidden="true" tabindex="-1"></a>polclim_sum1</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 12 x 4
 #R&gt;  # Groups:   polit_aff [3]
 #R&gt;     polit_aff   climate                        freq  perc
@@ -765,19 +766,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  11 Republican  Not Real At All                  61 29.3 
 #R&gt;  12 Republican  DK/REF                           15  7.21</code></pre>
 <p>Suppose that the researchers want to compute a percentage of respondents that thought climate change was real, whether they had the cause correct or not. Further suppose that they wish to include the “DK/REF” answers with the “Not Real At All” answers under the assumption that if they though climate change was real they would have responded as such.</p>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb561-1"><a href="factors.html#cb561-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
-<span id="cb561-2"><a href="factors.html#cb561-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polit_aff <span class="sc">!=</span> <span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb561-3"><a href="factors.html#cb561-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">climate=</span><span class="fu">fct_collapse</span>(climate,</span>
-<span id="cb561-4"><a href="factors.html#cb561-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Real&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Real and Caused by People&quot;</span>,</span>
-<span id="cb561-5"><a href="factors.html#cb561-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Real but not Caused by People&quot;</span>),</span>
-<span id="cb561-6"><a href="factors.html#cb561-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Not Real&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Not Real At All&quot;</span>,</span>
-<span id="cb561-7"><a href="factors.html#cb561-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;DK/REF&quot;</span>)))</span>
-<span id="cb561-8"><a href="factors.html#cb561-8" aria-hidden="true" tabindex="-1"></a>polclim_sum2 <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
-<span id="cb561-9"><a href="factors.html#cb561-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(polit_aff,climate) <span class="sc">%&gt;%</span></span>
-<span id="cb561-10"><a href="factors.html#cb561-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb561-11"><a href="factors.html#cb561-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc=</span>freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb561-12"><a href="factors.html#cb561-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb561-13"><a href="factors.html#cb561-13" aria-hidden="true" tabindex="-1"></a>polclim_sum2</span></code></pre></div>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb564-1"><a href="factors.html#cb564-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> PON <span class="sc">%&gt;%</span></span>
+<span id="cb564-2"><a href="factors.html#cb564-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polit_aff <span class="sc">!=</span> <span class="st">&quot;DK/REF&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb564-3"><a href="factors.html#cb564-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">climate=</span><span class="fu">fct_collapse</span>(climate,</span>
+<span id="cb564-4"><a href="factors.html#cb564-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Real&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Real and Caused by People&quot;</span>,</span>
+<span id="cb564-5"><a href="factors.html#cb564-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Real but not Caused by People&quot;</span>),</span>
+<span id="cb564-6"><a href="factors.html#cb564-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Not Real&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Not Real At All&quot;</span>,</span>
+<span id="cb564-7"><a href="factors.html#cb564-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;DK/REF&quot;</span>)))</span>
+<span id="cb564-8"><a href="factors.html#cb564-8" aria-hidden="true" tabindex="-1"></a>polclim_sum2 <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
+<span id="cb564-9"><a href="factors.html#cb564-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(polit_aff,climate) <span class="sc">%&gt;%</span></span>
+<span id="cb564-10"><a href="factors.html#cb564-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb564-11"><a href="factors.html#cb564-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc=</span>freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb564-12"><a href="factors.html#cb564-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb564-13"><a href="factors.html#cb564-13" aria-hidden="true" tabindex="-1"></a>polclim_sum2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 6 x 4
 #R&gt;    polit_aff   climate   freq  perc
 #R&gt;    &lt;fct&gt;       &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -788,14 +789,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  5 Republican  Real       132 63.5 
 #R&gt;  6 Republican  Not Real    76 36.5</code></pre>
 <p>And a graphic of the results for fun.</p>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-280-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-283-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
 <div id="enterococci-on-sydney-beaches" class="section level3" number="10.4.2">
 <h3><span class="header-section-number">10.4.2</span> Enterococci on Sydney Beaches</h3>
 <p>The Beachwatch Water Quality Program of Sydney, Australia measured the density (in colony forming units per 100 ml of water) of <a href="https://en.wikipedia.org/wiki/Enterococcus"><em>Enterococci</em></a> on Sydney beaches. The data from 2013 to 2018 was made available by the R-Ladies Sydney group and is in <a href="https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv">sydneybeaches.csv</a>.<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> The data are loaded below.</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb563-1"><a href="factors.html#cb563-1" aria-hidden="true" tabindex="-1"></a>sb <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv&quot;</span>)</span>
-<span id="cb563-2"><a href="factors.html#cb563-2" aria-hidden="true" tabindex="-1"></a>sb</span></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb566-1"><a href="factors.html#cb566-1" aria-hidden="true" tabindex="-1"></a>sb <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/rladiessydney/RYouWithMe/master/sydneybeaches.csv&quot;</span>)</span>
+<span id="cb566-2"><a href="factors.html#cb566-2" aria-hidden="true" tabindex="-1"></a>sb</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3,690 x 8
 #R&gt;     BeachId Region    Council   Site   Longitude Latitude Date  `Enterococci (cf~
 #R&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
@@ -811,10 +812,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  10      25 Sydney C~ Randwick~ Clove~      151.    -33.9 25/0~                 0
 #R&gt;  # ... with 3,680 more rows</code></pre>
 <p>For the demonstration here the <code>BeachId</code>, <code>Council</code>, and <code>Region</code> variables are not needed. The density of Enterococci is the last variable but its name is difficult to work with and will be renamed.</p>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb565-1"><a href="factors.html#cb565-1" aria-hidden="true" tabindex="-1"></a>sb <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb565-2"><a href="factors.html#cb565-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>BeachId,<span class="sc">-</span>Council,<span class="sc">-</span>Region) <span class="sc">%&gt;%</span></span>
-<span id="cb565-3"><a href="factors.html#cb565-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">density=</span><span class="fu">last_col</span>())</span>
-<span id="cb565-4"><a href="factors.html#cb565-4" aria-hidden="true" tabindex="-1"></a>sb</span></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb568-1"><a href="factors.html#cb568-1" aria-hidden="true" tabindex="-1"></a>sb <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb568-2"><a href="factors.html#cb568-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>BeachId,<span class="sc">-</span>Council,<span class="sc">-</span>Region) <span class="sc">%&gt;%</span></span>
+<span id="cb568-3"><a href="factors.html#cb568-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">density=</span><span class="fu">last_col</span>())</span>
+<span id="cb568-4"><a href="factors.html#cb568-4" aria-hidden="true" tabindex="-1"></a>sb</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3,690 x 5
 #R&gt;     Site           Longitude Latitude Date       density
 #R&gt;     &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -830,17 +831,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  10 Clovelly Beach      151.    -33.9 25/03/2013       0
 #R&gt;  # ... with 3,680 more rows</code></pre>
 <p>In one part of their analysis the researchers wanted to produce a plot of the mean and range of densities of <em>Enterococci</em> by beach. To aid understand, however, they wanted the beaches ordered from south to north. The summary statistics below are calculated by <code>Site</code> converted to a factor class based on <code>Latitude</code>. The latitudes are list with negative numbers (because Australia is in the southern hemisphere) so that more negative numbers are further south.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb567-1"><a href="factors.html#cb567-1" aria-hidden="true" tabindex="-1"></a>sb_sum1 <span class="ot">&lt;-</span> sb <span class="sc">%&gt;%</span></span>
-<span id="cb567-2"><a href="factors.html#cb567-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Site=</span><span class="fu">fct_reorder</span>(Site,Latitude)) <span class="sc">%&gt;%</span></span>
-<span id="cb567-3"><a href="factors.html#cb567-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Longitude,Latitude,Site) <span class="sc">%&gt;%</span></span>
-<span id="cb567-4"><a href="factors.html#cb567-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb567-5"><a href="factors.html#cb567-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">valid_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(density)),</span>
-<span id="cb567-6"><a href="factors.html#cb567-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn_density=</span><span class="fu">mean</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb567-7"><a href="factors.html#cb567-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_density=</span><span class="fu">sd</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb567-8"><a href="factors.html#cb567-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_density=</span><span class="fu">min</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb567-9"><a href="factors.html#cb567-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_density=</span><span class="fu">max</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb567-10"><a href="factors.html#cb567-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb567-11"><a href="factors.html#cb567-11" aria-hidden="true" tabindex="-1"></a>sb_sum1</span></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb570-1"><a href="factors.html#cb570-1" aria-hidden="true" tabindex="-1"></a>sb_sum1 <span class="ot">&lt;-</span> sb <span class="sc">%&gt;%</span></span>
+<span id="cb570-2"><a href="factors.html#cb570-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Site=</span><span class="fu">fct_reorder</span>(Site,Latitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb570-3"><a href="factors.html#cb570-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Longitude,Latitude,Site) <span class="sc">%&gt;%</span></span>
+<span id="cb570-4"><a href="factors.html#cb570-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb570-5"><a href="factors.html#cb570-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">valid_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(density)),</span>
+<span id="cb570-6"><a href="factors.html#cb570-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn_density=</span><span class="fu">mean</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb570-7"><a href="factors.html#cb570-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_density=</span><span class="fu">sd</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb570-8"><a href="factors.html#cb570-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_density=</span><span class="fu">min</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb570-9"><a href="factors.html#cb570-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_density=</span><span class="fu">max</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb570-10"><a href="factors.html#cb570-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb570-11"><a href="factors.html#cb570-11" aria-hidden="true" tabindex="-1"></a>sb_sum1</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 11 x 9
 #R&gt;     Longitude Latitude Site           n valid_n mn_density sd_density min_density
 #R&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
@@ -857,19 +858,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  11      151.    -33.9 Bondi Bea~   338     334       18.8       51.9           0
 #R&gt;  # ... with 1 more variable: max_density &lt;dbl&gt;</code></pre>
 <p>The desired plot is shown below (with the southern-most beach at the bottom of the y-axis).</p>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-284-1.png" width="480" style="display: block; margin: auto;" /></p>
-<p>Other researchers would prefer that the beaches are ordered from lowest to highest density of <em>Enterococci</em>. The code below creates a summary by <code>Site</code>s ordered by the mean <code>density</code>. Note the use of <code>na.rm=TRUE</code> in <code>fct_reorder()</code> because of the missing values at some sites.</p>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb569-1"><a href="factors.html#cb569-1" aria-hidden="true" tabindex="-1"></a>sb_sum2 <span class="ot">&lt;-</span> sb <span class="sc">%&gt;%</span></span>
-<span id="cb569-2"><a href="factors.html#cb569-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Site=</span><span class="fu">fct_reorder</span>(Site,density,<span class="at">.fun=</span>mean,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb569-3"><a href="factors.html#cb569-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site,Longitude,Latitude) <span class="sc">%&gt;%</span></span>
-<span id="cb569-4"><a href="factors.html#cb569-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb569-5"><a href="factors.html#cb569-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">valid_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(density)),</span>
-<span id="cb569-6"><a href="factors.html#cb569-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn_density=</span><span class="fu">mean</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb569-7"><a href="factors.html#cb569-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_density=</span><span class="fu">sd</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb569-8"><a href="factors.html#cb569-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_density=</span><span class="fu">min</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb569-9"><a href="factors.html#cb569-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_density=</span><span class="fu">max</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb569-10"><a href="factors.html#cb569-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb569-11"><a href="factors.html#cb569-11" aria-hidden="true" tabindex="-1"></a>sb_sum2</span></code></pre></div>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-287-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Other researchers would prefer that the beaches are ordered from lowest to highest density of <em>Enterococci</em>. The code below creates a summary by <code>Site</code>s ordered by the mean <code>density</code>. Note the use of <code>na.rm=TRUE</code> in <code class="inline">fct_reorder()</code> because of the missing values at some sites.</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb572-1"><a href="factors.html#cb572-1" aria-hidden="true" tabindex="-1"></a>sb_sum2 <span class="ot">&lt;-</span> sb <span class="sc">%&gt;%</span></span>
+<span id="cb572-2"><a href="factors.html#cb572-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Site=</span><span class="fu">fct_reorder</span>(Site,density,<span class="at">.fun=</span>mean,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb572-3"><a href="factors.html#cb572-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site,Longitude,Latitude) <span class="sc">%&gt;%</span></span>
+<span id="cb572-4"><a href="factors.html#cb572-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb572-5"><a href="factors.html#cb572-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">valid_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(density)),</span>
+<span id="cb572-6"><a href="factors.html#cb572-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn_density=</span><span class="fu">mean</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb572-7"><a href="factors.html#cb572-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_density=</span><span class="fu">sd</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb572-8"><a href="factors.html#cb572-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_density=</span><span class="fu">min</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb572-9"><a href="factors.html#cb572-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_density=</span><span class="fu">max</span>(density,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb572-10"><a href="factors.html#cb572-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb572-11"><a href="factors.html#cb572-11" aria-hidden="true" tabindex="-1"></a>sb_sum2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 11 x 9
 #R&gt;     Site       Longitude Latitude     n valid_n mn_density sd_density min_density
 #R&gt;     &lt;fct&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
@@ -885,7 +886,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  10 South Mar~      151.    -34.0   316     314       63.9      210.            0
 #R&gt;  11 Malabar B~      151.    -34.0   343     341       68.1      214.            0
 #R&gt;  # ... with 1 more variable: max_density &lt;dbl&gt;</code></pre>
-<p><img src="BookWrangling_files/figure-html/unnamed-chunk-286-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="BookWrangling_files/figure-html/unnamed-chunk-289-1.png" width="480" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -55,7 +55,7 @@ Finally, I prefer to have lighter text on a darker background (as you can see wi
 ## Install Tidyverse and Other Packages
 Methods in this course depend on functions from the `tidyverse`, `magrittr`, and `lubridate` packages. The following steps in RStudio will install these packages.^[These same steps can be used to install other packages as needed.]
 
-1. Open the "Packages" tab (in the lower-left pane if your RStudio panes are rearramged to match my preferences).
+1. Open the "Packages" tab (in the lower-left pane if your RStudio panes are rearranged to match my preferences).
 1. Press the "Install" button on the toolbar.
 1. Enter the names of the three packages in the "Packages ..." box.
 
@@ -75,7 +75,7 @@ library(lubridate)
 &nbsp;
 
 ## RStudio Projects
-Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. It is generally best to use a separate project for each data anaysis project. For this course it is adequate to use one project for all of your work. 
+Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. It is generally best to use a separate project for each data analysis project. For this course it is adequate to use one project for all of your work. 
 
 ### Creating a Project
 A project can be created in RStudio with these steps.
@@ -96,6 +96,8 @@ This will refresh RStudio (i.e., like starting anew) but you will see the name o
 knitr::include_graphics("zimgs/RStudio_Project_ShowName.JPG")
 ```
 
+For consistency with many of the examples in subsequent modules, you should create a "data" directory/folder within your project folder. Then put all data files in this folder, whereas all code scripts will be in the main project folder.
+
 ### Opening an Existing Project
 An existing project can be opened with the "File" menu and "Open Project" submenu, browsing to the folder where the project exists, and then selecting the .Rproj file in that folder. Alternatively, open a project (or create a new project) by selecting the small "down arrow" next to the project name on the toolbar and then selecting "Open Project" near the top of the box that appears or selecting a recently opened project from the list further down.
 
@@ -111,10 +113,10 @@ Open the project in a new RStudio window by selecting the small icon to the righ
 :::
 
 ### Project Benefits
-The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you avoide all of the hassles of using `setwd()`. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without needing to modify the working directory structure.
+The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you avoid all of the hassles of using `setwd()`{.inline}. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without needing to modify the working directory structure.
 
 ::: {.tip data-latex=""}
-You do not need to use `setwd()` with RStudio projects!!
+You do not need to use `setwd()`{.inline} with RStudio projects!!
 :::
 
 &nbsp;

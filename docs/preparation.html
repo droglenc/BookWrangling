@@ -161,13 +161,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="read-external-data-files.html"><a href="read-external-data-files.html#entering-data"><i class="fa fa-check"></i><b>3.1</b> Entering Data</a></li>
 <li class="chapter" data-level="3.2" data-path="read-external-data-files.html"><a href="read-external-data-files.html#saving-the-external-file"><i class="fa fa-check"></i><b>3.2</b> Saving the External File</a></li>
-<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-the-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading the External File</a></li>
+<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-an-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading an External File</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>4</b> Relational Data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.1</b> Join Concepts</a></li>
-<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.2</b> Joins in R</a></li>
-<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.3</b> Examples With Context</a></li>
+<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#nature-of-relational-data"><i class="fa fa-check"></i><b>4.1</b> Nature of Relational Data</a></li>
+<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.2</b> Join Concepts</a></li>
+<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.3</b> Joins in R</a></li>
+<li class="chapter" data-level="4.4" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.4</b> Examples With Context</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="pivot.html"><a href="pivot.html"><i class="fa fa-check"></i><b>5</b> Pivot</a>
 <ul>
@@ -298,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.3</span> Install Tidyverse and Other Packages</h2>
 <p>Methods in this course depend on functions from the <code>tidyverse</code>, <code>magrittr</code>, and <code>lubridate</code> packages. The following steps in RStudio will install these packages.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <ol style="list-style-type: decimal">
-<li>Open the “Packages” tab (in the lower-left pane if your RStudio panes are rearramged to match my preferences).</li>
+<li>Open the “Packages” tab (in the lower-left pane if your RStudio panes are rearranged to match my preferences).</li>
 <li>Press the “Install” button on the toolbar.</li>
 <li>Enter the names of the three packages in the “Packages …” box.</li>
 </ol>
@@ -335,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="rstudio-projects" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> RStudio Projects</h2>
-<p>Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. It is generally best to use a separate project for each data anaysis project. For this course it is adequate to use one project for all of your work.</p>
+<p>Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. It is generally best to use a separate project for each data analysis project. For this course it is adequate to use one project for all of your work.</p>
 <div id="creating-a-project" class="section level3" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Creating a Project</h3>
 <p>A project can be created in RStudio with these steps.</p>
@@ -350,6 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>This will refresh RStudio (i.e., like starting anew) but you will see the name of your project above the upper-right corner of the upper-right pane in RStudio.</p>
 <p><img src="zimgs/RStudio_Project_ShowName.JPG" width="60%" style="display: block; margin: auto;" /></p>
+<p>For consistency with many of the examples in subsequent modules, you should create a “data” directory/folder within your project folder. Then put all data files in this folder, whereas all code scripts will be in the main project folder.</p>
 </div>
 <div id="opening-an-existing-project" class="section level3" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> Opening an Existing Project</h3>
@@ -365,9 +367,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="project-benefits" class="section level3" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> Project Benefits</h3>
-<p>The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you avoide all of the hassles of using <code>setwd()</code>. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without needing to modify the working directory structure.</p>
+<p>The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you avoid all of the hassles of using <code class="inline">setwd()</code>. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without needing to modify the working directory structure.</p>
 <div class="tip">
-<p>You do not need to use <code>setwd()</code> with RStudio projects!!</p>
+<p>You do not need to use <code class="inline">setwd()</code> with RStudio projects!!</p>
 </div>
 <p> </p>
 </div>

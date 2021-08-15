@@ -161,13 +161,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="read-external-data-files.html"><a href="read-external-data-files.html#entering-data"><i class="fa fa-check"></i><b>3.1</b> Entering Data</a></li>
 <li class="chapter" data-level="3.2" data-path="read-external-data-files.html"><a href="read-external-data-files.html#saving-the-external-file"><i class="fa fa-check"></i><b>3.2</b> Saving the External File</a></li>
-<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-the-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading the External File</a></li>
+<li class="chapter" data-level="3.3" data-path="read-external-data-files.html"><a href="read-external-data-files.html#reading-an-external-file"><i class="fa fa-check"></i><b>3.3</b> Reading an External File</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>4</b> Relational Data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.1</b> Join Concepts</a></li>
-<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.2</b> Joins in R</a></li>
-<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.3</b> Examples With Context</a></li>
+<li class="chapter" data-level="4.1" data-path="relational-data.html"><a href="relational-data.html#nature-of-relational-data"><i class="fa fa-check"></i><b>4.1</b> Nature of Relational Data</a></li>
+<li class="chapter" data-level="4.2" data-path="relational-data.html"><a href="relational-data.html#join-concepts"><i class="fa fa-check"></i><b>4.2</b> Join Concepts</a></li>
+<li class="chapter" data-level="4.3" data-path="relational-data.html"><a href="relational-data.html#joins-in-r"><i class="fa fa-check"></i><b>4.3</b> Joins in R</a></li>
+<li class="chapter" data-level="4.4" data-path="relational-data.html"><a href="relational-data.html#examples-with-context"><i class="fa fa-check"></i><b>4.4</b> Examples With Context</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="pivot.html"><a href="pivot.html"><i class="fa fa-check"></i><b>5</b> Pivot</a>
 <ul>
@@ -261,10 +262,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>How to summarize and wrangle data by groups is introduced in this module.</p>
 <div id="declaring-groupings" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Declaring Groupings</h2>
-<p>Groups may be declared by including the grouping variable or variables in <code>group_by()</code>. For example the code below declares groupings based on levels in <code>County</code>.</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb327-1"><a href="groupings.html#cb327-1" aria-hidden="true" tabindex="-1"></a>covid_byCO <span class="ot">&lt;-</span> covABD <span class="sc">%&gt;%</span></span>
-<span id="cb327-2"><a href="groupings.html#cb327-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(County)</span>
-<span id="cb327-3"><a href="groupings.html#cb327-3" aria-hidden="true" tabindex="-1"></a>covid_byCO</span></code></pre></div>
+<p>Groups may be declared by including the grouping variable or variables in <code class="inline">group_by()</code>. For example the code below declares groupings based on levels in <code>County</code>.</p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb330-1"><a href="groupings.html#cb330-1" aria-hidden="true" tabindex="-1"></a>covid_byCO <span class="ot">&lt;-</span> covABD <span class="sc">%&gt;%</span></span>
+<span id="cb330-2"><a href="groupings.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(County)</span>
+<span id="cb330-3"><a href="groupings.html#cb330-3" aria-hidden="true" tabindex="-1"></a>covid_byCO</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 48 x 4
 #R&gt;  # Groups:   County [3]
 #R&gt;     County  Month Year  Cases
@@ -280,11 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   9 Ashland Nov   2020    378
 #R&gt;  10 Ashland Dec   2020    331
 #R&gt;  # ... with 38 more rows</code></pre>
-<p>Simply using <code>group_by()</code> will not produce any immediately noticeable difference in the data frame. For example, the only perceptible difference above is the addition of the “Groups: County[3]” line. Using <code>group_by()</code> only adds a grouping declaration to a data frame. How this is useful is demonstrated in the next sections.</p>
+<p>Simply using <code class="inline">group_by()</code> will not produce any immediately noticeable difference in the data frame. For example, the only perceptible difference above is the addition of the “Groups: County[3]” line. Using <code class="inline">group_by()</code> only adds a grouping declaration to a data frame. How this is useful is demonstrated in the next sections.</p>
 <p>There can be multiple levels of groupings. For example, the code below will group <code>Year</code> within <code>County</code>. Note that the subsequent variables are always nested within groups of previous variables.</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb329-1"><a href="groupings.html#cb329-1" aria-hidden="true" tabindex="-1"></a>covid_byCOYR <span class="ot">&lt;-</span> covABD <span class="sc">%&gt;%</span></span>
-<span id="cb329-2"><a href="groupings.html#cb329-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(County,Year)</span>
-<span id="cb329-3"><a href="groupings.html#cb329-3" aria-hidden="true" tabindex="-1"></a>covid_byCOYR</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb332-1"><a href="groupings.html#cb332-1" aria-hidden="true" tabindex="-1"></a>covid_byCOYR <span class="ot">&lt;-</span> covABD <span class="sc">%&gt;%</span></span>
+<span id="cb332-2"><a href="groupings.html#cb332-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(County,Year)</span>
+<span id="cb332-3"><a href="groupings.html#cb332-3" aria-hidden="true" tabindex="-1"></a>covid_byCOYR</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 48 x 4
 #R&gt;  # Groups:   County, Year [6]
 #R&gt;     County  Month Year  Cases
@@ -304,11 +305,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="summarizing-by-groups" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Summarizing by Groups</h2>
-<p>Adding groupings to a data frame becomes most useful when that data frame is submitted to <code>summarize()</code> to summarize results by groups. The <code>summarize()</code> function takes arguments that are a name for the summary set equal to a function that creates a summary. The summary function can be any function that returns a single numeric result (Table <a href="groupings.html#tab:SumFunctions">8.1</a>).</p>
+<p>Adding groupings to a data frame becomes most useful when that data frame is submitted to <code class="inline">summarize()</code> to summarize results by groups. The <code class="inline">summarize()</code> function takes arguments that are a name for the summary set equal to a function that creates a summary. The summary function can be any function that returns a single numeric result (Table <a href="groupings.html#tab:SumFunctions">8.1</a>).</p>
 <p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:SumFunctions">Table 8.1: </span>Common summary functions used in <code>summarize()</code>, especially with <code>group_by()</code>. Note that <code>x</code> generically represents a variable in the data frame and would be replaced with a specific variable name (see examples in main text).
+<span id="tab:SumFunctions">Table 8.1: </span>Common summary functions used in <code class="inline">summarize()</code>, especially with <code class="inline">group_by()</code>. Note that <code>x</code> generically represents a variable in the data frame and would be replaced with a specific variable name (see examples in main text).
 </caption>
 <thead>
 <tr>
@@ -323,7 +324,7 @@ Summary value returned
 <tbody>
 <tr>
 <td style="text-align:left;width: 2.0in; ">
-<code>n()</code>
+<code class="inline">n()</code>
 </td>
 <td style="text-align:left;">
 Number of observations<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>
@@ -429,21 +430,21 @@ Number of distance (i.e., unique) values of <code>x</code>.
 </table>
 <p> </p>
 <p>For example, the code below finds the sample size (i.e., number of months) and total number of cases of COVID by county (across all months) using the first “grouped” data frame created in Section <a href="groupings.html#declaring-groupings">8.1</a>.</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb331-1"><a href="groupings.html#cb331-1" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO <span class="ot">&lt;-</span> covid_byCO <span class="sc">%&gt;%</span></span>
-<span id="cb331-2"><a href="groupings.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_mons=</span><span class="fu">n</span>(),</span>
-<span id="cb331-3"><a href="groupings.html#cb331-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cases=</span><span class="fu">sum</span>(Cases))</span>
-<span id="cb331-4"><a href="groupings.html#cb331-4" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb334-1"><a href="groupings.html#cb334-1" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO <span class="ot">&lt;-</span> covid_byCO <span class="sc">%&gt;%</span></span>
+<span id="cb334-2"><a href="groupings.html#cb334-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_mons=</span><span class="fu">n</span>(),</span>
+<span id="cb334-3"><a href="groupings.html#cb334-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cases=</span><span class="fu">sum</span>(Cases))</span>
+<span id="cb334-4"><a href="groupings.html#cb334-4" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
 #R&gt;    County   num_mons num_cases
 #R&gt;    &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;
 #R&gt;  1 Ashland        16      1291
 #R&gt;  2 Bayfield       16      1169
 #R&gt;  3 Douglas        16      4166</code></pre>
-<p>The results from applying <code>summarize()</code> to a “grouped” data frame is itself a data frame with the last level of grouping removed. In the example above, there was only one level of grouping (i.e., <code>County</code>) so the returned result was simply a data frame with the grouping removed. However, applying the same summaries to the data frame that had groupings by both <code>County</code> and <code>Year</code> returns a data frame with summaries by year within each county, with the returned data frame retaining the first grouping (i.e., by <code>County</code>) but not the last (i.e., by <code>Year</code>).</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb333-1"><a href="groupings.html#cb333-1" aria-hidden="true" tabindex="-1"></a>sum_covid_byCOYR <span class="ot">&lt;-</span> covid_byCOYR <span class="sc">%&gt;%</span></span>
-<span id="cb333-2"><a href="groupings.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_mons=</span><span class="fu">n</span>(),</span>
-<span id="cb333-3"><a href="groupings.html#cb333-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cases=</span><span class="fu">sum</span>(Cases))</span>
-<span id="cb333-4"><a href="groupings.html#cb333-4" aria-hidden="true" tabindex="-1"></a>sum_covid_byCOYR</span></code></pre></div>
+<p>The results from applying <code class="inline">summarize()</code> to a “grouped” data frame is itself a data frame with the last level of grouping removed. In the example above, there was only one level of grouping (i.e., <code>County</code>) so the returned result was simply a data frame with the grouping removed. However, applying the same summaries to the data frame that had groupings by both <code>County</code> and <code>Year</code> returns a data frame with summaries by year within each county, with the returned data frame retaining the first grouping (i.e., by <code>County</code>) but not the last (i.e., by <code>Year</code>).</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb336-1"><a href="groupings.html#cb336-1" aria-hidden="true" tabindex="-1"></a>sum_covid_byCOYR <span class="ot">&lt;-</span> covid_byCOYR <span class="sc">%&gt;%</span></span>
+<span id="cb336-2"><a href="groupings.html#cb336-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_mons=</span><span class="fu">n</span>(),</span>
+<span id="cb336-3"><a href="groupings.html#cb336-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cases=</span><span class="fu">sum</span>(Cases))</span>
+<span id="cb336-4"><a href="groupings.html#cb336-4" aria-hidden="true" tabindex="-1"></a>sum_covid_byCOYR</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 6 x 4
 #R&gt;  # Groups:   County [3]
 #R&gt;    County   Year  num_mons num_cases
@@ -455,10 +456,10 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  5 Douglas  2020        10      3081
 #R&gt;  6 Douglas  2021         6      1085</code></pre>
 <p>Summarizing this summarized but still grouped data frame will then summarize the summarized data across the remaining groupings (i.e., by <code>County</code>).<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a> Note that these results are the same as when the summarization was just by <code>County</code> (i.e., compare <code>sum_covid_byCO</code> from above to <code>sum_covid_byCO1</code> below).</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb335-1"><a href="groupings.html#cb335-1" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO1 <span class="ot">&lt;-</span> sum_covid_byCOYR <span class="sc">%&gt;%</span></span>
-<span id="cb335-2"><a href="groupings.html#cb335-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_mons=</span><span class="fu">sum</span>(num_mons),</span>
-<span id="cb335-3"><a href="groupings.html#cb335-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cases=</span><span class="fu">sum</span>(num_cases))</span>
-<span id="cb335-4"><a href="groupings.html#cb335-4" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO1</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb338-1"><a href="groupings.html#cb338-1" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO1 <span class="ot">&lt;-</span> sum_covid_byCOYR <span class="sc">%&gt;%</span></span>
+<span id="cb338-2"><a href="groupings.html#cb338-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_mons=</span><span class="fu">sum</span>(num_mons),</span>
+<span id="cb338-3"><a href="groupings.html#cb338-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cases=</span><span class="fu">sum</span>(num_cases))</span>
+<span id="cb338-4"><a href="groupings.html#cb338-4" aria-hidden="true" tabindex="-1"></a>sum_covid_byCO1</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
 #R&gt;    County   num_mons num_cases
 #R&gt;    &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;
@@ -483,24 +484,24 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  10 B      y         11
 #R&gt;  11 B      y         55</code></pre>
 <p>The code below computes the sample size, sum, and mean of <code>value</code> for the two groups defined by <code>group1</code>.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb338-1"><a href="groupings.html#cb338-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_1 <span class="ot">&lt;-</span> trouble <span class="sc">%&gt;%</span></span>
-<span id="cb338-2"><a href="groupings.html#cb338-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
-<span id="cb338-3"><a href="groupings.html#cb338-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb338-4"><a href="groupings.html#cb338-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(value),</span>
-<span id="cb338-5"><a href="groupings.html#cb338-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value))</span>
-<span id="cb338-6"><a href="groupings.html#cb338-6" aria-hidden="true" tabindex="-1"></a>sum_trouble_1</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb341-1"><a href="groupings.html#cb341-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_1 <span class="ot">&lt;-</span> trouble <span class="sc">%&gt;%</span></span>
+<span id="cb341-2"><a href="groupings.html#cb341-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
+<span id="cb341-3"><a href="groupings.html#cb341-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb341-4"><a href="groupings.html#cb341-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(value),</span>
+<span id="cb341-5"><a href="groupings.html#cb341-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value))</span>
+<span id="cb341-6"><a href="groupings.html#cb341-6" aria-hidden="true" tabindex="-1"></a>sum_trouble_1</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2 x 4
 #R&gt;    group1     n   sum    mn
 #R&gt;    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 #R&gt;  1 A          7   123  17.6
 #R&gt;  2 B          4    85  21.2</code></pre>
 <p>The code below computes the same summaries for the four groups defined by <code>group2</code> nested within <code>group1</code>.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb340-1"><a href="groupings.html#cb340-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_2 <span class="ot">&lt;-</span> trouble <span class="sc">%&gt;%</span></span>
-<span id="cb340-2"><a href="groupings.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1,group2) <span class="sc">%&gt;%</span></span>
-<span id="cb340-3"><a href="groupings.html#cb340-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb340-4"><a href="groupings.html#cb340-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(value),</span>
-<span id="cb340-5"><a href="groupings.html#cb340-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value))</span>
-<span id="cb340-6"><a href="groupings.html#cb340-6" aria-hidden="true" tabindex="-1"></a>sum_trouble_2</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb343-1"><a href="groupings.html#cb343-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_2 <span class="ot">&lt;-</span> trouble <span class="sc">%&gt;%</span></span>
+<span id="cb343-2"><a href="groupings.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1,group2) <span class="sc">%&gt;%</span></span>
+<span id="cb343-3"><a href="groupings.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb343-4"><a href="groupings.html#cb343-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(value),</span>
+<span id="cb343-5"><a href="groupings.html#cb343-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value))</span>
+<span id="cb343-6"><a href="groupings.html#cb343-6" aria-hidden="true" tabindex="-1"></a>sum_trouble_2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4 x 5
 #R&gt;  # Groups:   group1 [2]
 #R&gt;    group1 group2     n   sum    mn
@@ -510,11 +511,11 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  3 B      y          2    66  33  
 #R&gt;  4 B      z          2    19   9.5</code></pre>
 <p>This last data frame is still grouped by <code>group1</code> so it is possible to use it to get summaries for the two groups defined by <code>group1</code>.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb342-1"><a href="groupings.html#cb342-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_1A <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
-<span id="cb342-2"><a href="groupings.html#cb342-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">sum</span>(n),</span>
-<span id="cb342-3"><a href="groupings.html#cb342-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(sum),</span>
-<span id="cb342-4"><a href="groupings.html#cb342-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(mn))</span>
-<span id="cb342-5"><a href="groupings.html#cb342-5" aria-hidden="true" tabindex="-1"></a>sum_trouble_1A</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb345-1"><a href="groupings.html#cb345-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_1A <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
+<span id="cb345-2"><a href="groupings.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">sum</span>(n),</span>
+<span id="cb345-3"><a href="groupings.html#cb345-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(sum),</span>
+<span id="cb345-4"><a href="groupings.html#cb345-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(mn))</span>
+<span id="cb345-5"><a href="groupings.html#cb345-5" aria-hidden="true" tabindex="-1"></a>sum_trouble_1A</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2 x 4
 #R&gt;    group1     n   sum    mn
 #R&gt;    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -540,28 +541,28 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  10 B      y         NA
 #R&gt;  11 B      y         55</code></pre>
 <p>Most of the summary functions shown in Table <a href="groupings.html#tab:SumFunctions">8.1</a> will return <code>NA</code> if the variable being summarized contains any <code>NA</code>s. For example, the code below attempts to count the number of values in <code>value</code> and compute the mean and standard deviation of <code>value</code> for each group in <code>group1</code>.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb345-1"><a href="groupings.html#cb345-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> trouble2 <span class="sc">%&gt;%</span></span>
-<span id="cb345-2"><a href="groupings.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
-<span id="cb345-3"><a href="groupings.html#cb345-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb345-4"><a href="groupings.html#cb345-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value),</span>
-<span id="cb345-5"><a href="groupings.html#cb345-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(value))</span>
-<span id="cb345-6"><a href="groupings.html#cb345-6" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb348-1"><a href="groupings.html#cb348-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> trouble2 <span class="sc">%&gt;%</span></span>
+<span id="cb348-2"><a href="groupings.html#cb348-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
+<span id="cb348-3"><a href="groupings.html#cb348-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb348-4"><a href="groupings.html#cb348-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value),</span>
+<span id="cb348-5"><a href="groupings.html#cb348-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(value))</span>
+<span id="cb348-6"><a href="groupings.html#cb348-6" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2 x 4
 #R&gt;    group1     n    mn    sd
 #R&gt;    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 #R&gt;  1 A          7    NA    NA
 #R&gt;  2 B          4    NA    NA</code></pre>
 <p>There are at least two issues here. First, the count variable (<code>n</code>) suggests that there were 7 and 4 <em>valid</em> observations in the two groups, when in reality there is only 6 and 2. Second, the means and standard deviations could not be properly calculated because of the <code>NA</code>s in <code>value</code>.</p>
-<p>The first issue of counting valid observations is addressed by using the <code>sum(!is.na(x))</code> code shown in Table <a href="groupings.html#tab:SumFunctions">8.1</a>. This code is a combination of two functions. The <code>is.na()</code> function returns <code>TRUE</code> if an element is an <code>NA</code> (and <code>FALSE</code> otherwise). The exclamation point in front of <code>is.na()</code> takes the complement of these values (i.e., <code>TRUE</code> becomes <code>FALSE</code> and vice versa) such that <code>!is.na()</code> returns <code>TRUE</code> if the element is <strong>not</strong> an <code>NA</code>. When logical values are given to <code>sum()</code> the <code>TRUE</code>s are converted to <code>1</code>s and the <code>FALSE</code>s to <code>0</code>s. Thus, the <code>sum()</code> of these logicals will return the number of <code>TRUE</code>s or, in this case, the number of elements that are <strong>not</strong> <code>NA</code>; i.e., the number of valid observations.</p>
+<p>The first issue of counting valid observations is addressed by using the <code>sum(!is.na(x))</code> code shown in Table <a href="groupings.html#tab:SumFunctions">8.1</a>. This code is a combination of two functions. The <code class="inline">is.na()</code> function returns <code>TRUE</code> if an element is an <code>NA</code> (and <code>FALSE</code> otherwise). The exclamation point in front of <code class="inline">is.na()</code> takes the complement of these values (i.e., <code>TRUE</code> becomes <code>FALSE</code> and vice versa) such that <code class="inline">!is.na()</code> returns <code>TRUE</code> if the element is <strong>not</strong> an <code>NA</code>. When logical values are given to <code class="inline">sum()</code> the <code>TRUE</code>s are converted to <code>1</code>s and the <code>FALSE</code>s to <code>0</code>s. Thus, the <code class="inline">sum()</code> of these logicals will return the number of <code>TRUE</code>s or, in this case, the number of elements that are <strong>not</strong> <code>NA</code>; i.e., the number of valid observations.</p>
 <p>The second issue of the summary function returning <code>NA</code> if an <code>NA</code> exists in the variable is addressed by including <code>na.rm=TRUE</code> within the summary function. This argument serves to remove the <code>NA</code>s from the calculations and will, thus, return the summary of all non-missing elements.</p>
 <p>Thus, the following code provides a better summary of the count, mean, and standard deviation of the <code>value</code> variable.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb347-1"><a href="groupings.html#cb347-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> trouble2 <span class="sc">%&gt;%</span></span>
-<span id="cb347-2"><a href="groupings.html#cb347-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
-<span id="cb347-3"><a href="groupings.html#cb347-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb347-4"><a href="groupings.html#cb347-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_valid=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)),</span>
-<span id="cb347-5"><a href="groupings.html#cb347-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb347-6"><a href="groupings.html#cb347-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(value,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb347-7"><a href="groupings.html#cb347-7" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb350-1"><a href="groupings.html#cb350-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> trouble2 <span class="sc">%&gt;%</span></span>
+<span id="cb350-2"><a href="groupings.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
+<span id="cb350-3"><a href="groupings.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb350-4"><a href="groupings.html#cb350-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_valid=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)),</span>
+<span id="cb350-5"><a href="groupings.html#cb350-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb350-6"><a href="groupings.html#cb350-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(value,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb350-7"><a href="groupings.html#cb350-7" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2 x 5
 #R&gt;    group1     n n_valid    mn    sd
 #R&gt;    &lt;chr&gt;  &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -587,11 +588,11 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;   9 Jak              2  78.3
 #R&gt;  10 Abel             2  67.6
 #R&gt;  11 Bonham           2  80.3</code></pre>
-<p>The code below uses <code>rank()</code> and <code>desc()</code> to create a new variable that is the rank of the student in the course based on their grade. The <code>desc()</code> function must be used here to assure that the student with the highest grade is given a rank of 1 (because <code>rank()</code> ranks in ascending order by default).</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb350-1"><a href="groupings.html#cb350-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> grades <span class="sc">%&gt;%</span></span>
-<span id="cb350-2"><a href="groupings.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rnk=</span><span class="fu">rank</span>(<span class="fu">desc</span>(grade))) <span class="sc">%&gt;%</span></span>
-<span id="cb350-3"><a href="groupings.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(rnk)</span>
-<span id="cb350-4"><a href="groupings.html#cb350-4" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>The code below uses <code class="inline">rank()</code> and <code class="inline">desc()</code> to create a new variable that is the rank of the student in the course based on their grade. The <code class="inline">desc()</code> function must be used here to assure that the student with the highest grade is given a rank of 1 (because <code class="inline">rank()</code> ranks in ascending order by default).</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb353-1"><a href="groupings.html#cb353-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> grades <span class="sc">%&gt;%</span></span>
+<span id="cb353-2"><a href="groupings.html#cb353-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rnk=</span><span class="fu">rank</span>(<span class="fu">desc</span>(grade))) <span class="sc">%&gt;%</span></span>
+<span id="cb353-3"><a href="groupings.html#cb353-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(rnk)</span>
+<span id="cb353-4"><a href="groupings.html#cb353-4" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 11 x 4
 #R&gt;     last       section grade   rnk
 #R&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -606,12 +607,12 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;   9 Abel             2  67.6     9
 #R&gt;  10 Lepal            1  56.9    10
 #R&gt;  11 Robertson        2  56.5    11</code></pre>
-<p>However, suppose that interest is in the rank WITHIN each section. Here <code>group_by()</code> can be used prior to <code>mutate()</code> so that the methods in <code>mutate()</code> are applied separately to each group.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb352-1"><a href="groupings.html#cb352-1" aria-hidden="true" tabindex="-1"></a>grades <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb352-2"><a href="groupings.html#cb352-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(section) <span class="sc">%&gt;%</span></span>
-<span id="cb352-3"><a href="groupings.html#cb352-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rnk=</span><span class="fu">rank</span>(<span class="fu">desc</span>(grade))) <span class="sc">%&gt;%</span></span>
-<span id="cb352-4"><a href="groupings.html#cb352-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(section,rnk)</span>
-<span id="cb352-5"><a href="groupings.html#cb352-5" aria-hidden="true" tabindex="-1"></a>grades</span></code></pre></div>
+<p>However, suppose that interest is in the rank WITHIN each section. Here <code class="inline">group_by()</code> can be used prior to <code class="inline">mutate()</code> so that the methods in <code class="inline">mutate()</code> are applied separately to each group.</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb355-1"><a href="groupings.html#cb355-1" aria-hidden="true" tabindex="-1"></a>grades <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb355-2"><a href="groupings.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(section) <span class="sc">%&gt;%</span></span>
+<span id="cb355-3"><a href="groupings.html#cb355-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rnk=</span><span class="fu">rank</span>(<span class="fu">desc</span>(grade))) <span class="sc">%&gt;%</span></span>
+<span id="cb355-4"><a href="groupings.html#cb355-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(section,rnk)</span>
+<span id="cb355-5"><a href="groupings.html#cb355-5" aria-hidden="true" tabindex="-1"></a>grades</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 11 x 4
 #R&gt;  # Groups:   section [2]
 #R&gt;     last       section grade   rnk
@@ -627,11 +628,11 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;   9 Phelps           2  71.2     4
 #R&gt;  10 Abel             2  67.6     5
 #R&gt;  11 Robertson        2  56.5     6</code></pre>
-<p>Note that in contrast to <code>summarize()</code> that the grouping is not removed from the data frame when <code>mutate()</code> is used.</p>
-<p>Further suppose that the data frame should be reduced to the three students with the highest grades in EACH section. Here <code>filter()</code> can be used to filter the data within each grouping.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb354-1"><a href="groupings.html#cb354-1" aria-hidden="true" tabindex="-1"></a>top3 <span class="ot">&lt;-</span> grades <span class="sc">%&gt;%</span></span>
-<span id="cb354-2"><a href="groupings.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rnk<span class="sc">&lt;=</span><span class="dv">3</span>)</span>
-<span id="cb354-3"><a href="groupings.html#cb354-3" aria-hidden="true" tabindex="-1"></a>top3</span></code></pre></div>
+<p>Note that in contrast to <code class="inline">summarize()</code> that the grouping is not removed from the data frame when <code class="inline">mutate()</code> is used.</p>
+<p>Further suppose that the data frame should be reduced to the three students with the highest grades in EACH section. Here <code class="inline">filter()</code> can be used to filter the data within each grouping.</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb357-1"><a href="groupings.html#cb357-1" aria-hidden="true" tabindex="-1"></a>top3 <span class="ot">&lt;-</span> grades <span class="sc">%&gt;%</span></span>
+<span id="cb357-2"><a href="groupings.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rnk<span class="sc">&lt;=</span><span class="dv">3</span>)</span>
+<span id="cb357-3"><a href="groupings.html#cb357-3" aria-hidden="true" tabindex="-1"></a>top3</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 6 x 4
 #R&gt;  # Groups:   section [2]
 #R&gt;    last       section grade   rnk
@@ -642,21 +643,21 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  4 McLaughlin       2  88.4     1
 #R&gt;  5 Bonham           2  80.3     2
 #R&gt;  6 Jak              2  78.3     3</code></pre>
-<p>Once again, note that the grouping is not removed from the data frame when using <code>filter()</code>. Thus, one could immediately calculate the mean grade for the highest three grades in each section.</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb356-1"><a href="groupings.html#cb356-1" aria-hidden="true" tabindex="-1"></a>top3 <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb356-2"><a href="groupings.html#cb356-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mn=</span><span class="fu">mean</span>(grade))</span></code></pre></div>
+<p>Once again, note that the grouping is not removed from the data frame when using <code class="inline">filter()</code>. Thus, one could immediately calculate the mean grade for the highest three grades in each section.</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb359-1"><a href="groupings.html#cb359-1" aria-hidden="true" tabindex="-1"></a>top3 <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb359-2"><a href="groupings.html#cb359-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mn=</span><span class="fu">mean</span>(grade))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2 x 3
 #R&gt;    section     n    mn
 #R&gt;      &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
 #R&gt;  1       1     3  89.3
 #R&gt;  2       2     3  82.3</code></pre>
 <p> </p>
-<p>The use of <code>mutate()</code> with <code>group_by()</code> is less common but can be very powerful. As a simple example, suppose that one wanted to find the difference between each observation and the mean of its group. In the example below, the use of <code>mean()</code> within <code>mutate()</code> will find the mean for each group because of the use of <code>group_by()</code>. Because this is within a <code>mutate()</code> rather than a <code>summarize()</code> it is repeated for each observation in each group.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb358-1"><a href="groupings.html#cb358-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> trouble2 <span class="sc">%&gt;%</span></span>
-<span id="cb358-2"><a href="groupings.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
-<span id="cb358-3"><a href="groupings.html#cb358-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mn=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb358-4"><a href="groupings.html#cb358-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">diff=</span>value<span class="sc">-</span>mn)</span>
-<span id="cb358-5"><a href="groupings.html#cb358-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>The use of <code class="inline">mutate()</code> with <code class="inline">group_by()</code> is less common but can be very powerful. As a simple example, suppose that one wanted to find the difference between each observation and the mean of its group. In the example below, the use of <code class="inline">mean()</code> within <code class="inline">mutate()</code> will find the mean for each group because of the use of <code class="inline">group_by()</code>. Because this is within a <code class="inline">mutate()</code> rather than a <code class="inline">summarize()</code> it is repeated for each observation in each group.</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb361-1"><a href="groupings.html#cb361-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> trouble2 <span class="sc">%&gt;%</span></span>
+<span id="cb361-2"><a href="groupings.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1) <span class="sc">%&gt;%</span></span>
+<span id="cb361-3"><a href="groupings.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mn=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb361-4"><a href="groupings.html#cb361-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">diff=</span>value<span class="sc">-</span>mn)</span>
+<span id="cb361-5"><a href="groupings.html#cb361-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 11 x 5
 #R&gt;  # Groups:   group1 [2]
 #R&gt;     group1 group2 value    mn  diff
@@ -677,8 +678,8 @@ Number of distance (i.e., unique) values of <code>x</code>.
 <div id="ungrouping" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> Ungrouping</h2>
 <p>As a general rule-of-thumb it is best to remove the groupings from your data frame once you know you are done summarizing, filtering, etc. based on groups. There are two main reasons for this. First, as noted above, many <code>dplyr</code> verbs work on groupings. Thus, if your data frame maintins groupings after you are done (in your mind) with groupings then you may get unintended results.</p>
-<p>As a very simple example, suppose that you want to use <code>slice()</code> to retain <strong>ONLY</strong> the first row of a data frame. However, if that data frame has groupings (e.g., after a first level of summarizing) then <code>slice()</code> will return rows from each group. For example, suppose that you want only the first row of <code>sum_trouble_2</code> created above (note below that it retained a grouping variable).</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb360-1"><a href="groupings.html#cb360-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_2</span></code></pre></div>
+<p>As a very simple example, suppose that you want to use <code class="inline">slice()</code> to retain <strong>ONLY</strong> the first row of a data frame. However, if that data frame has groupings (e.g., after a first level of summarizing) then <code class="inline">slice()</code> will return rows from each group. For example, suppose that you want only the first row of <code>sum_trouble_2</code> created above (note below that it retained a grouping variable).</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb363-1"><a href="groupings.html#cb363-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4 x 5
 #R&gt;  # Groups:   group1 [2]
 #R&gt;    group1 group2     n   sum    mn
@@ -687,22 +688,22 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  2 A      z          2    19   9.5
 #R&gt;  3 B      y          2    66  33  
 #R&gt;  4 B      z          2    19   9.5</code></pre>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb362-1"><a href="groupings.html#cb362-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
-<span id="cb362-2"><a href="groupings.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
-<span id="cb362-3"><a href="groupings.html#cb362-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb365-1"><a href="groupings.html#cb365-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
+<span id="cb365-2"><a href="groupings.html#cb365-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb365-3"><a href="groupings.html#cb365-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 2 x 5
 #R&gt;  # Groups:   group1 [2]
 #R&gt;    group1 group2     n   sum    mn
 #R&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 #R&gt;  1 A      y          5   104  20.8
 #R&gt;  2 B      y          2    66  33</code></pre>
-<p>As you can see, <code>slice()</code> was applied to both groups of <code>group1</code> such that the first row of each group was returned, which was not the intended outcome.</p>
+<p>As you can see, <code class="inline">slice()</code> was applied to both groups of <code>group1</code> such that the first row of each group was returned, which was not the intended outcome.</p>
 <p>As another example, suppose that you wanted to change the names of the groups in <code>group1</code> in <code>sum_trouble_2</code>.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb364-1"><a href="groupings.html#cb364-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
-<span id="cb364-2"><a href="groupings.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group1=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(group1,<span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;Alex&quot;</span>,<span class="st">&quot;Bart&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb367-1"><a href="groupings.html#cb367-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
+<span id="cb367-2"><a href="groupings.html#cb367-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group1=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(group1,<span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;Alex&quot;</span>,<span class="st">&quot;Bart&quot;</span>)))</span></code></pre></div>
 <pre class="RMESSAGE"><code>#R&gt;  The following `from` values were not present in `x`: B</code></pre>
 <pre class="RMESSAGE"><code>#R&gt;  The following `from` values were not present in `x`: A</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb367-1"><a href="groupings.html#cb367-1" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb370-1"><a href="groupings.html#cb370-1" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4 x 5
 #R&gt;  # Groups:   group1 [2]
 #R&gt;    group1 group2     n   sum    mn
@@ -711,25 +712,25 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  2 Alex   z          2    19   9.5
 #R&gt;  3 Bart   y          2    66  33  
 #R&gt;  4 Bart   z          2    19   9.5</code></pre>
-<p>While this ultimately worked the messages shown in the output suggest an issue. Again the <code>mutate()</code> is applied by groups and when working with group “A” there is no group “B” which leads to the first message (and the second message comes from the opposite problem when working with group “B”).</p>
-<p>Both of these issues can be corrected by using <code>ungroup()</code> to remove the groupings from the data frame.</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb369-1"><a href="groupings.html#cb369-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
-<span id="cb369-2"><a href="groupings.html#cb369-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb369-3"><a href="groupings.html#cb369-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group1=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(group1,<span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;Alex&quot;</span>,<span class="st">&quot;Bart&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb369-4"><a href="groupings.html#cb369-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
-<span id="cb369-5"><a href="groupings.html#cb369-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>While this ultimately worked the messages shown in the output suggest an issue. Again the <code class="inline">mutate()</code> is applied by groups and when working with group “A” there is no group “B” which leads to the first message (and the second message comes from the opposite problem when working with group “B”).</p>
+<p>Both of these issues can be corrected by using <code class="inline">ungroup()</code> to remove the groupings from the data frame.</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb372-1"><a href="groupings.html#cb372-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> sum_trouble_2 <span class="sc">%&gt;%</span></span>
+<span id="cb372-2"><a href="groupings.html#cb372-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb372-3"><a href="groupings.html#cb372-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group1=</span>plyr<span class="sc">::</span><span class="fu">mapvalues</span>(group1,<span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),<span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;Alex&quot;</span>,<span class="st">&quot;Bart&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb372-4"><a href="groupings.html#cb372-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb372-5"><a href="groupings.html#cb372-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 1 x 5
 #R&gt;    group1 group2     n   sum    mn
 #R&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 #R&gt;  1 Alex   y          5   104  20.8</code></pre>
-<p>As a general rule-of-thumb, I suggest using <code>ungroup()</code> at the end of a piping chain where you know you are done with the groupings. For example, instead of using <code>ungroup()</code> as in the previous code, I would have created <code>sum_trouble_2</code> as such.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb371-1"><a href="groupings.html#cb371-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_2 <span class="ot">&lt;-</span> trouble <span class="sc">%&gt;%</span></span>
-<span id="cb371-2"><a href="groupings.html#cb371-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1,group2) <span class="sc">%&gt;%</span></span>
-<span id="cb371-3"><a href="groupings.html#cb371-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb371-4"><a href="groupings.html#cb371-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(value),</span>
-<span id="cb371-5"><a href="groupings.html#cb371-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb371-6"><a href="groupings.html#cb371-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb371-7"><a href="groupings.html#cb371-7" aria-hidden="true" tabindex="-1"></a>sum_trouble_2</span></code></pre></div>
+<p>As a general rule-of-thumb, I suggest using <code class="inline">ungroup()</code> at the end of a piping chain where you know you are done with the groupings. For example, instead of using <code class="inline">ungroup()</code> as in the previous code, I would have created <code>sum_trouble_2</code> as such.</p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb374-1"><a href="groupings.html#cb374-1" aria-hidden="true" tabindex="-1"></a>sum_trouble_2 <span class="ot">&lt;-</span> trouble <span class="sc">%&gt;%</span></span>
+<span id="cb374-2"><a href="groupings.html#cb374-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group1,group2) <span class="sc">%&gt;%</span></span>
+<span id="cb374-3"><a href="groupings.html#cb374-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb374-4"><a href="groupings.html#cb374-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum=</span><span class="fu">sum</span>(value),</span>
+<span id="cb374-5"><a href="groupings.html#cb374-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mn=</span><span class="fu">mean</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb374-6"><a href="groupings.html#cb374-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb374-7"><a href="groupings.html#cb374-7" aria-hidden="true" tabindex="-1"></a>sum_trouble_2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4 x 5
 #R&gt;    group1 group2     n   sum    mn
 #R&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -744,8 +745,8 @@ Number of distance (i.e., unique) values of <code>x</code>.
 <h2><span class="header-section-number">8.5</span> Examples in Context</h2>
 <div id="student-data-1" class="section level3" number="8.5.1">
 <h3><span class="header-section-number">8.5.1</span> Student Data</h3>
-<p>In Section <a href="relational-data.html#student-data">4.3.1</a> a data frame called <code>schedules2</code> was constructued that contained a student’s ID number with each course they were enrolled along with the course’s credits and instructor.</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb373-1"><a href="groupings.html#cb373-1" aria-hidden="true" tabindex="-1"></a>schedules2</span></code></pre></div>
+<p>In Section <a href="relational-data.html#student-data">4.4.1</a> a data frame called <code>schedules2</code> was constructued that contained a student’s ID number with each course they were enrolled along with the course’s credits and instructor.</p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb376-1"><a href="groupings.html#cb376-1" aria-hidden="true" tabindex="-1"></a>schedules2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 20 x 4
 #R&gt;     studentID course credits instructor
 #R&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     
@@ -770,19 +771,21 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  19     98222 SOC480       4 Schanning 
 #R&gt;  20     98222 ART220       3 Duffy</code></pre>
 <p>Additionally, recall that there was a data frame called <code>personal</code> that contained personal information about each student (along with the ID).</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb375-1"><a href="groupings.html#cb375-1" aria-hidden="true" tabindex="-1"></a>personal</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;    studentID  first_nm    last_nm     hometown homestate
-#R&gt;  1     34535   Rolando   Blackman      Windsor        MI
-#R&gt;  2     45423 Catherine    Johnson Eden Prairie        MN
-#R&gt;  3     73424     James Carmichael       Marion        IA
-#R&gt;  4     89874    Rachel      Brown    Milwaukee        WI
-#R&gt;  5     98222   Esteban      Perez      El Paso        TX</code></pre>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb378-1"><a href="groupings.html#cb378-1" aria-hidden="true" tabindex="-1"></a>personal</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 5
+#R&gt;    studentID first_nm  last_nm    hometown     homestate
+#R&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;    
+#R&gt;  1     34535 Rolando   Blackman   Windsor      MI       
+#R&gt;  2     45423 Catherine Johnson    Eden Prairie MN       
+#R&gt;  3     73424 James     Carmichael Marion       IA       
+#R&gt;  4     89874 Rachel    Brown      Milwaukee    WI       
+#R&gt;  5     98222 Esteban   Perez      El Paso      TX</code></pre>
 <p>In this example, suppose that the registrar wants to creat a database that has the number of courses and the total number of credits taken appended to the personal information for each student. Construction of this database begins by summarizing <code>schedules2</code> for each student.</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb377-1"><a href="groupings.html#cb377-1" aria-hidden="true" tabindex="-1"></a>sum_crs <span class="ot">&lt;-</span> schedules2 <span class="sc">%&gt;%</span></span>
-<span id="cb377-2"><a href="groupings.html#cb377-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(studentID) <span class="sc">%&gt;%</span></span>
-<span id="cb377-3"><a href="groupings.html#cb377-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_courses=</span><span class="fu">n</span>(),</span>
-<span id="cb377-4"><a href="groupings.html#cb377-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_credits=</span><span class="fu">sum</span>(credits))</span>
-<span id="cb377-5"><a href="groupings.html#cb377-5" aria-hidden="true" tabindex="-1"></a>sum_crs</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb380-1"><a href="groupings.html#cb380-1" aria-hidden="true" tabindex="-1"></a>sum_crs <span class="ot">&lt;-</span> schedules2 <span class="sc">%&gt;%</span></span>
+<span id="cb380-2"><a href="groupings.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(studentID) <span class="sc">%&gt;%</span></span>
+<span id="cb380-3"><a href="groupings.html#cb380-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_courses=</span><span class="fu">n</span>(),</span>
+<span id="cb380-4"><a href="groupings.html#cb380-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_credits=</span><span class="fu">sum</span>(credits))</span>
+<span id="cb380-5"><a href="groupings.html#cb380-5" aria-hidden="true" tabindex="-1"></a>sum_crs</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 3
 #R&gt;    studentID num_courses num_credits
 #R&gt;        &lt;dbl&gt;       &lt;int&gt;       &lt;dbl&gt;
@@ -791,22 +794,24 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  3     73424           4          15
 #R&gt;  4     89874           3          12
 #R&gt;  5     98222           4          14</code></pre>
-<p>These results can then be <code>left_join()</code>ed with <code>personal</code> to create the desired database.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb379-1"><a href="groupings.html#cb379-1" aria-hidden="true" tabindex="-1"></a>personal2 <span class="ot">&lt;-</span> personal <span class="sc">%&gt;%</span></span>
-<span id="cb379-2"><a href="groupings.html#cb379-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sum_crs,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
-<span id="cb379-3"><a href="groupings.html#cb379-3" aria-hidden="true" tabindex="-1"></a>personal2</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;    studentID  first_nm    last_nm     hometown homestate num_courses num_credits
-#R&gt;  1     34535   Rolando   Blackman      Windsor        MI           4          15
-#R&gt;  2     45423 Catherine    Johnson Eden Prairie        MN           5          17
-#R&gt;  3     73424     James Carmichael       Marion        IA           4          15
-#R&gt;  4     89874    Rachel      Brown    Milwaukee        WI           3          12
-#R&gt;  5     98222   Esteban      Perez      El Paso        TX           4          14</code></pre>
+<p>These results can then be <code class="inline">left_join()</code>ed with <code>personal</code> to create the desired database.</p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb382-1"><a href="groupings.html#cb382-1" aria-hidden="true" tabindex="-1"></a>personal2 <span class="ot">&lt;-</span> personal <span class="sc">%&gt;%</span></span>
+<span id="cb382-2"><a href="groupings.html#cb382-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sum_crs,<span class="at">by=</span><span class="st">&quot;studentID&quot;</span>)</span>
+<span id="cb382-3"><a href="groupings.html#cb382-3" aria-hidden="true" tabindex="-1"></a>personal2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 7
+#R&gt;    studentID first_nm  last_nm    hometown     homestate num_courses num_credits
+#R&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;           &lt;int&gt;       &lt;dbl&gt;
+#R&gt;  1     34535 Rolando   Blackman   Windsor      MI                  4          15
+#R&gt;  2     45423 Catherine Johnson    Eden Prairie MN                  5          17
+#R&gt;  3     73424 James     Carmichael Marion       IA                  4          15
+#R&gt;  4     89874 Rachel    Brown      Milwaukee    WI                  3          12
+#R&gt;  5     98222 Esteban   Perez      El Paso      TX                  4          14</code></pre>
 <p> </p>
 </div>
 <div id="resource-sampling-data" class="section level3" number="8.5.2">
 <h3><span class="header-section-number">8.5.2</span> Resource Sampling Data</h3>
-<p>In Section <a href="relational-data.html#resource-data">4.3.2</a> a data frame called <code>fishcatch</code> was created that had the species and number of that species caught in each of five nets. The date and lake where the net was set was also recorded.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb381-1"><a href="groupings.html#cb381-1" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
+<p>In Section <a href="relational-data.html#resource-data">4.4.2</a> a data frame called <code>fishcatch</code> was created that had the species and number of that species caught in each of five nets. The date and lake where the net was set was also recorded.</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb384-1"><a href="groupings.html#cb384-1" aria-hidden="true" tabindex="-1"></a>fishcatch</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;    net_num      lake     date          species number
 #R&gt;  1       1     Eagle 3-Jul-21         Bluegill      7
 #R&gt;  2       1     Eagle 3-Jul-21  Largemouth Bass      3
@@ -817,12 +822,12 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  7       4     Eagle 6-Jul-21         Bluegill      3
 #R&gt;  8       4     Eagle 6-Jul-21  Largemouth Bass      6
 #R&gt;  9       5 Millicent 6-Jul-21  Largemouth Bass      3</code></pre>
-<p>Suppose a technician wants to summarize the number of species caught and the total catch (regardless of species) in each net. An examination of the data frame above reveals <code>NA</code>s for <code>species</code> and <code>number</code> for one of the nets that did not catch any fish. Because of this we cannot simply count the number of rows for each <code>net_num</code> to get the number of species. Instead this calculation will have to be treated as described for finding the valid number of observations. The total catch in each <code>net_num</code> can be found with <code>sum()</code> but it must include <code>na.rm=TRUE</code> to account for the missing data.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb383-1"><a href="groupings.html#cb383-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> fishcatch <span class="sc">%&gt;%</span></span>
-<span id="cb383-2"><a href="groupings.html#cb383-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(net_num) <span class="sc">%&gt;%</span></span>
-<span id="cb383-3"><a href="groupings.html#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_spec=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(species)),</span>
-<span id="cb383-4"><a href="groupings.html#cb383-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_catch=</span><span class="fu">sum</span>(number,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb383-5"><a href="groupings.html#cb383-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>Suppose a technician wants to summarize the number of species caught and the total catch (regardless of species) in each net. An examination of the data frame above reveals <code>NA</code>s for <code>species</code> and <code>number</code> for one of the nets that did not catch any fish. Because of this we cannot simply count the number of rows for each <code>net_num</code> to get the number of species. Instead this calculation will have to be treated as described for finding the valid number of observations. The total catch in each <code>net_num</code> can be found with <code class="inline">sum()</code> but it must include <code>na.rm=TRUE</code> to account for the missing data.</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb386-1"><a href="groupings.html#cb386-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> fishcatch <span class="sc">%&gt;%</span></span>
+<span id="cb386-2"><a href="groupings.html#cb386-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(net_num) <span class="sc">%&gt;%</span></span>
+<span id="cb386-3"><a href="groupings.html#cb386-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_spec=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(species)),</span>
+<span id="cb386-4"><a href="groupings.html#cb386-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_catch=</span><span class="fu">sum</span>(number,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb386-5"><a href="groupings.html#cb386-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 3
 #R&gt;    net_num num_spec ttl_catch
 #R&gt;      &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
@@ -831,15 +836,15 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  3       3        0         0
 #R&gt;  4       4        2         9
 #R&gt;  5       5        1         3</code></pre>
-<p>The resulting data frame is missing the specific information (date and lake) for each <code>net_num</code>. A trick for including information that is specific (and thus repeated) to the grouping variable is to include those variables as grouping variables prior to the main grouping variable. For example, there is only one <code>net_num</code> per <code>lake</code> and <code>date</code> combination so including <code>lake</code> and <code>date</code> prior to <code>net_num</code> will not alter the results but will retain the <code>lake</code> and <code>date</code> values. If you use this trick, make sure to <code>ungroup()</code> after the summarization so there are no unintended consequences of adding the extra grouping variables.</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb385-1"><a href="groupings.html#cb385-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> fishcatch <span class="sc">%&gt;%</span></span>
-<span id="cb385-2"><a href="groupings.html#cb385-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake,date,net_num) <span class="sc">%&gt;%</span></span>
-<span id="cb385-3"><a href="groupings.html#cb385-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_spec=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(species)),</span>
-<span id="cb385-4"><a href="groupings.html#cb385-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_catch=</span><span class="fu">sum</span>(number,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb385-5"><a href="groupings.html#cb385-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb385-6"><a href="groupings.html#cb385-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(net_num) <span class="sc">%&gt;%</span></span>
-<span id="cb385-7"><a href="groupings.html#cb385-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(net_num)</span>
-<span id="cb385-8"><a href="groupings.html#cb385-8" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>The resulting data frame is missing the specific information (date and lake) for each <code>net_num</code>. A trick for including information that is specific (and thus repeated) to the grouping variable is to include those variables as grouping variables prior to the main grouping variable. For example, there is only one <code>net_num</code> per <code>lake</code> and <code>date</code> combination so including <code>lake</code> and <code>date</code> prior to <code>net_num</code> will not alter the results but will retain the <code>lake</code> and <code>date</code> values. If you use this trick, make sure to <code class="inline">ungroup()</code> after the summarization so there are no unintended consequences of adding the extra grouping variables.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb388-1"><a href="groupings.html#cb388-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> fishcatch <span class="sc">%&gt;%</span></span>
+<span id="cb388-2"><a href="groupings.html#cb388-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake,date,net_num) <span class="sc">%&gt;%</span></span>
+<span id="cb388-3"><a href="groupings.html#cb388-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_spec=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(species)),</span>
+<span id="cb388-4"><a href="groupings.html#cb388-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ttl_catch=</span><span class="fu">sum</span>(number,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb388-5"><a href="groupings.html#cb388-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb388-6"><a href="groupings.html#cb388-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(net_num) <span class="sc">%&gt;%</span></span>
+<span id="cb388-7"><a href="groupings.html#cb388-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(net_num)</span>
+<span id="cb388-8"><a href="groupings.html#cb388-8" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 5 x 5
 #R&gt;    net_num lake      date     num_spec ttl_catch
 #R&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;
@@ -854,19 +859,19 @@ Number of distance (i.e., unique) values of <code>x</code>.
 <h3><span class="header-section-number">8.5.3</span> Wolves and Moose of Isle Royale</h3>
 <p>In Section <a href="wrangle-columns.html#columns-isle-royale">6.7.2</a> a data frame called <code>irmw2</code> was created that contained the number of wolves and moose, the winter air temperature, and whether or not an ice bridge to the mainland formed for each year from 1959-2012. In that module, an <code>era</code> variable was also created that categorized the years into “early,” “middle,” and “late” time periods.</p>
 <p>Suppose that the researchers want to compute summary statistics for the number of moose separated by era, and by era and whether an ice bridge formed. The latter is accomplished below.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb387-1"><a href="groupings.html#cb387-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
-<span id="cb387-2"><a href="groupings.html#cb387-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(era,ice_bridges) <span class="sc">%&gt;%</span></span>
-<span id="cb387-3"><a href="groupings.html#cb387-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb387-4"><a href="groupings.html#cb387-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_valid=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(moose)),</span>
-<span id="cb387-5"><a href="groupings.html#cb387-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb387-6"><a href="groupings.html#cb387-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb387-7"><a href="groupings.html#cb387-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb387-8"><a href="groupings.html#cb387-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q1=</span><span class="fu">quantile</span>(moose,<span class="fl">0.25</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb387-9"><a href="groupings.html#cb387-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">median=</span><span class="fu">median</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb387-10"><a href="groupings.html#cb387-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q3=</span><span class="fu">quantile</span>(moose,<span class="fl">0.75</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb387-11"><a href="groupings.html#cb387-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb387-12"><a href="groupings.html#cb387-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb387-13"><a href="groupings.html#cb387-13" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb390-1"><a href="groupings.html#cb390-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
+<span id="cb390-2"><a href="groupings.html#cb390-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(era,ice_bridges) <span class="sc">%&gt;%</span></span>
+<span id="cb390-3"><a href="groupings.html#cb390-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb390-4"><a href="groupings.html#cb390-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_valid=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(moose)),</span>
+<span id="cb390-5"><a href="groupings.html#cb390-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb390-6"><a href="groupings.html#cb390-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb390-7"><a href="groupings.html#cb390-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb390-8"><a href="groupings.html#cb390-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q1=</span><span class="fu">quantile</span>(moose,<span class="fl">0.25</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb390-9"><a href="groupings.html#cb390-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">median=</span><span class="fu">median</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb390-10"><a href="groupings.html#cb390-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q3=</span><span class="fu">quantile</span>(moose,<span class="fl">0.75</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb390-11"><a href="groupings.html#cb390-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb390-12"><a href="groupings.html#cb390-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb390-13"><a href="groupings.html#cb390-13" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 6 x 11
 #R&gt;    era    ice_bridges     n n_valid  mean    sd   min    Q1 median    Q3   max
 #R&gt;    &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -876,21 +881,21 @@ Number of distance (i.e., unique) values of <code>x</code>.
 #R&gt;  4 middle yes             9       9 1277.  575.  780.  900.   976. 1496. 2398.
 #R&gt;  5 recent no             14      14  816.  364.  385   519.   750  1069. 1600 
 #R&gt;  6 recent yes             5       5 1297   523.  650  1050   1250  1475  2060</code></pre>
-<p>Here I <code>ungroup()</code>ed the data frame because I want to make sure that I am not tempted to summarize the returned data frame that would have still had groupings by <code>era</code>. As mentioned in the main text it is inappropriate to compute most summaries on a second level of groupings after summarizing by the first level of groupings.</p>
+<p>Here I <code class="inline">ungroup()</code>ed the data frame because I want to make sure that I am not tempted to summarize the returned data frame that would have still had groupings by <code>era</code>. As mentioned in the main text it is inappropriate to compute most summaries on a second level of groupings after summarizing by the first level of groupings.</p>
 <p>Thus, the first goal of the researchers is then accomplished below.</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb389-1"><a href="groupings.html#cb389-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
-<span id="cb389-2"><a href="groupings.html#cb389-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(era) <span class="sc">%&gt;%</span></span>
-<span id="cb389-3"><a href="groupings.html#cb389-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
-<span id="cb389-4"><a href="groupings.html#cb389-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_valid=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(moose)),</span>
-<span id="cb389-5"><a href="groupings.html#cb389-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb389-6"><a href="groupings.html#cb389-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb389-7"><a href="groupings.html#cb389-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb389-8"><a href="groupings.html#cb389-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q1=</span><span class="fu">quantile</span>(moose,<span class="fl">0.25</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb389-9"><a href="groupings.html#cb389-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">median=</span><span class="fu">median</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb389-10"><a href="groupings.html#cb389-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q3=</span><span class="fu">quantile</span>(moose,<span class="fl">0.75</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb389-11"><a href="groupings.html#cb389-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb389-12"><a href="groupings.html#cb389-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb389-13"><a href="groupings.html#cb389-13" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb392-1"><a href="groupings.html#cb392-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
+<span id="cb392-2"><a href="groupings.html#cb392-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(era) <span class="sc">%&gt;%</span></span>
+<span id="cb392-3"><a href="groupings.html#cb392-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb392-4"><a href="groupings.html#cb392-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_valid=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(moose)),</span>
+<span id="cb392-5"><a href="groupings.html#cb392-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean=</span><span class="fu">mean</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb392-6"><a href="groupings.html#cb392-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb392-7"><a href="groupings.html#cb392-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="fu">min</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb392-8"><a href="groupings.html#cb392-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q1=</span><span class="fu">quantile</span>(moose,<span class="fl">0.25</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb392-9"><a href="groupings.html#cb392-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">median=</span><span class="fu">median</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb392-10"><a href="groupings.html#cb392-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q3=</span><span class="fu">quantile</span>(moose,<span class="fl">0.75</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb392-11"><a href="groupings.html#cb392-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(moose,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb392-12"><a href="groupings.html#cb392-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb392-13"><a href="groupings.html#cb392-13" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 10
 #R&gt;    era        n n_valid  mean    sd   min    Q1 median    Q3   max
 #R&gt;    &lt;chr&gt;  &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -905,7 +910,7 @@ Number of distance (i.e., unique) values of <code>x</code>.
 <hr />
 <ol start="34">
 <li id="fn34"><p>This data frame was introduced in Module <a href="pivot.html#pivot">5</a>.<a href="groupings.html#fnref34" class="footnote-back">↩︎</a></p></li>
-<li id="fn35"><p>There are no arguments to <code>n()</code>.<a href="groupings.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p>There are no arguments to <code class="inline">n()</code>.<a href="groupings.html#fnref35" class="footnote-back">↩︎</a></p></li>
 <li id="fn36"><p>Note here the use of the summarized but still grouped data frame and that the computation of numbers of months and cases had to be adjusted for the new variables in the summarized data frame.<a href="groupings.html#fnref36" class="footnote-back">↩︎</a></p></li>
 <li id="fn37"><p>In the two-level summarize the mean of the “A” group is calculated as <span class="math inline">\(\frac{20.8+19.5}{1+1}\)</span> rather than <span class="math inline">\(\frac{104+19}{5+2}\)</span>.<a href="groupings.html#fnref37" class="footnote-back">↩︎</a></p></li>
 </ol>

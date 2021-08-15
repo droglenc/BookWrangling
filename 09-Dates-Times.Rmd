@@ -13,9 +13,9 @@ library(lubridate)
 ### Making Dates from Strings
 Dates are often entered as string or character class data, which can make them fairly easily to deal with. However, dates can be entered in many different formats, some of which can be ambiguous as to what date they represent. For example, July 15th in 2021 could be formatted as "July 15, 2021", "15-Jul-2021", "15-Jul-21", "15-July-2021", or "2021-Jul-15", among other possibilities. Fortunately, `lubridate` has a suite of functions that can easily convert strings to dates as long as all dates are entered in the same format and you know what that format is.
 
-The `lubridate` function names are combinations of `y`, `m`, and `d` in order of the year, month, and day components of the date format. For example, if dates are given as year, month, and day then use `ymd()`. Alternatively, if dates are given as month, day, and year then use `mdy()`.
+The `lubridate` function names are combinations of `y`, `m`, and `d` in order of the year, month, and day components of the date format. For example, if dates are given as year, month, and day then use `ymd()`{.inline}. Alternatively, if dates are given as month, day, and year then use `mdy()`{.inline}.
 
-Each `lubridate` function is good at deciphering the proper dates regardless of how the components are separated (dashes, slashes, commas, spaces) or whether words or numbers are used for months. For example, a data frame is created below that has dates in year-month-day format in the `DSTR` variable which is then converted with `ymd()` to the `DATE` variable. Note how the `DATE` variable is of the "date" data class, which is what is needed for proper graphing and calculation as shown in later sections.
+Each `lubridate` function is good at deciphering the proper dates regardless of how the components are separated (dashes, slashes, commas, spaces) or whether words or numbers are used for months. For example, a data frame is created below that has dates in year-month-day format in the `DSTR` variable which is then converted with `ymd()`{.inline} to the `DATE` variable. Note how the `DATE` variable is of the "date" data class, which is what is needed for proper graphing and calculation as shown in later sections.
 
 ```{r}
 ex1 <- tibble(DSTR=c("2021-7-15","2020-9-21","2019-3-3"),
@@ -55,7 +55,7 @@ ex6 <- tibble(yr=c(2021,2020,2019),
 ex6
 ```
 
-An easy way to deal with these date components is to first combine them into a string with `paste()`.
+An easy way to deal with these date components is to first combine them into a string with `paste()`{.inline}.
 
 ```{r}
 ex6a <- ex6 %>%
@@ -63,14 +63,14 @@ ex6a <- ex6 %>%
 ex6a
 ```
 
-The "date" class variable is then created with `mdy()` (in this case because of the order in which the components were pasted).
+The "date" class variable is then created with `mdy()`{.inline} (in this case because of the order in which the components were pasted).
 
 ```{r}
 ex6a %<>% mutate(DATE=mdy(DSTR))
 ex6a
 ```
 
-The `paste()` is often used inside of `mdy()` to eliminate the need to create the intermediate `DSTR` variable. This is shown below, along with eliminating the original component variables to make a cleaner data frame to use in the next sections.
+The `paste()`{.inline} is often used inside of `mdy()`{.inline} to eliminate the need to create the intermediate `DSTR` variable. This is shown below, along with eliminating the original component variables to make a cleaner data frame to use in the next sections.
 
 ```{r}
 ex6a <- ex6 %>%
@@ -83,7 +83,7 @@ ex6a
 
 ## Extracting Date Components
 
-The year, month, and day (within the month) can be extracted from a "date" class variable with `year()`, `month()`, and `day()`, respectively. The numeric month is extracted by `month()` by default. The abbreviated month will be returned if `label=TRUE` is used and the full month name is returned by also including `abbr=FALSE`.
+The year, month, and day (within the month) can be extracted from a "date" class variable with `year()`{.inline}, `month()`{.inline}, and `day()`{.inline}, respectively. The numeric month is extracted by `month()`{.inline} by default. The abbreviated month will be returned if `label=TRUE` is used and the full month name is returned by also including `abbr=FALSE`.
 
 ```{r}
 ex6b <- ex6a %>%
@@ -101,13 +101,13 @@ Note that the two variables of month names are of the "ord" class, which means t
 ex6b$mon1 > "Apr"
 ```
 
-There are other useful extractor functions in `lubridate`. Day number within the year is returned with `yday()`.^[For example, `yday()` returns a 1 for January 1st.]
+There are other useful extractor functions in `lubridate`. Day number within the year is returned with `yday()`{.inline}.^[For example, `yday()`{.inline} returns a 1 for January 1st.]
 
 ```{r}
 yday(ex6a$DATE)
 ```
 
-Numeric day of the week is returned by `wday()`.^[By default the week day starts on "Sunday."] The abbreviated name of the week is returned when `label=TRUE` is included and the full names is returned when `abbr=FALSE` is also included. The data type will also be "ord" when labels are returned.
+Numeric day of the week is returned by `wday()`{.inline}.^[By default the week day starts on "Sunday."] The abbreviated name of the week is returned when `label=TRUE` is included and the full names is returned when `abbr=FALSE` is also included. The data type will also be "ord" when labels are returned.
 
 ```{r}
 wday(ex6a$DATE)
@@ -115,26 +115,26 @@ wday(ex6a$DATE,label=TRUE)
 wday(ex6a$DATE,label=TRUE,abbr=FALSE)
 ```
 
-Week number within the year is returned with `week()`.^[A week is defined here as a full seven day period and is inclusive of the current seven day period. Thus, the week for 1-Jan will always be 1 and 8-Jan will always be 2.]
+Week number within the year is returned with `week()`{.inline}.^[A week is defined here as a full seven day period and is inclusive of the current seven day period. Thus, the week for 1-Jan will always be 1 and 8-Jan will always be 2.]
 
 ```{r}
 week(ex6a$DATE)
 ```
 
-Numeric day within a "quarter" is returned by `qday()`, whereas the actual "quarter" in which the day falls is returned by `quarter()`.
+Numeric day within a "quarter" is returned by `qday()`{.inline}, whereas the actual "quarter" in which the day falls is returned by `quarter()`{.inline}.
 
 ```{r}
 quarter(ex6a$DATE)
 qday(ex6a$DATE)
 ```
 
-Whether or not a year is a leap year can be determined with `leap_year()`.
+Whether or not a year is a leap year can be determined with `leap_year()`{.inline}.
 
 ```{r}
 leap_year(2010:2020)
 ```
 
-Finally, the current date is found with `today()`.
+Finally, the current date is found with `today()`{.inline}.
 
 ```{r}
 today()
@@ -143,7 +143,7 @@ today()
 &nbsp;
 
 ## Calculations with Dates
-Performing calculations on dates introduces new data classes. The main one that we will use in this course is **interval**. An interval is a special date class that records the start and end date of an interval of time. Intervals are created from two dates with `%--%`. For example, the code below creates one interval from that date in `DATE` to today's date and another constant interval from January 1, 2019 to January 1, 2021. Note in the second example that the date strings must be converted to a date format first (using `ymd()` in this case).
+Performing calculations on dates introduces new data classes. The main one that we will use in this course is **interval**. An interval is a special date class that records the start and end date of an interval of time. Intervals are created from two dates with `%--%`. For example, the code below creates one interval from that date in `DATE` to today's date and another constant interval from January 1, 2019 to January 1, 2021. Note in the second example that the date strings must be converted to a date format first (using `ymd()`{.inline} in this case).
 
 ```{r}
 ex6c <- ex6a %>%
@@ -154,14 +154,14 @@ ex6c
 
 Here you can see that the two new variables contain start and end dates for the interval on either side of the `--`.
 
-Use `%within%` to determine if a date is within an interval and `int_overlaps()` to determine if two intervals overlap.
+Use `%within%` to determine if a date is within an interval and `int_overlaps()`{.inline} to determine if two intervals overlap.
 
 ```{r}
 ymd("2020-Jan-1") %within% ex6c$int2now
 int_overlaps(ex6c$int2now,ex6c$int2Jan20)
 ```
 
-The amount of time within an interval is found with `time_length()` with units of measurement supplied to `unit=`. When `units=` `"months"` or `"years"` then `time_length()` will take into account that not all months and years have the same number of days.^[As long as `time_length()` is given an interval class type.]
+The amount of time within an interval is found with `time_length()`{.inline} with units of measurement supplied to `unit=`. When `units=` `"months"` or `"years"` then `time_length()`{.inline} will take into account that not all months and years have the same number of days.^[As long as `time_length()`{.inline} is given an interval class type.]
 
 ```{r}
 ex6d <- ex6a %>%
@@ -200,9 +200,9 @@ exT2 <- tibble(DTSTR=c("2021-7-15 12:15:01","2020-9-21 9:14:56","2019-3-3 19:34:
 exT2
 ```
 
-a character variable with date and times in these formats are converted to a date-time class variable with the `lubridate` functions described in Section \@ref(obtaining-dates-data) but with `_hm` or `_hms` appended depending on whether the time portion is hour-minute or hour-minute-second data. For example, if the dates are in year-month-day format and the times are in hours-minutes-seconds then use `ymd_hms()`.
+a character variable with date and times in these formats are converted to a date-time class variable with the `lubridate` functions described in Section \@ref(obtaining-dates-data) but with `_hm` or `_hms` appended depending on whether the time portion is hour-minute or hour-minute-second data. For example, if the dates are in year-month-day format and the times are in hours-minutes-seconds then use `ymd_hms()`{.inline}.
 
-Another concern with converting to a date-time class is concerns about the time zone. This most likely becomes an issue if you are finding intervals of time from a base time (say, New Years at 12 am) or among times from different time zones (e.g., airline flight data). The time zone for a date-time variable can be set with `tz=`. The time-zone is set with so-called "Olson Names." You can see all names recognized in R with `OlsonNames()`. Most Olson Names begin with a continentent separated by a place on that continent by a forward slash. For example, `America/Chicago` would use the time zone for Chicago in America (i.e., "Central" time). Time zones in the United States can also generally be set with `US/Eastern`, `US/Central`, `US/Mountain`, and `US/Pacific`. Note, however, that time zones are "odd" for some areas so there are special codes for those places. One of regional note is `US/Michigan`.
+Another concern with converting to a date-time class is concerns about the time zone. This most likely becomes an issue if you are finding intervals of time from a base time (say, New Years at 12 am) or among times from different time zones (e.g., airline flight data). The time zone for a date-time variable can be set with `tz=`. The time-zone is set with so-called "Olson Names." You can see all names recognized in R with `OlsonNames()`{.inline}. Most Olson Names begin with a continentent separated by a place on that continent by a forward slash. For example, `America/Chicago` would use the time zone for Chicago in America (i.e., "Central" time). Time zones in the United States can also generally be set with `US/Eastern`, `US/Central`, `US/Mountain`, and `US/Pacific`. Note, however, that time zones are "odd" for some areas so there are special codes for those places. One of regional note is `US/Michigan`.
 
 The code below converts the `DTSTR` string in `exT2` to a date-time class using the `US/Central` time zone and removes the original string (for aesthetics only). Note how the new variable is a "datetime" class.
 
@@ -214,7 +214,7 @@ exT2
 ```
 
 ## Extracting Time Components
-Hours, minutes, and seconds from a date-time object can be extracted with `hour()`, `minute()`, and `second()`.
+Hours, minutes, and seconds from a date-time object can be extracted with `hour()`{.inline}, `minute()`{.inline}, and `second()`{.inline}.
 
 ```{r}
 exT2 %>%
@@ -224,7 +224,7 @@ exT2 %>%
 ```
 
 ## Calculations with Date-Times
-As shown with dates in Section \@ref(calculations-with-dates), intervals of time can be found between two times. In the example below `int2now` contains the interval of time between the date-time in `DATETIME` and the current date-time as returned by `now()`.^[Note the use of `now()` with date-times, whereas as `today()` is used just for dates.] The number of hours and days are then found using `time_length()` in the same was as shown for dates in Section \@ref(calculations-with-dates). I moved the `int2now` variable to the end simply so that the other two variables would show in the tibble.
+As shown with dates in Section \@ref(calculations-with-dates), intervals of time can be found between two times. In the example below `int2now` contains the interval of time between the date-time in `DATETIME` and the current date-time as returned by `now()`{.inline}.^[Note the use of `now()`{.inline} with date-times, whereas as `today()`{.inline} is used just for dates.] The number of hours and days are then found using `time_length()`{.inline} in the same was as shown for dates in Section \@ref(calculations-with-dates). I moved the `int2now` variable to the end simply so that the other two variables would show in the tibble.
 
 ```{r}
 exT2 %<>%
@@ -252,7 +252,7 @@ exT1a
 
 ## Examples in Context
 ### Sales Transactions
-This example examines results for a trading company as presented in [an RSquared Academy blogpost](https://blog.rsquaredacademy.com/handling-date-and-time-in-r/). The data in [transact.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/transact.csv)^[Original data from [rsquaredacadamy](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv).] represent the dates that an invoice was sent, payment of the invoice was due, and payment was received. As you can see from the data frame below, `read_csv()` accurately determined that each column contained dates and thus automatically read those columns in as of the date class.
+This example examines results for a trading company as presented in [an RSquared Academy blogpost](https://blog.rsquaredacademy.com/handling-date-and-time-in-r/). The data in [transact.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/transact.csv)^[Original data from [rsquaredacadamy](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv).] represent the dates that an invoice was sent, payment of the invoice was due, and payment was received. As you can see from the data frame below, `read_csv()`{.inline} accurately determined that each column contained dates and thus automatically read those columns in as of the date class.
 
 ```{r}
 trans <- read_csv(file.path("data","transact.csv"))
@@ -314,14 +314,14 @@ trans %>%
 
 &nbsp;
 
-### Stream Discharge
+### Stream Discharge {#dt-stream-discharge}
 The U.S. Geological Survey (USGS) monitors stream/river discharge at a large number of stations around the United States. These data can be accessed via the [National Water Information System: Web Interface](https://waterdata.usgs.gov/nwis). Here I will examine provisional data available for 2021 (up to 3-Aug, the day I accessed the data). The following steps were taken on the NWIS site to produce a **tab**-delimited file for use below.
 
 * Selected "Current Conditions" button.
 * Selected Wisconsin on the US map.
 * Carefully selected the "Whittlesey Creek" dot on the Wisconsin map.
 * Selected only "00060 Discharge" from "Available Parameters", "Tab-separated" from "Output format", and enter "2021-01-01" into "Begin Date". Pressed "GO" button.
-* Copied URL from the ensuing page into `read_tsv()` below. [*Note that the top of the file has many lines of comments each preceded by a '#', which precipates the use of `comment=` below.*]
+* Copied URL from the ensuing page into `read_tsv()`{.inline} below. [*Note that the top of the file has many lines of comments each preceded by a '#', which precipates the use of `comment=` below.*]
 
 ```{r wcd_data, cache=TRUE}
 wcd <- read_tsv("https://nwis.waterdata.usgs.gov/usa/nwis/uv/?cb_00045=on&cb_00060=on&format=rdb&site_no=040263205&period=&begin_date=2021-01-01&end_date=2021-08-03",
@@ -331,12 +331,12 @@ wcd
 
 There are several issues with the way these data load into R.
 
-1. The first line of the data frame is not data at all; this row is removed with `slice()` below.
+1. The first line of the data frame is not data at all; this row is removed with `slice()`{.inline} below.
 1. All columns with "cd" in the name can be removed ... they either note that the data is provisional or are all constants. Do note that the time zone is "CST".
 1. Thes `site_no` column can be removed (it is a constant).
 1. The discharge data is in the column that ends with "00060" and the precipitation data is in the column that ends with "00045". These names should be changed to be more useful.
 1. The `datetime` variable needs to be converted from a character to datetime class.
-1. The `discharge` and `precip` variables need to be converted from a character to a numeric class (with `as.numeric()` below).
+1. The `discharge` and `precip` variables need to be converted from a character to a numeric class (with `as.numeric()`{.inline} below).
 
 ```{r}
 wcd %<>%
@@ -398,7 +398,7 @@ For fun, it is often interesting to look at the discharge plot around a "flashy"
 wcd$datetime[which.max(wcd$discharge)]
 ```
 
-A new data frame that is around this point of maximum discharge is then created with `filter()`.
+A new data frame that is around this point of maximum discharge is then created with `filter()`{.inline}.
 
 ```{r}
 wcd1 <- wcd %>%

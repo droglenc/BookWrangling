@@ -16,7 +16,7 @@ Factors have a long and, for some, dubious history in R. The `forcats` package w
 &nbsp;
 
 ## Creating Factors
-A variable is converted to a factor class by including that variable in `factor()`. The code below creates a new data frame where `loc` is now a factor, as indicated by `<fct>` below `loc` when the tibble is printed.
+A variable is converted to a factor class by including that variable in `factor()`{.inline}. The code below creates a new data frame where `loc` is now a factor, as indicated by `<fct>` below `loc` when the tibble is printed.
 
 ```{r}
 tmp <- bears %>%
@@ -30,7 +30,7 @@ Nothing is changed when the data are displayed as above. However, behind-the-sce
 tmp %>% mutate(loc_nums=as.numeric(loc))
 ```
 
-Suppose, however, that we prefer that the levels of the `loc` variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to `levels=` within `factor()`.
+Suppose, however, that we prefer that the levels of the `loc` variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to `levels=` within `factor()`{.inline}.
 
 ```{r}
 tmp <- bears %>%
@@ -60,13 +60,13 @@ tmp <- bears %>%
 tmp
 ```
 
-Given these last two issues it is important to understand what levels exist within a variable. If the variable is a character class (and not yet a factor) then use `unique()` to see the list of levels.
+Given these last two issues it is important to understand what levels exist within a variable. If the variable is a character class (and not yet a factor) then use `unique()`{.inline} to see the list of levels.
 
 ```{r}
 unique(bears$loc)
 ```
 
-However, if the variable is a factor class already then use `levels()` to see the list of levels along with their order.
+However, if the variable is a factor class already then use `levels()`{.inline} to see the list of levels along with their order.
 
 ```{r}
 levels(tmp$loc)
@@ -77,7 +77,7 @@ levels(tmp$loc)
 ## Changing Factor Order
 Factor levels can be manually reordered using `levels=` as shown in the previous section. However functions in `forcats` provide other methods to simplify reordering levels for common situations.
 
-Levels can be reordered based on the value of another variable with `fct_reorder()`. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called `.fun` can be used to calculate a summary of the numeric variable to use for reordering.^[Note that `.fun` is only useful if multiple observations of the factor variable are present and it defaults to using the median.]
+Levels can be reordered based on the value of another variable with `fct_reorder()`{.inline}. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called `.fun` can be used to calculate a summary of the numeric variable to use for reordering.^[Note that `.fun` is only useful if multiple observations of the factor variable are present and it defaults to using the median.]
 
 For example, the code below orders the levels in `loc` by the median length of the bears.
 
@@ -107,7 +107,7 @@ tmp %>%
 
 &nbsp;
 
-Specific levels are moved to the beginning of the order of levels with `fct_relevel()`. The first argument to this function is the factor variable and subsequent arguments are levels to move to the "beginning of the line." For example, the following code moves "Bayfield" to the beginning of the order.
+Specific levels are moved to the beginning of the order of levels with `fct_relevel()`{.inline}. The first argument to this function is the factor variable and subsequent arguments are levels to move to the "beginning of the line." For example, the following code moves "Bayfield" to the beginning of the order.
 
 ```{r}
 tmp <- bears %>%
@@ -125,7 +125,7 @@ levels(tmp$loc)
 
 &nbsp;
 
-The order of levels for a factor variable are reversed with `fct_rev()`.
+The order of levels for a factor variable are reversed with `fct_rev()`{.inline}.
 
 ```{r}
 tmp <- bears %>%
@@ -133,7 +133,7 @@ tmp <- bears %>%
 levels(tmp$loc)
 ```
 
-The `fct_rev()` function can be used with `fct_reorder()` to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.
+The `fct_rev()`{.inline} function can be used with `fct_reorder()`{.inline} to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.
 
 ```{r}
 tmp <- bears %>%
@@ -148,7 +148,7 @@ tmp %>%
 
 &nbsp;
 
-The `fct_infreq()` function is used to order the levels by **de**creasing frequency of their occurrence.
+The `fct_infreq()`{.inline} function is used to order the levels by **de**creasing frequency of their occurrence.
 
 ```{r}
 tmp <- bears %>%
@@ -159,7 +159,7 @@ tmp %>%
   summarize(n=n())
 ```
 
-Of course, using `fct_rev()` with `fct_infreq()` would order the levels in ascending frequency of occurrence.
+Of course, using `fct_rev()`{.inline} with `fct_infreq()`{.inline} would order the levels in ascending frequency of occurrence.
 
 ```{r}
 tmp <- bears %>%
@@ -193,9 +193,9 @@ aip_sum1
 
 The summary above shows several species within a few genera. A research may wish to collapse these species into a one level that represents the genera. For example, one may want to collapse "Acer rubrum", "Acer saccharum", "Acer spicatum", and "Acer sp." into a single level of "Acer sp."
 
-The "collapsing" of multiple levels into one level is accomplished with `fct_collapse()`. The first argument to this function is the factor variable containing the "old" levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.
+The "collapsing" of multiple levels into one level is accomplished with `fct_collapse()`{.inline}. The first argument to this function is the factor variable containing the "old" levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.
 
-For example the code below uses `fct_collapse()` to create a new `species2` variable that collapses the multiple "Acer" and "Betula" levels into two levels specific to each genera. The levels of `species2` are then ordered in descending order of the sum of `density` (using `fct_reorder()` and `fct_rev()`).^[Compare the `species` to `species2` columns below to confirm how the "refactoring" worked.]
+For example the code below uses `fct_collapse()`{.inline} to create a new `species2` variable that collapses the multiple "Acer" and "Betula" levels into two levels specific to each genera. The levels of `species2` are then ordered in descending order of the sum of `density` (using `fct_reorder()`{.inline} and `fct_rev()`{.inline}).^[Compare the `species` to `species2` columns below to confirm how the "refactoring" worked.]
 
 ```{r}
 aip %<>%
@@ -222,7 +222,7 @@ aip_sum2 <- aip %>%
 aip_sum2
 ```
 
-The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four infrequent species into an "Other" category. This type of "lumping" can be accomplished with `fct_lump_n()` which requires the factor variable as its first argument and`n=` to indicate the top `n` levels to **not** lump into an "Other" category. For example, the code below will lump all levels in `species2` after the top four into an "Other" category of the new `species3` variable. The summary results illustrate the lumping.
+The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four infrequent species into an "Other" category. This type of "lumping" can be accomplished with `fct_lump_n()`{.inline} which requires the factor variable as its first argument and`n=` to indicate the top `n` levels to **not** lump into an "Other" category. For example, the code below will lump all levels in `species2` after the top four into an "Other" category of the new `species3` variable. The summary results illustrate the lumping.
 
 ```{r}
 aip <- aip %>%
@@ -236,9 +236,9 @@ aip_sum3 <- aip %>%
 aip_sum3
 ```
 
-Other versions of `fct_lump_XXX()`, such as `fct_lump_prop()` and `fct_lump_min()`, can be used when ordering by frequency rather than be another variable as shown here.
+Other versions of `fct_lump_XXX()`{.inline}, such as `fct_lump_prop()`{.inline} and `fct_lump_min()`{.inline}, can be used when ordering by frequency rather than be another variable as shown here.
 
-Finally, the names of specific levels can be changed with `fct_recode()`. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in `fct_recode()` will be retained with their original names. For example, the code below creates a new `species4` variable with new common names for the three "species" levels remaining in `species3`. The results are seen in the summary below.
+Finally, the names of specific levels can be changed with `fct_recode()`{.inline}. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in `fct_recode()`{.inline} will be retained with their original names. For example, the code below creates a new `species4` variable with new common names for the three "species" levels remaining in `species3`. The results are seen in the summary below.
 
 ```{r}
 aip %<>%
@@ -267,7 +267,7 @@ PON <- read_csv(file.path("data","201709-CAH_PulseOfTheNation.csv"))
 PON
 ```
 
-The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used `names()`, which when given a data frame returns all the variable names of that data frame.
+The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used `names()`{.inline}, which when given a data frame returns all the variable names of that data frame.
 
 ```{r}
 names(PON)
@@ -301,7 +301,7 @@ From this examination of levels, I made the following notes:
 * I will order the levels for `climate` based on my understanding of what the correct answer is (i.e., I will order the answers from correct to less correct).
 * I will order the levels of `polit_aff` so that "Independent" is in the middle (which will happen alphabetically) and "DK/REF" is last.
 
-Creation of these factors is below. Note that to move "DK/REF" to the end of `polit_aff` I used `fct_relevel()` with `after=Inf` to move the level to the last position.
+Creation of these factors is below. Note that to move "DK/REF" to the end of `polit_aff` I used `fct_relevel()`{.inline} with `after=Inf` to move the level to the last position.
 
 ```{r}
 PON %<>%
@@ -321,7 +321,7 @@ PON %<>%
                                        "DK/REF")))
 ```
 
-I then used `levels()` to double-check that each factor has the levels and the order of levels that I expected.
+I then used `levels()`{.inline} to double-check that each factor has the levels and the order of levels that I expected.
 
 ```{r}
 levels(PON$polit_aff)
@@ -467,7 +467,7 @@ sb_plot1 <- ggplot(sb_sum1) +
 sb_plot1
 ```
 
-Other researchers would prefer that the beaches are ordered from lowest to highest density of *Enterococci*. The code below creates a summary by `Site`s ordered by the mean `density`. Note the use of `na.rm=TRUE` in `fct_reorder()` because of the missing values at some sites.
+Other researchers would prefer that the beaches are ordered from lowest to highest density of *Enterococci*. The code below creates a summary by `Site`s ordered by the mean `density`. Note the use of `na.rm=TRUE` in `fct_reorder()`{.inline} because of the missing values at some sites.
 
 ```{r}
 sb_sum2 <- sb %>%

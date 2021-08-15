@@ -26,12 +26,13 @@ entering-data
 saving-the-external-file
 excel
 google-sheets
-reading-the-external-file
+reading-an-external-file
 csv-files
 excel-files
 google-sheets-1
 other-formats
 relational-data
+nature-of-relational-data
 join-concepts
 inner-join
 left-join
@@ -95,7 +96,7 @@ extracting-time-components
 calculations-with-date-times
 examples-in-context-2
 sales-transactions
-stream-discharge
+dt-stream-discharge
 factors
 creating-factors
 changing-factor-order
