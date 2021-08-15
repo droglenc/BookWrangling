@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-14" />
+<meta name="date" content="2021-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -262,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The spreadsheet may be saved in the format of the spreadsheet program (e.g., as an Excel file) to be read into R. However, it is also common to save the file as a <em>comma separated values</em> (CSV) file to be read into R. The advantage of a CSV file is that these files are small and, because they do not require any special software (e.g., Excel) to read, they are very likely to always be able to be read into R.</p>
 <div id="excel" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Excel</h3>
-<p>An Excel worksheet is saved as a CSV file by selecting the <strong>File..Save As</strong> menu item, which will produce the dialog box below. In this dialog box, change “Save as type” to “CSV (Comma delimited),”<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, provide a file name (<strong>do not put any periods in the name</strong>), select a location to save the file (<strong>this should be the same location as your assignment template file</strong>), and press “Save.” Two “warning” dialog boxes may then appear – select “OK” for the first and “YES” for the second. You can now close the spreadsheet file.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>An Excel worksheet is saved as a CSV file by selecting the <strong>File..Save As</strong> menu item, which will produce the dialog box below. In this dialog box, change “Save as type” to “CSV (Comma delimited),”<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>, provide a file name (<strong>do not put any periods in the name</strong>), select a location to save the file (<strong>this should be the same location as your assignment template file</strong>), and press “Save.” Two “warning” dialog boxes may then appear – select “OK” for the first and “YES” for the second. You can now close the spreadsheet file.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p><img src="zimgs/Data_File_2.jpg" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="google-sheets" class="section level3" number="3.2.2">
@@ -278,13 +278,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.3</span> Reading the External File</h2>
 <div id="csv-files" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> CSV Files</h3>
-<p>CSV files may be read with <code>read.csv()</code> from base R or <code>read_csv()</code> from <code>tidyverse</code>. For most of our applications there will be little functional difference between these two functions. However, <code>read_csv()</code> is faster than <code>read.csv()</code> and can be a little “smarter” about the way it imports certain columns.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> In addition, it is a bit more transparent about what it is doing. For those reasons, we will use <code>read_csv()</code> in this course.</p>
+<p>CSV files may be read with <code>read.csv()</code> from base R or <code>read_csv()</code> from <code>tidyverse</code>. For most of our applications there will be little functional difference between these two functions. However, <code>read_csv()</code> is faster than <code>read.csv()</code> and can be a little “smarter” about the way it imports certain columns.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> In addition, it is a bit more transparent about what it is doing. For those reasons, we will use <code>read_csv()</code> in this course.</p>
 <div class="tip">
 <p>An object saved from <code>read_csv()</code> will be a tibble.</p>
 </div>
-<p>The first argument to <code>read_csv()</code> is the filename. This file must exist in your working directory, include be a partial path relative to your working directory or a full path to the file, or be a valid URL. For example, the code below reads “Bears.csv” from the “data” folder in my working directory and stores the result in the <code>bears</code> object. Here, I used <code>file.path()</code> to combine the folder names in the partial path with the filename because <code>file.path()</code> creates at path that will be correct for your operating system.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="read-external-data-files.html#cb86-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
-<span id="cb86-2"><a href="read-external-data-files.html#cb86-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<p>The first argument to <code>read_csv()</code> is the filename. This file must exist in your working directory, include be a partial path relative to your working directory or a full path to the file, or be a valid URL. For example, the code below reads “Bears.csv” from the “data” folder in my working directory and stores the result in the <code>bears</code> object. Here, I used <code>file.path()</code> to combine the folder names in the partial path with the filename because <code>file.path()</code> creates at path that will be correct for your operating system.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb85-1"><a href="read-external-data-files.html#cb85-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears.csv&quot;</span>))</span>
+<span id="cb85-2"><a href="read-external-data-files.html#cb85-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -297,8 +297,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>The filename argument could also be the link to the published Google Sheet (from above).</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb88-1"><a href="read-external-data-files.html#cb88-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQaxD9tvwL29MydISlYw4bVXrw6-rvkEbT_2qFGxw7HuYX6M3h83aIYT4eZ-mrrEfJf8y5Q8p1Rkn4Z/pub?gid=522647677&amp;single=true&amp;output=csv&quot;</span>)</span>
-<span id="cb88-2"><a href="read-external-data-files.html#cb88-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb87-1"><a href="read-external-data-files.html#cb87-1" aria-hidden="true" tabindex="-1"></a>bears <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQaxD9tvwL29MydISlYw4bVXrw6-rvkEbT_2qFGxw7HuYX6M3h83aIYT4eZ-mrrEfJf8y5Q8p1Rkn4Z/pub?gid=522647677&amp;single=true&amp;output=csv&quot;</span>)</span>
+<span id="cb87-2"><a href="read-external-data-files.html#cb87-2" aria-hidden="true" tabindex="-1"></a>bears</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -311,8 +311,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>The URL does not have to be from the published Google Sheet. For example, the following reads a CSV from <a href="https://sports-statistics.com/sports-data/nba-basketball-datasets-csv-files/">this page</a> that lists information about every player who has played in the National Basketball Association (NBA).</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="read-external-data-files.html#cb90-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
-<span id="cb90-2"><a href="read-external-data-files.html#cb90-2" aria-hidden="true" tabindex="-1"></a>players</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb89-1"><a href="read-external-data-files.html#cb89-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://sports-statistics.com/database/basketball-data/nba/NBA-playerlist.csv&quot;</span>)</span>
+<span id="cb89-2"><a href="read-external-data-files.html#cb89-2" aria-hidden="true" tabindex="-1"></a>players</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4,393 x 15
 #R&gt;      ...1 DISPLAY_FIRST_LAST  DISPLAY_LAST_COMMA_FIRST FROM_YEAR GAMES_PLAYED_FL~
 #R&gt;     &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;           
@@ -332,8 +332,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  #   TEAM_CODE &lt;chr&gt;, TEAM_ID &lt;dbl&gt;, TEAM_NAME &lt;chr&gt;, TO_YEAR &lt;dbl&gt;</code></pre>
 <p> </p>
 <p>The <code>read_csv()</code> function provides a variety of options that will help you correctly load CSV files that may be “quirky” in some respects. Use <code>skip.lines=</code> to skip, for example, the first two lines in a CSV file that do not contain data (perhaps they hold comments).</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb92-1"><a href="read-external-data-files.html#cb92-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_SkipLines.csv&quot;</span>),<span class="at">skip=</span><span class="dv">2</span>)</span>
-<span id="cb92-2"><a href="read-external-data-files.html#cb92-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb91-1"><a href="read-external-data-files.html#cb91-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_SkipLines.csv&quot;</span>),<span class="at">skip=</span><span class="dv">2</span>)</span>
+<span id="cb91-2"><a href="read-external-data-files.html#cb91-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -346,8 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Alternatively, use <code>comment=</code> to identify leading characters that identify lines in the data file that are comments and should not be read as data.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb94-1"><a href="read-external-data-files.html#cb94-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Comment.csv&quot;</span>),<span class="at">comment=</span><span class="st">&quot;#&quot;</span>)</span>
-<span id="cb94-2"><a href="read-external-data-files.html#cb94-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb93-1"><a href="read-external-data-files.html#cb93-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Comment.csv&quot;</span>),<span class="at">comment=</span><span class="st">&quot;#&quot;</span>)</span>
+<span id="cb93-2"><a href="read-external-data-files.html#cb93-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -360,8 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Often data may be missing. By default, R treats <code>NA</code> in the data frame as missing data. If all missing data is coded with <code>NA</code> then <code>read_csv()</code> will handle this properly. For example, note the <code>NA</code>s in the second and eighth rows below.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb96-1"><a href="read-external-data-files.html#cb96-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Missing1.csv&quot;</span>))</span>
-<span id="cb96-2"><a href="read-external-data-files.html#cb96-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb95-1"><a href="read-external-data-files.html#cb95-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Missing1.csv&quot;</span>))</span>
+<span id="cb95-2"><a href="read-external-data-files.html#cb95-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -374,8 +374,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 &lt;NA&gt;</code></pre>
 <p>However, some researcher may denote missing data with other codes. For example, the data file read below used “-” denote missing data. In cases like this, use <code>na=</code> to dictate which codes should be “missing” and converted to <code>NA</code> in the data frame object.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb98-1"><a href="read-external-data-files.html#cb98-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Missing2.csv&quot;</span>),<span class="at">na=</span><span class="st">&quot;-&quot;</span>)</span>
-<span id="cb98-2"><a href="read-external-data-files.html#cb98-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb97-1"><a href="read-external-data-files.html#cb97-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Missing2.csv&quot;</span>),<span class="at">na=</span><span class="st">&quot;-&quot;</span>)</span>
+<span id="cb97-2"><a href="read-external-data-files.html#cb97-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -388,8 +388,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 &lt;NA&gt;</code></pre>
 <p>In other instances, the research may have sloppily used multiple codes for missing data. In these instances, set <code>na=</code> to a vector of all codes to be converted to <code>NA</code> in the data frame object.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb100-1"><a href="read-external-data-files.html#cb100-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Missing3.csv&quot;</span>),<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;NAN&quot;</span>,<span class="st">&quot;-&quot;</span>))</span>
-<span id="cb100-2"><a href="read-external-data-files.html#cb100-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb99-1"><a href="read-external-data-files.html#cb99-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Bears_Missing3.csv&quot;</span>),<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;NAN&quot;</span>,<span class="st">&quot;-&quot;</span>))</span>
+<span id="cb99-2"><a href="read-external-data-files.html#cb99-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -407,9 +407,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="excel-files" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Excel Files</h3>
 <p>Some researchers prefer to save data entered in Excel as an Excel workbook rather than a CSV file. The main argument here is that saving to a CSV often results in two files – an Excel workbook file and a CSV file. It is generally bad practice to have your data in two files as you may update the Excel file and forget to save it to the CSV file or you may update the CSV file and forget to also update the Excel file. Regardless of the reason, data can generally be read from an Excel file into R.</p>
-<p>The <code>read_excel()</code> function from the <code>readxl</code> package provides a coherent process for reading data from an Excel workbook. The first argument to <code>read_excel()</code> is the name of the Excel file, possibly with path information. By default <code>read_excel()</code> reads the first sheet in the Excel workbook. The example below reads the first sheet of the “DataExamples.xlsx” workbook in the “data” folder.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb102-1"><a href="read-external-data-files.html#cb102-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;DataExamples.xlsx&quot;</span>))</span>
-<span id="cb102-2"><a href="read-external-data-files.html#cb102-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<p>The <code>read_excel()</code> function from the <code>readxl</code> package provides a coherent process for reading data from an Excel workbook. The first argument to <code>read_excel()</code> is the name of the Excel file, possibly with path information. By default <code>read_excel()</code> reads the first sheet in the Excel workbook. The example below reads the first sheet of the “DataExamples.xlsx” workbook in the “data” folder.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb101-1"><a href="read-external-data-files.html#cb101-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;DataExamples.xlsx&quot;</span>))</span>
+<span id="cb101-2"><a href="read-external-data-files.html#cb101-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -422,9 +422,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Data on specific sheets can be read by including the sheet name in <code>sheet=</code>. Additionally, lines at the top of the sheet can be skipped with <code>skip=</code> as described for <code>read_csv()</code>. For example, the code below reads the data after the first two lines in the “Bears_SkipLines” worksheet in the same Excel workbook.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb104-1"><a href="read-external-data-files.html#cb104-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;DataExamples.xlsx&quot;</span>),</span>
-<span id="cb104-2"><a href="read-external-data-files.html#cb104-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;Bears_SkipLines&quot;</span>,<span class="at">skip=</span><span class="dv">2</span>)</span>
-<span id="cb104-3"><a href="read-external-data-files.html#cb104-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb103-1"><a href="read-external-data-files.html#cb103-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;DataExamples.xlsx&quot;</span>),</span>
+<span id="cb103-2"><a href="read-external-data-files.html#cb103-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;Bears_SkipLines&quot;</span>,<span class="at">skip=</span><span class="dv">2</span>)</span>
+<span id="cb103-3"><a href="read-external-data-files.html#cb103-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -437,9 +437,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  7      130.       105 Douglas 
 #R&gt;  8      150        110 Douglas</code></pre>
 <p>Missing data is handled exactly as described for <code>read_csv()</code>.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb106-1"><a href="read-external-data-files.html#cb106-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;DataExamples.xlsx&quot;</span>),</span>
-<span id="cb106-2"><a href="read-external-data-files.html#cb106-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;Bears_Missing3&quot;</span>,<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;NAN&quot;</span>,<span class="st">&quot;-&quot;</span>))</span>
-<span id="cb106-3"><a href="read-external-data-files.html#cb106-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb105-1"><a href="read-external-data-files.html#cb105-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;DataExamples.xlsx&quot;</span>),</span>
+<span id="cb105-2"><a href="read-external-data-files.html#cb105-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;Bears_Missing3&quot;</span>,<span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;NAN&quot;</span>,<span class="st">&quot;-&quot;</span>))</span>
+<span id="cb105-3"><a href="read-external-data-files.html#cb105-3" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 3
 #R&gt;    length.cm weight.kg loc     
 #R&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
@@ -476,12 +476,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>There are several choices for CSV files here; do NOT choose the one with “UTF-8” in the name.<a href="read-external-data-files.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>You may be asked to save changes – you should say “No.”<a href="read-external-data-files.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>How <code>read_csv()</code> identifies the class of data in a column is described <a href="https://r4ds.had.co.nz/data-import.html#parsing-a-file">here</a><a href="read-external-data-files.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Windows and Mac OS handle paths differently; this function avoids that complication.<a href="read-external-data-files.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>I use the <code>readxl::read_excel()</code> construct here rather than loading the <code>readxl</code> package and then simply using <code>read_excel()</code> because this is the only function that I will use from <code>readxl</code>. Thus, I am not loading unneeded functions into my work environment.<a href="read-external-data-files.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<ol start="9">
+<li id="fn9"><p>There are several choices for CSV files here; do NOT choose the one with “UTF-8” in the name.<a href="read-external-data-files.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>You may be asked to save changes – you should say “No.”<a href="read-external-data-files.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>How <code>read_csv()</code> identifies the class of data in a column is described <a href="https://r4ds.had.co.nz/data-import.html#parsing-a-file">here</a><a href="read-external-data-files.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>Windows and Mac OS handle paths differently; this function avoids that complication.<a href="read-external-data-files.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>I use the <code>readxl::read_excel()</code> construct here rather than loading the <code>readxl</code> package and then simply using <code>read_excel()</code> because this is the only function that I will use from <code>readxl</code>. Thus, I am not loading unneeded functions into my work environment.<a href="read-external-data-files.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -1,5 +1,9 @@
 # Preparation {#preparation}
-The material for this course will use R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio from the prerequisite courses. This module will explain how to install R, RStudio, and helper packages, and how to configure and use RStudio in an efficient manner for the course.
+The material for this course uses R through RStudio. R is a software environment for performing statistical analyses. RStudio is a helper program that makes it easier to use R. I assume that you are familiar with both R and RStudio from the prerequisite courses. This module will explain how to install R, RStudio, and helper packages, and how to configure and use RStudio in an efficient manner for the course.
+
+::: {.tip data-latex=""}
+R is like the engine of a car and RStudio is like the dashboard.^[This analogy is from [Modern Dive](https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.4.0/2-getting-started.html)]
+:::
 
 &nbsp;
 
@@ -49,9 +53,9 @@ Finally, I prefer to have lighter text on a darker background (as you can see wi
 &nbsp;
 
 ## Install Tidyverse and Other Packages
-Methods in this course will depend heavily on functions from the `tidyverse`, `magrittr`, and `lubridate` packages. Use the following steps in RStudio to install these packages.
+Methods in this course depend on functions from the `tidyverse`, `magrittr`, and `lubridate` packages. The following steps in RStudio will install these packages.^[These same steps can be used to install other packages as needed.]
 
-1. Open the "Packages" tab (in the lower-left pane if you rearranged your RStudio panes to match my preferences).
+1. Open the "Packages" tab (in the lower-left pane if your RStudio panes are rearramged to match my preferences).
 1. Press the "Install" button on the toolbar.
 1. Enter the names of the three packages in the "Packages ..." box.
 
@@ -71,38 +75,43 @@ library(lubridate)
 &nbsp;
 
 ## RStudio Projects
-Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. I generally use a separate project for each data anaysis project that I am working on. Here, I suggest that you create a project for all of your work in this course. 
+Projects in RStudio can be used to keep all parts of a data analysis organized into one folder. The project also keeps track of specific information about the project that helps keep your analyses organized. It is generally best to use a separate project for each data anaysis project. For this course it is adequate to use one project for all of your work. 
 
 ### Creating a Project
-A project can be started in RStudio with
+A project can be created in RStudio with these steps.
 
-* Select the "File" menu, "New Project" submenu, "New Directory" item, and "New Project" item (use "Existing Directory" item if you have already created a folder outside of RStudio),
-* enter the name for the directory and the project under "Directory Name",
-* browse to an appropriate place for this new folder as shown below "Create Project as Subdirectory of", and
+1. Select the "File" menu, "New Project" submenu, "New Directory" item, and "New Project" item (use "Existing Directory" item if you have already created a folder outside of RStudio),
+1. Enter the name for the directory and the project under "Directory Name",
 
 ```{r echo=FALSE, out.width='60%'}
 knitr::include_graphics("zimgs/RStudio_Project_MakeName.JPG")
 ```
 
-* select "Create Directory"
+3. Browse to an appropriate place for this new folder as shown above under "Create Project as Subdirectory of", and
+1. Select "Create Project".
 
 This will refresh RStudio (i.e., like starting anew) but you will see the name of your project above the upper-right corner of the upper-right pane in RStudio.
 
-```{r echo=FALSE, out.width='15%'}
+```{r echo=FALSE, out.width='60%'}
 knitr::include_graphics("zimgs/RStudio_Project_ShowName.JPG")
 ```
 
 ### Opening an Existing Project
-An existing project can be opened with "File" menu and "Open Project" submenu, browsing to the folder where the project exists, and then selecting the .Rproj file in that folder. Alternatively, you can open a project (or create a new project) by selecting the small "down arrow" next to where the project name will appear. You can select "Open Project" near the top of the box that appears or select a recently opened project from the list further down.
+An existing project can be opened with the "File" menu and "Open Project" submenu, browsing to the folder where the project exists, and then selecting the .Rproj file in that folder. Alternatively, open a project (or create a new project) by selecting the small "down arrow" next to the project name on the toolbar and then selecting "Open Project" near the top of the box that appears or selecting a recently opened project from the list further down.
 
 ```{r echo=FALSE, out.width='30%'}
 knitr::include_graphics("zimgs/RStudio_Project_OpenProjectList.JPG")
 ```
 
-A project will open in a new RStudio window by selecting the small icon to the right of an existing project name or "Open Project in New Session ...".
+Open the project in a new RStudio window by selecting the small icon to the right of an existing project name or using "Open Project in New Session ...".
+
+::: {.tip data-latex=""}
+* RStudio opens the project you were last working in when it starts.
+* Look on the right side of the RStudio toolbar to see which project you are currently working in.
+:::
 
 ### Project Benefits
-The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you do not need to worry about using `setwd()` and all of the hassles that come with that. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without having to modify the working directory structure.
+The major benefit of using an RStudio Project is that the working directory is automatically set to the project folder. Thus, you avoide all of the hassles of using `setwd()`. In addition, you can send your script and data file to someone (like me) who can then open in a project and have it work without needing to modify the working directory structure.
 
 ::: {.tip data-latex=""}
 You do not need to use `setwd()` with RStudio projects!!
@@ -113,9 +122,9 @@ You do not need to use `setwd()` with RStudio projects!!
 ## Using the Notebook Template
 Notebooks in RStudio are an efficient way to enter R code, show results of R code, write answers to assignment questions, and compile all of that to a document that can be handed in.
 
-For class assignments, start by downloading [this template](https://raw.githubusercontent.com/droglenc/NCWrangling/main/resources/TEMPLATE.Rmd) (right-click, don't change the name) to a folder where you plan to store all of your class-related work. Then open the template in RStudio and change the Author in line 3 to your name. Save the template with this change.
+For class assignments, start by downloading [this template](https://raw.githubusercontent.com/droglenc/NCWrangling/main/resources/TEMPLATE.Rmd) (right-click, don't change the name) to your project folder. Then open the template in RStudio and change the Author in line 5 to your name. Save the template with this change.
 
-Every time you start an assignment you should open the template file in RStudio and immediately save it (File .. Save As) with a different name (e.g., "Assignment1" ... make sure that the name does not have a "dot" in it). Then edit the Title in line 2 to something that represents the assignment (e.g., "Wrangling Columns"). Do not change anything else in the first 23 lines.
+Every time you start an assignment open the template file in RStudio and immediately save it (File .. Save As) with a different name (e.g., "Assignment1" ... make sure that the name does not have a "dot" in it). Then edit the Title in line 4 to something that represents the assignment (e.g., "Wrangling Columns"). Do not change anything else in the first 22 lines.
 
 ```{r echo=FALSE, out.width='90%'}
 knitr::include_graphics("zimgs/Notebook_TopLines.JPG")
@@ -125,31 +134,27 @@ knitr::include_graphics("zimgs/Notebook_TopLines.JPG")
 
 ### Including Text in the Notebook
 #### Creating Sections {-}
-Most assignments will have several questions, each of which is identified with a section heading. Your answers to the assignments should be shown under section headings with the same name as on the assignment. Section headings are created by preceding the section heading name with a hashtag. The template has one section heading started that looks like this ...
-
-::: {.tip data-latex=""}
-Subsequent section headings can be inserted by preceding text with a hashtag, making sure that there is a blank line prior to section heading line.
-:::
+Most assignments will have several questions separated into sections. Your answers to the questions should be shown under section headings with the same name as on the assignment. Section headings are created in an R Notebook by preceding the section heading name with a single hashtag. The template has one section heading started that looks like this ...
 
 ```
 # EDIT THIS WITH FIRST SECTION HEADING TEXT
 ```
 
-You should change this text to create the section heading that you want; e.g., 
+You should change this text to create an appropriate section heading; e.g., 
 
 ```
 # Arctic Penguins
 ```
 
 ::: {.tip data-latex=""}
-Subsequent section headings can be inserted by preceding text with a hashtag, making sure that there is a blank line prior to section heading line.
+Subsequent section headings can be inserted by preceding text with a single hashtag, making sure that there is a blank line prior to the section heading line.
 :::
 
 #### Writing Text for Your Answers {-}
 Sentences can be included by typing the text at the beginning of any line. A new paragraph is created by pressing return twice so that there is a blank line between paragraphs.
 
 #### Numbered Lists for Your Answers {-}
-A numbered list is created by starting a line with "1. " followed by what you want after the number (e.g., your answer). If there are no blank lines between consecutive "1. " items then RStudio will automatically iterate the number when the document is compiled.^[Note the space after the dot and before the text that will form the list item.] For example, typing this ...
+A numbered list is created by starting a line with "1. " followed by text. If there are no blank lines between consecutive "1. " items then RStudio will automatically iterate the number when the document is compiled.^[Note the space after the dot and before the text that will form the list item.] For example, typing this ...
 
 ```{r echo=FALSE, out.width='40%'}
 knitr::include_graphics("zimgs/Notebook_OrderedList_1.JPG")
@@ -162,7 +167,7 @@ knitr::include_graphics("zimgs/Notebook_OrderedList_1.JPG")
 knitr::include_graphics("zimgs/Notebook_OrderedList_Out1.JPG")
 ```
 
-However, typing this ...
+However, if the items in the ordered list are separated by, for example, an R chunk of code then you will need to manually restart the list numbering. For example, typing this ...
 
 ```{r echo=FALSE, out.width='60%'}
 knitr::include_graphics("zimgs/Notebook_OrderedList_2.JPG")
@@ -180,11 +185,11 @@ knitr::include_graphics("zimgs/Notebook_OrderedList_Out2.JPG")
 ### Compile Notebook to HTML Document
 Once you are comfortable that your R code runs without error and that you have answered all questions for the assignment, then compile your Notebook to an HTML document by pressing the "Knit" button on the console window toolbar. Make sure to check your document for completeness and neatness before turning in.
 
-If the document does not produce an HTML document (this make take several seconds) then there may be an error in your R code.
-
-```{r echo=FALSE, out.width='20%'}
+```{r echo=FALSE, out.width='40%'}
 knitr::include_graphics("zimgs/Notebook_Knit.JPG")
 ```
+
+If the document does not produce an HTML document (this make take several seconds) then there may be an error in your R code.
 
 
 ```{r echo=FALSE}
