@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-15" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -346,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="filtering-rows" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Filtering Rows</h2>
-<p>Observations or rows can be selected from a data frame with <code class="inline">filter()</code>. The directive arguments to <code class="inline">filter()</code> are conditional expressions describing which observations from the data frame to maintain. Common operators used in these conditional expressions are in Table <a href="wrangle-rows.html#tab:filterComps">7.1</a>.</p>
+<p>Observations or rows can be selected from a data frame with <code class="inline">filter()</code>. The directive arguments to <code class="inline">filter()</code> are conditional expressions describing which observations from the data frame to maintain. Common operators used in these conditional expressions are in Table <a href="wrangle-rows.html#tab:filterComps">7.1</a>. The <code>filter()</code> function works by evaluating the condition to either <code>TRUE</code> or <code>FALSE</code> and then returning all rows that evaluated to <code>TRUE</code>.</p>
 <p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -514,13 +514,13 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 #R&gt;   $ weight.kg: num(0) 
 #R&gt;   $ loc      : chr(0)</code></pre>
 <ul>
-<li>If you filter with respect to a categorical variable then use <code class="inline">unique()</code> with that categorical variable to examine its levels. For example, the filter below is expected to return observations for just Ashland and Bayfield counties. The use of <code class="inline">unique()</code> supports that this is what is returned.</li>
+<li>If you filter with respect to a categorical variable then use <code class="inline">unique()</code> with that categorical variable to examine its levels. For example, the filter below is expected to return observations for just Ashland and Bayfield counties. The use of <code class="inline">unique()</code> supports that this is what was returned.</li>
 </ul>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb275-1"><a href="wrangle-rows.html#cb275-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(loc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bayfield&quot;</span>,<span class="st">&quot;Ashland&quot;</span>))</span>
 <span id="cb275-2"><a href="wrangle-rows.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(tmp<span class="sc">$</span>loc)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Bayfield&quot; &quot;Ashland&quot;</code></pre>
 <ul>
-<li>If you filter with respect to a quantitative variable then use <code class="inline">summary()</code> with that quantitative variable to examine its summary statistics. For example the fitler below is expected to return observations for lengths between 130 and 145 cm. The minimum and maximum values in the <code class="inline">summary()</code> results support that is what is returned.</li>
+<li>If you filter with respect to a quantitative variable then use <code class="inline">summary()</code> with that quantitative variable to examine its summary statistics. For example the fitler below is expected to return observations for lengths between 130 and 145 cm. The minimum and maximum values in the <code class="inline">summary()</code> results support that is what was returned.</li>
 </ul>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb277-1"><a href="wrangle-rows.html#cb277-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> bears <span class="sc">%&gt;%</span> <span class="fu">filter</span>(length.cm<span class="sc">&gt;</span><span class="dv">130</span>,length.cm<span class="sc">&lt;</span><span class="dv">145</span>)</span>
 <span id="cb277-2"><a href="wrangle-rows.html#cb277-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tmp<span class="sc">$</span>length.cm)</span></code></pre></div>
@@ -725,26 +725,31 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 #R&gt;   9 McCloud, George     1989  2002           13 yes   
 #R&gt;  10 Robinson, David     1989  2002           13 yes   
 #R&gt;  # ... with 11 more rows</code></pre>
-<p>Perhaps those that were playing during the year of your graduation.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb303-1"><a href="wrangle-rows.html#cb303-1" aria-hidden="true" tabindex="-1"></a>nba_grad3 <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(start<span class="sc">&lt;=</span><span class="dv">1985</span>,end<span class="sc">&gt;=</span><span class="dv">1985</span>)</span>
+<p>Perhaps we want to find those that were playing during the year of your graduation.</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb303-1"><a href="wrangle-rows.html#cb303-1" aria-hidden="true" tabindex="-1"></a>nba_grad3 <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(start<span class="sc">&lt;=</span><span class="dv">1989</span>,end<span class="sc">&gt;=</span><span class="dv">1989</span>)</span>
 <span id="cb303-2"><a href="wrangle-rows.html#cb303-2" aria-hidden="true" tabindex="-1"></a>nba_grad3</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 353 x 5
-#R&gt;     name                 start   end years_played modern
-#R&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
-#R&gt;   1 Willis, Kevin         1984  2006           22 yes   
-#R&gt;   2 Jones, Mark           1983  2004           21 yes   
-#R&gt;   3 Parish, Robert        1976  1996           20 yes   
-#R&gt;   4 Abdul-Jabbar, Kareem  1969  1988           19 yes   
-#R&gt;   5 Edwards, James        1977  1995           18 yes   
-#R&gt;   6 Jordan, Michael       1984  2002           18 yes   
-#R&gt;   7 Long, John            1978  1996           18 yes   
-#R&gt;   8 Mahorn, Rick          1980  1998           18 yes   
-#R&gt;   9 Malone, Karl          1985  2003           18 yes   
-#R&gt;  10 Malone, Moses         1976  1994           18 yes   
-#R&gt;  # ... with 343 more rows</code></pre>
-<p>Perhaps those whose name was “Jordan.”</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb305-1"><a href="wrangle-rows.html#cb305-1" aria-hidden="true" tabindex="-1"></a>nba_jordans <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;Jordan&quot;</span>,name))</span>
-<span id="cb305-2"><a href="wrangle-rows.html#cb305-2" aria-hidden="true" tabindex="-1"></a>nba_jordans</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 409 x 5
+#R&gt;     name            start   end years_played modern
+#R&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
+#R&gt;   1 Willis, Kevin    1984  2006           22 yes   
+#R&gt;   2 Jones, Mark      1983  2004           21 yes   
+#R&gt;   3 Parish, Robert   1976  1996           20 yes   
+#R&gt;   4 Edwards, James   1977  1995           18 yes   
+#R&gt;   5 Jordan, Michael  1984  2002           18 yes   
+#R&gt;   6 Long, John       1978  1996           18 yes   
+#R&gt;   7 Mahorn, Rick     1980  1998           18 yes   
+#R&gt;   8 Malone, Karl     1985  2003           18 yes   
+#R&gt;   9 Malone, Moses    1976  1994           18 yes   
+#R&gt;  10 Oakley, Charles  1985  2003           18 yes   
+#R&gt;  # ... with 399 more rows</code></pre>
+<p>Perhaps we want to find those whose name was “Jordan.” This gets a bit tricky because <code>name</code> is formatted as <code>Lastname, Firstname</code>. In this case we want to find all instances where “Jordan” is somewhere in <code>name</code>. This will require a function that won’t be formally introduced until Module <a href="strings.html#strings">11</a>. This new function is called <code class="inline">grepl()</code> and it takes a string to find as the first argument and the name of character vector in which to look for that string as the second argument. It will return <code>TRUE</code> if the string is found in the vector or <code>FALSE</code> if it is not. Below is a quick, simple example.</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb305-1"><a href="wrangle-rows.html#cb305-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ogle, Derek&quot;</span>,<span class="st">&quot;Kim, Young&quot;</span>,<span class="st">&quot;Jordan, Michael&quot;</span>,<span class="st">&quot;Farmar, Jordan&quot;</span>)</span>
+<span id="cb305-2"><a href="wrangle-rows.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">&quot;Jordan&quot;</span>,test)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] FALSE FALSE  TRUE  TRUE</code></pre>
+<p>Here <code>TRUE</code> was returned only for the last two elements because they were the only two elements that contained “Jordan.”</p>
+<p>Because <code class="inline">filter()</code> works by returning the rows that evaluate to <code>TRUE</code>, the <code class="inline">grepl()</code> code can be put in the place of the condition. For example, the code below returns all rows of <code>players2</code> where <code>name</code> contains “Jordan.”</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb307-1"><a href="wrangle-rows.html#cb307-1" aria-hidden="true" tabindex="-1"></a>nba_jordans <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;Jordan&quot;</span>,name))</span>
+<span id="cb307-2"><a href="wrangle-rows.html#cb307-2" aria-hidden="true" tabindex="-1"></a>nba_jordans</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 20 x 5
 #R&gt;     name             start   end years_played modern
 #R&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
@@ -768,9 +773,9 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 #R&gt;  18 Loyd, Jordan      2018  2018            0 yes   
 #R&gt;  19 Sibert, Jordan    2018  2018            0 yes   
 #R&gt;  20 Williams, Jordan  2011  2011            0 yes</code></pre>
-<p>Ahhh … need to be a little tricky to get all last names that are “Jordan.”</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb307-1"><a href="wrangle-rows.html#cb307-1" aria-hidden="true" tabindex="-1"></a>nba_jordans2 <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;Jordan,&quot;</span>,name))</span>
-<span id="cb307-2"><a href="wrangle-rows.html#cb307-2" aria-hidden="true" tabindex="-1"></a>nba_jordans2</span></code></pre></div>
+<p>However, given the format of the data in <code>name</code> we need to be a little tricky to get all last names that are “Jordan” (<em>note the extra comma on “Jordan,” below</em>).</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb309-1"><a href="wrangle-rows.html#cb309-1" aria-hidden="true" tabindex="-1"></a>nba_jordans2 <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;Jordan,&quot;</span>,name))</span>
+<span id="cb309-2"><a href="wrangle-rows.html#cb309-2" aria-hidden="true" tabindex="-1"></a>nba_jordans2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 5
 #R&gt;    name            start   end years_played modern
 #R&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
@@ -782,9 +787,9 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 #R&gt;  6 Jordan, Jerome   2011  2014            3 yes   
 #R&gt;  7 Jordan, Thomas   1992  1992            0 yes   
 #R&gt;  8 Jordan, Walter   1980  1980            0 yes</code></pre>
-<p>Also tricky to get all first names that are “Jordan.”</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb309-1"><a href="wrangle-rows.html#cb309-1" aria-hidden="true" tabindex="-1"></a>nba_jordans3 <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;, Jordan&quot;</span>,name))</span>
-<span id="cb309-2"><a href="wrangle-rows.html#cb309-2" aria-hidden="true" tabindex="-1"></a>nba_jordans3</span></code></pre></div>
+<p>We also need to be a little tricky to get all first names that are “Jordan.”</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb311-1"><a href="wrangle-rows.html#cb311-1" aria-hidden="true" tabindex="-1"></a>nba_jordans3 <span class="ot">&lt;-</span> players2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;, Jordan&quot;</span>,name))</span>
+<span id="cb311-2"><a href="wrangle-rows.html#cb311-2" aria-hidden="true" tabindex="-1"></a>nba_jordans3</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 12 x 5
 #R&gt;     name             start   end years_played modern
 #R&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt; 
@@ -806,7 +811,7 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 <div id="rows-isle-royale" class="section level3" number="7.5.2">
 <h3><span class="header-section-number">7.5.2</span> Wolves and Moose of Isle Royale</h3>
 <p>In Section <a href="wrangle-columns.html#columns-isle-royale">6.7.2</a> the <code>irmw2</code> data frame was created for use in the graphing course.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb311-1"><a href="wrangle-rows.html#cb311-1" aria-hidden="true" tabindex="-1"></a>irmw2</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb313-1"><a href="wrangle-rows.html#cb313-1" aria-hidden="true" tabindex="-1"></a>irmw2</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 61 x 6
 #R&gt;      year era   wolves moose winter_temp ice_bridges
 #R&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -822,13 +827,13 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 #R&gt;  10  1968 early     22  848.        5.85 yes        
 #R&gt;  # ... with 51 more rows</code></pre>
 <p>One of the things we did in that class is focus on the “early” years of the wolf-moose time series. Such a data frame is create below.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb313-1"><a href="wrangle-rows.html#cb313-1" aria-hidden="true" tabindex="-1"></a>irmw_early <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(era<span class="sc">==</span><span class="st">&quot;early&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb315-1"><a href="wrangle-rows.html#cb315-1" aria-hidden="true" tabindex="-1"></a>irmw_early <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(era<span class="sc">==</span><span class="st">&quot;early&quot;</span>)</span></code></pre></div>
 <p>Other things that we could do with these data are …</p>
 <ul>
 <li>Find years where the moose population was more than 1500 animals.</li>
 </ul>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb314-1"><a href="wrangle-rows.html#cb314-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moose<span class="sc">&gt;</span><span class="dv">1500</span>)</span>
-<span id="cb314-2"><a href="wrangle-rows.html#cb314-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb316-1"><a href="wrangle-rows.html#cb316-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moose<span class="sc">&gt;</span><span class="dv">1500</span>)</span>
+<span id="cb316-2"><a href="wrangle-rows.html#cb316-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 7 x 6
 #R&gt;     year era    wolves moose winter_temp ice_bridges
 #R&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -842,8 +847,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 <ul>
 <li>Find years where the wolf population was less than 10 animals.</li>
 </ul>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb316-1"><a href="wrangle-rows.html#cb316-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(wolves<span class="sc">&lt;</span><span class="dv">10</span>)</span>
-<span id="cb316-2"><a href="wrangle-rows.html#cb316-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb318-1"><a href="wrangle-rows.html#cb318-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(wolves<span class="sc">&lt;</span><span class="dv">10</span>)</span>
+<span id="cb318-2"><a href="wrangle-rows.html#cb318-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 7 x 6
 #R&gt;     year era    wolves moose winter_temp ice_bridges
 #R&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -857,8 +862,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 <ul>
 <li>Find years where the wolf population was less than 10 animals and the moose population was greater than 1500 animals.</li>
 </ul>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb318-1"><a href="wrangle-rows.html#cb318-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(wolves<span class="sc">&lt;</span><span class="dv">10</span>,moose<span class="sc">&gt;</span><span class="dv">1500</span>)</span>
-<span id="cb318-2"><a href="wrangle-rows.html#cb318-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb320-1"><a href="wrangle-rows.html#cb320-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(wolves<span class="sc">&lt;</span><span class="dv">10</span>,moose<span class="sc">&gt;</span><span class="dv">1500</span>)</span>
+<span id="cb320-2"><a href="wrangle-rows.html#cb320-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 1 x 6
 #R&gt;     year era    wolves moose winter_temp ice_bridges
 #R&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -866,8 +871,8 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 <ul>
 <li>Find years where ice bridges formed.</li>
 </ul>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb320-1"><a href="wrangle-rows.html#cb320-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ice_bridges<span class="sc">==</span><span class="st">&quot;yes&quot;</span>)</span>
-<span id="cb320-2"><a href="wrangle-rows.html#cb320-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb322-1"><a href="wrangle-rows.html#cb322-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ice_bridges<span class="sc">==</span><span class="st">&quot;yes&quot;</span>)</span>
+<span id="cb322-2"><a href="wrangle-rows.html#cb322-2" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 26 x 6
 #R&gt;      year era   wolves moose winter_temp ice_bridges
 #R&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -885,10 +890,10 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 <ul>
 <li>Find years in the 1970s decade and order by the descending number of wolves.</li>
 </ul>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb322-1"><a href="wrangle-rows.html#cb322-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
-<span id="cb322-2"><a href="wrangle-rows.html#cb322-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1970</span>,year<span class="sc">&lt;</span><span class="dv">1980</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb322-3"><a href="wrangle-rows.html#cb322-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wolves))</span>
-<span id="cb322-4"><a href="wrangle-rows.html#cb322-4" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb324-1"><a href="wrangle-rows.html#cb324-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
+<span id="cb324-2"><a href="wrangle-rows.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1970</span>,year<span class="sc">&lt;</span><span class="dv">1980</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb324-3"><a href="wrangle-rows.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wolves))</span>
+<span id="cb324-4"><a href="wrangle-rows.html#cb324-4" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 10 x 6
 #R&gt;      year era    wolves moose winter_temp ice_bridges
 #R&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      
@@ -905,11 +910,11 @@ All rows where <strong>ONE or BOTH</strong> conditions are true<a href="#fn32" c
 <ul>
 <li>Find years in the 1980s decade, order by the descending number of wolves, and show only the top three years (i.e., most wolves).</li>
 </ul>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb324-1"><a href="wrangle-rows.html#cb324-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
-<span id="cb324-2"><a href="wrangle-rows.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1980</span>,year<span class="sc">&lt;</span><span class="dv">1990</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb324-3"><a href="wrangle-rows.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wolves)) <span class="sc">%&gt;%</span></span>
-<span id="cb324-4"><a href="wrangle-rows.html#cb324-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">3</span>)</span>
-<span id="cb324-5"><a href="wrangle-rows.html#cb324-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb326-1"><a href="wrangle-rows.html#cb326-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> irmw2 <span class="sc">%&gt;%</span></span>
+<span id="cb326-2"><a href="wrangle-rows.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1980</span>,year<span class="sc">&lt;</span><span class="dv">1990</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb326-3"><a href="wrangle-rows.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wolves)) <span class="sc">%&gt;%</span></span>
+<span id="cb326-4"><a href="wrangle-rows.html#cb326-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">3</span>)</span>
+<span id="cb326-5"><a href="wrangle-rows.html#cb326-5" aria-hidden="true" tabindex="-1"></a>tmp</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 6
 #R&gt;     year era    wolves moose winter_temp ice_bridges
 #R&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      

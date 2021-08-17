@@ -47,7 +47,7 @@ Use the `slice()`{.inline} family of functions to select specific (or random) ro
 :::
 
 ## Filtering Rows
-Observations or rows can be selected from a data frame with `filter()`{.inline}. The directive arguments to `filter()`{.inline} are conditional expressions describing which observations from the data frame to maintain. Common operators used in these conditional expressions are in Table \@ref(tab:filterComps).
+Observations or rows can be selected from a data frame with `filter()`{.inline}. The directive arguments to `filter()`{.inline} are conditional expressions describing which observations from the data frame to maintain. Common operators used in these conditional expressions are in Table \@ref(tab:filterComps). The `filter()` function works by evaluating the condition to either `TRUE` or `FALSE` and then returning all rows that evaluated to `TRUE`.
 
 &nbsp;
 
@@ -129,14 +129,14 @@ tmp
 str(tmp,give.attr=FALSE)
 ```
 
-* If you filter with respect to a categorical variable then use `unique()`{.inline} with that categorical variable to examine its levels. For example, the filter below is expected to return observations for just Ashland and Bayfield counties. The use of `unique()`{.inline} supports that this is what is returned.
+* If you filter with respect to a categorical variable then use `unique()`{.inline} with that categorical variable to examine its levels. For example, the filter below is expected to return observations for just Ashland and Bayfield counties. The use of `unique()`{.inline} supports that this is what was returned.
 
 ```{r}
 tmp <- bears %>% filter(loc %in% c("Bayfield","Ashland"))
 unique(tmp$loc)
 ```
 
-* If you filter with respect to a quantitative variable then use `summary()`{.inline} with that quantitative variable to examine its summary statistics. For example the fitler below is expected to return observations for lengths between 130 and 145 cm. The minimum and maximum values in the `summary()`{.inline} results support that is what is returned.
+* If you filter with respect to a quantitative variable then use `summary()`{.inline} with that quantitative variable to examine its summary statistics. For example the fitler below is expected to return observations for lengths between 130 and 145 cm. The minimum and maximum values in the `summary()`{.inline} results support that is what was returned.
 
 ```{r}
 tmp <- bears %>% filter(length.cm>130,length.cm<145)
@@ -248,28 +248,37 @@ nba_grad2 <- players2 %>% filter(start==1989,years_played>10)
 nba_grad2
 ```
 
-Perhaps those that were playing during the year of your graduation.
+Perhaps we want to find those that were playing during the year of your graduation.
 
 ```{r}
-nba_grad3 <- players2 %>% filter(start<=1985,end>=1985)
+nba_grad3 <- players2 %>% filter(start<=1989,end>=1989)
 nba_grad3
 ```
 
-Perhaps those whose name was "Jordan".
+Perhaps we want to find those whose name was "Jordan". This gets a bit tricky because `name` is formatted as `Lastname, Firstname`. In this case we want to find all instances where "Jordan" is somewhere in `name`. This will require a function that won't be formally introduced until Module \@ref(strings). This new function is called `grepl()`{.inline} and it takes a string to find as the first argument and the name of character vector in which to look for that string as the second argument. It will return `TRUE` if the string is found in the vector or `FALSE` if it is not. Below is a quick, simple example.
+
+```{r}
+test <- c("Ogle, Derek","Kim, Young","Jordan, Michael","Farmar, Jordan")
+grepl("Jordan",test)
+```
+
+Here `TRUE` was returned only for the last two elements because they were the only two elements that contained "Jordan".
+
+Because `filter()`{.inline} works by returning the rows that evaluate to `TRUE`, the `grepl()`{.inline} code can be put in the place of the condition. For example, the code below returns all rows of `players2` where `name` contains "Jordan".
 
 ```{r}
 nba_jordans <- players2 %>% filter(grepl("Jordan",name))
 nba_jordans
 ```
 
-Ahhh ... need to be a little tricky to get all last names that are "Jordan".
+However, given the format of the data in `name` we need to be a little tricky to get all last names that are "Jordan" (*note the extra comma on "Jordan," below*).
 
 ```{r}
 nba_jordans2 <- players2 %>% filter(grepl("Jordan,",name))
 nba_jordans2
 ```
 
-Also tricky to get all first names that are "Jordan".
+We also need to be a little tricky to get all first names that are "Jordan".
 
 ```{r}
 nba_jordans3 <- players2 %>% filter(grepl(", Jordan",name))
@@ -289,7 +298,7 @@ irmw2
 
 One of the things we did in that class is focus on the "early" years of the wolf-moose time series. Such a data frame is create below.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 irmw_early <- irmw2 %>% filter(era=="early")
 ```
 

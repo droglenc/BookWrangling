@@ -24,13 +24,13 @@ tmp <- bears %>%
 tmp
 ```
 
-Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order here is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes "1" is mapped to "Ashland", "2" to "Bayfield", and "3" to "Douglas". This mapping is shown below.
+Nothing is changed when the data are displayed as above. However, behind-the-scenes the factor variable consists of numerical codes that are mapped to levels (i.e., the categories) of the factor variable. The order here is still alphabetical because the order of the levels was not specifically controlled when creating the factor variable. Thus, behind-the-scenes "1" is mapped to "Ashland", "2" to "Bayfield", and "3" to "Douglas". This mapping is shown with `loc_nums` below.
 
 ```{r}
 tmp %>% mutate(loc_nums=as.numeric(loc))
 ```
 
-Suppose, however, that we prefer that the levels of the `loc` variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to `levels=` within `factor()`{.inline}.
+Suppose, however, that we prefer that the levels of the `loc` variable be ordered from West to East, as in Douglas than Bayfield and then Ashland. The specific order of the levels can be set by supplying the ordered levels in a vector given to `levels=`{.inline} within `factor()`{.inline}.
 
 ```{r}
 tmp <- bears %>%
@@ -52,7 +52,7 @@ tmp <- bears %>%
 tmp
 ```
 
-Additionally, make sure that you include all possible levels when creating the levels.
+Additionally, make sure to include all possible levels when creating the levels.
 
 ```{r}
 tmp <- bears %>%
@@ -75,9 +75,9 @@ levels(tmp$loc)
 &nbsp;
 
 ## Changing Factor Order
-Factor levels can be manually reordered using `levels=` as shown in the previous section. However functions in `forcats` provide other methods to simplify reordering levels for common situations.
+Factor levels can be manually reordered using `levels=`{.inline} as shown in the previous section. However functions in `forcats` provide other methods to simplify reordering levels for common situations.
 
-Levels can be reordered based on the value of another variable with `fct_reorder()`{.inline}. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called `.fun` can be used to calculate a summary of the numeric variable to use for reordering.^[Note that `.fun` is only useful if multiple observations of the factor variable are present and it defaults to using the median.]
+Levels can be reordered based on the value of another variable with `fct_reorder()`{.inline}. This function takes the factor variable as the first argument and a numeric variable that contains values for which to reorder the factor levels as the second argument. Optionally a third argument called `.fun`{.inline} can be used to calculate a summary of the numeric variable to use for reordering.^[Note that `.fun` is only useful if multiple observations of the factor variable are present and it defaults to using the median.]
 
 For example, the code below orders the levels in `loc` by the median length of the bears.
 
@@ -86,19 +86,21 @@ tmp <- bears %>%
   mutate(loc=fct_reorder(loc,length.cm))
 levels(tmp$loc)
 
+## Checking
 tmp %>%
   group_by(loc) %>%
   summarize(n=n(),
             mdn=median(length.cm))
 ```
 
-Alternatively, the code below orders the levels of `loc` by the minimum length of the bears.
+Alternatively, the code below orders the levels of `loc` by the minimum length of the bears (i.e., using `min`{.inline} in `.fun=`).
 
 ```{r}
 tmp <- bears %>%
   mutate(loc=fct_reorder(loc,length.cm,.fun=min))
 levels(tmp$loc)
 
+## Checking
 tmp %>%
   group_by(loc) %>%
   summarize(n=n(),
@@ -133,13 +135,14 @@ tmp <- bears %>%
 levels(tmp$loc)
 ```
 
-The `fct_rev()`{.inline} function can be used with `fct_reorder()`{.inline} to change the order from ascending to descending order. For example, the code below show the factor levels in descending order of the minimum length.
+The `fct_rev()`{.inline} function can be used with `fct_reorder()`{.inline} to change the order from ascending to descending order. For example, the code below changes the factor levels to be in descending order of minimum length.
 
 ```{r}
 tmp <- bears %>%
   mutate(loc=fct_reorder(loc,length.cm,.fun=min),
          loc=fct_rev(loc))
 
+## Checking
 tmp %>%
   group_by(loc) %>%
   summarize(n=n(),
@@ -154,23 +157,25 @@ The `fct_infreq()`{.inline} function is used to order the levels by **de**creasi
 tmp <- bears %>%
   mutate(loc=fct_infreq(loc))
 
+## Checking
 tmp %>%
   group_by(loc) %>%
   summarize(n=n())
 ```
 
-Of course, using `fct_rev()`{.inline} with `fct_infreq()`{.inline} would order the levels in ascending frequency of occurrence.
+Of course, using `fct_rev()`{.inline} with `fct_infreq()`{.inline} would order the levels in **as**cending frequency of occurrence.
 
 ```{r}
 tmp <- bears %>%
   mutate(loc=fct_rev(fct_infreq(loc)))
 
+## Checking
 tmp %>%
   group_by(loc) %>%
   summarize(n=n())
 ```
 
-
+&nbsp;
 
 ## Changing Factor Levels
 In some instances it may be beneficial to change the names of the levels or to collapse or lump levels together. Methods for performing these changes are demonstrated in this section using data on the density and basal area of tree species located on plots in the Apostle Islands that were designated as "Balsam Fir" plots. These data were extracted from [Sanders and Grochowski (2012)](https://irma.nps.gov/DataStore/DownloadFile/454366)^[Note that Jessica Grochowski, now Jessica Kirschbaum, is a Northland alum.] and are stored in [APIS_FirPlots.xlsx](https://github.com/droglenc/BookWrangling/raw/main/data/APIS_FirPlots.xlsx).
@@ -180,7 +185,7 @@ aip <- readxl::read_excel(file.path("data","APIS_FirPlots.xlsx"))
 aip
 ```
 
-These data are read in and briefly summarized below.
+These data are briefly summarized below.
 
 ```{r}
 aip_sum1 <- aip %>%
@@ -191,11 +196,11 @@ aip_sum1 <- aip %>%
 aip_sum1
 ```
 
-The summary above shows several species within a few genera. A research may wish to collapse these species into a one level that represents the genera. For example, one may want to collapse "Acer rubrum", "Acer saccharum", "Acer spicatum", and "Acer sp." into a single level of "Acer sp."
+The summary above shows several species within a few genera (e.g., *Acer*). A researcher may wish to collapse these species into one level that represents the genera. For example, one may want to collapse "Acer rubrum", "Acer saccharum", "Acer spicatum", and "Acer sp." into a single level called "Acer sp."
 
 The "collapsing" of multiple levels into one level is accomplished with `fct_collapse()`{.inline}. The first argument to this function is the factor variable containing the "old" levels. Subsequent arguments are formed by setting a new level name equal to a vector containing old level names to collapse.
 
-For example the code below uses `fct_collapse()`{.inline} to create a new `species2` variable that collapses the multiple "Acer" and "Betula" levels into two levels specific to each genera. The levels of `species2` are then ordered in descending order of the sum of `density` (using `fct_reorder()`{.inline} and `fct_rev()`{.inline}).^[Compare the `species` to `species2` columns below to confirm how the "refactoring" worked.]
+For example the code below uses `fct_collapse()`{.inline} to create a new `species2` variable that collapses the multiple "Acer" and "Betula" levels into two levels specific to each genera. To allow ease of comparison of the two "species" variables I then moved `species2` to be right after `species` and arranged the rows by `species`.^[Compare the `species` to `species2` columns below to confirm how the "refactoring" worked.]
 
 ```{r}
 aip %<>%
@@ -206,12 +211,20 @@ aip %<>%
                                               "Betula papyrifera",
                                               "Betula sp."),
                                "Unknown"=c("unknown tree - hardwood",
-                                           "unknown tree - softwood")),
-         species2=fct_rev(fct_reorder(species2,density,.fun=sum)))
+                                           "unknown tree - softwood"))) %>%
+  relocate(species,.after=species) %>%
+  arrange(species)
 aip
 ```
 
-Total density and total basal area by level of `species2`, where the levels of `species2` are ordered in descending order of the total density is shown below.
+To highlight the most abundance species in further analysis below, the levels of `species2` were ordered in descending values of the sum of `density` (using `fct_reorder()`{.inline} and `fct_rev()`{.inline}).
+
+```{r class.source="RCODE_ALONE"}
+aip %<>%
+  mutate(species2=fct_rev(fct_reorder(species2,density,.fun=sum)))
+```
+
+Total density and total basal area by level of `species2`, where the levels of `species2` are ordered in descending order of the total density is then shown below.
 
 ```{r}
 aip_sum2 <- aip %>%
@@ -222,7 +235,7 @@ aip_sum2 <- aip %>%
 aip_sum2
 ```
 
-The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four infrequent species into an "Other" category. This type of "lumping" can be accomplished with `fct_lump_n()`{.inline} which requires the factor variable as its first argument and`n=` to indicate the top `n` levels to **not** lump into an "Other" category. For example, the code below will lump all levels in `species2` after the top four into an "Other" category of the new `species3` variable. The summary results illustrate the lumping.
+The result above indicate that four of the "species" dominated the results. It may be useful (especially if graphing these results) to "lump" the four least abundant "species" into an "Other" category. This type of "lumping" can be accomplished with `fct_lump_n()`{.inline} which requires the factor variable as its first argument and`n=`{.inline} to indicate the top `n` levels to **not** lump into an "Other" category. For example, the code below will lump all levels in `species2` after the top four into an "Other" category of the new `species3` variable. The summary results illustrate the lumping.
 
 ```{r}
 aip <- aip %>%
@@ -237,6 +250,8 @@ aip_sum3
 ```
 
 Other versions of `fct_lump_XXX()`{.inline}, such as `fct_lump_prop()`{.inline} and `fct_lump_min()`{.inline}, can be used when ordering by frequency rather than be another variable as shown here.
+
+&nbsp;
 
 Finally, the names of specific levels can be changed with `fct_recode()`{.inline}. The first argument to this function is the original factor variable. Subsequent arguments are of the form new level name equal to old level name. Any levels not listed in `fct_recode()`{.inline} will be retained with their original names. For example, the code below creates a new `species4` variable with new common names for the three "species" levels remaining in `species3`. The results are seen in the summary below.
 
@@ -255,25 +270,24 @@ aip_sum4 <- aip %>%
 aip_sum4
 ```
 
-
-
+&nbsp;
 
 ## Examples in Context
 ### Pulse of the Nation Survey
-[Cards Against Humanity Saves America](https://www.cardsagainsthumanitysavesamerica.com/) created monthly polls to assess what they called the "Pulse of the Nation." "Cards" partnered with Survey Sampling International — a professional research firm — to contact a nationally representative sample of the American public. For the first three polls, they interrupted people’s dinners on both their cell phones and landlines, and a total of about 3000 adults did not hang up immediately. Results from the first poll are in [201709-CAH_PulseOfTheNation.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/201709-CAH_PulseOfTheNation.csv)^[These data are from [Kaggle](https://www.kaggle.com/cardsagainsthumanity/pulse-of-the-nation)], which are read in below.
+[Cards Against Humanity Saves America](https://www.cardsagainsthumanitysavesamerica.com/) created monthly polls to assess what they called the "Pulse of the Nation." "Cards" partnered with Survey Sampling International to contact a nationally representative sample of the American public. For the first three polls, they contacted potential respondents on their cell phones and landlines, and a total of about 3000 adults ultimately participated i the poll. Results from the first poll are in [201709-CAH_PulseOfTheNation.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/201709-CAH_PulseOfTheNation.csv)^[These data are from [Kaggle](https://www.kaggle.com/cardsagainsthumanity/pulse-of-the-nation)], which are read in below.
 
 ```{r}
 PON <- read_csv(file.path("data","201709-CAH_PulseOfTheNation.csv"))
 PON
 ```
 
-The variables in the data frame are generally the actual questions asked in the survey. These are both difficult to read and to work with. To get a better look at these variables I used `names()`{.inline}, which when given a data frame returns all the variable names of that data frame.
+The variables in the data frame are generally the actual questions asked in the poll. These are both difficult to read and to work with. To get a better look at these variables I used `names()`{.inline}, which when given a data frame returns all the variable names of that data frame.
 
 ```{r}
 names(PON)
 ```
 
-For this analysis I want to focus on the `Political Affiliation`, `Age Range`, and the three variable related to education, opinion about climate change, and opinion about the honesty of scientists. These last three variables have very long names so it will be easier to refer to them by their column **number**. From above, it is noted that the "education" variable is column 7, the climate change variable is in column 15, and the "scientists honesty" question is in column 18. In the code below, I rename each of the columns (and `Age Range`) and then reduce the data frame to just those variables.
+For this analysis I want to focus on the `Political Affiliation`, `Age Range`, and the three variables related to education, opinion about climate change, and opinion about the honesty of scientists. These last three variables have very long names so it will be easier to refer to them by their column **number**. From above, it is noted that the "education" variable is column 7, the climate change variable is in column 15, and the "scientists honesty" question is in column 18. In the code below, I rename each of the columns (and `Age Range`) and then reduce the data frame to just those variables.
 
 ```{r}
 PON %<>%
@@ -283,7 +297,7 @@ PON %<>%
 PON
 ```
 
-All remaining variables are categorical and for my analysis purposes I want each to be a factor. Before converting these variables to factors I will examine the levels that appear in each.
+All remaining variables are categorical and for my analysis purposes I want each to be a factor. Before converting these variables to factors I examine the levels that appear in each.
 
 ```{r}
 unique(PON$polit_aff)
@@ -301,9 +315,9 @@ From this examination of levels, I made the following notes:
 * I will order the levels for `climate` based on my understanding of what the correct answer is (i.e., I will order the answers from correct to less correct).
 * I will order the levels of `polit_aff` so that "Independent" is in the middle (which will happen alphabetically) and "DK/REF" is last.
 
-Creation of these factors is below. Note that to move "DK/REF" to the end of `polit_aff` I used `fct_relevel()`{.inline} with `after=Inf` to move the level to the last position.
+Creation of these factors is below. Note that to move "DK/REF" to the end of `polit_aff` I used `fct_relevel()`{.inline} with `after=Inf`{.inline} to move the level to the last position.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 PON %<>%
   mutate(polit_aff=factor(polit_aff),
          polit_aff=fct_relevel(polit_aff,"DK/REF",after=Inf),
@@ -367,6 +381,8 @@ ggplot(sci_sum2,mapping=aes(x=scihon,y=freq)) +
   theme(axis.title.x=element_blank())
 ```
 
+&nbsp;
+
 Further suppose that the analysts want to summarize the question about climate change separately by political affiliation (for which an answer was provided).
 
 ```{r}
@@ -378,7 +394,7 @@ polclim_sum1 <- PON %>%
 polclim_sum1
 ```
 
-Suppose that the researchers want to compute a percentage of respondents that thought climate change was real, whether they had the cause correct or not. Further suppose that they wish to include the "DK/REF" answers with the "Not Real At All" answers under the assumption that if they though climate change was real they would have responded as such.
+Suppose that the researchers want to compute a percentage of respondents that thought climate change was real, whether they had the cause correct or not. Further suppose that they wish to include the "DK/REF" answers with the "Not Real At All" answers under the assumption that if they thought climate change was real they would have responded as such.
 
 ```{r}
 tmp <- PON %>%
@@ -432,7 +448,7 @@ sb %<>%
 sb
 ```
 
-In one part of their analysis the researchers wanted to produce a plot of the mean and range of densities of *Enterococci* by beach. To aid understand, however, they wanted the beaches ordered from south to north. The summary statistics below are calculated by `Site` converted to a factor class based on `Latitude`. The latitudes are list with negative numbers (because Australia is in the southern hemisphere) so that more negative numbers are further south.
+In one part of their analysis the researchers wanted to produce a plot of the mean and range of densities of *Enterococci* by beach. To aid understanding, however, they wanted the beaches ordered from south to north. The summary statistics below are calculated by `Site` converted to a factor class based on increasing `Latitude`. The latitudes are list with negative numbers (because Australia is in the southern hemisphere) so that more negative numbers are further south. Note the use of `na.rm=TRUE`{.inline} in `fct_reorder()`{.inline} because of the missing values at some sites.
 
 ```{r}
 sb_sum1 <- sb %>%
@@ -467,7 +483,9 @@ sb_plot1 <- ggplot(sb_sum1) +
 sb_plot1
 ```
 
-Other researchers would prefer that the beaches are ordered from lowest to highest density of *Enterococci*. The code below creates a summary by `Site`s ordered by the mean `density`. Note the use of `na.rm=TRUE` in `fct_reorder()`{.inline} because of the missing values at some sites.
+&nbsp;
+
+Other researchers would prefer that the beaches be ordered from lowest to highest density of *Enterococci*. The code below creates a summary by `Site`s ordered by the mean `density`.
 
 ```{r}
 sb_sum2 <- sb %>%
@@ -486,3 +504,5 @@ sb_sum2
 ```{r echo=FALSE, fig.width=5}
 sb_plot1 %+% mutate(sb_sum2,Site=fct_rev(Site))
 ```
+
+&nbsp;

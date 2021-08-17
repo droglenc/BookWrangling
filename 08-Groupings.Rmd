@@ -20,9 +20,9 @@ covid_byCO <- covABD %>%
 covid_byCO
 ```
 
-Simply using `group_by()`{.inline} will not produce any immediately noticeable difference in the data frame. For example, the only perceptible difference above is the addition of the "Groups: County[3]" line. Using `group_by()`{.inline} only adds a grouping declaration to a data frame. How this is useful is demonstrated in the next sections.
+Simply using `group_by()`{.inline} will not produce any immediately noticeable difference in the data frame. For example, the only perceptible difference above is the addition of the "Groups: County[3]" line in the output. Using `group_by()`{.inline} only adds a grouping declaration to a data frame. How this is useful is demonstrated in the next sections.
 
-There can be multiple levels of groupings. For example, the code below will group `Year` within `County`. Note that the subsequent variables are always nested within groups of previous variables.
+There can be multiple levels of groupings. For example, the code below will group `Year` within `County`.
 
 ```{r}
 covid_byCOYR <- covABD %>%
@@ -30,7 +30,9 @@ covid_byCOYR <- covABD %>%
 covid_byCOYR
 ```
 
-&nbsp;
+::: {.tip data-latex=""}
+When grouping by more than one variable, subsequent variables are always nested within groups of previous variables.
+:::
 
 ## Summarizing by Groups
 Adding groupings to a data frame becomes most useful when that data frame is submitted to `summarize()`{.inline} to summarize results by groups. The `summarize()`{.inline} function takes arguments that are a name for the summary set equal to a function that creates a summary. The summary function can be any function that returns a single numeric result (Table \@ref(tab:SumFunctions)).
@@ -41,18 +43,18 @@ Adding groupings to a data frame becomes most useful when that data frame is sub
 tribble(
   ~Function,~`Summary value returned`,
   '`n()`{.inline}','Number of observations^[There are no arguments to `n()`{.inline}.]',
-  '`sum(!is.na(x))`','Count of non-missing values in `x`',
-  '`sum(x)`','Sum values in `x`',
-  '`mean(x)`','Mean (average) of values in `x`',
-  '`median(x)`','Median of values in `x`',
-  '`sd(x)`','Standard deviation of values in `x`',
-  '`IQR(x)`','Inter-quartile range of values in `x`',
-  '`max(x)`','Maximum value of `x`',
-  '`min(x)`','Minimum value of `x`',
-  '`quantile(x,p)`','100$\\times$`p`% quantile of values in `x`',
-  '`first(x)`','Value of first observation of `x`',
-  '`last(x)`','Value of last observation of `x`',
-  '`n_distinct(x)`','Number of distance (i.e., unique) values of `x`.',
+  '`sum(!is.na(x))`{.inline}.]','Count of non-missing values in `x`',
+  '`sum(x)`{.inline}.]','Sum values in `x`',
+  '`mean(x)`{.inline}.]','Mean (average) of values in `x`',
+  '`median(x)`{.inline}.]','Median of values in `x`',
+  '`sd(x)`{.inline}.]','Standard deviation of values in `x`',
+  '`IQR(x)`{.inline}.]','Inter-quartile range of values in `x`',
+  '`max(x)`{.inline}.]','Maximum value of `x`',
+  '`min(x)`{.inline}.]','Minimum value of `x`',
+  '`quantile(x,p)`{.inline}.]','100$\\times$`p`% quantile of values in `x`',
+  '`first(x)`{.inline}.]','Value of first observation of `x`',
+  '`last(x)`{.inline}.]','Value of last observation of `x`',
+  '`n_distinct(x)`{.inline}.]','Number of distance (i.e., unique) values of `x`.',
 ) %>%
   knitr::kable(booktabs=TRUE,caption="Common summary functions used in `summarize()`{.inline}, especially with `group_by()`{.inline}. Note that `x` generically represents a variable in the data frame and would be replaced with a specific variable name (see examples in main text).") %>%
   kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
@@ -88,8 +90,6 @@ sum_covid_byCO1 <- sum_covid_byCOYR %>%
             num_cases=sum(num_cases))
 sum_covid_byCO1
 ```
-
-&nbsp;
 
 Nested levels of groupings can be very powerful, but they should be used carefully. As a general rule, multi-level summarizations on multiple grouping variables only work properly for counts and sums. Multi-level summarizations are unlikely to give the desired results when using other summaries, such as the mean or standard deviation. 
 
@@ -145,10 +145,11 @@ sum_trouble_1A <- sum_trouble_2 %>%
             mn=mean(mn))
 sum_trouble_1A
 ```
+The `sum_trouble_1` from further above and `sum_trouble_1A` from here reveals that both have identical counts and sums of the values for the two groups and the same mean for the "B" group. However the means are different for the "A" group. The means for the "A" group differ between the two methods of summarization because there were different sample sizes among the groups of `group2` nested within the "A" group of `group1`. In other words, the mean for the "A" group was calculated as the mean of 20.8 and 19.5 without realizing that 20.8 came from five observations in the `y` group and 9.5 came from only two observations in the `z` group.^[In the two-level summarize the mean of the "A" group is calculated as $\frac{20.8+19.5}{1+1}$ rather than $\frac{104+19}{5+2}$.]
 
-A comparison of `sum_trouble_1` from further above to `sum_trouble_1A` here reveals that both means return identical results for both groups for the count of and sum of the values and the same mean for the "B" group. However the mean is different for the "A" group. The means for the "A" group differ between the two methods of summarization because there were different sample sizes among the groups of `group2` nested within the "A" group of `group1`. In other words, the mean for the "A" group was calculated as the mean of 20.8 and 19.5 without realizing that 20.8 came from five observations in the `y` group and 9.5 came from only two observations in the `z` group.^[In the two-level summarize the mean of the "A" group is calculated as $\frac{20.8+19.5}{1+1}$ rather than $\frac{104+19}{5+2}$.]
-
-&nbsp;
+::: {.tip data-latex=""}
+Do **NOT** use multi-level summarizations for other than counts and sums.
+:::
 
 ### Handling Missing Values
 Missing values are coded in R with `NA`. For example, this simple data frame called `trouble2` has three missing values in the `value` variable.
@@ -185,9 +186,9 @@ tmp
 
 There are at least two issues here. First, the count variable (`n`) suggests that there were 7 and 4 *valid* observations in the two groups, when in reality there is only 6 and 2. Second, the means and standard deviations could not be properly calculated because of the `NA`s in `value`.
 
-The first issue of counting valid observations is addressed by using the `sum(!is.na(x))` code shown in Table \@ref(tab:SumFunctions). This code is a combination of two functions. The `is.na()`{.inline} function returns `TRUE` if an element is an `NA` (and `FALSE` otherwise). The exclamation point in front of `is.na()`{.inline} takes the complement of these values (i.e., `TRUE` becomes `FALSE` and vice versa) such that `!is.na()`{.inline} returns `TRUE` if the element is **not** an `NA`. When logical values are given to `sum()`{.inline} the `TRUE`s are converted to `1`s and the `FALSE`s to `0`s. Thus, the `sum()`{.inline} of these logicals will return the number of `TRUE`s or, in this case, the number of elements that are **not** `NA`; i.e., the number of valid observations.
+The first issue of counting valid observations is addressed by using the `sum(!is.na(x))`{.inline} code shown in Table \@ref(tab:SumFunctions). This code is a combination of two functions. The `is.na()`{.inline} function returns `TRUE` if an element of `x` is `NA` (and `FALSE` otherwise). The exclamation point in front of `is.na()`{.inline} takes the complement of these values (i.e., `TRUE` becomes `FALSE` and vice versa) such that `!is.na()`{.inline} returns `TRUE` if the element is **not** an `NA`. When logical values are given to `sum()`{.inline} the `TRUE`s are converted to `1`s and the `FALSE`s to `0`s. Thus, the `sum()`{.inline} of these logicals will return the number of `TRUE`s or, in this case, the number of elements that are **not** `NA`; i.e., the number of valid observations.
 
-The second issue of the summary function returning `NA` if an `NA` exists in the variable is addressed by including `na.rm=TRUE` within the summary function. This argument serves to remove the `NA`s from the calculations and will, thus, return the summary of all non-missing elements.
+The second issue of the summary function returning `NA` if an `NA` exists in the variable is addressed by including `na.rm=TRUE`{.inline}.] within the summary function. This argument serves to remove the `NA`s from the calculations and will, thus, return the summary of all non-missing elements.
 
 Thus, the following code provides a better summary of the count, mean, and standard deviation of the `value` variable.
 
@@ -224,7 +225,7 @@ grades <- tribble(
 grades
 ```
 
-The code below uses `rank()`{.inline} and `desc()`{.inline} to create a new variable that is the rank of the student in the course based on their grade. The `desc()`{.inline} function must be used here to assure that the student with the highest grade is given a rank of 1 (because `rank()`{.inline} ranks in ascending order by default).
+The code below uses `rank()`{.inline} and `desc()`{.inline} to create a new variable that is the rank of each student in the course based on their grade. The `desc()`{.inline} function is used here to assure that the student with the highest grade is given a rank of 1 (because `rank()`{.inline} ranks in ascending order by default).
 
 ```{r}
 tmp <- grades %>%
@@ -233,7 +234,7 @@ tmp <- grades %>%
 tmp
 ```
 
-However, suppose that interest is in the rank WITHIN each section. Here `group_by()`{.inline} can be used prior to `mutate()`{.inline} so that the methods in `mutate()`{.inline} are applied separately to each group.
+However, suppose that interest is in the rank WITHIN each section. Here `group_by()`{.inline} can be used prior to `mutate()`{.inline} so that the methods in `mutate()`{.inline} are applied separately to each group.^[This same ordering also could have been accomplished without creating the ranks and just using `arrange(section,desc(grade))`{.inline}.].]
 
 ```{r}
 grades %<>%
@@ -243,9 +244,7 @@ grades %<>%
 grades
 ```
 
-Note that in contrast to `summarize()`{.inline} that the grouping is not removed from the data frame when `mutate()`{.inline} is used.
-
-Further suppose that the data frame should be reduced to the three students with the highest grades in EACH section. Here `filter()`{.inline} can be used to filter the data within each grouping.
+Note that in contrast to `summarize()`{.inline} the grouping is not removed from the data frame when `mutate()`{.inline} is used. Because the grouping variable is still intact, `filter()`{.inline} can be used to, for example, return the three students with the highest grades in EACH section.^[This could also have been accopmlished with `grades %>% slice_head(n=3)`.]
 
 ```{r}
 top3 <- grades %>%
@@ -262,7 +261,7 @@ top3 %>% summarize(n=n(),
 
 &nbsp;
 
-The use of `mutate()`{.inline} with `group_by()`{.inline} is less common but can be very powerful. As a simple example, suppose that one wanted to find the difference between each observation and the mean of its group. In the example below, the use of `mean()`{.inline} within `mutate()`{.inline} will find the mean for each group because of the use of `group_by()`{.inline}. Because this is within a `mutate()`{.inline} rather than a `summarize()`{.inline} it is repeated for each observation in each group.
+The use of `mutate()`{.inline} with `group_by()`{.inline} is less common but can be very powerful. As a simple example, suppose that one wanted to find the difference between each observation and the mean of its group. In the code below, `mean()`{.inline} within `mutate()`{.inline} when a grouping is declared will find the mean for each group. Because this is within a `mutate()`{.inline} rather than a `summarize()`{.inline} it is repeated for each observation in each group.
 
 ```{r}
 tmp <- trouble2 %>%
@@ -272,7 +271,9 @@ tmp <- trouble2 %>%
 tmp
 ```
 
-&nbsp;
+::: {.tip data-latex=""}
+`dplyr` verbs other than `summarize()`{.inline} will not remove a level of groupings.
+:::
 
 ## Ungrouping
 As a general rule-of-thumb it is best to remove the groupings from your data frame once you know you are done summarizing, filtering, etc. based on groups. There are two main reasons for this. First, as noted above, many `dplyr` verbs work on groupings. Thus, if your data frame maintins groupings after you are done (in your mind) with groupings then you may get unintended results.
@@ -321,15 +322,15 @@ sum_trouble_2 <- trouble %>%
 sum_trouble_2
 ```
 
-Notice how the tibble does not showing any grouping structure.
+Notice how the tibble does not show any grouping structure.
 
-&nbsp;
+::: {.tip data-latex=""}
+To avoid unforeseen behavior, grouping variable(s) should be removed from the data frame with `ungroup()`{.inline} if you are done summarizing or wrangling by group.
+:::
 
 ## Examples in Context
-
-
 ### Student Data
-In Section \@ref(student-data) a data frame called `schedules2` was constructued that contained a student's ID number with each course they were enrolled along with the course's credits and instructor.
+In Section \@ref(student-data) a data frame called `schedules2` was constructued that contained a student's ID number with each course they were enrolled in along with the course's credits and instructor.
 
 ```{r}
 schedules2
@@ -341,7 +342,7 @@ Additionally, recall that there was a data frame called `personal` that containe
 personal
 ```
 
-In this example, suppose that the registrar wants to creat a database that has the number of courses and the total number of credits taken appended to the personal information for each student. Construction of this database begins by summarizing `schedules2` for each student.
+In this example, suppose that the registrar wants to create a report that has the number of courses and the total number of credits taken appended to the personal information for each student. Construction of this report begins by summarizing `schedules2` for each student.
 
 ```{r}
 sum_crs <- schedules2 %>%
@@ -368,7 +369,7 @@ In Section \@ref(resource-data) a data frame called `fishcatch` was created that
 fishcatch
 ```
 
-Suppose a technician wants to summarize the number of species caught and the total catch (regardless of species) in each net. An examination of the data frame above reveals `NA`s for `species` and `number` for one of the nets that did not catch any fish. Because of this we cannot simply count the number of rows for each `net_num` to get the number of species. Instead this calculation will have to be treated as described for finding the valid number of observations. The total catch in each `net_num` can be found with `sum()`{.inline} but it must include `na.rm=TRUE` to account for the missing data.
+Suppose a technician wants to summarize the number of species caught and the total catch (regardless of species) in each net. An examination of the data frame above reveals `NA`s for `species` and `number` for one of the nets that did not catch any fish. Because of this we cannot simply count the number of rows for each `net_num` to get the number of species. Instead this calculation will have to be treated as described for finding the valid number of observations. The total catch in each `net_num` can be found with `sum()`{.inline} but it must include `na.rm=TRUE`{.inline} to account for the missing data.
 
 ```{r}
 tmp <- fishcatch %>%
@@ -433,3 +434,5 @@ tmp <- irmw2 %>%
   ungroup()
 tmp
 ```
+
+&nbsp;
