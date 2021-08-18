@@ -416,3 +416,38 @@ ggplot(data=ephem2,mapping=aes(x=diff20_90,y=loc,color=diff20_90<0)) +
   scale_y_continuous(name="Quadrat",breaks=101:110) +
   theme_bw()
 ```
+
+&nbsp;
+
+### Blueberries and Fire
+[Duchesne and Wetzel (2004)](https://www.canadianfieldnaturalist.ca/cfn/index.php/cfn/article/view/913) examined the effects of fire characteristics on characteristics of blueberry plants. In one part of their study they examined the effect of low-intensity fire on the production (grams of blueberries per m^2^), stem density (number of stems per m^2^), and number of berries per stem of [Velvet Leaf Blueberry](https://www.minnesotawildflowers.info/shrub/velvet-leaf-blueberry) (*Vaccinium myrtilloides*) in plots found in stands of clear-cut [Jack Pine](https://www.srs.fs.usda.gov/pubs/misc/ag_654/volume_1/pinus/banksiana.htm) (*Pinus banksiana*) in eastern Ontario. A small portion of their data is shown in the `bb` data frame below.
+
+```{r echo=FALSE}
+bb <- tibble(plot=rep(1:4,each=2),
+             tx=rep(c("Before","After"),4),
+             prod=c(452,507,623,691,378,483,98,142),
+             stem=c(32,37,17,26,21,27,13,15),
+             bdens=c(5.2,6.1,6.1,5.9,6.7,6.8,3.3,3.2))
+bb
+```
+
+As part of their analysis they wanted to create new variables that recorded the increase (negative number would mean decrease) of each plant characteristic between the before and after fire times for each plot. To accomplish this for, for example, berry production the data frame needs to be modified so that production before the fire is one variable and production after the fire is a second variable. This organization would then be repeated for both stem density and berry density.
+
+From this description it is evident that `bb` needs to be pivoted from a "longer" to a "wider" format. The `names_from=`{.inline} variable should be set to `tx` as we want new columns for "Before" and "After". However, `values_from=`{.inline} needs to be each of `prod` and `stem` and `bdens`. Fortunately, all three variables can be placed into a single vector set equal to `values_from=`{.inline} to simultaneously pivot each of the three berry characteristics from their "longer" to "wider" formats.
+
+```{r}
+bb2 <- pivot_wider(bb,names_from=tx,values_from=c(prod,stem,bdens))
+bb2
+```
+
+Variables that are the increase in each of the three berry characteristic variables are created below using two functions (`mutate()`{.inline} and `select()`{.inline}) that you will learn in Module \@ref(wrangle-columns).
+
+```{r}
+bb2 %>%
+  mutate(prod_inc=prod_After-prod_Before,
+         stem_inc=stem_After-stem_Before,
+         bdens_inc=bdens_After-bdens_Before) %>%
+  select(plot,ends_with("inc"))
+```
+
+&nbsp;

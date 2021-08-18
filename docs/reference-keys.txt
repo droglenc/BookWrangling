@@ -55,6 +55,7 @@ pivot-wider-1
 pivoting-examples
 pivoting-covid
 abundance-of-mayflies
+blueberries-and-fire
 wrangle-columns
 dplyr-verbs
 pipe

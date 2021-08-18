@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2021-08-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1067,6 +1067,47 @@ y
 #R&gt;  10   110 Cobble    23        40        36        -4</code></pre>
 <p>These data could then be easily plotted or summarized.</p>
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-114-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p> </p>
+</div>
+<div id="blueberries-and-fire" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Blueberries and Fire</h3>
+<p><a href="https://www.canadianfieldnaturalist.ca/cfn/index.php/cfn/article/view/913">Duchesne and Wetzel (2004)</a> examined the effects of fire characteristics on characteristics of blueberry plants. In one part of their study they examined the effect of low-intensity fire on the production (grams of blueberries per m<sup>2</sup>), stem density (number of stems per m<sup>2</sup>), and number of berries per stem of <a href="https://www.minnesotawildflowers.info/shrub/velvet-leaf-blueberry">Velvet Leaf Blueberry</a> (<em>Vaccinium myrtilloides</em>) in plots found in stands of clear-cut <a href="https://www.srs.fs.usda.gov/pubs/misc/ag_654/volume_1/pinus/banksiana.htm">Jack Pine</a> (<em>Pinus banksiana</em>) in eastern Ontario. A small portion of their data is shown in the <code>bb</code> data frame below.</p>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 8 x 5
+#R&gt;     plot tx      prod  stem bdens
+#R&gt;    &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#R&gt;  1     1 Before   452    32   5.2
+#R&gt;  2     1 After    507    37   6.1
+#R&gt;  3     2 Before   623    17   6.1
+#R&gt;  4     2 After    691    26   5.9
+#R&gt;  5     3 Before   378    21   6.7
+#R&gt;  6     3 After    483    27   6.8
+#R&gt;  7     4 Before    98    13   3.3
+#R&gt;  8     4 After    142    15   3.2</code></pre>
+<p>As part of their analysis they wanted to create new variables that recorded the increase (negative number would mean decrease) of each plant characteristic between the before and after fire times for each plot. To accomplish this for, for example, berry production the data frame needs to be modified so that production before the fire is one variable and production after the fire is a second variable. This organization would then be repeated for both stem density and berry density.</p>
+<p>From this description it is evident that <code>bb</code> needs to be pivoted from a “longer” to a “wider” format. The <code class="inline">names_from=</code> variable should be set to <code>tx</code> as we want new columns for “Before” and “After.” However, <code class="inline">values_from=</code> needs to be each of <code>prod</code> and <code>stem</code> and <code>bdens</code>. Fortunately, all three variables can be placed into a single vector set equal to <code class="inline">values_from=</code> to simultaneously pivot each of the three berry characteristics from their “longer” to “wider” formats.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="pivot.html#cb182-1" aria-hidden="true" tabindex="-1"></a>bb2 <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(bb,<span class="at">names_from=</span>tx,<span class="at">values_from=</span><span class="fu">c</span>(prod,stem,bdens))</span>
+<span id="cb182-2"><a href="pivot.html#cb182-2" aria-hidden="true" tabindex="-1"></a>bb2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4 x 7
+#R&gt;     plot prod_Before prod_After stem_Before stem_After bdens_Before bdens_After
+#R&gt;    &lt;int&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+#R&gt;  1     1         452        507          32         37          5.2         6.1
+#R&gt;  2     2         623        691          17         26          6.1         5.9
+#R&gt;  3     3         378        483          21         27          6.7         6.8
+#R&gt;  4     4          98        142          13         15          3.3         3.2</code></pre>
+<p>Variables that are the increase in each of the three berry characteristic variables are created below using two functions (<code class="inline">mutate()</code> and <code class="inline">select()</code>) that you will learn in Module <a href="wrangle-columns.html#wrangle-columns">6</a>.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb184-1"><a href="pivot.html#cb184-1" aria-hidden="true" tabindex="-1"></a>bb2 <span class="sc">%&gt;%</span></span>
+<span id="cb184-2"><a href="pivot.html#cb184-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prod_inc=</span>prod_After<span class="sc">-</span>prod_Before,</span>
+<span id="cb184-3"><a href="pivot.html#cb184-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">stem_inc=</span>stem_After<span class="sc">-</span>stem_Before,</span>
+<span id="cb184-4"><a href="pivot.html#cb184-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">bdens_inc=</span>bdens_After<span class="sc">-</span>bdens_Before) <span class="sc">%&gt;%</span></span>
+<span id="cb184-5"><a href="pivot.html#cb184-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(plot,<span class="fu">ends_with</span>(<span class="st">&quot;inc&quot;</span>))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 4 x 4
+#R&gt;     plot prod_inc stem_inc bdens_inc
+#R&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#R&gt;  1     1       55        5     0.900
+#R&gt;  2     2       68        9    -0.200
+#R&gt;  3     3      105        6     0.100
+#R&gt;  4     4       44        2    -0.100</code></pre>
+<p> </p>
 
 </div>
 </div>
