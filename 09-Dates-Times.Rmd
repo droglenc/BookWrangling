@@ -428,7 +428,7 @@ ggplot(data=wcd1,mapping=aes(x=datetime,y=discharge)) +
 &nbsp;
 
 ### Time Card
-A consultant worked on a project with three distinct parts called "Schedule", "Analysis-OW", and "Analysis-ICE". To bill the company the consultant kept a time card of the date and starting and ending time for when they worked, which part of the project they worked on, and a more descriptive narrative of the work they did (which was crossed out here for confidetiality reasons). Their time card for the project was recorded in [Timecard.csv]().
+A consultant worked on a project with three distinct parts called "Schedule", "Analysis-OW", and "Analysis-ICE". To bill the company the consultant kept a time card of the date and starting and ending time for when they worked, which part of the project they worked on, and a more descriptive narrative of the work they did (which was crossed out here for confidentiality reasons). Their time card for the project was recorded in [Timecard.csv](https://raw.githubusercontent.com/droglenc/BookWrangling/main/data/Timecard.csv).
 
 ```{r}
 tc <- read_csv(file.path("data","Timecard.csv"))
@@ -445,7 +445,7 @@ tc %<>%
   select(-Date)
 ```
 
-with a proper date-time class, the `Start` and `End` variables were used to create an interval of time from which the number of hours between the two was extracted as a measure of how long the consultant worked. The month and year of the working day were then extracted but then combined together as a month-year combination as the consultant wanted to summarize the work hours by month but the project spanned three years so, for example, the "january"s had to be kept separate by their year.
+With a proper date-time class, the `Start` and `End` variables were used to create an interval of time from which the number of hours between the two was extracted as a measure of how long the consultant worked. The month and year of the working day were then extracted but then combined together as a month-year combination as the consultant wanted to summarize the work hours by month but the project spanned three years so, for example, the "January"s had to be kept separate by their year.
 
 ```{r class.source="RCODE_ALONE"}
 tc %<>%
@@ -456,7 +456,7 @@ tc %<>%
          monyr=paste(mon,yr,sep="-"))
 ```
 
-The month-year variable should be converted to a factor for summarization but the order needs to be controlled. A quick look at the unique values in the `monyr` variable show that they are already in order so the results of this function can be used in `levels=`{.inline} within `factor()`{.inline} to put the month-years in order.
+The month-year variable should be converted to a factor for summarization but the order needs to be controlled. A quick look at the unique values in the `monyr` variable shows that they are already in order, so the results of this function can be used in `levels=`{.inline} within `factor()`{.inline} to put the month-years in order.
 
 ```{r}
 unique(tc$monyr)
