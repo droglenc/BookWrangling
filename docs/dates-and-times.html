@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-08-18" />
+<meta name="date" content="2021-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -393,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;   [1] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE</code></pre>
 <p>Finally, the current date is found with <code class="inline">today()</code>.</p>
 <div class="sourceCode" id="cb437"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb437-1"><a href="dates-and-times.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;  [1] &quot;2021-08-18&quot;</code></pre>
+<pre class="ROUTPUT"><code>#R&gt;  [1] &quot;2021-08-21&quot;</code></pre>
 <p> </p>
 </div>
 <div id="calculations-with-dates" class="section level2" number="9.3">
@@ -406,9 +406,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
 #R&gt;    DATE       int2now                        int2Jan20                     
 #R&gt;    &lt;date&gt;     &lt;Interval&gt;                     &lt;Interval&gt;                    
-#R&gt;  1 2021-07-15 2021-07-15 UTC--2021-08-18 UTC 2019-01-01 UTC--2021-01-01 UTC
-#R&gt;  2 2020-09-11 2020-09-11 UTC--2021-08-18 UTC 2019-01-01 UTC--2021-01-01 UTC
-#R&gt;  3 2019-03-03 2019-03-03 UTC--2021-08-18 UTC 2019-01-01 UTC--2021-01-01 UTC</code></pre>
+#R&gt;  1 2021-07-15 2021-07-15 UTC--2021-08-21 UTC 2019-01-01 UTC--2021-01-01 UTC
+#R&gt;  2 2020-09-11 2020-09-11 UTC--2021-08-21 UTC 2019-01-01 UTC--2021-01-01 UTC
+#R&gt;  3 2019-03-03 2019-03-03 UTC--2021-08-21 UTC 2019-01-01 UTC--2021-01-01 UTC</code></pre>
 <p>Here you can see that the two new variables contain start and end dates for the interval on either side of the <code>--</code>.</p>
 <p>Use <code>%within%</code>qday(ex6a$DATE) to determine if a date is within an interval and <code class="inline">int_overlaps()</code> to determine if two intervals overlap.</p>
 <div class="sourceCode" id="cb441"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb441-1"><a href="dates-and-times.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">&quot;2020-Jan-1&quot;</span>) <span class="sc">%within%</span> ex6c<span class="sc">$</span>int2now</span></code></pre></div>
@@ -425,9 +425,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 4
 #R&gt;    int2now                        dur2now_days dur2now_yrs dur2now_mons
 #R&gt;    &lt;Interval&gt;                            &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-#R&gt;  1 2021-07-15 UTC--2021-08-18 UTC           34      0.0932         1.10
-#R&gt;  2 2020-09-21 UTC--2021-08-18 UTC          331      0.907         10.9 
-#R&gt;  3 2019-03-03 UTC--2021-08-18 UTC          899      2.46          29.5</code></pre>
+#R&gt;  1 2021-07-15 UTC--2021-08-21 UTC           37       0.101         1.19
+#R&gt;  2 2020-09-21 UTC--2021-08-21 UTC          334       0.915        11   
+#R&gt;  3 2019-03-03 UTC--2021-08-21 UTC          902       2.47         29.6</code></pre>
 <p> </p>
 </div>
 <div id="obtaining-time-data" class="section level2" number="9.4">
@@ -506,9 +506,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 4
 #R&gt;    DATETIME            hrs2now days2now
 #R&gt;    &lt;dttm&gt;                &lt;dbl&gt;    &lt;dbl&gt;
-#R&gt;  1 2021-07-15 12:15:01    819.     34.1
-#R&gt;  2 2020-09-21 09:14:56   7950.    331. 
-#R&gt;  3 2019-03-03 19:34:01  21570.    899. 
+#R&gt;  1 2021-07-15 12:15:01    897.     37.4
+#R&gt;  2 2020-09-21 09:14:56   8028.    334. 
+#R&gt;  3 2019-03-03 19:34:01  21648.    902. 
 #R&gt;  # ... with 1 more variable: int2now &lt;Interval&gt;</code></pre>
 <p> </p>
 <p>A quick return to the data frame from Section <a href="dates-and-times.html#just-times">9.4.1</a>. Suppose that the researcher wants to find the number of minutes between the given time (which was converted to a date-time) and dinner at 6 pm. Note that if you use the trick of adding a dummy date then you must use the same dummy date here.</p>
@@ -779,6 +779,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;  # ... with 783 more rows</code></pre>
 <p>Which can then be plotted.</p>
 <p><img src="BookWrangling_files/figure-html/unnamed-chunk-252-1.png" width="432" style="display: block; margin: auto;" /></p>
+<p> </p>
+</div>
+<div id="time-card" class="section level3" number="9.7.3">
+<h3><span class="header-section-number">9.7.3</span> Time Card</h3>
+<p>A consultant worked on a project with three distinct parts called “Schedule,” “Analysis-OW,” and “Analysis-ICE.” To bill the company the consultant kept a time card of the date and starting and ending time for when they worked, which part of the project they worked on, and a more descriptive narrative of the work they did (which was crossed out here for confidetiality reasons). Their time card for the project was recorded in <a href="">Timecard.csv</a>.</p>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb485-1"><a href="dates-and-times.html#cb485-1" aria-hidden="true" tabindex="-1"></a>tc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;Timecard.csv&quot;</span>))</span>
+<span id="cb485-2"><a href="dates-and-times.html#cb485-2" aria-hidden="true" tabindex="-1"></a>tc</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 81 x 5
+#R&gt;     Date      Start End   Main     Description
+#R&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;      
+#R&gt;   1 11-Dec-18 8:45  9:45  Schedule XXX        
+#R&gt;   2 15-Dec-18 16:35 16:55 Schedule XXX        
+#R&gt;   3 16-Dec-18 10:00 13:30 Schedule XXX        
+#R&gt;   4 16-Dec-18 15:00 16:05 Schedule XXX        
+#R&gt;   5 20-Dec-18 7:15  7:30  Schedule XXX        
+#R&gt;   6 21-Dec-18 20:30 22:50 Schedule XXX        
+#R&gt;   7 22-Dec-18 17:15 20:30 Schedule XXX        
+#R&gt;   8 23-Dec-18 7:00  8:00  Schedule XXX        
+#R&gt;   9 23-Dec-18 9:45  11:30 Schedule XXX        
+#R&gt;  10 23-Dec-18 2:45  7:30  Schedule XXX        
+#R&gt;  # ... with 71 more rows</code></pre>
+<p>These data are a little messy because, for example, the date and starting time are in separate variables, but ultimately need to be one variable of the date-time class. Thus, the two variables need to be pasted together and then converted to the date-time class. Below <code class="inline">paste()</code> is used to paste the two variables together and, because of the format of the date and because only hours and minutes were recorded, <code class="inline">dmy_hm()</code> was used to convert the result to a date-time class. The same was done for the ending time. The <code>Main</code> variable was converted to a factor and the order of the levels was controlled based on the approximate order in which the parts of the project were worked on.</p>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb487-1"><a href="dates-and-times.html#cb487-1" aria-hidden="true" tabindex="-1"></a>tc <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb487-2"><a href="dates-and-times.html#cb487-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Start=</span><span class="fu">dmy_hm</span>(<span class="fu">paste</span>(Date,Start)),</span>
+<span id="cb487-3"><a href="dates-and-times.html#cb487-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">End=</span><span class="fu">dmy_hm</span>(<span class="fu">paste</span>(Date,End)),</span>
+<span id="cb487-4"><a href="dates-and-times.html#cb487-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Main=</span><span class="fu">factor</span>(Main,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Schedule&quot;</span>,<span class="st">&quot;Analysis-OW&quot;</span>,<span class="st">&quot;Analysis-ICE&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb487-5"><a href="dates-and-times.html#cb487-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Date)</span></code></pre></div>
+<p>with a proper date-time class, the <code>Start</code> and <code>End</code> variables were used to create an interval of time from which the number of hours between the two was extracted as a measure of how long the consultant worked. The month and year of the working day were then extracted but then combined together as a month-year combination as the consultant wanted to summarize the work hours by month but the project spanned three years so, for example, the “january”s had to be kept separate by their year.</p>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb488-1"><a href="dates-and-times.html#cb488-1" aria-hidden="true" tabindex="-1"></a>tc <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb488-2"><a href="dates-and-times.html#cb488-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iTime=</span>Start <span class="sc">%--%</span> End,</span>
+<span id="cb488-3"><a href="dates-and-times.html#cb488-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">hrs=</span><span class="fu">time_length</span>(iTime,<span class="at">unit=</span><span class="st">&quot;hour&quot;</span>),</span>
+<span id="cb488-4"><a href="dates-and-times.html#cb488-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mon=</span><span class="fu">month</span>(Start,<span class="at">label=</span><span class="cn">TRUE</span>),</span>
+<span id="cb488-5"><a href="dates-and-times.html#cb488-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">yr=</span><span class="fu">year</span>(Start),</span>
+<span id="cb488-6"><a href="dates-and-times.html#cb488-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">monyr=</span><span class="fu">paste</span>(mon,yr,<span class="at">sep=</span><span class="st">&quot;-&quot;</span>))</span></code></pre></div>
+<p>The month-year variable should be converted to a factor for summarization but the order needs to be controlled. A quick look at the unique values in the <code>monyr</code> variable show that they are already in order so the results of this function can be used in <code class="inline">levels=</code> within <code class="inline">factor()</code> to put the month-years in order.</p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb489-1"><a href="dates-and-times.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(tc<span class="sc">$</span>monyr)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] &quot;Dec-2018&quot; &quot;Jan-2019&quot; &quot;May-2019&quot; &quot;Jun-2019&quot; &quot;Jul-2019&quot; &quot;Aug-2019&quot; &quot;Oct-2019&quot;
+#R&gt;  [8] &quot;Nov-2019&quot; &quot;Jan-2020&quot;</code></pre>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb491-1"><a href="dates-and-times.html#cb491-1" aria-hidden="true" tabindex="-1"></a>tc <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb491-2"><a href="dates-and-times.html#cb491-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">monyr=</span><span class="fu">factor</span>(monyr,<span class="at">levels=</span><span class="fu">unique</span>(monyr)))</span></code></pre></div>
+<p>Finally, the number of hours worked are summed across each part of the project (i.e., by <code>Main</code>) and month (i.e., <code>monyr</code>). The consultant was paid $75 per hour so a new variable called <code>earned</code> was created to show how much the consultant earned each month for each part of the project.</p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb492-1"><a href="dates-and-times.html#cb492-1" aria-hidden="true" tabindex="-1"></a>sum_hrs1 <span class="ot">&lt;-</span> tc <span class="sc">%&gt;%</span></span>
+<span id="cb492-2"><a href="dates-and-times.html#cb492-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Main,monyr) <span class="sc">%&gt;%</span></span>
+<span id="cb492-3"><a href="dates-and-times.html#cb492-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">worked=</span><span class="fu">sum</span>(hrs)) <span class="sc">%&gt;%</span></span>
+<span id="cb492-4"><a href="dates-and-times.html#cb492-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">earned=</span><span class="dv">75</span><span class="sc">*</span>worked)</span>
+<span id="cb492-5"><a href="dates-and-times.html#cb492-5" aria-hidden="true" tabindex="-1"></a>sum_hrs1</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 15 x 4
+#R&gt;  # Groups:   Main [3]
+#R&gt;     Main         monyr    worked earned
+#R&gt;     &lt;fct&gt;        &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#R&gt;   1 Schedule     Dec-2018 19.2   1444. 
+#R&gt;   2 Schedule     Jan-2019  6.75   506. 
+#R&gt;   3 Schedule     May-2019 17.5   1312. 
+#R&gt;   4 Schedule     Jun-2019  0.75    56.2
+#R&gt;   5 Schedule     Jul-2019  0.333   25  
+#R&gt;   6 Schedule     Nov-2019  0.25    18.8
+#R&gt;   7 Analysis-OW  May-2019 37.7   2825  
+#R&gt;   8 Analysis-OW  Jun-2019 23.7   1775  
+#R&gt;   9 Analysis-OW  Jul-2019  7      525  
+#R&gt;  10 Analysis-OW  Oct-2019 10.6    794. 
+#R&gt;  11 Analysis-OW  Nov-2019  4.83   362. 
+#R&gt;  12 Analysis-OW  Jan-2020  1.42   106. 
+#R&gt;  13 Analysis-ICE Aug-2019 25.7   1925  
+#R&gt;  14 Analysis-ICE Oct-2019  8.08   606. 
+#R&gt;  15 Analysis-ICE Nov-2019  1.33   100</code></pre>
+<p>These summaries were then summarized across all of the month-years to get the total hours worked and compensation earned per part of the project.</p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb494-1"><a href="dates-and-times.html#cb494-1" aria-hidden="true" tabindex="-1"></a>sum_hrs2 <span class="ot">&lt;-</span> sum_hrs1 <span class="sc">%&gt;%</span></span>
+<span id="cb494-2"><a href="dates-and-times.html#cb494-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">worked=</span><span class="fu">sum</span>(worked),</span>
+<span id="cb494-3"><a href="dates-and-times.html#cb494-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">earned=</span><span class="fu">sum</span>(earned))</span>
+<span id="cb494-4"><a href="dates-and-times.html#cb494-4" aria-hidden="true" tabindex="-1"></a>sum_hrs2</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 3 x 3
+#R&gt;    Main         worked earned
+#R&gt;    &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+#R&gt;  1 Schedule       44.8  3362.
+#R&gt;  2 Analysis-OW    85.2  6388.
+#R&gt;  3 Analysis-ICE   35.1  2631.</code></pre>
+<p>These summaries were then summarized across all parts to get total hours worked and compensation earned for the project.</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb496-1"><a href="dates-and-times.html#cb496-1" aria-hidden="true" tabindex="-1"></a>sum_ttl <span class="ot">&lt;-</span> sum_hrs2 <span class="sc">%&gt;%</span></span>
+<span id="cb496-2"><a href="dates-and-times.html#cb496-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">worked=</span><span class="fu">sum</span>(worked),</span>
+<span id="cb496-3"><a href="dates-and-times.html#cb496-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">earned=</span><span class="fu">sum</span>(earned))</span>
+<span id="cb496-4"><a href="dates-and-times.html#cb496-4" aria-hidden="true" tabindex="-1"></a>sum_ttl</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  # A tibble: 1 x 2
+#R&gt;    worked earned
+#R&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#R&gt;  1   165. 12381.</code></pre>
+<p> </p>
 
 </div>
 </div>

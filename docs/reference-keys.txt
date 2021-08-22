@@ -98,6 +98,7 @@ calculations-with-date-times
 examples-in-context-2
 sales-transactions
 dt-stream-discharge
+time-card
 factors
 creating-factors
 changing-factor-order

@@ -424,3 +424,75 @@ ggplot(data=wcd1,mapping=aes(x=datetime,y=discharge)) +
        subtitle="Discharge Around the 10&11-Mar event",
        caption="source: USGS provisional data")
 ```
+
+&nbsp;
+
+### Time Card
+A consultant worked on a project with three distinct parts called "Schedule", "Analysis-OW", and "Analysis-ICE". To bill the company the consultant kept a time card of the date and starting and ending time for when they worked, which part of the project they worked on, and a more descriptive narrative of the work they did (which was crossed out here for confidetiality reasons). Their time card for the project was recorded in [Timecard.csv]().
+
+```{r}
+tc <- read_csv(file.path("data","Timecard.csv"))
+tc
+```
+
+These data are a little messy because, for example, the date and starting time are in separate variables, but ultimately need to be one variable of the date-time class. Thus, the two variables need to be pasted together and then converted to the date-time class. Below `paste()`{.inline} is used to paste the two variables together and, because of the format of the date and because only hours and minutes were recorded, `dmy_hm()`{.inline} was used to convert the result to a date-time class. The same was done for the ending time. The `Main` variable was converted to a factor and the order of the levels was controlled based on the approximate order in which the parts of the project were worked on.
+
+```{r class.source="RCODE_ALONE"}
+tc %<>%
+  mutate(Start=dmy_hm(paste(Date,Start)),
+         End=dmy_hm(paste(Date,End)),
+         Main=factor(Main,levels=c("Schedule","Analysis-OW","Analysis-ICE"))) %>%
+  select(-Date)
+```
+
+with a proper date-time class, the `Start` and `End` variables were used to create an interval of time from which the number of hours between the two was extracted as a measure of how long the consultant worked. The month and year of the working day were then extracted but then combined together as a month-year combination as the consultant wanted to summarize the work hours by month but the project spanned three years so, for example, the "january"s had to be kept separate by their year.
+
+```{r class.source="RCODE_ALONE"}
+tc %<>%
+  mutate(iTime=Start %--% End,
+         hrs=time_length(iTime,unit="hour"),
+         mon=month(Start,label=TRUE),
+         yr=year(Start),
+         monyr=paste(mon,yr,sep="-"))
+```
+
+The month-year variable should be converted to a factor for summarization but the order needs to be controlled. A quick look at the unique values in the `monyr` variable show that they are already in order so the results of this function can be used in `levels=`{.inline} within `factor()`{.inline} to put the month-years in order.
+
+```{r}
+unique(tc$monyr)
+```
+
+```{r class.source="RCODE_ALONE"}
+tc %<>%
+  mutate(monyr=factor(monyr,levels=unique(monyr)))
+```
+
+Finally, the number of hours worked are summed across each part of the project (i.e., by `Main`) and month (i.e., `monyr`). The consultant was paid $75 per hour so a new variable called `earned` was created to show how much the consultant earned each month for each part of the project.
+
+```{r}
+sum_hrs1 <- tc %>%
+  group_by(Main,monyr) %>%
+  summarize(worked=sum(hrs)) %>%
+  mutate(earned=75*worked)
+sum_hrs1
+```
+
+These summaries were then summarized across all of the month-years to get the total hours worked and compensation earned per part of the project.
+
+```{r}
+sum_hrs2 <- sum_hrs1 %>%
+  summarize(worked=sum(worked),
+            earned=sum(earned))
+sum_hrs2
+```
+
+These summaries were then summarized across all parts to get total hours worked and compensation earned for the project.
+
+```{r}
+sum_ttl <- sum_hrs2 %>%
+  summarize(worked=sum(worked),
+            earned=sum(earned))
+sum_ttl
+```
+
+&nbsp;
